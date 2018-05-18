@@ -23,44 +23,45 @@ const App = () => (
   <div>
     <Header title="Policy Bytes" />
     <Router>
-    <Nav/>
-      <Switch>
-        <Redirect exact from="/" to="/landingPage" />
-        <Redirect exact from="/home" to="/landingPage" />
-        <Route
-          path="/landingPage"
-          component={LandingPage}
-        />
-        <Route
-          path="/topicPage"
-          component={TopicPage}
-        />
-        <Route
-          path="/topicManage"
-          component={TopicManage}
-        />
-        <Route
-          path="/commentManage"
-          component={CommentManage}
-        />
-        <Route
-          path="/topicEdit"
-          component={TopicEdit}
-        />
+      <div>
+        <Nav/>
+        <Switch>
+          <Redirect exact from="/" to="/home" />
+          <Route
+            path="/home"
+            component={LandingPage}
+          />
+          <Route
+            path="/topicPage"
+            component={TopicPage}
+          />
+          <Route
+            path="/topicManage"
+            component={TopicManage}
+          />
+          <Route
+            path="/commentManage"
+            component={CommentManage}
+          />
+          <Route
+            path="/topicEdit"
+            component={TopicEdit}
+          />
 
-{/* predefined routes */}
-        <Route
-          path="/login"
-          component={LoginPage}
-        />
-        <Route
-          path="/register"
-          component={RegisterPage}
-        />
-        {/* OTHERWISE (no path!) */}
-        <Route render={() => <h1>404</h1>} />
+  {/* predefined routes */}
+          <Route
+            path="/login"
+            component={LoginPage}
+          />
+          <Route
+            path="/register"
+            component={RegisterPage}
+          />
+          {/* OTHERWISE (no path!) */}
+          <Route render={() => <h1>404</h1>} />
+        </Switch>
+      </div>
 
-      </Switch>
     </Router>
   </div>
 );
