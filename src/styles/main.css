@@ -31,7 +31,8 @@ table {
 
 body {
     -webkit-text-size-adjust: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: rgb(228, 226, 226); 
 }
 
 .instructions h1 {
@@ -115,6 +116,12 @@ li a:hover {
 
 /* NEW CSS FRIDAY MAY 18 */
 
+.contributorPanel{
+    margin-left: 15%; 
+    width: 30%;
+    display: inline-block; 
+}
+
 .footer{
     width: 100%;
     background-color: #CA4A00;
@@ -143,5 +150,36 @@ li a:hover {
     background-color: lightgrey; 
     display: inline-block; 
     margin-left: 12%; 
+}
+
+.wireArena{
+    float: right; 
+    height: 68em; 
+    width: 60%; 
+    background-color: lightgrey; 
+    margin: auto 5% auto 2%; 
+}
+
+.wireArenaPhoto{
+    height: 10em; 
+    width: 10em; 
+    background-color: lightgrey; 
+    margin: auto auto 2% 2%; 
+    display: inline-block;
+}
+
+.wireArenaSummary{
+    float: right; 
+    height: 10em; 
+    width: 60%; 
+    background-color: lightgrey; 
+    margin: auto 5% auto 2%; 
+}
+
+.wireKeyClaim{
+    height: 10em; 
+    width: 30%; 
+    background-color: lightgrey; 
+    margin: auto auto 2% 2%; 
 }
 
