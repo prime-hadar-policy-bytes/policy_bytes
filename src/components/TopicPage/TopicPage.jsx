@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Footer from '../Footer/Footer.jsx'
 
-import Panel from 'react-bootstrap/lib/Panel';
+import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap'; 
 
 export class TopicPage extends Component {
 
@@ -11,7 +11,9 @@ export class TopicPage extends Component {
       <div>
         <div className="wrapper">
           <h1>Minimum Wage Increase</h1>
-           
+
+
+           {/* INTRO */}
             <Panel>
               <Panel.Body>
               <p>
@@ -48,25 +50,24 @@ export class TopicPage extends Component {
             <Panel className="contributorPanel"> 
               <Panel.Body>
                <div className="wirePhoto"></div>
-               <h3>Eli Harrison</h3>
-                <i>Eli has a PhD in Economics from the University of Minnesota, 
+               <h3>Jennifer Johnson</h3>
+                <i>Jennifer has a PhD in Economics from the University of Minnesota, 
                   and has worked as a Financial Analyst at Ameriprise Financial for 15 years.
                 </i>
               </Panel.Body>
             </Panel>
             
-            {/* <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-              <Tab eventKey={1} title="Tab 1">
+            <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
+              <Tab eventKey={1} title="Eli">
                 Tab 1 content
               </Tab>
-              <Tab eventKey={2} title="Tab 2">
+              <Tab eventKey={2} title="Jennifer">
                 Tab 2 content
               </Tab>
-              <Tab eventKey={3} title="Tab 3" disabled>
-                Tab 3 content
-              </Tab>
-            </Tabs>; */}
+            </Tabs>
             
+
+        {/* ARENA */}
             <Panel> 
               <Panel.Heading>Arena</Panel.Heading>
               <Panel.Body>
@@ -89,6 +90,59 @@ export class TopicPage extends Component {
                 <div className="wireKeyClaim">Rolling Stones/Beatles</div>
               </Panel.Body>
             </Panel>
+
+
+          {/* COMMENTS */}
+
+          <Panel> 
+              <Panel.Heading>Comment Section</Panel.Heading>
+              <Panel.Body>
+          
+                <Panel className="wireComment">
+                <Panel.Heading>Christina Perfetti says:</Panel.Heading>
+                  <Panel.Body>
+                    <input type="text" placeholder="Join the Conversation..."/>
+                    <Button className="wireCommentButtons">Submit</Button>
+
+                  </Panel.Body>
+                </Panel>
+
+                <Panel className="wireComment">
+                  <Panel.Heading>Christina Perfetti says:</Panel.Heading>
+                  <Panel.Body>
+                    I agree with Eli
+                    <ButtonGroup className="wireCommentButtons">
+                      <Button bsStyle="danger">[AdminDelete]</Button>
+                      <Button>Like</Button>
+                      <Button>Love</Button>
+                      <Button>Comment</Button>
+                    </ButtonGroup>
+                  </Panel.Body>
+                </Panel>
+
+                <Panel className="wireComment">
+                  <Panel.Heading>Alex Hanson says:</Panel.Heading>
+                  <Panel.Body>
+                    Jennifer seems like she know's what's up! 
+                    <ButtonGroup className="wireCommentButtons">
+                      <Button bsStyle="danger">[AdminDelete]</Button>
+                      <Button>Like</Button>
+                      <Button>Love</Button>
+                      <Button>Comment</Button>
+                    </ButtonGroup>
+                  </Panel.Body>
+                </Panel>
+
+              </Panel.Body>
+            </Panel>
+
+
+            <Panel>
+              <Panel.Body>
+                <h4>Sponsored by Ameriprise Financial</h4>
+              </Panel.Body>
+            </Panel>
+
 
 
           </div>

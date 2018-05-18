@@ -183,3 +183,12 @@ li a:hover {
     margin: auto auto 2% 2%; 
 }
 
+.wireComment{
+    width: 70%; 
+    margin: auto auto 2% 15%; 
+}
+
+.wireCommentButtons{
+    float: right; 
+}
+
