@@ -192,3 +192,8 @@ li a:hover {
     float: right; 
 }
 
+.wireStreamInput{
+    width: 90%; 
+    margin-left: 5%; 
+    background-color: lightseagreen; 
+}

@@ -13,7 +13,7 @@ import LandingPage from './components/LandingPage/LandingPage.jsx'
 import TopicPage from './components/TopicPage/TopicPage.jsx'
 import TopicManage from './components/Admin/TopicManage/TopicManage.jsx'
 import TopicEdit from './components/Admin/TopicEdit/TopicEdit.jsx';
-import CommentManage from './components/Admin/CommentManage/CommentManage.jsx';
+// import CommentManage from './components/Admin/CommentManage/CommentManage.jsx';
 
 import Nav from './components/Nav/Nav.jsx'
 
@@ -39,10 +39,10 @@ const App = () => (
             path="/topicManage"
             component={TopicManage}
           />
-          <Route
+          {/* <Route
             path="/commentManage"
             component={CommentManage}
-          />
+          /> */}
           <Route
             path="/topicEdit"
             component={TopicEdit}

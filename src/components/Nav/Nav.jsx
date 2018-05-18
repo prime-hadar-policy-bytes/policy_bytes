@@ -21,11 +21,6 @@ const Nav = () => (
           </Link>
         </li>
         <li>
-          <Link to="/commentManage">
-            ADMIN Comment Manage
-          </Link>
-        </li>
-        <li>
           <Link to="/topicEdit">
             Topic Edit
           </Link>
