@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import Footer from '../../Footer/Footer.jsx'
+
+import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'; 
+
 export class TopicManage extends Component {
   static propTypes = {
     prop: PropTypes

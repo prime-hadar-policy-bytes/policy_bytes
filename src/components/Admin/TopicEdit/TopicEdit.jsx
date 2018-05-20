@@ -150,7 +150,6 @@ export class TopicEdit extends Component {
 
           </div>
 
-          <Footer/>
       </div>
     )
   }
