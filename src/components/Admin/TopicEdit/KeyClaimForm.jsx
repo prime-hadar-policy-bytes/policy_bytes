@@ -12,6 +12,7 @@ class KeyClaimForm extends Component {
         super(props) 
 
         this.state = {
+            claimId: this.props.claimId, 
             claimContributor: '',
             keyClaim: '',
             keyClaimEvidence: '', 
@@ -32,7 +33,7 @@ class KeyClaimForm extends Component {
     handleChange = (event) => {
         this.setState({
         [event.target.name]: event.target.value,
-        })    
+        })
     }
 
 

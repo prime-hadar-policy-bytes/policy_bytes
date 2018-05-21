@@ -21,7 +21,7 @@ class TopicEdit extends Component {
       bio2: '', 
       proposal2: '',
       keyClaims: [0],
-      
+
     }
   }
 
@@ -31,6 +31,8 @@ class TopicEdit extends Component {
   handleSubmit = (event) => {
     event.preventDefault(); 
     console.log('form submit clicked');
+    console.log();
+    
     
   }
 
