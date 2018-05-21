@@ -1,5 +1,18 @@
 import { combineReducers } from 'redux';
 
+//allTopics contains all topics from the database
+const allTopics = (state = [], action) => {
+
+    //sets state of allTopics to an array of objects where each object is a topic
+    if (action.type === 'SET_ALL_TOPICS'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_TOPICS' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
 //featuredTopicPage contains the information needed for the featured topic
 //on the Topic Page
 const featuredTopicPage = (state = [], action) => {
@@ -45,8 +58,8 @@ const archivedTopics = (state = [], action) => {
     return state
 } 
 
-//commentsGeneral contains all comments that were not direct comments to key claims 
-//or any claim of a stream
+//commentsGeneral contains all comments based on topic id that were not direct comments
+//to key claims or any claim of a stream
 const commentsGeneral = (state = [], action) => {
 
     //sets state of comments to an array of objects where those objects are comments
@@ -59,9 +72,24 @@ const commentsGeneral = (state = [], action) => {
     return state
 }
 
+//commentsKeyClaim contains all comments for a given key claim based on the topic id
+const commentsKeyClaim = (state = [], action) => {
+
+    //sets state of comments to an array of objects where those objects are comments
+    //and the user id, topic id, and key claim id of those comments
+    if(action.type === 'SET_KEY_CLAIM_COMMENTS'){
+        return action.payload
+    }
+
+    //if action 'SET_COMMENTS' is not received, state is set to its default empty array
+    return state
+}
+
 export default combineReducers({
+    allTopics,
     featuredTopicPage,
     featuredLandingPage,
     archivedTopics,
-    commentsGeneral
+    commentsGeneral,
+    commentsKeyClaim
 })
