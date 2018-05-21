@@ -4,6 +4,8 @@ import { combineReducers } from 'redux';
 const allTopics = (state = [], action) => {
 
     //sets state of allTopics to an array of objects where each object is a topic
+    //with the topic text, premise, common ground, published date, archived status,
+    //archived summary, and an archived date
     if (action.type === 'SET_ALL_TOPICS'){
         return action.payload
     }
@@ -17,6 +19,7 @@ const allTopics = (state = [], action) => {
 const allKeyClaims = (state = [], action) => {
 
     //sets state of allKeyClaims to an array of objects where each object is a key claim
+    //with topic id, contributor id, claim text, and order id
     if (action.type === 'SET_ALL_KEY_CLAIMS'){
         return action.payload
     }
@@ -30,11 +33,40 @@ const allKeyClaims = (state = [], action) => {
 const allStreams = (state = [], action) => {
 
     //sets state of allStreams to an array of objects where each object is a stream
+    //with key claim id, contributor id, stream text, and evidence text
     if (action.type === 'SET_ALL_STREAMS'){
         return action.payload
     }
 
     //if action 'SET_ALL_STREAMS' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
+//allContributors contains all contributors from the database
+const allContributors = (state = [], action) => {
+
+    //sets state of allContributors to an array of objects where each object is a contributor
+    //with their first name, last name, bio, and photo url
+    if (action.type === 'SET_ALL_CONTRIBUTORS'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_CONTRIBUTORS' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
+//allProposals contains all proposals from the database
+const allProposals = (state = [], action) => {
+
+    //sets state of allProposals to an array of objects where each object is a proposal
+    //with the topic id, contributor id, and the proposal text
+    if (action.type === 'SET_ALL_PROPOSALS'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_PROPOSALS' is not received, state is set to its 
     //default empty array
     return state
 }
@@ -128,6 +160,8 @@ export default combineReducers({
     allTopics,
     allKeyClaims,
     allStreams,
+    allContributors,
+    allProposals,
     featuredTopicPage,
     featuredLandingPage,
     archivedTopics,

@@ -70,6 +70,52 @@ function* fetchAllStreams(action){
     }
 }
 
+//gets all contributors from database
+function* fetchAllContributors(action){
+    try{
+
+        //contributorResponse sends get request to router '/api/topic/allcontributors' and 
+        //receives back all contributors from the database and stores them in contributorResponse.data
+        const contributorResponse = yield call(axios.get, '/api/topic/allcontributors')
+
+        //sends all contributors to allContributors reducer via action 'SET_ALL_CONTRIBUTORS'
+        //and payload contributorResponse.data
+        yield put({
+            type: 'SET_ALL_CONTRIBUTORS',
+            payload: contributorResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
+//gets all proposals from database
+function* fetchAllProposals(action){
+    try{
+
+        //proposalResponse sends get request to router '/api/topic/allproposals' and 
+        //receives back all proposals from the database and stores them in proposalResponse.data
+        const proposalResponse = yield call(axios.get, '/api/topic/allproposals')
+
+        //sends all proposals to allProposals reducer via action 'SET_ALL_PROPOSALS'
+        //and payload proposalResponse.data
+        yield put({
+            type: 'SET_ALL_PROPOSALS',
+            payload: proposalResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
 //gets the featured topic to be displayed on the topic page from the database
 function* fetchFeaturedTopicPage(action){
     try{
@@ -214,6 +260,8 @@ function* factionSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
     yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
     yield takeLatest('FETCH_ALL_STREAMS', fetchAllStreams)
+    yield takeLatest('FETCH_ALL_CONTRIBUTORS', fetchAllContributors)
+    yield takeLatest('FETCH_ALL_PROPOSALS', fetchAllProposals)
     yield takeLatest('FETCH_NEW_TOPIC_TOPIC_PAGE', fetchFeaturedTopicPage)
     yield takeLatest('FETCH_NEW_TOPIC_LANDING_PAGE', fetchFeaturedTopicLanding)
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
