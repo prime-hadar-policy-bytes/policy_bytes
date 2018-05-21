@@ -1,15 +1,48 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import Footer from '../../Footer/Footer.jsx'
+import KeyClaimForm from './KeyClaimForm.jsx'
 
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'; 
 
 export class TopicEdit extends Component {
-  static propTypes = {
-    prop: PropTypes
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      topicTitle: '', 
+      topicSummary: '', 
+      topicPremise: '', 
+      topicReadMore: '', 
+      topicCommonGround: '', 
+      bio1: '', 
+      proposal1: '',
+      bio2: '', 
+      proposal2: '',
+
+    }
   }
+
+
+
+//Send local state object to Redux
+  handleSubmit = (event) => {
+    event.preventDefault(); 
+    console.log('form submit clicked');
+    
+  }
+
+//currying function to setState on change of input fields
+handleTextChange = (event) => {
+  this.setState({
+    [event.target.name]: event.target.value,
+  })    
+}
+
+
+
+
 
   render() {
     return (
@@ -17,11 +50,16 @@ export class TopicEdit extends Component {
         <div className="wrapper">
           <h1>Topic Edit</h1>
 
+{/* SHOW STATE ON DOM */}
+          <pre>state: {JSON.stringify(this.state, null, 2)}</pre>
+
+          <form action="" onSubmit={this.handleSubmit}>
+
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Topic Title</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="topicTitle" value={this.state.topicTitle} type="text"/>
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
             </Panel>
@@ -29,41 +67,41 @@ export class TopicEdit extends Component {
             <Panel>
               <Panel.Body>
                 <ControlLabel>Topic Summary (for archive)</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="topicSummary" value={this.state.topicSummary} type="text"/>
               </Panel.Body>
             </Panel>
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Topic Premise</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="topicPremise" value={this.state.topicPremise} type="text"/>
                 <ControlLabel>Link to read more?</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="topicReadMore" value={this.state.topicReadMore} type="text"/>
               </Panel.Body>
             </Panel>
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Common Ground</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="topicCommonGround" value={this.state.commonGround} type="text"/>
               </Panel.Body>
             </Panel>
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Contributor 1 Bio</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="bio1" value={this.state.bio1} type="text"/>
                 <ControlLabel>Contributor 1 Proposal Summary</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="proposal1" value={this.state.proposal1} type="text"/>
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
             </Panel>
             <Panel>
               <Panel.Body>
                 <ControlLabel>Contributor 2 Bio</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="bio2" value={this.state.bio2} type="text"/>
                 <ControlLabel>Contributor 2 Proposal Summary</ControlLabel>
-                <FormControl type="text"/>
+                <FormControl onChange={this.handleTextChange} name="proposal2" value={this.state.proposal2} type="text"/>
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
             </Panel>
@@ -71,83 +109,15 @@ export class TopicEdit extends Component {
           
 
 
-
-{/* KEY CLAIM INPUTS */}
-{/* CONTRIB 1 */}
-
-          <Panel bsStyle="primary">
-            <Panel.Heading>
-              Contributor 1 
-            </Panel.Heading>
-
-              <Panel.Body>
-                <ControlLabel>Key Claim</ControlLabel>
-                <FormControl type="text"/>
-                <ControlLabel>Key Claim Evidence</ControlLabel>
-                <FormControl type="text"/>
-             
-{/* STREAM INPUTS */}
-              <Panel className="wireStreamInput">
-                <Panel.Body>
-                  <select name="" id="">Contrib Select</select>
-                  <ControlLabel>Stream Comment</ControlLabel>
-                  <FormControl type="text"/>
-                  <ControlLabel>Stream Comment Evidence</ControlLabel>
-                  <FormControl type="text"/>
-                  <Button className="wireCommentButtons">Add Stream Comment</Button>
-                </Panel.Body>
-              </Panel>
-
-              <ButtonGroup className="wireCommentButtons">
-                <Button bsStyle="danger">[trash can]</Button>
-                <Button>[arrow up]</Button>
-                <Button>[arrow down]</Button>
-                <Button className="wireCommentButtons">+</Button>
-              </ButtonGroup>
-            </Panel.Body>
-          </Panel>
-
-{/* CONTRIB 2 */}
-
-          <Panel bsStyle="warning">
-            <Panel.Heading>
-              Contributor 2 
-            </Panel.Heading>
-
-              <Panel.Body>
-                <ControlLabel>Key Claim</ControlLabel>
-                <FormControl type="text"/>
-                <ControlLabel>Key Claim Evidence</ControlLabel>
-                <FormControl type="text"/>
-             
-{/* STREAM INPUTS */}
-              <Panel className="wireStreamInput">
-                <Panel.Body>
-                  <select name="" id="">Contrib Select</select>
-                  <ControlLabel>Stream Comment</ControlLabel>
-                  <FormControl type="text"/>
-                  <ControlLabel>Stream Comment Evidence</ControlLabel>
-                  <FormControl type="text"/>
-                  <Button className="wireCommentButtons">Add Stream Comment</Button>
-                </Panel.Body>
-              </Panel>
-
-              <ButtonGroup className="wireCommentButtons">
-                <Button bsStyle="danger">[trash can]</Button>
-                <Button>[arrow up]</Button>
-                <Button>[arrow down]</Button>
-                <Button className="wireCommentButtons">+</Button>
-              </ButtonGroup>
-            </Panel.Body>
-          </Panel>
+<KeyClaimForm/>
 
 
 
 
 
 
-
-
+          <Button type="submit" bsStyle="primary">Submit!</Button>
+          </form>
           </div>
 
       </div>
