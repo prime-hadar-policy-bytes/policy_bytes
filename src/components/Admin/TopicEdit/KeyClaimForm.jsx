@@ -22,8 +22,6 @@ class KeyClaimForm extends Component {
         }
     }
 
-
-
 //currying function to setState on change of form fields
     handleChange = (event) => {
         this.props.handleKeyClaimChange(event); 
@@ -51,7 +49,6 @@ class KeyClaimForm extends Component {
     }
 
 
-
   render() {
 
 //looping over the local streamData object to create the correct number of streamItemForms
@@ -68,14 +65,8 @@ class KeyClaimForm extends Component {
       )
     }
 
-
-
-
     return (
       <div>
-{/* KEY CLAIM INPUTS */}
-
-
 {/* SHOW STATE ON DOM */}
           <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre>
           {/* <pre>state: {JSON.stringify(this.state, null, 2)}</pre> */}
@@ -107,7 +98,6 @@ class KeyClaimForm extends Component {
                                 name="keyClaimEvidence" 
                                 value={this.state.keyClaimEvidence} 
                                 type="text"/>
-
 
 {/* Variable holding .map of <StreamItemForm>  */}
             {streamItemForms}
