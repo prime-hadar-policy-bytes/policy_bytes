@@ -25,6 +25,30 @@ function* fetchFeaturedTopicPage(action){
     }
 }
 
+//gets the featured topic to be displayed on the landing page from the database
+function* fetchFeaturedTopicLanding(action){
+    try{
+
+        //topicResponse sends get request to router '/api/topic/featuredlanding' and 
+        //receives back the topic admin wants to be the featured topic on the landing
+        //page and stores it in topicResponse.data
+        const topicResponse = yield call(axios.get, '/api/topic/featuredlanding')
+
+        //sends new featured topic to newTopic reducer via action 'SET_NEW_FEATURED_TOPIC'
+        //and payload topicResponse.data
+        yield put({
+            type: 'SET_FEATURED_TOPIC_LANDING_PAGE',
+            payload: topicResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
 //gets all of the archived topics for displaying them on the landing page
 function* fetchArchivedTopics(action){
     try{
@@ -48,20 +72,19 @@ function* fetchArchivedTopics(action){
     }
 }
 
-//gets the featured topic to be displayed on the landing page from the database
-function* fetchFeaturedTopicLanding(action){
+//gets all of the general comments for displaying them on the topic page
+function* fetchGeneralComments(action){
     try{
 
-        //topicResponse sends get request to router '/api/topic/featuredlanding' and 
-        //receives back the topic admin wants to be the featured topic on the landing
-        //page and stores it in topicResponse.data
-        const topicResponse = yield call(axios.get, '/api/topic/featuredlanding')
+        //commentResponse sends get request to router '/api/topic/generalcomments' and 
+        //receives back all general comments and store them in commentResponse.data
+        const commentResponse = yield call(axios.get, '/api/topic/generalcomments')
 
-        //sends new featured topic to newTopic reducer via action 'SET_NEW_FEATURED_TOPIC'
-        //and payload topicResponse.data
+        //sends all general comments to commentsGeneral reducer via action 'SET_GENERAL_COMMENTS'
+        //and payload archivedResponse.data
         yield put({
-            type: 'SET_FEATURED_TOPIC_LANDING_PAGE',
-            payload: topicResponse.data
+            type: 'SET_GENERAL_COMMENTS',
+            payload: commentResponse.data
         })
 
     //if there is an error in sending get request to router, the error

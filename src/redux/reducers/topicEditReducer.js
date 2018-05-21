@@ -31,6 +31,7 @@ const featuredLandingPage = (state = [], action) => {
     return state
 }
 
+//archivedTopics contains all of the archived topics from the database
 const archivedTopics = (state = [], action) => {
 
     //sets state of archivedTopics to an array of objects where those objects are 
@@ -44,8 +45,13 @@ const archivedTopics = (state = [], action) => {
     return state
 } 
 
-const comments = (state = [], action) => {
-    if(action.type === 'SET_COMMENTS'){
+//commentsGeneral contains all comments that were not direct comments to key claims 
+//or any claim of a stream
+const commentsGeneral = (state = [], action) => {
+
+    //sets state of comments to an array of objects where those objects are comments
+    //and the user id and topic id of those comments
+    if(action.type === 'SET_GENERAL_COMMENTS'){
         return action.payload
     }
 
@@ -57,5 +63,5 @@ export default combineReducers({
     featuredTopicPage,
     featuredLandingPage,
     archivedTopics,
-    comments
+    commentsGeneral
 })
