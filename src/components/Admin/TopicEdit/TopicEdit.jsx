@@ -6,7 +6,7 @@ import KeyClaimForm from './KeyClaimForm.jsx'
 
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap'; 
 
-export class TopicEdit extends Component {
+class TopicEdit extends Component {
   constructor(props) {
     super(props)
 
@@ -20,6 +20,7 @@ export class TopicEdit extends Component {
       proposal1: '',
       bio2: '', 
       proposal2: '',
+      keyClaims: [0],
 
     }
   }
@@ -40,11 +41,32 @@ handleTextChange = (event) => {
   })    
 }
 
+//adding a new value to this.state.keyclaims that will be the ID of the new key claim 
+addKeyClaim = () => {
+  let claimAddId = this.state.keyClaims.length;
+  console.log(claimAddId);
+  this.setState({
+    keyClaims: [...this.state.keyClaims, claimAddId]
+  })
+}
+
 
 
 
 
   render() {
+
+    let keyClaimIds = this.state.keyClaims; 
+
+    let keyClaimForms = keyClaimIds.map((keyClaimId) => {
+      console.log(keyClaimId);
+      
+      return <KeyClaimForm key={keyClaimId}
+                            claimId ={keyClaimId}/>
+    })
+
+
+
     return (
       <div>
         <div className="wrapper">
@@ -106,16 +128,18 @@ handleTextChange = (event) => {
               </Panel.Body>
             </Panel>
 
+          <Button bsStyle="primary" onClick={this.addKeyClaim}>Add Key Claim</Button>
+
+{/* Mapped array of number of key claims in this.state */}
+{keyClaimForms}
+
+
+
+
+
+
+
           
-
-
-<KeyClaimForm/>
-
-
-
-
-
-
           <Button type="submit" bsStyle="primary">Submit!</Button>
           </form>
           </div>
