@@ -123,13 +123,36 @@ function* fetchKeyClaimComments(action){
     try{
 
         //commentResponse sends get request to router '/api/topic/keyclaimcomments' and 
-        //receives back all general comments and store them in commentResponse.data
+        //receives back comments on all key claims of a topic and store them in commentResponse.data
         const commentResponse = yield call(axios.get, '/api/topic/keyclaimcomments')
 
         //sends all general comments to commentsGeneral reducer via action 'SET_KEY_CLAIM_COMMENTS'
         //and payload archivedResponse.data
         yield put({
             type: 'SET_KEY_CLAIM_COMMENTS',
+            payload: commentResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
+//gets all of the comments for all stream items based on the given topic id to display them on the topic page
+function* fetchStreamComments(action){
+    try{
+
+        //commentResponse sends get request to router '/api/topic/streamcomments' and 
+        //receives back all comments in a stream and store them in commentResponse.data
+        const commentResponse = yield call(axios.get, '/api/topic/streamcomments')
+
+        //sends all general comments to commentsGeneral reducer via action 'SET_STREAM_COMMENTS'
+        //and payload archivedResponse.data
+        yield put({
+            type: 'SET_STREAM_COMMENTS',
             payload: commentResponse.data
         })
 
@@ -148,6 +171,7 @@ function* factionSaga() {
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
     yield takeLatest('FETCH_GENERAL_COMMENTS', fetchGeneralComments)
     yield takeLatest('FETCH_KEY_CLAIM_COMMENTS', fetchKeyClaimComments)
+    yield takeLatest('FETCH_STREAM_COMMENTS', fetchStreamComments)
   }
 
   export default factionSaga;
