@@ -24,8 +24,31 @@ function* fetchNewTopic(action){
     }
 }
 
+function* fetchArchivedTopics(action){
+    try{
+
+        //archivedResponse sends get request to router '/api/topic/archived' and 
+        //receives back all archived topics and store them in archivedResponse.data
+        const archivedResponse = yield call(axios.get, '/api/topic/archived')
+
+        //sends all archived topics to archivedTopics reducer via action 'SET_ARCHIVED_TOPICS'
+        //and payload archivedResponse.data
+        yield put({
+            type: 'SET_ARCHIVED_TOPICS',
+            payload: archivedResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
 function* factionSaga() {
     yield takeLatest('FETCH_NEW_TOPIC', fetchNewTopic)
+    yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
   }
 
   export default factionSaga;
