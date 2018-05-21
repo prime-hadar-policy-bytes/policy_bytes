@@ -16,6 +16,7 @@
     "eslint-plugin-react": "^7.7.0",
     "express": "^4.16.3",
     "passport": "^0.4.0",
+    "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
     "pg": "^7.4.1",
     "prop-types": "^15.6.1",
@@ -31,7 +32,7 @@
   },
   "scripts": {
     "start": "react-scripts build && node server/server.js",
-    "client": "react-scripts start",
+    "client": "HTTPS=true react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",

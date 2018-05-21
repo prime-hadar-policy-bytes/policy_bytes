@@ -15,7 +15,7 @@ import TopicManage from './components/Admin/TopicManage/TopicManage.jsx'
 import TopicEdit from './components/Admin/TopicEdit/TopicEdit.jsx';
 // import CommentManage from './components/Admin/CommentManage/CommentManage.jsx';
 
-import Nav from './components/Nav/Nav.jsx'
+import Nav from './components/Nav/Nav.js'
 
 import './styles/main.css';
 
