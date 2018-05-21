@@ -12,11 +12,6 @@ class KeyClaimForm extends Component {
         super(props) 
 
         this.state = {
-            claimId: this.props.claimId, 
-            claimContributor: '',
-            keyClaim: '',
-            keyClaimEvidence: '', 
-            streamItems: [0],
             streamData: {
                 0: {
                     streamContributor: '', 
@@ -31,46 +26,47 @@ class KeyClaimForm extends Component {
 
 //currying function to setState on change of form fields
     handleChange = (event) => {
+        this.props.handleKeyClaimChange(event); 
         this.setState({
         [event.target.name]: event.target.value,
         })
     }
 
 
-//streamId selects the object to edit
-//input field names select the object key to edit
-//spread operators maintain old data
-    handleStreamChange = (event) => {
+//adding a new value to this.state.streamData object that will be the ID of the new key claim 
+    addStreamItem = () => {
+        let streamItemId = Object.keys(this.state.streamData).length;
+        console.log('addin a stream Item, key claim id:', this.props.claimId, 'streamItemId: ',streamItemId);
+        console.log('props', this.props, 'state:', this.state)
         this.setState({
             streamData: {
-                ...this.state.streamData,
-                [event.target.id]: {
-                    ...this.state.streamData[event.target.id], 
-                    [event.target.name]: event.target.value
-                }
+              ...this.state.streamData, 
+              [streamItemId]: {
+                streamContributor: '', 
+                streamComment: '',
+                streamEvidence: '',
+              }, 
             }
-        })
-    }
-
-//adding a new value to this.state.keyclaims that will be the ID of the new key claim 
-    addStreamItem = () => {
-        let streamItemId = this.state.streamItems.length;
-        this.setState({
-            streamItems: [...this.state.streamItems, streamItemId]
-        })
+          })
     }
 
 
 
   render() {
 
-//Looping through this.state.streamItems to see how many streamItems forms are needed
-    let streamItemIdArray = this.state.streamItems; 
-    let streamItemForms = streamItemIdArray.map((streamItemId) => {      
-      return <StreamItemForm key={streamItemId}
-                            streamItemId ={streamItemId}
-                            handleStreamChange={this.handleStreamChange}/>
-    })
+//looping over the local streamData object to create the correct number of streamItemForms
+//using a For Of loop insteand of a .map (because this is an object, not an array)
+    let streamDataObject = this.state.streamData;
+    let streamItemForms = []
+    for (const streamItem in streamDataObject) {      
+        streamItemForms.push(
+        <StreamItemForm key={streamItem}
+                      claimId ={this.props.claimId}
+                      streamId={streamItem}
+                      handleKeyClaimChange={this.handleKeyClaimChange}
+                      handleStreamChange={this.props.handleStreamChange}/>
+      )
+    }
 
 
 
@@ -82,12 +78,16 @@ class KeyClaimForm extends Component {
 
 {/* SHOW STATE ON DOM */}
           <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre>
-          <pre>state: {JSON.stringify(this.state, null, 2)}</pre>
+          {/* <pre>state: {JSON.stringify(this.state, null, 2)}</pre> */}
 
           <Panel bsStyle="primary">
 
             <Panel.Heading>
-                <FormControl componentClass="select" placeholder="select" name="claimContributor" onChange={this.handleChange}>
+                <FormControl componentClass="select" 
+                                placeholder="select" 
+                                name="claimContributor" 
+                                onChange={this.handleChange}
+                                id={this.props.claimId} >
                     <option value="">-- Select Contributor --</option>
                     <option value="contributor1">Contributor 1</option>
                     <option value="contributor2">Contributor 2</option>
@@ -96,9 +96,17 @@ class KeyClaimForm extends Component {
 
               <Panel.Body>
                 <ControlLabel>Key Claim</ControlLabel>
-                <FormControl onChange={this.handleChange} name="keyClaim" value={this.state.keyClaim} type="text"/>
+                <FormControl onChange={this.handleChange} 
+                            id={this.props.claimId} 
+                            name="keyClaim" 
+                            value={this.state.keyClaim} 
+                            type="text"/>
                 <ControlLabel>Key Claim Evidence</ControlLabel>
-                <FormControl onChange={this.handleChange} name="keyClaimEvidence" value={this.state.keyClaimEvidence} type="text"/>
+                <FormControl onChange={this.handleChange} 
+                                id={this.props.claimId} 
+                                name="keyClaimEvidence" 
+                                value={this.state.keyClaimEvidence} 
+                                type="text"/>
 
 
 {/* Variable holding .map of <StreamItemForm>  */}

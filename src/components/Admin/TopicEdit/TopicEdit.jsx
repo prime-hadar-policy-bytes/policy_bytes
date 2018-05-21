@@ -11,6 +11,7 @@ class TopicEdit extends Component {
     super(props)
 
     this.state = {
+      keyClaimNumber: 0,
       topicTitle: '', 
       topicSummary: '', 
       topicPremise: '', 
@@ -20,10 +21,57 @@ class TopicEdit extends Component {
       proposal1: '',
       bio2: '', 
       proposal2: '',
-      keyClaims: [0],
+      keyClaims: {
+        0: {
+          claimId: 0,
+          claimContributor: '',
+            keyClaim: '',
+            keyClaimEvidence: '', 
+            streamData: {
+                0: {
+                    streamContributor: '', 
+                    streamComment: '',
+                    streamEvidence: '', 
+                },
+            }
+        },
+      },
 
     }
   }
+
+handleKeyClaimChange = (event) => {
+  // console.log('event.target: ',event.target.id);
+  this.setState({
+    keyClaims: {
+      ...this.state.keyClaims,
+      [event.target.id]: {
+        ...this.state.keyClaims[event.target.id], 
+              [event.target.name]: event.target.value
+      }
+    }
+  })
+}
+
+handleStreamChange = (event, claimId, streamId) => {
+  console.log('in topicEdit handle stream change, claim id:', claimId, 'streamId:', streamId);
+  console.log('event.target: ',event.target);
+  this.setState({
+    keyClaims: {
+      ...this.state.keyClaims,
+      [claimId]: {
+            streamData: {
+              ...this.state.keyClaims[claimId].streamData, 
+              [streamId]: {
+                ...this.state.keyClaims[claimId].streamData[streamId],
+                [event.target.name]: event.target.value
+              }
+            }
+      }
+    }
+  })
+}
+
 
 
 
@@ -31,9 +79,6 @@ class TopicEdit extends Component {
   handleSubmit = (event) => {
     event.preventDefault(); 
     console.log('form submit clicked');
-    console.log();
-    
-    
   }
 
 //currying function to setState on change of input fields
@@ -45,29 +90,41 @@ handleTextChange = (event) => {
 
 //adding a new value to this.state.keyclaims that will be the ID of the new key claim 
 addKeyClaim = () => {
-  let claimAddId = this.state.keyClaims.length;
+  const claimAddId = Object.keys(this.state.keyClaims).length;
   console.log(claimAddId);
   this.setState({
-    keyClaims: [...this.state.keyClaims, claimAddId]
+    keyClaims: {
+      ...this.state.keyClaims, 
+      [claimAddId]: {
+          claimId: claimAddId, 
+          claimContributor: '',
+          keyClaim: '',
+          keyClaimEvidence: '', 
+          streamData: {
+              0: {
+                  streamContributor: '', 
+                  streamComment: '',
+                  streamEvidence: '', 
+              },
+          }
+      }, 
+    }
   })
 }
 
 
-
-
-
   render() {
 
-//Looping through this.state.keyclaims to see how many key claim forms are needed
-    let keyClaimIdArray = this.state.keyClaims; 
-    let keyClaimForms = keyClaimIdArray.map((keyClaimId) => {
-      console.log(keyClaimId);
-      
-      return <KeyClaimForm key={keyClaimId}
-                            claimId ={keyClaimId}/>
-    })
-
-
+    let keyClaimIdObject = this.state.keyClaims;
+    let keyClaimForms = []
+    for (const keyClaim in keyClaimIdObject) {      
+      keyClaimForms.push(
+        <KeyClaimForm key={keyClaim}
+                      claimId ={keyClaim}
+                      handleKeyClaimChange={this.handleKeyClaimChange}
+                      handleStreamChange={this.handleStreamChange}/>
+      )
+    }
 
     return (
       <div>
@@ -75,7 +132,7 @@ addKeyClaim = () => {
           <h1>Topic Edit</h1>
 
 {/* SHOW STATE ON DOM */}
-          <pre>state: {JSON.stringify(this.state, null, 2)}</pre>
+          <pre>state: {JSON.stringify(this.state, null, 3)}</pre>
 
           <form action="" onSubmit={this.handleSubmit}>
 
