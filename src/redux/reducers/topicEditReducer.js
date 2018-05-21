@@ -13,6 +13,32 @@ const allTopics = (state = [], action) => {
     return state
 }
 
+//allKeyClaims contains all key claims from the database
+const allKeyClaims = (state = [], action) => {
+
+    //sets state of allKeyClaims to an array of objects where each object is a key claim
+    if (action.type === 'SET_ALL_KEY_CLAIMS'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_KEY_CLAIMS' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
+//allStreams contains all streams from the database
+const allStreams = (state = [], action) => {
+
+    //sets state of allStreams to an array of objects where each object is a stream
+    if (action.type === 'SET_ALL_STREAMS'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_STREAMS' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
 //featuredTopicPage contains the information needed for the featured topic
 //on the Topic Page
 const featuredTopicPage = (state = [], action) => {
@@ -100,6 +126,8 @@ const commentsStream = (state = [], action) => {
 
 export default combineReducers({
     allTopics,
+    allKeyClaims,
+    allStreams,
     featuredTopicPage,
     featuredLandingPage,
     archivedTopics,

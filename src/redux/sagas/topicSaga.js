@@ -9,11 +9,57 @@ function* fetchAllTopics(action){
         //receives back all topics from the database and stores them in topicResponse.data
         const topicResponse = yield call(axios.get, '/api/topic/alltopics')
 
-        //sends all topics to newTopic reducer via action 'SET_ALL_TOPICS'
+        //sends all topics to allTopics reducer via action 'SET_ALL_TOPICS'
         //and payload topicResponse.data
         yield put({
             type: 'SET_ALL_TOPICS',
             payload: topicResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
+//gets all key claims from database
+function* fetchAllKeyClaims(action){
+    try{
+
+        //keyClaimResponse sends get request to router '/api/topic/allkeyclaims' and 
+        //receives back all key claims from the database and stores them in keyClaimResponse.data
+        const keyClaimResponse = yield call(axios.get, '/api/topic/allkeyclaims')
+
+        //sends all key claims to allKeyClaims reducer via action 'SET_ALL_KEY_CLAIMS'
+        //and payload keyClaimResponse.data
+        yield put({
+            type: 'SET_ALL_KEY_CLAIMS',
+            payload: keyClaimResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting topic: ', error);
+        
+    }
+}
+
+//gets all streams from database
+function* fetchAllStreams(action){
+    try{
+
+        //streamResponse sends get request to router '/api/topic/allstreams' and 
+        //receives back all streams from the database and stores them in streamResponse.data
+        const streamResponse = yield call(axios.get, '/api/topic/allstreams')
+
+        //sends all streams to allStreams reducer via action 'SET_ALL_STREAMS'
+        //and payload streamResponse.data
+        yield put({
+            type: 'SET_ALL_STREAMS',
+            payload: streamResponse.data
         })
 
     //if there is an error in sending get request to router, the error
@@ -33,7 +79,7 @@ function* fetchFeaturedTopicPage(action){
         //page and stores it in topicResponse.data
         const topicResponse = yield call(axios.get, '/api/topic/featuredtopic')
 
-        //sends new featured topic to newTopic reducer via action 'SET_FEATURED_TOPIC_TOPIC_PAGE'
+        //sends new featured topic to featuredTopicPage reducer via action 'SET_FEATURED_TOPIC_TOPIC_PAGE'
         //and payload topicResponse.data
         yield put({
             type: 'SET_FEATURED_TOPIC_TOPIC_PAGE',
@@ -57,7 +103,7 @@ function* fetchFeaturedTopicLanding(action){
         //page and stores it in topicResponse.data
         const topicResponse = yield call(axios.get, '/api/topic/featuredlanding')
 
-        //sends new featured topic to newTopic reducer via action 'SET_NEW_FEATURED_TOPIC'
+        //sends new featured topic to featuredLandingPage reducer via action 'SET_NEW_FEATURED_TOPIC'
         //and payload topicResponse.data
         yield put({
             type: 'SET_FEATURED_TOPIC_LANDING_PAGE',
@@ -104,7 +150,7 @@ function* fetchGeneralComments(action){
         const commentResponse = yield call(axios.get, '/api/topic/generalcomments')
 
         //sends all general comments to commentsGeneral reducer via action 'SET_GENERAL_COMMENTS'
-        //and payload archivedResponse.data
+        //and payload commentResponse.data
         yield put({
             type: 'SET_GENERAL_COMMENTS',
             payload: commentResponse.data
@@ -126,8 +172,8 @@ function* fetchKeyClaimComments(action){
         //receives back comments on all key claims of a topic and store them in commentResponse.data
         const commentResponse = yield call(axios.get, '/api/topic/keyclaimcomments')
 
-        //sends all general comments to commentsGeneral reducer via action 'SET_KEY_CLAIM_COMMENTS'
-        //and payload archivedResponse.data
+        //sends all general comments to commentsKeyClaim reducer via action 'SET_KEY_CLAIM_COMMENTS'
+        //and payload commentResponse.data
         yield put({
             type: 'SET_KEY_CLAIM_COMMENTS',
             payload: commentResponse.data
@@ -149,8 +195,8 @@ function* fetchStreamComments(action){
         //receives back all comments in a stream and store them in commentResponse.data
         const commentResponse = yield call(axios.get, '/api/topic/streamcomments')
 
-        //sends all general comments to commentsGeneral reducer via action 'SET_STREAM_COMMENTS'
-        //and payload archivedResponse.data
+        //sends all general comments to commentsStream reducer via action 'SET_STREAM_COMMENTS'
+        //and payload commentResponse.data
         yield put({
             type: 'SET_STREAM_COMMENTS',
             payload: commentResponse.data
@@ -166,6 +212,8 @@ function* fetchStreamComments(action){
 
 function* factionSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
+    yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
+    yield takeLatest('FETCH_ALL_STREAMS', fetchAllStreams)
     yield takeLatest('FETCH_NEW_TOPIC_TOPIC_PAGE', fetchFeaturedTopicPage)
     yield takeLatest('FETCH_NEW_TOPIC_LANDING_PAGE', fetchFeaturedTopicLanding)
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
