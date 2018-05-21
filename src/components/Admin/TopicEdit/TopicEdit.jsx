@@ -21,7 +21,7 @@ class TopicEdit extends Component {
       bio2: '', 
       proposal2: '',
       keyClaims: [0],
-
+      
     }
   }
 
@@ -56,9 +56,9 @@ addKeyClaim = () => {
 
   render() {
 
-    let keyClaimIds = this.state.keyClaims; 
-
-    let keyClaimForms = keyClaimIds.map((keyClaimId) => {
+//Looping through this.state.keyclaims to see how many key claim forms are needed
+    let keyClaimIdArray = this.state.keyClaims; 
+    let keyClaimForms = keyClaimIdArray.map((keyClaimId) => {
       console.log(keyClaimId);
       
       return <KeyClaimForm key={keyClaimId}
