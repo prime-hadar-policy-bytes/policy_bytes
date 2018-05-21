@@ -8,7 +8,9 @@ import axios from 'axios';
 // worker Saga: will be fired on "LOGIN" actions
 
 function* loginFacebookUser() {
+  console.log('in loginFacebookUser in login saga')
   yield axios.get('api/facebook/send');
+
 };
 
 function* loginUser(action) {
@@ -56,7 +58,7 @@ function* loginSaga() {
   yield takeLatest(LOGIN_ACTIONS.LOGIN, loginUser);
   yield takeLatest(LOGIN_ACTIONS.LOGOUT, logoutUser);
   //DAVID Added
-  yield takeLatest(' LOGIN_FACEBOOK', loginFacebookUser);
+  yield takeLatest('LOGIN_FACEBOOK', loginFacebookUser);
 }
 
 export default loginSaga;

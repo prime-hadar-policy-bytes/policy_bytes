@@ -10,9 +10,12 @@ const mapStateToProps = state => ({
 class Nav extends Component {
 
 
-  // facebookLogin = () {
-  //   this.props.dispatch()
-  // }
+  loginFacebook = () => {
+    console.log('made it to login facebook');
+    this.props.dispatch({
+      type: 'LOGIN_FACEBOOK'
+  });
+  }
 
   render() {
 
@@ -41,9 +44,7 @@ class Nav extends Component {
           </Link>
             </li>
             <li>
-              <a href="https://localhost:5000/api/facebook/send">
-                Login with Facebook
-          </a>
+              <button onClick={this.loginFacebook}>Login with Facebook</button>
             </li>
           </ul>
         </div>
