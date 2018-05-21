@@ -1,3 +1,4 @@
+
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (100) UNIQUE NOT NULL,
@@ -11,18 +12,18 @@ CREATE TABLE "person" (
     "status" INT
 );
 
-
 CREATE TABLE "topic" (
     "id" SERIAL PRIMARY KEY,
     "topic" VARCHAR(100),
     "premise" VARCHAR(1000),
     "common_ground" VARCHAR(1000),
-    "published_date" timestamp with time zone,
+    "published_date" timestamp with time zone default current_timestamp,
     "archived" boolean default false,
     "archived_summary" VARCHAR(5000),
-    "archived_date" timestamp with time zone,
+    "archived_date" timestamp with time zone default current_timestamp,
     "icon_url" VARCHAR(5000)
  );
+
  
  
 CREATE TABLE "contributor" (
@@ -54,7 +55,7 @@ CREATE TABLE "stream" (
 
 CREATE TABLE "comments_stream" (
 	"id" SERIAL PRIMARY KEY,
-	"date" timestamp with time zone,
+	"date" timestamp with time zone default current_timestamp,
 	"person_id" INT REFERENCES "person",
 	"topic_id" INT REFERENCES "topic",
 	"stream_id" INT REFERENCES "stream",
@@ -65,7 +66,7 @@ CREATE TABLE "comments_stream" (
 
 CREATE TABLE "comments_general" (
 	"id" SERIAL PRIMARY KEY,
-	"date" timestamp with time zone,
+	"date" timestamp with time zone default current_timestamp,
 	"person_id" INT REFERENCES "person",
 	"topic_id" INT REFERENCES "topic",
 	"comment" VARCHAR(5000),
@@ -75,7 +76,7 @@ CREATE TABLE "comments_general" (
 
 CREATE TABLE "comments_key_claim" (
 	"id" SERIAL PRIMARY KEY,
-	"date" timestamp with time zone,
+	"date" timestamp with time zone default current_timestamp,
 	"person_id" INT REFERENCES "person",
 	"topic_id" INT REFERENCES "topic",
 	"key_claim_id" INT REFERENCES "key_claim",
@@ -115,5 +116,12 @@ CREATE TABLE "love" (
 	"proposal_id" INT REFERENCES "proposal"
 );
 	
+INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
+VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt', 'byrne', 1);
+    
+
+INSERT INTO "topic" ("topic", "premise", "common_ground", "archived", "archived_summary", "icon_url") 
+VALUES ('guns', 'more guns', 'people should be able to own', false, 'this is the archive summary','url');
+    
 
 	
