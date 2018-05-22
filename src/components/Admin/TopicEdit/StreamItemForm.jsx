@@ -5,6 +5,16 @@ import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormCon
 
 
 class StreamItemForm extends Component {
+  constructor (props) {
+    super(props) 
+
+    this.state = {
+      streamContributor: '',
+      streamComment: '',
+      streamEvidence: '',
+    }
+  }
+
 
   packageStreamChange = (event) => {
     console.log('stream id: ',this.props.streamId);
@@ -31,7 +41,9 @@ class StreamItemForm extends Component {
                             onChange={this.packageStreamChange}
                             placeholder="select" 
                             id={this.props.streamId} 
-                            name="streamContributor">
+                            name="streamContributor"
+                            // value={this.state.streamContributor}
+                            >
                   <option value="">-- Select Contributor --</option>
                   <option value="contributor1">Contributor 1</option>
                   <option value="contributor2">Contributor 2</option>

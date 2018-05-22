@@ -11,27 +11,26 @@ class TopicEdit extends Component {
     super(props)
 
     this.state = {
-      keyClaimNumber: 0,
-      topicTitle: '', 
-      topicSummary: '', 
-      topicPremise: '', 
-      topicReadMore: '', 
-      topicCommonGround: '', 
-      bio1: '', 
-      proposal1: '',
-      bio2: '', 
-      proposal2: '',
+      topicTitle: 'asdf', 
+      topicSummary: 'fdsa', 
+      topicPremise: 'asdf', 
+      topicReadMore: 'fdsa', 
+      topicCommonGround: 'asdf', 
+      bio1: 'fdsa', 
+      proposal1: 'asdf',
+      bio2: 'fdsa', 
+      proposal2: 'asdf',
       keyClaims: {
         0: {
           claimId: 0,
-          claimContributor: '',
-            keyClaim: '',
-            keyClaimEvidence: '', 
+          claimContributor: 'fdsa',
+            keyClaim: 'asdfasd',
+            keyClaimEvidence: 'fdsadfasd', 
             streamData: {
                 0: {
-                    streamContributor: '', 
-                    streamComment: '',
-                    streamEvidence: '', 
+                    streamContributor: 'asdfads', 
+                    streamComment: 'asdfasd',
+                    streamEvidence: 'asdfasdf', 
                 },
             }
         },
@@ -60,6 +59,7 @@ handleStreamChange = (event, claimId, streamId) => {
     keyClaims: {
       ...this.state.keyClaims,
       [claimId]: {
+        ...this.state.keyClaims[claimId],
             streamData: {
               ...this.state.keyClaims[claimId].streamData, 
               [streamId]: {
@@ -72,13 +72,17 @@ handleStreamChange = (event, claimId, streamId) => {
   })
 }
 
-
-
-
 //Send local state object to Redux
   handleSubmit = (event) => {
     event.preventDefault(); 
-    console.log('form submit clicked');
+    console.log('form submit clicked, contents:', this.state);
+    this.props.dispatch({
+      type: 'SET_NEW_TOPIC',
+      payload: this.state, 
+    })
+
+    ///SOME INDICATOR HERE
+
   }
 
 //currying function to setState on change of input fields
@@ -164,7 +168,7 @@ addKeyClaim = () => {
             <Panel>
               <Panel.Body>
                 <ControlLabel>Common Ground</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="topicCommonGround" value={this.state.commonGround} type="text"/>
+                <FormControl onChange={this.handleTextChange} name="topicCommonGround" value={this.state.topicCommonGround} type="text"/>
               </Panel.Body>
             </Panel>
 
@@ -190,14 +194,7 @@ addKeyClaim = () => {
           <Button bsStyle="primary" onClick={this.addKeyClaim}>Add Key Claim</Button>
 
 {/* Mapped array of number of key claims in this.state */}
-{keyClaimForms}
-
-
-
-
-
-
-
+          {keyClaimForms}
           
           <Button type="submit" bsStyle="primary">Submit!</Button>
           </form>
