@@ -304,7 +304,7 @@ function* setNewTopic(action){
     }
 }
 
-function* factionSaga() {
+function* topicSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
     yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
     yield takeLatest('FETCH_ALL_STREAMS', fetchAllStreams)
@@ -321,4 +321,4 @@ function* factionSaga() {
     yield takeLatest('SET_NEW_TOPIC', setNewTopic)
   }
 
-  export default factionSaga;
+  export default topicSaga;
