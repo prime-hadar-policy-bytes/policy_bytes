@@ -124,21 +124,22 @@ VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt
   
 INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
 VALUES ('kerry', 'kerry5', 'kerry_byrne34', 'kerry_byrne', 'url', 'kerry@mail', 'kerry', 'byrne', 2);
+
    
-   
+  
+      
 INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "featured", "archive_summary", "icon_url") 
 VALUES ('guns', 'more guns', 'people should be able to own', false,
 false, 'this is the archive summary','url'), 
-('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, false, 'Taxes are important for a government to function','url');
-    
+('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, 
+false, 'Taxes are important for a government to function','url');
+
 
 INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url") 
 VALUES ('Mike', 'Jones', 'Professor at some college', 'url');
 
-
 INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order") 
 VALUES (1, 1,'guns make us safer', 1);
-
 
 INSERT INTO "stream" ("key_claim_id", "contributor_id", "text", "evidence") 
 VALUES (1, 1,'according to this study...', 'link to some research');
@@ -158,7 +159,14 @@ VALUES (1, 1, 'we should have more guns...');
 INSERT INTO "like" ("person_id", "key_claim_id", "stream_id", "comments_key_claim_id", "comments_stream_id", "comments_general_id", "proposal_id") 
 VALUES (2, 1, 1, 1, 1, 1, 1);
 
-
 INSERT INTO "love" ("person_id", "key_claim_id", "stream_id", "comments_key_claim_id", "comments_stream_id", "comments_general_id", "proposal_id") 
 VALUES (2, 1, 1, 1, 1, 1, 1);
 	
+
+--PUT to toggle Published
+UPDATE topic SET published = NOT published WHERE id = 2; 
+
+--PUT to turn all featured to false
+UPDATE topic SET featured = FALSE; 
+UPDATE topic SET featured = TRUE WHERE id = 2;
+
