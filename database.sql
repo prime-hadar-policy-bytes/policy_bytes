@@ -1,8 +1,8 @@
 
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
-    "username" VARCHAR (100) UNIQUE NOT NULL,
-    "password" VARCHAR (1000) NOT NULL,
+    "username" VARCHAR (100) UNIQUE,
+    "password" VARCHAR (1000),
     "fb_id" VARCHAR(5000),
     "fb_display_name" VARCHAR(1000),
     "fb_picture" VARCHAR (500),
@@ -14,13 +14,14 @@ CREATE TABLE "person" (
 
 CREATE TABLE "topic" (
     "id" SERIAL PRIMARY KEY,
-    "topic" VARCHAR(100),
+    "topic_title" VARCHAR(100),
     "premise" VARCHAR(1000),
     "common_ground" VARCHAR(1000),
     "published_date" timestamp with time zone default current_timestamp,
-    "archived" boolean default false,
-    "archived_summary" VARCHAR(5000),
-    "archived_date" timestamp with time zone default current_timestamp,
+    "published" boolean default false,
+	"featured" boolean default false,
+    "archive_summary" VARCHAR(5000),
+    "archive_date" timestamp with time zone default current_timestamp,
     "icon_url" VARCHAR(5000)
  );
 
@@ -123,10 +124,12 @@ VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt
   
 INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
 VALUES ('kerry', 'kerry5', 'kerry_byrne34', 'kerry_byrne', 'url', 'kerry@mail', 'kerry', 'byrne', 2);
-      
-
-INSERT INTO "topic" ("topic", "premise", "common_ground", "archived", "archived_summary", "icon_url") 
-VALUES ('guns', 'more guns', 'people should be able to own', false, 'this is the archive summary','url');
+   
+   
+INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "featured", "archive_summary", "icon_url") 
+VALUES ('guns', 'more guns', 'people should be able to own', false,
+false, 'this is the archive summary','url'), 
+('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, false, 'Taxes are important for a government to function','url');
     
 
 INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url") 
