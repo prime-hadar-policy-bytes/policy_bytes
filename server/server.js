@@ -14,6 +14,7 @@ const passportFacebook = require('./strategies/facebook.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const facebookRouter = require('./routes/facebook.router');
+const topicRouter = require('./routes/topic.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -31,6 +32,7 @@ app.use(passportFacebook.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/facebook', facebookRouter);
+app.use('/api/topic', topicRouter)
 
 // Serve static files
 app.use(express.static('build'));
