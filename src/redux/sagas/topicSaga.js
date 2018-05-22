@@ -289,6 +289,21 @@ function* fetchStreamComments(action){
     }
 }
 
+//posts a new topic to the database
+function* setNewTopic(action){
+    try{
+
+        //posts new topic to the database via axios.post
+        //action.payload contains the new topic
+        yield call(axios.post, '/api/topic/newtopic', action.payload)
+
+    //if there is an error in sending post request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in posting new topic: ', error);
+    }
+}
+
 function* factionSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
     yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
@@ -303,6 +318,7 @@ function* factionSaga() {
     yield takeLatest('FETCH_GENERAL_COMMENTS', fetchGeneralComments)
     yield takeLatest('FETCH_KEY_CLAIM_COMMENTS', fetchKeyClaimComments)
     yield takeLatest('FETCH_STREAM_COMMENTS', fetchStreamComments)
+    yield takeLatest('SET_NEW_TOPIC', setNewTopic)
   }
 
   export default factionSaga;
