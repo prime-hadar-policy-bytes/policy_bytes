@@ -3,9 +3,12 @@ import { connect } from 'react-redux'
 
 import Footer from '../../Footer/Footer.jsx'
 import TopicManagePanel from './TopicManagePanel.jsx'
+import TopicManageModal from './TopicManageModal.jsx'
+
+import './TopicManage.css'; 
 
 import { Link } from 'react-router-dom';
-import { Panel, Button, ButtonGroup, ButtonToolbar, FormGroup, ControlLabel, FormControl, Checkbox, Glyphicon } from 'react-bootstrap'; 
+import { Panel, Button, ButtonGroup, ButtonToolbar, FormGroup, ControlLabel, FormControl, Checkbox, Glyphicon, Modal } from 'react-bootstrap'; 
 
 class TopicManage extends Component {
   constructor(props) {
@@ -14,33 +17,73 @@ class TopicManage extends Component {
     this.state = {
       topics: [
         1, 2, 3, 4
-      ]
+      ],
+      showModal: false,  
     }
   }
 
+  componentDidMount () {
+    this.fetchAllTopics(); 
+  }
+
+  fetchAllTopics = () => {
+    console.log('in FETCH_ALL_TOPICS');
+    this.props.dispatch({
+      type: 'FETCH_ALL_TOPICS'
+    })
+  }
+
+  handleDelete = () => {
+    console.log('in TopicManage handleDelete');
+    this.handleShow(); 
+    
+  }
+
+
+  handleDismiss = () => {
+    this.setState({ showModal: false });
+  }
+
+  handleShow = () => {
+    this.setState({ showModal: true });
+  }
+
+
+
 
   render() {
+    
 
     let topicsArray = this.state.topics;
     let topicPanels = topicsArray.map((topic) => {
-      return <TopicManagePanel/>
+      return <TopicManagePanel key={topic}
+                              topic={topic}
+                              handleDelete={this.handleDelete}/>
     })
 
+    let modalContent;
+    if (this.state.showModal) {
+      modalContent = (
+        <TopicManageModal handleDismiss={this.handleDismiss}/>
+      )
+    }
     return (
       <div>
-                    
-        <h1>Topic Manage Page</h1>
+        <div className="wrapper">
 
-        <Panel className="topicManagePanel">
-            <Panel.Heading>Create a New Topic</Panel.Heading>
-            <Panel.Body>
-            <Button bsStyle="success"><Link to='/topicEdit'>Create New Topic Button</Link></Button>
-            </Panel.Body>
-        </Panel>
+
+        {JSON.stringify(this.state, null, 2)}
+
+        <h1>
+          Topic Manage Page
+          <Button className="newTopicButton" bsStyle="success"><Link to='/topicEdit'>Create A New Topic</Link></Button>
+        </h1>             
+
           
-          
+          {modalContent}
           {topicPanels}
 
+        </div>
         <Footer />
 
       </div>

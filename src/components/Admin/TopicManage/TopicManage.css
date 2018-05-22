@@ -1,0 +1,12 @@
+/* TOPIC MANAGE PAGE */
+
+.topicManagePanel{
+    width: 30%; 
+    float: left; 
+    margin: 1em 1em 0 0; 
+}
+
+.newTopicButton{
+    display: inline;
+    margin-left: 2em; 
+}
