@@ -11,6 +11,8 @@ const mapStateToProps = state => ({
   login: state.login,
 });
 
+// console.log(process.env.LOCALHOST_SUCCESS_URL)
+
 class Nav extends Component {
 
   componentDidMount() {

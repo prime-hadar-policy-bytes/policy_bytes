@@ -16,9 +16,6 @@ if(process.env.DEV == 'true'){
   console.log(successUrl);
 }
 
-
-
-
 // Handles Ajax request for user information if user is authenticated
 router.get('/', (req, res) => {
   // check if logged in
@@ -34,23 +31,13 @@ router.get('/', (req, res) => {
 //TO-DO failureRedirect
 router.get('/callback',
 facebookStrategy.authenticate('facebook', { successRedirect: successUrl,
-                                      failureRedirect: '/' }));
+                                      failureRedirect: successUrl }));
 
-// Handles login form authenticate/login POST
-// userStrategy.authenticate('local') is middleware that we run on this route
-// this middleware will run our POST if successful
-// this middleware will send a 404 if not successful
-
+                                      
 router.get('/send',
 facebookStrategy.authenticate('facebook', { scope: ['public_profile', 'email'] } ), (req, res) => {
   res.sendStatus(200);
 });
-
-
-// router.get('/send', (req, res) => {
-//   console.log('made it to fb router');
-//   res.send('taco');
-//     });
 
 // clear all server session information about this user
 router.get('/logout', (req, res) => {

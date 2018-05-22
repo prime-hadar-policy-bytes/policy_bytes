@@ -7,18 +7,18 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "LOGIN" actions
 
-function* loginFacebookUser() {
-  console.log('in loginFacebookUser in login saga')
-  try {  yield call(axios.get, '/api/facebook/send');
-  yield put({
-    type: USER_ACTIONS.FETCH_USER,
-  });
-} catch (error) {
-  console.log('error in loginFacebookUser');
-}
-
-
-};
+//currently loginFacebookUser is not being used. axios.get to facebook.strategy.js on server is not working
+//so get is hardcoded into link from Nav.jsx
+// function* loginFacebookUser() {
+//   console.log('in loginFacebookUser in login saga')
+//   try {  yield call(axios.get, '/api/facebook/send');
+//   yield put({
+//     type: USER_ACTIONS.FETCH_USER,
+//   });
+// } catch (error) {
+//   console.log('error in loginFacebookUser');
+// }
+// };
 
 function* loginUser(action) {
   try {
@@ -64,8 +64,8 @@ function* logoutUser(action) {
 function* loginSaga() {
   yield takeLatest(LOGIN_ACTIONS.LOGIN, loginUser);
   yield takeLatest(LOGIN_ACTIONS.LOGOUT, logoutUser);
-  //DAVID Added
-  yield takeEvery('LOGIN_FACEBOOK', loginFacebookUser);
+  //Not currently working. get facebook is hardcoded into Nav.jsx
+  // yield takeEvery('LOGIN_FACEBOOK', loginFacebookUser);
 }
 
 export default loginSaga;
