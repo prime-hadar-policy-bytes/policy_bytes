@@ -16,7 +16,6 @@ class TopicManagePanel extends Component {
   handleDeleteTopic = () => {
     console.log('in handleDeleteTopic', this.props.topic);
     this.props.handleDelete(this.props.topic); 
-
   }
 
 
@@ -29,25 +28,61 @@ class TopicManagePanel extends Component {
     console.log('handleEditTopic Clicked:', this.props.topic);
   }
 
+//toggle published status in db and reset all topics
+  togglePublished = () => {
+    console.log('in Panel togglePublished');
+    this.props.dispatch({
+      type: 'TOGGLE_PUBLISHED',
+      payload: this.props.topic
+    })
+  }
+
+//toggle featured status in db and reset all topics
+  toggleFeatured = () => {
+    console.log('in Panel toggleFeatured');
+    this.props.dispatch({
+      type: 'TOGGLE_FEATURED',
+      payload: this.props.topic
+    })
+  }
 
 
 
   render() {
+
+//color/text of publish button based on topic.published status
+    let publishStyle = 'default';
+    if (this.props.topic.published) {
+      publishStyle = 'success'
+    }
+    let publishText = 'Unpublished';
+    if (this.props.topic.published) {
+      publishText = 'Published'
+    }
+//color/text of publish button based on topic.featured status
+    let featuredStyle = 'default';
+    if (this.props.topic.featured) {
+      featuredStyle = 'primary'
+    }
+    let featuredText = 'Set Featured';
+    if (this.props.topic.featured) {
+      featuredText = 'Featured Topic'
+    }
+ 
 
     return (
       <div>
                
             <Panel className="topicManagePanel">
               <Panel.Heading>
-                Raising the Minimum Wage
-                <Checkbox>Publish/Unpublish</Checkbox>
+                {this.props.topic.topic_title}
+                <Button bsStyle={publishStyle} onClick={this.togglePublished}>{publishText}</Button>
+                <Button bsStyle={featuredStyle} onClick={this.toggleFeatured}>{featuredText}</Button>
               </Panel.Heading>
               <Panel.Body>
                 <p>
-                  Hector Chavez, Nicole Rodriguez, Josepine Lampone, 
-                  propose policy plans surrounding public transit in the 
-                  Twin Cities and discuss the implications, (dis)advantages 
-                  and solvency of each plan.
+                {this.props.topic.archive_summary}
+
                 </p>
                 
                 <img src="./assets/politicsIcon.svg" alt="" width="200"/>
