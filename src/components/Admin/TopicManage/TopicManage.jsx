@@ -15,9 +15,6 @@ class TopicManage extends Component {
     super(props) 
 
     this.state = {
-      topics: [
-        1, 2, 3, 4
-      ],
       showModal: false,  
     }
   }
@@ -31,6 +28,7 @@ class TopicManage extends Component {
     this.props.dispatch({
       type: 'FETCH_ALL_TOPICS'
     })
+    
   }
 
   handleDelete = () => {
@@ -54,9 +52,9 @@ class TopicManage extends Component {
   render() {
     
 
-    let topicsArray = this.state.topics;
+    let topicsArray = this.props.state.topics.allTopics;
     let topicPanels = topicsArray.map((topic) => {
-      return <TopicManagePanel key={topic}
+      return <TopicManagePanel key={topic.id}
                               topic={topic}
                               handleDelete={this.handleDelete}/>
     })
@@ -71,8 +69,8 @@ class TopicManage extends Component {
       <div>
         <div className="wrapper">
 
-
-        {JSON.stringify(this.state, null, 2)}
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        <pre>all topics reducer:::<br/>{JSON.stringify(this.props.state.topics.allTopics, null, 2)}</pre>
 
         <h1>
           Topic Manage Page
@@ -84,7 +82,7 @@ class TopicManage extends Component {
           {topicPanels}
 
         </div>
-        <Footer />
+        {/* <Footer /> */}
 
       </div>
     )
@@ -92,7 +90,7 @@ class TopicManage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  
+  state
 })
 
 
