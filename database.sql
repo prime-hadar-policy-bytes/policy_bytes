@@ -124,12 +124,16 @@ VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt
   
 INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
 VALUES ('kerry', 'kerry5', 'kerry_byrne34', 'kerry_byrne', 'url', 'kerry@mail', 'kerry', 'byrne', 2);
+
+   
+  
       
 INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "featured", "archive_summary", "icon_url") 
 VALUES ('guns', 'more guns', 'people should be able to own', false,
 false, 'this is the archive summary','url'), 
 ('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, 
 false, 'Taxes are important for a government to function','url');
+
 
 INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url") 
 VALUES ('Mike', 'Jones', 'Professor at some college', 'url');
