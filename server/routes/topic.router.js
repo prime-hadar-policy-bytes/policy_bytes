@@ -8,7 +8,8 @@ router.get('/alltopics', (req, res) => {
     //checks to see if the user has an account in the database;
     //if they don't, a forbidden message is displayed and he or she
     //will not have access to the results from the following query
-    if(req.isAuthenticated()){
+
+    // if(req.isAuthenticated()){
 
     //queryText is the query text that will get all of the topics from the 
     //topic table in the database
@@ -28,12 +29,12 @@ router.get('/alltopics', (req, res) => {
         console.log('Error in getting topics: ', error);
         
     })
-    } else{
+    // } else{
 
-        //if req.isAuthenticated() is false, the forbidden error will appear
-        //on the webpage
-        res.sendStatus(403)
-    }
+    //     //if req.isAuthenticated() is false, the forbidden error will appear
+    //     //on the webpage
+    //     res.sendStatus(403)
+    // }
 });
 
 /**
