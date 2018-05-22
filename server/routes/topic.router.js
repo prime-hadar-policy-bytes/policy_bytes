@@ -44,4 +44,26 @@ router.post('/', (req, res) => {
 
 });
 
+
+
+//WRITTEN BY ATTICUS
+//TOGGLES PUBLISHED STATUS IN TOPIC TABLE
+router.put('/togglePublished', (req, res) => {
+    console.log('in /api/topics/togglePublished', req.body);
+    let topicId = req.body.id; 
+    let queryText = `UPDATE topic SET published = NOT published WHERE id = $1;`
+    pool.query(queryText, [topicId])
+    .then((result)=> {
+        console.log('successful PUT /api/topic/togglePublished');
+        res.sendStatus(200);
+    })
+    .catch((err)=> {
+        console.log('error in PUT /api/topic/togglePublished');
+        res.sendStatus(500); 
+    })
+})
+
+
+
+
 module.exports = router;
