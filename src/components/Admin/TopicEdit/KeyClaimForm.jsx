@@ -12,6 +12,9 @@ class KeyClaimForm extends Component {
         super(props) 
 
         this.state = {
+            keyClaimContributor: '',
+            keyClaimEvidence: 'vcxz',
+            keyClaim: 'zxcv',
             streamData: {
                 0: {
                     streamContributor: '', 
@@ -78,7 +81,9 @@ class KeyClaimForm extends Component {
                                 placeholder="select" 
                                 name="claimContributor" 
                                 onChange={this.handleChange}
-                                id={this.props.claimId} >
+                                id={this.props.claimId} 
+                                // value={this.state.keyClaimContributor}
+                                >
                     <option value="">-- Select Contributor --</option>
                     <option value="contributor1">Contributor 1</option>
                     <option value="contributor2">Contributor 2</option>
