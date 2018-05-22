@@ -1,9 +1,25 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
 import { LOGIN_ACTIONS } from '../actions/loginActions';
 import { USER_ACTIONS } from '../actions/userActions';
 import { callLogin, callLogout } from '../requests/loginRequests';
+import axios from 'axios';
+
 
 // worker Saga: will be fired on "LOGIN" actions
+
+//currently loginFacebookUser is not being used. axios.get to facebook.strategy.js on server is not working
+//so get is hardcoded into link from Nav.jsx
+// function* loginFacebookUser() {
+//   console.log('in loginFacebookUser in login saga')
+//   try {  yield call(axios.get, '/api/facebook/send');
+//   yield put({
+//     type: USER_ACTIONS.FETCH_USER,
+//   });
+// } catch (error) {
+//   console.log('error in loginFacebookUser');
+// }
+// };
+
 function* loginUser(action) {
   try {
     yield put({ type: LOGIN_ACTIONS.CLEAR_LOGIN_ERROR });
@@ -48,6 +64,8 @@ function* logoutUser(action) {
 function* loginSaga() {
   yield takeLatest(LOGIN_ACTIONS.LOGIN, loginUser);
   yield takeLatest(LOGIN_ACTIONS.LOGOUT, logoutUser);
+  //Not currently working. get facebook is hardcoded into Nav.jsx
+  // yield takeEvery('LOGIN_FACEBOOK', loginFacebookUser);
 }
 
 export default loginSaga;

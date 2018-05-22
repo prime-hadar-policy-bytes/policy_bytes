@@ -63,6 +63,8 @@ typings/
 
 # dotenv environment variables file
 .env
+localhost.cert 
+localhost.key
 
 # ignore package-lock as it complicates merging
 package-lock.json
