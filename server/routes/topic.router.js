@@ -19,7 +19,7 @@ router.get('/alltopics', (req, res) => {
     //stores the results in the variable result
     pool.query(queryText).then((result) => {
     
-    //all of the topics are store in result.rows; therefore we will send back
+    //all of the topics are stored in result.rows; therefore we will send back
     //result.rows
         res.send(result.rows)
 
@@ -36,6 +36,107 @@ router.get('/alltopics', (req, res) => {
     //     res.sendStatus(403)
     // }
 });
+
+//gets all key claims from database
+router.get('/allkeyclaims', (req, res) => {
+
+    //see comment from router.get('/alltopics') for explanation of 
+    //if(req.isAuthenticated())
+    // if(req.isAuthenticated()){
+
+    //queryText is the query text that will get all of the key claims from 
+    //the key_claim table in the database
+    const queryText = `;`
+
+    //pool.query is the method that sends the queryText to the database and 
+    //stores the results in the variable result
+    pool.query(queryText).then((result) => {
+    
+    //all of the key claims are stored in result.rows; therefore we will send back
+    //result.rows
+        res.send(result.rows)
+
+    //if there was an error in getting the key claims from the database,
+    //the error will be displayed in the console log
+    }).catch((error) => {
+        console.log('Error in getting key claims: ', error);
+        
+    })
+    // } else{
+
+    //     //if req.isAuthenticated() is false, the forbidden error will appear
+    //     //on the webpage
+    //     res.sendStatus(403)
+    // }
+});
+
+//gets all streams from database
+router.get('/allstreams', (req, res) => {
+
+    //see comment from router.get('/alltopics') for explanation of 
+    //if(req.isAuthenticated())
+    // if(req.isAuthenticated()){
+
+    //queryText is the query text that will get all of the streams from 
+    //the stream table in the database
+    const queryText = `;`
+
+    //pool.query is the method that sends the queryText to the database and 
+    //stores the results in the variable result
+    pool.query(queryText).then((result) => {
+    
+    //all of the streams are stored in result.rows; therefore we will send back
+    //result.rows
+        res.send(result.rows)
+
+    //if there was an error in getting the streams from the database,
+    //the error will be displayed in the console log
+    }).catch((error) => {
+        console.log('Error in getting streams: ', error);
+        
+    })
+    // } else{
+
+    //     //if req.isAuthenticated() is false, the forbidden error will appear
+    //     //on the webpage
+    //     res.sendStatus(403)
+    // }
+});
+
+//gets all contributors from database
+router.get('/allcontributors', (req, res) => {
+
+    //see comment from router.get('/alltopics') for explanation of 
+    //if(req.isAuthenticated())
+    // if(req.isAuthenticated()){
+
+    //queryText is the query text that will get all of the contributors from 
+    //the contributor table in the database
+    const queryText = `SELECT * FROM "contributor";`
+
+    //pool.query is the method that sends the queryText to the database and 
+    //stores the results in the variable result
+    pool.query(queryText).then((result) => {
+    
+    //all of the contributors are stored in result.rows; therefore we will send back
+    //result.rows
+        res.send(result.rows)
+
+    //if there was an error in getting the topics from the database,
+    //the error will be displayed in the console log
+    }).catch((error) => {
+        console.log('Error in getting contributors: ', error);
+        
+    })
+    // } else{
+
+    //     //if req.isAuthenticated() is false, the forbidden error will appear
+    //     //on the webpage
+    //     res.sendStatus(403)
+    // }
+});
+
+
 
 /**
  * POST route template
