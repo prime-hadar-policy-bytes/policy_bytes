@@ -71,6 +71,36 @@ const allProposals = (state = [], action) => {
     return state
 }
 
+//allLikes contains all likes from the database
+const allLikes = (state = [], action) => {
+
+    //sets state of allLikes to an array of objects where each object is a like
+    //with the user id and the id of the item liked e.g. key claim id, stream id,
+    //id of a comment on a key claim, etc.
+    if (action.type === 'SET_ALL_LIKES'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_LIKES' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
+//allLoves contains all loves from the database
+const allLoves = (state = [], action) => {
+
+    //sets state of allLoves to an array of objects where each object is a love
+    //with the user id and the id of the item loved e.g. key claim id, stream id,
+    //id of a comment on a key claim, etc.
+    if (action.type === 'SET_ALL_LOVES'){
+        return action.payload
+    }
+
+    //if action 'SET_ALL_LOVES' is not received, state is set to its 
+    //default empty array
+    return state
+}
+
 //featuredTopicPage contains the information needed for the featured topic
 //on the Topic Page
 const featuredTopicPage = (state = [], action) => {
@@ -162,6 +192,8 @@ export default combineReducers({
     allStreams,
     allContributors,
     allProposals,
+    allLikes,
+    allLoves,
     featuredTopicPage,
     featuredLandingPage,
     archivedTopics,

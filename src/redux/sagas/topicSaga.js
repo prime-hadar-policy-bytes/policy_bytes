@@ -19,8 +19,7 @@ function* fetchAllTopics(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting topics: ', error);
     }
 }
 
@@ -42,8 +41,7 @@ function* fetchAllKeyClaims(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting key claims: ', error);
     }
 }
 
@@ -65,8 +63,7 @@ function* fetchAllStreams(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting streams: ', error);
     }
 }
 
@@ -88,8 +85,7 @@ function* fetchAllContributors(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting contributors: ', error);
     }
 }
 
@@ -111,8 +107,51 @@ function* fetchAllProposals(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting proposals: ', error);
+    }
+}
+
+//gets all likes from database
+function* fetchAllLikes(action){
+    try{
+
+        //likeResponse sends get request to router '/api/topic/alllikes' and 
+        //receives back all likes from the database and stores them in likeResponse.data
+        const likeResponse = yield call(axios.get, '/api/topic/alllikes')
+
+        //sends all likes to allLikes reducer via action 'SET_ALL_LIKES'
+        //and payload likeResponse.data
+        yield put({
+            type: 'SET_ALL_LIKES',
+            payload: likeResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting likes: ', error);
+    }
+}
+
+//gets all loves from database
+function* fetchAllLoves(action){
+    try{
+
+        //loveResponse sends get request to router '/api/topic/allloves' and 
+        //receives back all loves from the database and stores them in loveResponse.data
+        const loveResponse = yield call(axios.get, '/api/topic/allloves')
+
+        //sends all likes to allLikes reducer via action 'SET_ALL_LOVES'
+        //and payload loveResponse.data
+        yield put({
+            type: 'SET_ALL_LOVES',
+            payload: loveResponse.data
+        })
+
+    //if there is an error in sending get request to router, the error
+    //will display in the console log
+    }catch(error){
+        console.log('Error in getting loves: ', error);
     }
 }
 
@@ -136,7 +175,6 @@ function* fetchFeaturedTopicPage(action){
     //will display in the console log
     }catch(error){
         console.log('Error in getting topic: ', error);
-        
     }
 }
 
@@ -160,7 +198,6 @@ function* fetchFeaturedTopicLanding(action){
     //will display in the console log
     }catch(error){
         console.log('Error in getting topic: ', error);
-        
     }
 }
 
@@ -182,8 +219,7 @@ function* fetchArchivedTopics(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting archived topics: ', error);
     }
 }
 
@@ -205,8 +241,7 @@ function* fetchGeneralComments(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting general comments: ', error);
     }
 }
 
@@ -228,8 +263,7 @@ function* fetchKeyClaimComments(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting key claim comments: ', error);
     }
 }
 
@@ -251,8 +285,7 @@ function* fetchStreamComments(action){
     //if there is an error in sending get request to router, the error
     //will display in the console log
     }catch(error){
-        console.log('Error in getting topic: ', error);
-        
+        console.log('Error in getting stream comments: ', error);
     }
 }
 
@@ -262,6 +295,8 @@ function* factionSaga() {
     yield takeLatest('FETCH_ALL_STREAMS', fetchAllStreams)
     yield takeLatest('FETCH_ALL_CONTRIBUTORS', fetchAllContributors)
     yield takeLatest('FETCH_ALL_PROPOSALS', fetchAllProposals)
+    yield takeLatest('FETCH_ALL_LIKES', fetchAllLikes)
+    yield takeLatest('FETCH_ALL_LOVES', fetchAllLoves)
     yield takeLatest('FETCH_NEW_TOPIC_TOPIC_PAGE', fetchFeaturedTopicPage)
     yield takeLatest('FETCH_NEW_TOPIC_LANDING_PAGE', fetchFeaturedTopicLanding)
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
