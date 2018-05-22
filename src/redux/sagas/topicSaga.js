@@ -304,6 +304,7 @@ function* setNewTopic(action){
     }
 }
 
+//WRITTEN BY ATTICUS
 function* togglePublishedSaga(action) {
     try {
         yield call (axios.put, '/api/topic/togglePublished', action.payload)
@@ -312,6 +313,18 @@ function* togglePublishedSaga(action) {
         })
     } catch (error) {
         console.log('Error togglePublishedSaga: ', error)
+    }
+}
+
+//WRITTEN BY ATTICUS
+function* toggleFeaturedSaga(action) {
+    try {
+        yield call (axios.put, '/api/topic/toggleFeatured', action.payload)
+        yield put ({
+            type: 'FETCH_ALL_TOPICS'
+        })
+    } catch (error) {
+        console.log('Error toggleFeaturedSaga: ', error)
     }
 }
 
@@ -333,6 +346,7 @@ function* topicSaga() {
 
     //ATTICUS ADDED:
     yield takeEvery('TOGGLE_PUBLISHED', togglePublishedSaga)
+    yield takeEvery('TOGGLE_FEATURED', toggleFeaturedSaga)
   }
 
   export default topicSaga;

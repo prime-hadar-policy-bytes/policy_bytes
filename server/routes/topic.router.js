@@ -63,6 +63,31 @@ router.put('/togglePublished', (req, res) => {
     })
 })
 
+//WRITTEN BY ATTICUS
+//TOGGLES FEATURED STATUS IN TOPIC TABLE (SETS ALL TO UNFEATURED, SETS SELECTED TO FEATURED)
+router.put('/toggleFeatured', (req, res) => {
+    console.log('in /api/topics/toggleFeatured', req.body);
+    let topicId = req.body.id; 
+    let firstQueryText = `UPDATE topic SET featured = FALSE;`
+    let secondQueryText = `UPDATE topic SET featured = TRUE WHERE id = $1;`
+    pool.query(firstQueryText)
+    .then((result)=> {
+        pool.query(secondQueryText, [topicId])
+        .then((result) => {
+            console.log('successful PUT /api/topic/toggleFeatured');
+            res.sendStatus(200); 
+        })
+        .catch((err)=> {
+            console.log('error in PUT /api/topic/toggleFeatured');
+            res.sendStatus(500); 
+        })
+    })
+    .catch((err)=> {
+        console.log('error in PUT /api/topic/toggleFeatured');
+        res.sendStatus(500); 
+    })
+})
+
 
 
 

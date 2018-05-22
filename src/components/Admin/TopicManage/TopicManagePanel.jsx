@@ -37,6 +37,15 @@ class TopicManagePanel extends Component {
     })
   }
 
+//toggle featured status in db and reset all topics
+  toggleFeatured = () => {
+    console.log('in Panel toggleFeatured');
+    this.props.dispatch({
+      type: 'TOGGLE_FEATURED',
+      payload: this.props.topic
+    })
+  }
+
 
 
   render() {
@@ -50,6 +59,15 @@ class TopicManagePanel extends Component {
     if (this.props.topic.published) {
       publishText = 'Published'
     }
+//color/text of publish button based on topic.featured status
+    let featuredStyle = 'default';
+    if (this.props.topic.featured) {
+      featuredStyle = 'primary'
+    }
+    let featuredText = 'Set Featured';
+    if (this.props.topic.featured) {
+      featuredText = 'Featured Topic'
+    }
  
 
     return (
@@ -59,6 +77,7 @@ class TopicManagePanel extends Component {
               <Panel.Heading>
                 {this.props.topic.topic_title}
                 <Button bsStyle={publishStyle} onClick={this.togglePublished}>{publishText}</Button>
+                <Button bsStyle={featuredStyle} onClick={this.toggleFeatured}>{featuredText}</Button>
               </Panel.Heading>
               <Panel.Body>
                 <p>
