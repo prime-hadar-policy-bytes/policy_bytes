@@ -328,6 +328,18 @@ function* toggleFeaturedSaga(action) {
     }
 }
 
+function* deleteTopicSaga(action) {
+    try {
+        yield call (axios.delete, `/api/topic/deleteTopic/${action.payload}`);
+        yield put ({
+            type: 'FETCH_ALL_TOPICS'
+        })
+    } catch (error) {
+        console.log('Error deleteTopicSaga: ', error);
+
+    }
+}
+
 function* topicSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
     yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
@@ -347,6 +359,7 @@ function* topicSaga() {
     //ATTICUS ADDED:
     yield takeEvery('TOGGLE_PUBLISHED', togglePublishedSaga)
     yield takeEvery('TOGGLE_FEATURED', toggleFeaturedSaga)
+    yield takeEvery('DELETE_TOPIC', deleteTopicSaga)
   }
 
   export default topicSaga;

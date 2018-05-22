@@ -28,13 +28,6 @@ class TopicManage extends Component {
     this.props.dispatch({
       type: 'FETCH_ALL_TOPICS'
     })
-    
-  }
-
-  handleDelete = () => {
-    console.log('in TopicManage handleDelete');
-    this.handleShow(); 
-    
   }
 
 
@@ -42,7 +35,7 @@ class TopicManage extends Component {
     this.setState({ showModal: false });
   }
 
-  handleShow = () => {
+  handleShowDelete = () => {
     this.setState({ showModal: true });
   }
 
@@ -56,13 +49,14 @@ class TopicManage extends Component {
     let topicPanels = topicsArray.map((topic) => {
       return <TopicManagePanel key={topic.id}
                               topic={topic}
-                              handleDelete={this.handleDelete}/>
+                              handleShowDelete={this.handleShowDelete}/>
     })
 
     let modalContent;
     if (this.state.showModal) {
       modalContent = (
-        <TopicManageModal handleDismiss={this.handleDismiss}/>
+        <TopicManageModal handleDismiss={this.handleDismiss}
+                          handleDelete={this.handleDelete}/>
       )
     }
     return (
