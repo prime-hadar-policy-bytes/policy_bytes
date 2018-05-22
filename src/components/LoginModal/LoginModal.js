@@ -91,13 +91,13 @@ class LoginModal extends Component {
               >
                 <FormControl
                   type="text"
-                  placeholder="Enter a new user name"
+                  placeholder="Enter your user name"
                   value={this.state.username}
                   onChange={this.handleInputChangeFor('username')}
                 />
                 <FormControl
                   type="text"
-                  placeholder="Enter a valid password"
+                  placeholder="Enter your password"
                   value={this.state.password}
                   onChange={this.handleInputChangeFor('password')}
                 />
