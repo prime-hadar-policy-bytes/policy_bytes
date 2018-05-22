@@ -2,11 +2,13 @@ import { combineReducers } from 'redux';
 
 //allTopics contains all topics from the database
 const allTopics = (state = [], action) => {
+    
 
     //sets state of allTopics to an array of objects where each object is a topic
     //with the topic text, premise, common ground, published date, archived status,
     //archived summary, and an archived date
     if (action.type === 'SET_ALL_TOPICS'){
+        
         return action.payload
     }
 

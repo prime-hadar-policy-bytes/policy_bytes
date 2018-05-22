@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios'
 
 //gets all topics from database
@@ -304,7 +304,31 @@ function* setNewTopic(action){
     }
 }
 
-function* factionSaga() {
+//WRITTEN BY ATTICUS
+function* togglePublishedSaga(action) {
+    try {
+        yield call (axios.put, '/api/topic/togglePublished', action.payload)
+        yield put ({
+            type: 'FETCH_ALL_TOPICS'
+        })
+    } catch (error) {
+        console.log('Error togglePublishedSaga: ', error)
+    }
+}
+
+//WRITTEN BY ATTICUS
+function* toggleFeaturedSaga(action) {
+    try {
+        yield call (axios.put, '/api/topic/toggleFeatured', action.payload)
+        yield put ({
+            type: 'FETCH_ALL_TOPICS'
+        })
+    } catch (error) {
+        console.log('Error toggleFeaturedSaga: ', error)
+    }
+}
+
+function* topicSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
     yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
     yield takeLatest('FETCH_ALL_STREAMS', fetchAllStreams)
@@ -319,6 +343,10 @@ function* factionSaga() {
     yield takeLatest('FETCH_KEY_CLAIM_COMMENTS', fetchKeyClaimComments)
     yield takeLatest('FETCH_STREAM_COMMENTS', fetchStreamComments)
     yield takeLatest('SET_NEW_TOPIC', setNewTopic)
+
+    //ATTICUS ADDED:
+    yield takeEvery('TOGGLE_PUBLISHED', togglePublishedSaga)
+    yield takeEvery('TOGGLE_FEATURED', toggleFeaturedSaga)
   }
 
-  export default factionSaga;
+  export default topicSaga;
