@@ -13,7 +13,7 @@ router.get('/alltopics', (req, res) => {
 
     //queryText is the query text that will get all of the topics from the 
     //topic table in the database
-    const queryText = `SELECT * FROM "topic";`
+    const queryText = `SELECT * from topic ORDER BY id asc;`
 
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
@@ -185,6 +185,23 @@ router.put('/toggleFeatured', (req, res) => {
     })
     .catch((err)=> {
         console.log('error in PUT /api/topic/toggleFeatured');
+        res.sendStatus(500); 
+    })
+})
+
+//WRITTEN BY ATTICUS
+//DELETES SELECTED TOPIC
+router.delete('/deleteTopic/:id', (req, res) => {
+    let topicId = req.params.id; 
+    console.log('in /api/topics/deleteTopic', topicId);
+    let queryText = `DELETE from topic WHERE id = $1;`
+    pool.query(queryText, [topicId])
+    .then((result)=> {
+        console.log('successful DELETE /api/topic/deleteTopic');
+        res.sendStatus(200);
+    })
+    .catch((err)=> {
+        console.log('error in DELETE /api/topic/deleteTopic');
         res.sendStatus(500); 
     })
 })

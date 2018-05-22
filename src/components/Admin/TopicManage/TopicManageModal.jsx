@@ -9,14 +9,14 @@ class TopicManageModal extends Component {
             <div>
             <Modal.Dialog >
                 <Modal.Header bsStyle="danger">
-                <Modal.Title>Modal title</Modal.Title>
+                <Modal.Title>Are you sure you want to delete this topic?</Modal.Title>
                 </Modal.Header>
         
-                <Modal.Body>One fine body...</Modal.Body>
+                <Modal.Body>This action cannot be undone</Modal.Body>
         
                 <Modal.Footer>
                 <Button onClick={this.props.handleDismiss}>Close</Button>
-                <Button bsStyle="primary">Save changes</Button>
+                <Button onClick={this.props.deleteTopic} bsStyle="danger">Yes, Delete This Topic</Button>
                 </Modal.Footer>
             </Modal.Dialog>
             </div>
