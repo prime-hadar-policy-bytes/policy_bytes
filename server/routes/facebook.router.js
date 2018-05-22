@@ -12,8 +12,8 @@ if(process.env.DEV == 'true'){
   successUrl = process.env.LOCALHOST_SUCCESS_URL
   console.log(successUrl);
 } else {
-  // cbUrl = process.env.DEPLOY_REDIRECT_URL
-  // console.log(cbUrl);
+  successUrl = process.env.LOCALHOST_SUCCESS_URL
+  console.log(successUrl);
 }
 
 
@@ -42,10 +42,10 @@ facebookStrategy.authenticate('facebook', { successRedirect: successUrl,
 // this middleware will send a 404 if not successful
 
 router.get('/send',
-facebookStrategy.authenticate('facebook', { scope: ['public_profile', 'email'] } )
-);
+facebookStrategy.authenticate('facebook', { scope: ['public_profile', 'email'] } ), (req, res) => {
+  res.sendStatus(200);
+});
 
-// { scope: 'public_profile' }
 
 // router.get('/send', (req, res) => {
 //   console.log('made it to fb router');

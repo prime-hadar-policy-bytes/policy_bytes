@@ -1,4 +1,4 @@
-import { put, takeLatest } from 'redux-saga/effects';
+import { put, call, takeEvery, takeLatest } from 'redux-saga/effects';
 import { LOGIN_ACTIONS } from '../actions/loginActions';
 import { USER_ACTIONS } from '../actions/userActions';
 import { callLogin, callLogout } from '../requests/loginRequests';
@@ -9,7 +9,14 @@ import axios from 'axios';
 
 function* loginFacebookUser() {
   console.log('in loginFacebookUser in login saga')
-  yield axios.get('api/facebook/send');
+  try {  yield call(axios.get, '/api/facebook/send');
+  yield put({
+    type: USER_ACTIONS.FETCH_USER,
+  });
+} catch (error) {
+  console.log('error in loginFacebookUser');
+}
+
 
 };
 
@@ -58,7 +65,7 @@ function* loginSaga() {
   yield takeLatest(LOGIN_ACTIONS.LOGIN, loginUser);
   yield takeLatest(LOGIN_ACTIONS.LOGOUT, logoutUser);
   //DAVID Added
-  yield takeLatest('LOGIN_FACEBOOK', loginFacebookUser);
+  yield takeEvery('LOGIN_FACEBOOK', loginFacebookUser);
 }
 
 export default loginSaga;
