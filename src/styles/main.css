@@ -134,7 +134,7 @@ li a:hover {
 }
 
 .wrapper {
-    margin: 0 10% 0 10%; 
+    margin: 0 5% 0 5%; 
 }
 
 .wirePhoto{
@@ -201,10 +201,3 @@ li a:hover {
 
 
 
-/* TOPIC MANAGE PAGE */
-
-.topicManagePanel{
-    width: 20%; 
-    float: left; 
-    margin: 1em; 
-}
