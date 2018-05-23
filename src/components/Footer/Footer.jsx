@@ -46,7 +46,7 @@ class Footer extends Component {
             return (
                 <div>
                 <span style={{'padding' :'10px'}}>Hello {this.props.user.userInfo.firstName}</span>
-                <span className="fbImage"><img src={this.props.user.userInfo.fbPicture} alt="facebook pic missing" /></span>
+                <span className="fbImage"><img src={this.props.user.userInfo.fbPicture}/></span>
                 </div>
             )
         }

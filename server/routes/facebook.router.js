@@ -1,7 +1,6 @@
 const express = require('express');
 const pool = require('../modules/pool.js');
 const router = express.Router();
-// var passport = require('passport');
 const facebookStrategy = require('../strategies/facebook.strategy');
 
 router.use( facebookStrategy.initialize());

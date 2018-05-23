@@ -15,8 +15,6 @@ if(process.env.DEV == 'true'){
   console.log(cbUrl);
 }
 
-// profileFields: ['id', 'displayName', 'first_name', 'last_name', 'photos', 'email']
-
 passport.use(new FacebookStrategy({
     clientID: process.env.FACEBOOK_APP_ID,
     clientSecret: process.env.FACEBOOK_APP_SECRET,
@@ -28,13 +26,14 @@ passport.use(new FacebookStrategy({
       console.log('Facebook profile', profile);
       console.log('Facebook photo[0]', profile.photos[0].value);
       console.log('Facebook email[0]', profile.emails[0].value);
-    
     };
 
     pool.query('SELECT * FROM person WHERE fb_id = $1;', [profile.id]).then((result) => {
       if(result.rows.length === 0) {
-        pool.query('INSERT INTO person (fb_display_name, fb_id, fb_picture, email, first_name, last_name) VALUES ($1, $2, $3, $4, $5, $6);',
-                    [profile.displayName, profile.id, profile.photos[0].value, profile.emails[0].value, profile.name.givenName, profile.name.familyName])
+        //values from Facebook are inserted into database.
+        // NOTE user is instantiated with a status int 1 in the database. int 2 is admin access.
+        pool.query('INSERT INTO person (fb_display_name, fb_id, fb_picture, email, first_name, last_name, status) VALUES ($1, $2, $3, $4, $5, $6, $7);',
+                    [profile.displayName, profile.id, profile.photos[0].value, profile.emails[0].value, profile.name.givenName, profile.name.familyName, 1])
           .then((result) => {
             if(debug){console.log('registered new user');};
 
