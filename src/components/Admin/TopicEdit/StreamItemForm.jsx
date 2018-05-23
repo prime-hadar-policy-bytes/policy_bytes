@@ -53,7 +53,8 @@ class StreamItemForm extends Component {
               <FormControl onChange={this.packageStreamChange} 
                             id={this.props.claimId} 
                             name="streamComment" 
-                            type="text"/>
+                            type="text"
+                            />
 
               <ControlLabel>Stream Comment Evidence</ControlLabel>
               <FormControl onChange={this.packageStreamChange} 
@@ -72,7 +73,8 @@ class StreamItemForm extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  
+  keyClaims: state.cacheEdit.topicEditCache.keyClaims,
+  state
 })
 
 
