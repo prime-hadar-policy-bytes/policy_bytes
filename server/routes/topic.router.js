@@ -88,16 +88,37 @@ router.post('/newtopic', (req, res) => {
                  const topicId = topicResult.rows[0].id
  
                  //text for posting gameinfo to the database
-                 queryText = `INSERT INTO "" ("user_id", "game_id", "player_name",
-                 "faction1", "faction2", "points", "rank", "bases", "comments", "admin") 
-                 VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10);`;
- 
-                 //takes user id, game id, and the property values from the variable game
-                 //and inputs them into the VALUES ($1, $2, $3,...) of the queryText
-                 //client.query then posts the info to the database
-                 const result = await client.query(queryText, [req.user.id, gameId, game.playerName,
-                 game.factionArray[0], game.factionArray[1], game.points, game.rank, game.bases,
-                 game.comments, req.user.id])
+                 let queryText1 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
+                 VALUES($1, $2, $3, $4) RETURNING "id";`;
+                 const contributor1Result = await client.query(queryText1, [topic.contributor1FirstName, 
+                    topic.contributor1LastName, topic.contributor1Bio, topic.contributor1Photo]);
+                
+                const contributor1Id = contributor1Result.rows[0].id
+
+                let queryText2 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
+                 VALUES($1, $2, $3, $4) RETURNING "id";`;
+                 const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName, 
+                    topic.contributor2LastName, topic.contributor2Bio, topic.contributor2Photo]);
+                
+                const contributor2Id = contributor2Result.rows[0].id
+
+                let queryText3 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
+                    $2, $3);`
+                    
+                 await client.query(queryText3, [topicId, contributor1Id, topic.proposal1])
+
+                 let queryText4 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
+                    $2, $3);`
+                    
+                 await client.query(queryText4, [topicId, contributor2Id, topic.proposal2])
+
+                 let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
+                 VALUES($1, $2, $3, $4) RETURNING "id";`;
+                 const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName, 
+                    topic.contributor2LastName, topic.contributor2Bio, topic.contributor2Photo]);
+                
+                const contributor2Id = contributor2Result.rows[0].id
+
                  await client.query('COMMIT');
                  res.sendStatus(201);
  
