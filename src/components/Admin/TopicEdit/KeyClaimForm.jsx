@@ -25,6 +25,7 @@ class KeyClaimForm extends Component {
         }
     }
 
+
 //currying function to setState on change of form fields
     handleChange = (event) => {
         this.props.handleKeyClaimChange(event); 
@@ -37,26 +38,27 @@ class KeyClaimForm extends Component {
 //adding a new value to this.state.streamData object that will be the ID of the new key claim 
     addStreamItem = () => {
         let streamItemId = Object.keys(this.state.streamData).length;
-        console.log('addin a stream Item, key claim id:', this.props.claimId, 'streamItemId: ',streamItemId);
-        console.log('props', this.props, 'state:', this.state)
-        this.setState({
-            streamData: {
-              ...this.state.streamData, 
-              [streamItemId]: {
-                streamContributor: '', 
-                streamComment: '',
-                streamEvidence: '',
-              }, 
-            }
-          })
+        let claimId = this.props.claimId; 
+        //packaging up the object to send to the reducer
+        let payloadObject = {
+            streamItemId: streamItemId,
+            claimId: claimId
+        }
+        this.props.dispatch({
+            type: 'ADD_STREAM_ITEM',
+            payload: payloadObject
+        })
     }
 
 
   render() {
-
-//looping over the local streamData object to create the correct number of streamItemForms
-//using a For Of loop insteand of a .map (because this is an object, not an array)
-    let streamDataObject = this.state.streamData;
+    //ID of the keyClaim
+    let claimId = this.props.claimId;
+    
+    //Object containg all keyClaim information passed down on props
+    //individual keyClaim ID used to pick out the streamData object on each keyClaim
+    //looping over this unique streamData object to create the correct number of streamInputForms
+    let streamDataObject = this.props.keyClaimIdObject[claimId].streamData;
     let streamItemForms = []
     for (const streamItem in streamDataObject) {      
         streamItemForms.push(
@@ -82,7 +84,8 @@ class KeyClaimForm extends Component {
                                 name="claimContributor" 
                                 onChange={this.handleChange}
                                 id={this.props.claimId} 
-                                // value={this.state.keyClaimContributor}
+
+                                value={this.props.keyClaimIdObject[claimId].claimContributor}//<-- THIS IS WHERE I'M GOING TO START TOMORROW 
                                 >
                     <option value="">-- Select Contributor --</option>
                     <option value="contributor1">Contributor 1</option>
