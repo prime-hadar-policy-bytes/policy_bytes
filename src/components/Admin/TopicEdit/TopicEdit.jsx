@@ -9,67 +9,56 @@ import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormCon
 class TopicEdit extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      topicTitle: 'asdf', 
-      topicSummary: 'fdsa', 
-      topicPremise: 'asdf', 
-      topicReadMore: 'fdsa', 
-      topicCommonGround: 'asdf', 
-      bio1: 'fdsa', 
-      proposal1: 'asdf',
-      bio2: 'fdsa', 
-      proposal2: 'asdf',
-      keyClaims: {
-        0: {
-          claimId: 0,
-          claimContributor: 'fdsa',
-            keyClaim: 'asdfasd',
-            keyClaimEvidence: 'fdsadfasd', 
-            streamData: {
-                0: {
-                    streamContributor: 'asdfads', 
-                    streamComment: 'asdfasd',
-                    streamEvidence: 'asdfasdf', 
-                },
-            }
-        },
-      },
-
-    }
   }
 
+  componentDidMount () {
+    this.fetchEditCache (); 
+  }
+
+  fetchEditCache = () => {
+    this.props.dispatch({
+        type: 'FETCH_EDIT_CACHE'
+    })
+}
+
 handleKeyClaimChange = (event) => {
-  // console.log('event.target: ',event.target.id);
-  this.setState({
-    keyClaims: {
-      ...this.state.keyClaims,
-      [event.target.id]: {
-        ...this.state.keyClaims[event.target.id], 
-              [event.target.name]: event.target.value
-      }
-    }
+  this.props.dispatch({
+    type: 'CHANGE_KEY_CLAIM_INFO',
+    payload: event.target
   })
 }
 
 handleStreamChange = (event, claimId, streamId) => {
   console.log('in topicEdit handle stream change, claim id:', claimId, 'streamId:', streamId);
   console.log('event.target: ',event.target);
-  this.setState({
-    keyClaims: {
-      ...this.state.keyClaims,
-      [claimId]: {
-        ...this.state.keyClaims[claimId],
-            streamData: {
-              ...this.state.keyClaims[claimId].streamData, 
-              [streamId]: {
-                ...this.state.keyClaims[claimId].streamData[streamId],
-                [event.target.name]: event.target.value
-              }
-            }
-      }
-    }
+  let payloadPackage = {
+    claimId: claimId, 
+    streamId: streamId,
+    eventTarget: event.target
+  }
+
+  this.props.dispatch({
+    type: 'CHANGE_STREAM_ITEM_INFO',
+    payload: payloadPackage
   })
+
+
+
+  // this.setState({
+  //   keyClaims: {
+  //     ...this.state.keyClaims,
+  //     [claimId]: {
+  //       ...this.state.keyClaims[claimId],
+  //           streamData: {
+  //             ...this.state.keyClaims[claimId].streamData, 
+  //             [streamId]: {
+  //               ...this.state.keyClaims[claimId].streamData[streamId],
+  //               [event.target.name]: event.target.value
+  //             }
+  //           }
+  //     }
+  //   }
+  // })
 }
 
 //Send local state object to Redux
@@ -85,46 +74,41 @@ handleStreamChange = (event, claimId, streamId) => {
 
   }
 
-//currying function to setState on change of input fields
+//currying function TO CHANGE REDUX STATE
 handleTextChange = (event) => {
-  this.setState({
-    [event.target.name]: event.target.value,
-  })    
+  console.log('in handleTextChange, event.target: ', event.target);
+  this.props.dispatch({
+    type: 'CHANGE_TOPIC_INFO',
+    payload: event.target
+  })
 }
 
-//adding a new value to this.state.keyclaims that will be the ID of the new key claim 
+//ADDING A NEW KEY CLAIM OBJECT TO THE EDITTOPICCACHE
 addKeyClaim = () => {
   const claimAddId = Object.keys(this.state.keyClaims).length;
   console.log(claimAddId);
-  this.setState({
-    keyClaims: {
-      ...this.state.keyClaims, 
-      [claimAddId]: {
-          claimId: claimAddId, 
-          claimContributor: '',
-          keyClaim: '',
-          keyClaimEvidence: '', 
-          streamData: {
-              0: {
-                  streamContributor: '', 
-                  streamComment: '',
-                  streamEvidence: '', 
-              },
-          }
-      }, 
-    }
+  this.props.dispatch({
+    type: 'ADD_KEY_CLAIM', 
+    payload: claimAddId
   })
 }
 
 
   render() {
 
-    let keyClaimIdObject = this.state.keyClaims;
+
+
+    let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
+
+    // console.log('keyClaimIdObject', keyClaimIdObject);
+    
+
     let keyClaimForms = []
     for (const keyClaim in keyClaimIdObject) {      
       keyClaimForms.push(
         <KeyClaimForm key={keyClaim}
                       claimId ={keyClaim}
+                      keyClaimIdObject={keyClaimIdObject}
                       handleKeyClaimChange={this.handleKeyClaimChange}
                       handleStreamChange={this.handleStreamChange}/>
       )
@@ -144,7 +128,10 @@ addKeyClaim = () => {
             <Panel>
               <Panel.Body>
                 <ControlLabel>Topic Title</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="topicTitle" value={this.state.topicTitle} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="topicTitle" 
+                              value={this.props.state.cacheEdit.topicTitle}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
             </Panel>
@@ -152,50 +139,77 @@ addKeyClaim = () => {
             <Panel>
               <Panel.Body>
                 <ControlLabel>Topic Summary (for archive)</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="topicSummary" value={this.state.topicSummary} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="topicSummary" 
+                              value={this.props.state.cacheEdit.topicSummary}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
               </Panel.Body>
             </Panel>
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Topic Premise</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="topicPremise" value={this.state.topicPremise} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="topicPremise" 
+                              value={this.props.state.cacheEdit.topicPremise}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
                 <ControlLabel>Link to read more?</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="topicReadMore" value={this.state.topicReadMore} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="topicReadMore" 
+                              value={this.props.state.cacheEdit.topicReadMore}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
               </Panel.Body>
             </Panel>
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Common Ground</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="topicCommonGround" value={this.state.topicCommonGround} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="topicCommonGround" 
+                              value={this.props.state.cacheEdit.topicCommonGround}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
               </Panel.Body>
             </Panel>
 
             <Panel>
               <Panel.Body>
                 <ControlLabel>Contributor 1 Bio</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="bio1" value={this.state.bio1} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="bio1" 
+                              value={this.props.state.cacheEdit.bio1}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
                 <ControlLabel>Contributor 1 Proposal Summary</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="proposal1" value={this.state.proposal1} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="proposal1" 
+                              value={this.props.state.cacheEdit.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
             </Panel>
             <Panel>
               <Panel.Body>
                 <ControlLabel>Contributor 2 Bio</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="bio2" value={this.state.bio2} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="bio2" 
+                              value={this.props.state.cacheEdit.bio2}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
                 <ControlLabel>Contributor 2 Proposal Summary</ControlLabel>
-                <FormControl onChange={this.handleTextChange} name="proposal2" value={this.state.proposal2} type="text"/>
+                <FormControl onChange={this.handleTextChange} 
+                              name="proposal2" 
+                              value={this.props.state.cacheEdit.proposal2}  //<-- VALUE COMES FROM REDUX STATE 
+                              type="text"/>
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
             </Panel>
 
           <Button bsStyle="primary" onClick={this.addKeyClaim}>Add Key Claim</Button>
 
-{/* Mapped array of number of key claims in this.state */}
+
+{/* Mapped array of number of key claims in this.props.state.keyClaims */}
           {keyClaimForms}
-          
+
+
+
           <Button type="submit" bsStyle="primary">Submit!</Button>
           </form>
           </div>
