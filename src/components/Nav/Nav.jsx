@@ -19,37 +19,10 @@ class Nav extends Component {
     this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
-  loginFacebook = () => {
-    this.props.dispatch({
-      type: 'LOGIN_FACEBOOK'
-    });
-  }
-
-  logout = () => {
-    this.props.dispatch(triggerLogout());
-    // this.props.history.push('home');
-  }
 
   render() {
 
-    let faceBookToRender;
 
-      if (!this.props.user.userInfo) {
-        faceBookToRender = (
-              <a href="https://localhost:5000/api/facebook/send" className="btn btn-lg btn-social btn-facebook">
-    <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook
-    </a>
-
-        )
-      } else {
-        faceBookToRender = (
-          <div className="helloUser">
-            Welcome, {this.props.user.userInfo.firstName}
-            <span className="fbImage"><img src={this.props.user.userInfo.fbPicture} alt="facebook pic missing" /></span> 
-            <Button bsSize="small" onClick={this.logout}>Log Out</Button>
-          </div>
-        )
-      }
 
     return (
       <div className="navbar">
@@ -74,9 +47,6 @@ class Nav extends Component {
               <Link to="/topicEdit">
                 Topic Edit
           </Link>
-            </li>
-            <li>
-              {faceBookToRender}
             </li>
           </ul>
         </div>

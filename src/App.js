@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import LoginPage from './components/LoginPage/LoginPage';
-import RegisterPage from './components/RegisterPage/RegisterPage';
+import LoginModal from './components/LoginModal/LoginModal';
+import RegisterModal from './components/RegisterModal/RegisterModal';
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import TopicPage from './components/TopicPage/TopicPage.jsx'
 import TopicManage from './components/Admin/TopicManage/TopicManage.jsx'
@@ -51,11 +51,11 @@ const App = () => (
   {/* predefined routes */}
           <Route
             path="/login"
-            component={LoginPage}
+            component={LoginModal}
           />
           <Route
             path="/register"
-            component={RegisterPage}
+            component={RegisterModal}
           />
           {/* OTHERWISE (no path!) */}
           <Route render={() => <h1>404</h1>} />
