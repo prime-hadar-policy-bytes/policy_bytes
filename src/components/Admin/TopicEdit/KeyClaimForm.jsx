@@ -84,7 +84,8 @@ class KeyClaimForm extends Component {
                                 name="claimContributor" 
                                 onChange={this.handleChange}
                                 id={this.props.claimId} 
-                                // value={this.state.keyClaimContributor}
+
+                                value={this.props.keyClaimIdObject[claimId].claimContributor}//<-- THIS IS WHERE I'M GOING TO START TOMORROW 
                                 >
                     <option value="">-- Select Contributor --</option>
                     <option value="contributor1">Contributor 1</option>
