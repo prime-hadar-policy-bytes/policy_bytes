@@ -76,7 +76,7 @@ handleStreamChange = (event, claimId, streamId) => {
 
 //currying function TO CHANGE REDUX STATE
 handleTextChange = (event) => {
-  console.log('in handleTextChange, event.target: ', event.target);
+  console.log('in handleTextChange, event.target: ', event.target.value);
   this.props.dispatch({
     type: 'CHANGE_TOPIC_INFO',
     payload: event.target
@@ -85,7 +85,7 @@ handleTextChange = (event) => {
 
 //ADDING A NEW KEY CLAIM OBJECT TO THE EDITTOPICCACHE
 addKeyClaim = () => {
-  const claimAddId = Object.keys(this.state.keyClaims).length;
+  const claimAddId = Object.keys(this.props.state.cacheEdit.topicEditCache.keyClaims).length;
   console.log(claimAddId);
   this.props.dispatch({
     type: 'ADD_KEY_CLAIM', 
@@ -100,7 +100,7 @@ addKeyClaim = () => {
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
 
-    // console.log('keyClaimIdObject', keyClaimIdObject);
+    console.log('keyClaimIdObject', keyClaimIdObject);
     
 
     let keyClaimForms = []
@@ -112,7 +112,10 @@ addKeyClaim = () => {
                       handleKeyClaimChange={this.handleKeyClaimChange}
                       handleStreamChange={this.handleStreamChange}/>
       )
-    }
+    } 
+
+    console.log(keyClaimForms);
+    
 
     return (
       <div>

@@ -15,12 +15,12 @@ let emptyTopicEditCache = {
     keyClaims: {
         0: {
             claimId: 0,
-            claimContributor: 'Contributor 1',
+            claimContributor: '',
             keyClaim: '',
             keyClaimEvidence: '',
             streamData: {
                 0: {
-                    streamContributor: 'Contributor 1',
+                    streamContributor: '',
                     streamComment: '',
                     streamEvidence: '',
                 }
@@ -68,7 +68,7 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
                             [action.payload.streamId]: {
                                 ...state.keyClaims[action.payload.claimId].streamData[action.payload.streamId],
                                 [action.payload.eventTarget.name]: action.payload.eventTarget.value
-                            } 
+                            }
                         }
                     }
                 } 
