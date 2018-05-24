@@ -1,7 +1,7 @@
 let dummyTopicCache = {
-    topicTitle: 'Does this work',
-    topicSummary: '',
-    topicPremise: '',
+    topicTitle: 'Lorem ipsum dolor sit amet.',
+    topicSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam metus augue, volutpat ut hendrerit ac.',
+    topicPremise: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut efficitur enim eget interdum volutpat. Cras in cursus erat, ultrices sodales magna. Nullam et lobortis nisl',
     topicReadMore: '',
     topicCommonGround: '',
     contributor1FirstName: '',
