@@ -6,6 +6,8 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
 
+import dummyTopicCache from './DummyData.js'
+
 //TO-DO replace hard-coded topic_id in CommentSection component
 
 export class TopicPage extends Component {
@@ -15,6 +17,10 @@ export class TopicPage extends Component {
   }
 
   render() {
+
+    console.log(dummyTopicCache);
+    
+
     return (
       <div>
         <div className="wrapper">
