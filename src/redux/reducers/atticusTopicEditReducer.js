@@ -1,14 +1,18 @@
 import { combineReducers } from 'redux';
 
 let emptyTopicEditCache = {
-    topicTitle: 'Default values of my cache',
+    topicTitle: '',
     topicSummary: '',
     topicPremise: '',
     topicReadMore: '',
     topicCommonGround: '',
+    contributor1FirstName: '',
+    contributor1LastName: '',
     bio1: '',
     photo1: '',
     proposal1: '',
+    contributor1FirstName: '',
+    contributor1LastName: '',
     bio2: '',
     photo2: '',
     proposal2: '',
@@ -21,7 +25,7 @@ let emptyTopicEditCache = {
             streamData: {
                 0: {
                     streamContributor: '',
-                    streamComment: 'will this work? ',
+                    streamComment: '',
                     streamEvidence: '',
                 }
             }
@@ -51,11 +55,14 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
             
             return{
                 ...state, 
+                keyClaims: {
+                    ...state.keyClaims,
                 [action.payload.id]: {
                     ...state.keyClaims[action.payload.id],
                     [action.payload.name]: action.payload.value
                 }
             }
+        }
             
 
         //HANDLE CHANGE FOR STREAM ITEM INFO (THIRD LEVEL OF OBJECT)    

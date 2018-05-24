@@ -19,7 +19,7 @@ class KeyClaimForm extends Component {
 
 //adding a new value to this.state.streamData object that will be the ID of the new key claim 
     addStreamItem = () => {
-        let streamItemId = Object.keys(this.state.streamData).length;
+        let streamItemId = Object.keys(this.props.keyClaims[this.props.claimId].streamData).length;
         let claimId = this.props.claimId; 
         //packaging up the object to send to the reducer
         let payloadObject = {
@@ -47,14 +47,15 @@ class KeyClaimForm extends Component {
     for (const streamItem in streamDataObject) {      
         streamItemForms.push(
         <StreamItemForm key={streamItem}
-                      claimId ={this.props.claimId}
-                      streamId={streamItem}
-                      handleKeyClaimChange={this.handleKeyClaimChange}
-                      handleStreamChange={this.props.handleStreamChange}/>
+                        claimId ={this.props.claimId}
+                        streamId={streamItem}
+                        keyClaims={this.props.keyClaims}
+                        handleKeyClaimChange={this.handleKeyClaimChange}
+                        handleStreamChange={this.props.handleStreamChange}/>
       )
     }
 
-    console.log('TESTSETSE',this.props.keyClaimIdObject[claimId].claimContributor);
+    console.log('TESTSETSE',this.props.keyClaimIdObject[claimId]);
     
 
     return (
@@ -66,13 +67,6 @@ class KeyClaimForm extends Component {
 
             <Panel.Heading>
 
-                {/* <SelectForm type="select"
-                            placeholder="Select Contributor"
-                            value={this.props.keyClaimIdObject[claimId].claimContributor}
-                            onChange={this.handleChange} 
-                            name="claimContributor"/> */}
-
-
           <pre>claim Id: {JSON.stringify(this.props.keyClaims[this.props.claimId], null, 2)}</pre>
 
                 <FormGroup>
@@ -81,22 +75,13 @@ class KeyClaimForm extends Component {
                                     name="claimContributor" 
                                     onChange={this.handleChange}
                                     id={this.props.claimId} 
-                                    // value={this.props.keyClaims[this.props.claimId]}//<-- THIS IS WHERE I'M GOING TO START TOMORROW 
+                                    value={this.props.keyClaims[this.props.claimId].claimContributor} 
                                     >
                         <option key="0" value="">-- Select Contributor --</option>
                         <option key="1" value="contributor1">Contributor 1</option>
                         <option key="2" value="contributor2">Contributor 2</option>
                     </FormControl>
                 </FormGroup>
-
-                {/* <select name="claimContributor"
-                        id={this.props.claimId}
-                        onChange={this.handleChange}
-                        >
-                    <option value="">-- Select Contributor --</option>
-                    <option value="contributor1">Contributor 1</option>
-                    <option selected value="contributor2">Contributor 2</option>
-                </select> */}
 
             </Panel.Heading>
 
@@ -105,13 +90,13 @@ class KeyClaimForm extends Component {
                 <FormControl onChange={this.handleChange} 
                             id={this.props.claimId} 
                             name="keyClaim" 
-                            // value={this.state.keyClaim} 
+                            value={this.props.keyClaims[this.props.claimId].keyClaim} 
                             type="text"/>
                 <ControlLabel>Key Claim Evidence</ControlLabel>
                 <FormControl onChange={this.handleChange} 
                                 id={this.props.claimId} 
                                 name="keyClaimEvidence" 
-                                // value={this.state.keyClaimEvidence} 
+                                value={this.props.keyClaims[this.props.claimId].keyClaimEvidence} 
                                 type="text"/>
 
 {/* Variable holding .map of <StreamItemForm>  */}

@@ -42,7 +42,7 @@ class StreamItemForm extends Component {
                             placeholder="select" 
                             id={this.props.streamId} 
                             name="streamContributor"
-                            // value={this.state.streamContributor}
+                            value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamContributor}
                             >
                   <option value="">-- Select Contributor --</option>
                   <option value="contributor1">Contributor 1</option>
@@ -54,13 +54,16 @@ class StreamItemForm extends Component {
                             id={this.props.claimId} 
                             name="streamComment" 
                             type="text"
+                            value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamComment}
                             />
 
               <ControlLabel>Stream Comment Evidence</ControlLabel>
               <FormControl onChange={this.packageStreamChange} 
                           id={this.props.claimId} 
                           name="streamEvidence" 
-                          type="text"/>
+                          type="text"
+                          value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamEvidence}
+                          />
 
               <Button bsStyle="danger">Delete Stream Item</Button>
 

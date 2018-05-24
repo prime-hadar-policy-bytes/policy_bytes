@@ -80,18 +80,14 @@ class TopicEdit extends Component {
 
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
-
-    console.log('keyClaimIdObject', keyClaimIdObject);
-
-
     let keyClaimForms = []
     for (const keyClaim in keyClaimIdObject) {
       keyClaimForms.push(
         <KeyClaimForm key={keyClaim}
-          claimId={keyClaim}
-          keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims}
-          handleKeyClaimChange={this.handleKeyClaimChange}
-          handleStreamChange={this.handleStreamChange} />
+                      claimId={keyClaim}
+                      keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims}
+                      handleKeyClaimChange={this.handleKeyClaimChange}
+                      handleStreamChange={this.handleStreamChange} />
       )
     }
 
@@ -157,11 +153,20 @@ class TopicEdit extends Component {
 
             <Panel>
               <Panel.Body>
-                <ControlLabel>Contributor 1 Name</ControlLabel>
+                <ControlLabel>Contributor 1 First Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio1"
-                  // value={this.props.state.cacheEdit.bio1}  //<-- VALUE COMES FROM REDUX STATE 
-                  type="text" />
+                  type="text" 
+                  name="contributor1FirstName"
+                  value={this.props.state.cacheEdit.contributor1FirstName}  //<-- VALUE COMES FROM REDUX STATE 
+                  />
+                <ControlLabel>Contributor 1 Last Name</ControlLabel>
+                <FormControl onChange={this.handleTextChange}
+                  name="bio1"
+                  type="text" 
+                  name="contributor1LastName"
+                  value={this.props.state.cacheEdit.contributor1LastName}  //<-- VALUE COMES FROM REDUX STATE 
+                  />
                 <ControlLabel>Contributor 1 Bio</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio1"
@@ -173,11 +178,25 @@ class TopicEdit extends Component {
                   value={this.props.state.cacheEdit.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
-                {/* <Button bsSize="large" bsStyle="primary">Submit</Button> */}
               </Panel.Body>
             </Panel>
+
             <Panel>
               <Panel.Body>
+              <ControlLabel>Contributor 2 First Name</ControlLabel>
+                <FormControl onChange={this.handleTextChange}
+                  name="bio1"
+                  type="text" 
+                  name="contributor2FirstName"
+                  value={this.props.state.cacheEdit.contributor2FirstName}  //<-- VALUE COMES FROM REDUX STATE 
+                  />
+                <ControlLabel>Contributor 2 Last Name</ControlLabel>
+                <FormControl onChange={this.handleTextChange}
+                  name="bio1"
+                  type="text" 
+                  name="contributor2LastName"
+                  value={this.props.state.cacheEdit.contributor2LastName}  //<-- VALUE COMES FROM REDUX STATE 
+                  />
                 <ControlLabel>Contributor 2 Bio</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio2"
@@ -210,7 +229,7 @@ class TopicEdit extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  // keyClaims: state.cacheEdit.topicEditCache.keyClaims,
+  keyClaims: state.cacheEdit.topicEditCache.keyClaims,
   state
 })
 
