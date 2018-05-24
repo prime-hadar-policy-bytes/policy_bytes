@@ -1,0 +1,7 @@
+.keyClaimPanel{
+    height: 10em; 
+    width: 30%; 
+    background-color: lightgrey; 
+    margin: auto auto 2% 2%; 
+    padding-top: 1% !important;  
+}
