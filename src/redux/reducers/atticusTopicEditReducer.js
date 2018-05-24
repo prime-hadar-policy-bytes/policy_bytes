@@ -21,7 +21,6 @@ let emptyTopicEditCache = {
             claimId: 0,
             claimContributor: '',
             keyClaim: '',
-            keyClaimEvidence: '',
             streamData: {
                 0: {
                     streamContributor: '',
