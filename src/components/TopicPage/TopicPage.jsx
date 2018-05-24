@@ -11,6 +11,7 @@ import dummyTopicCache from './DummyData.js'
 
 import './TopicPage.css'
 
+
 //TO-DO replace hard-coded topic_id in CommentSection component
 
 export class TopicPage extends Component {
@@ -30,6 +31,7 @@ export class TopicPage extends Component {
                         keyClaim={dummyTopicCache.keyClaims[keyClaimId]}/>
       )
     }
+
     
 
     return (
