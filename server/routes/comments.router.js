@@ -50,6 +50,7 @@ router.post('/addComment', (req, res) => {
 
 router.delete('/deleteComment/:id', (req, res) => {
     //TO-DO add isAuthenticated AND status === 2 for Admin access
+        // if(req.isAuthenticated && req.user.status === 2){
     let commentId = req.params.id; 
     console.log('in /api/comments/deleteComment', commentId);
     let queryText = `DELETE from comments_general WHERE id = $1;`
