@@ -11,7 +11,7 @@ import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
 export class TopicPage extends Component {
 
   componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
   render() {

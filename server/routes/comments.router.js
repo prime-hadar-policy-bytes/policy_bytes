@@ -9,7 +9,7 @@ router.get('/getGeneralcomments', (req, res) => {
 
     // if(req.isAuthenticated()){
 //TO-DO write a GET that grabs user's picture URL
-    const queryText = `SELECT * FROM "comments_general";`
+    const queryText = `SELECT comments_general.id, comments_general.date, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.date;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText).then((result) => {
@@ -50,9 +50,10 @@ router.post('/addComment', (req, res) => {
 
 router.delete('/deleteComment/:id', (req, res) => {
     //TO-DO add isAuthenticated AND status === 2 for Admin access
+        // if(req.isAuthenticated && req.user.status === 2){
     let commentId = req.params.id; 
     console.log('in /api/comments/deleteComment', commentId);
-    let queryText = `DELETE from topic WHERE id = $1;`
+    let queryText = `DELETE from comments_general WHERE id = $1;`
     pool.query(queryText, [commentId])
     .then((result)=> {
         console.log('successful DELETE /api/comments/deleteComment');

@@ -12,7 +12,7 @@ function* setNewComment(action) {
     }
 }
 
-function* deleteComment(action) {
+function* deleteGeneralComment(action) {
     try {
         yield call (axios.delete, `/api/comments/deleteComment/${action.payload}`);
         yield put ({
@@ -96,6 +96,7 @@ function* commentSaga() {
     yield takeLatest('FETCH_GENERAL_COMMENTS', fetchGeneralComments)
     yield takeLatest('FETCH_KEY_CLAIM_COMMENTS', fetchKeyClaimComments)
     yield takeLatest('FETCH_STREAM_COMMENTS', fetchStreamComments)
+    yield takeLatest('DELETE_GENERAL_COMMENT', deleteGeneralComment)
 
   }
 
