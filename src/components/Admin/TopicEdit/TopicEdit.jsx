@@ -3,12 +3,17 @@ import { connect } from 'react-redux'
 
 import Footer from '../../Footer/Footer.jsx'
 import KeyClaimForm from './KeyClaimForm.jsx'
+import SubmitAlert from './SubmitAlert.jsx'
 
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class TopicEdit extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      submitAlert: false
+    }
   }
 
   componentDidMount() {
@@ -50,7 +55,9 @@ class TopicEdit extends Component {
       type: 'SET_NEW_TOPIC',
       payload: this.state,
     })
-
+    this.setState({
+      submitAlert: true
+    })
     ///SOME INDICATOR HERE
 
   }
@@ -74,10 +81,16 @@ class TopicEdit extends Component {
     })
   }
 
+  handleDismiss = () => {
+    console.log('in handledismiss');
+    
+    this.setState({
+      submitAlert: false
+    })
+  }
+
 
   render() {
-
-
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
     let keyClaimForms = []
@@ -91,8 +104,6 @@ class TopicEdit extends Component {
       )
     }
 
-
-
     return (
       <div>
         <div className="wrapper">
@@ -103,7 +114,6 @@ class TopicEdit extends Component {
           <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre>
 
           <form action="" onSubmit={this.handleSubmit}>
-
 
             <Panel>
               <Panel.Body>
@@ -213,10 +223,16 @@ class TopicEdit extends Component {
 
             <Button bsStyle="primary" onClick={this.addKeyClaim}>Add Key Claim</Button>
 
-
             {/* Mapped array of number of key claims in this.props.state.keyClaims */}
             {keyClaimForms}
 
+
+{/* Conditionally render a success/failure message based on result of submit */}
+          <div>
+            {this.state.submitAlert &&
+              <SubmitAlert handleDismiss={this.handleDismiss}/>
+            }
+          </div>
 
 
             <Button type="submit" bsStyle="primary">Submit!</Button>
