@@ -98,7 +98,10 @@ export class TopicPage extends Component {
               <div className="wireKeyClaim">Rolling Stones/Beatles</div>
             </Panel.Body>
           </Panel>
+
           <CommentSection topicId={5} />
+
+          
           <Panel>
             <Panel.Body>
               <h4>Sponsored by Ameriprise Financial</h4>

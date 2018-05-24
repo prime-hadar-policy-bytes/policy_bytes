@@ -21,7 +21,6 @@ import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Policy Bytes" />
     <Router>
       <div>
         <Nav/>
@@ -44,7 +43,7 @@ const App = () => (
             component={CommentManage}
           /> */}
           <Route
-            path="/topicEdit"
+            path="/topicEdit/:id?"  //<-- optional route param is id of topic to populate edit
             component={TopicEdit}
           />
 

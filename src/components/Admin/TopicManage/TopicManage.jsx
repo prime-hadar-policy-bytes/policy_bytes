@@ -59,6 +59,8 @@ class TopicManage extends Component {
                           handleDelete={this.handleDelete}/>
       )
     }
+
+
     return (
       <div>
         <div className="wrapper">
@@ -68,7 +70,9 @@ class TopicManage extends Component {
 
         <h1>
           Topic Manage Page
-          <Button className="newTopicButton" bsStyle="success"><Link to='/topicEdit'>Create A New Topic</Link></Button>
+          <Button className="newTopicButton" bsStyle="success">
+            <Link to='/topicEdit'>Create A New Topic</Link>
+          </Button>
         </h1>             
 
           

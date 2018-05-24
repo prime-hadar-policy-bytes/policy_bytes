@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
+
+import Header from '../Header/Header';
+
 import './Nav.css';
 
 const mapStateToProps = state => ({
@@ -27,9 +30,12 @@ class Nav extends Component {
         <div>
           <ul>
             <li>
+              <Header title="Policy Bytes" />
+            </li> 
+            <li>
               <Link to="/home">
                 Home
-          </Link>
+              </Link>
             </li>
             <li>
               <Link to="/topicPage">
