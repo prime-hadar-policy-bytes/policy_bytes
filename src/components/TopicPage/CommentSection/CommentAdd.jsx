@@ -52,6 +52,14 @@ class CommentAdd extends Component {
         }
     }
 
+    // handleTextChange = (event) => {
+    //     this.props.dispatch({
+    //         type: 'SET_NEW_COMMENT',
+    //         payload: this.state,
+    //     })
+    // }
+
+
     handleTextChange = (event) => {
         this.setState({
             warning: '',
@@ -60,18 +68,19 @@ class CommentAdd extends Component {
     }
 
     render() {
+
+        let fbPicture = this.props.user.userInfo && this.props.user.userInfo.fbPicture;
         return (
             <Panel className="wireComment">
                 <Panel.Body>
                     <Form>
                         <FormGroup controlId="formControlsTextarea">
-                            <span style={{ 'padding': '10px' }}><Image rounded src={this.props.user.userInfo.fbPicture} /></span>
+                            <span style={{ 'padding': '10px' }}><Image rounded src={   fbPicture} /></span>
                             <div><p>{this.state.warning}</p></div>
                             <FormControl style={{ 'margin': '10px' }} componentClass="textarea" value={this.state.comment} onChange={this.handleTextChange} placeholder={this.state.placeholder} />
                         </FormGroup>
                     </Form>
                     <div><Button onClick={this.handleSubmit}>Submit</Button></div>
-                    <pre>{JSON.stringify(this.props.comments.commentsGeneral, null, 2)}</pre>
                 </Panel.Body>
             </Panel>
         )

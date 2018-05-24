@@ -14,6 +14,18 @@ const commentsGeneral = (state = [], action) => {
     return state
 }
 
+const currentCommentGeneral = (state = '', action) => {
+
+    //sets state of commentsGeneral to an array of objects where those objects are comments
+    //and the user id and topic id of those comments
+    if(action.type === 'SET_CURRENT_COMMENT_GENERAL'){
+        return action.payload
+    }
+
+    //if action 'SET_GENERAL_COMMENTS' is not received, state is set to its default empty array
+    return state
+}
+
 //commentsKeyClaim contains all comments for a given key claim based on the topic id
 const commentsKeyClaim = (state = [], action) => {
 
