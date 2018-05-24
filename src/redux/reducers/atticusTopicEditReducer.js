@@ -18,11 +18,12 @@ let emptyTopicEditCache = {
     proposal2: '',
     keyClaims: {
         0: {
-            claimId: 0,
+            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
             claimContributor: '',
             keyClaim: '',
             streamData: {
                 0: {
+                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: '',
                     streamComment: '',
                     streamEvidence: '',
