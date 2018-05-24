@@ -6,6 +6,7 @@ import { Button } from 'react-bootstrap';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { triggerLogout } from '../../redux/actions/loginActions';
 import './Footer.css';
+import FacebookLogin from '../FacebookLogin/FacebookLogin.jsx';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -45,8 +46,7 @@ class Footer extends Component {
         } else {
             return (
                 <div>
-                <span style={{'padding' :'10px'}}>Hello {this.props.user.userInfo.firstName}</span>
-                <span className="fbImage"><img src={this.props.user.userInfo.fbPicture}/></span>
+                <span style={{'padding' :'10px'}}>Welcome, {this.props.user.userInfo.firstName}!</span>
                 </div>
             )
         }
@@ -61,8 +61,7 @@ class Footer extends Component {
                 <div className="footer" id="footerButtons">
                     <div style={{'padding' :'10px'}}> <RegisterModal /></div>
                     <div style={{'padding' :'10px'}}> <LoginModal /></div>
-                    <div style={{'padding' :'10px'}}> <a href="https://localhost:5000/api/facebook/send" className="btn btn-lg btn-social btn-facebook">
-                        <i class="fa fa-facebook fa-fw"></i> Sign in with Facebook</a></div>
+                    <FacebookLogin/>
                 </div>
 
             )

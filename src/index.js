@@ -6,7 +6,7 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 
 import reducer from './redux/reducers';
-import 'font-awesome/css/font-awesome.min.css'; 
+import 'font-awesome/css/font-awesome.min.css';   
 
 import App from './App';
 import rootSaga from './redux/sagas';
