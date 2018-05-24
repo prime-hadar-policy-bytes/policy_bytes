@@ -52,6 +52,14 @@ class CommentAdd extends Component {
         }
     }
 
+    // handleTextChange = (event) => {
+    //     this.props.dispatch({
+    //         type: 'SET_NEW_COMMENT',
+    //         payload: this.state,
+    //     })
+    // }
+
+
     handleTextChange = (event) => {
         this.setState({
             warning: '',
@@ -71,7 +79,6 @@ class CommentAdd extends Component {
                         </FormGroup>
                     </Form>
                     <div><Button onClick={this.handleSubmit}>Submit</Button></div>
-                    <pre>{JSON.stringify(this.props.comments.commentsGeneral, null, 2)}</pre>
                 </Panel.Body>
             </Panel>
         )
