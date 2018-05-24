@@ -91,72 +91,6 @@ function* fetchArchivedTopics(action){
     }
 }
 
-//gets all of the general comments based on the given topic id to display them on the topic page
-function* fetchGeneralComments(action){
-    try{
-
-        //commentResponse sends get request to router '/api/topic/generalcomments' and 
-        //receives back all general comments and store them in commentResponse.data
-        const commentResponse = yield call(axios.get, '/api/topic/generalcomments')
-
-        //sends all general comments to commentsGeneral reducer via action 'SET_GENERAL_COMMENTS'
-        //and payload commentResponse.data
-        yield put({
-            type: 'SET_GENERAL_COMMENTS',
-            payload: commentResponse.data
-        })
-
-    //if there is an error in sending get request to router, the error
-    //will display in the console log
-    }catch(error){
-        console.log('Error in getting general comments: ', error);
-    }
-}
-
-//gets all of the comments for all key claims based on the given topic id to display them on the topic page
-function* fetchKeyClaimComments(action){
-    try{
-
-        //commentResponse sends get request to router '/api/topic/keyclaimcomments' and 
-        //receives back comments on all key claims of a topic and store them in commentResponse.data
-        const commentResponse = yield call(axios.get, '/api/topic/keyclaimcomments')
-
-        //sends all general comments to commentsKeyClaim reducer via action 'SET_KEY_CLAIM_COMMENTS'
-        //and payload commentResponse.data
-        yield put({
-            type: 'SET_KEY_CLAIM_COMMENTS',
-            payload: commentResponse.data
-        })
-
-    //if there is an error in sending get request to router, the error
-    //will display in the console log
-    }catch(error){
-        console.log('Error in getting key claim comments: ', error);
-    }
-}
-
-//gets all of the comments for all stream items based on the given topic id to display them on the topic page
-function* fetchStreamComments(action){
-    try{
-
-        //commentResponse sends get request to router '/api/topic/streamcomments' and 
-        //receives back all comments in a stream and store them in commentResponse.data
-        const commentResponse = yield call(axios.get, '/api/topic/streamcomments')
-
-        //sends all general comments to commentsStream reducer via action 'SET_STREAM_COMMENTS'
-        //and payload commentResponse.data
-        yield put({
-            type: 'SET_STREAM_COMMENTS',
-            payload: commentResponse.data
-        })
-
-    //if there is an error in sending get request to router, the error
-    //will display in the console log
-    }catch(error){
-        console.log('Error in getting stream comments: ', error);
-    }
-}
-
 //posts a new topic to the database
 function* setNewTopic(action){
     try{
@@ -219,9 +153,6 @@ function* topicSaga() {
     yield takeLatest('FETCH_NEW_TOPIC_TOPIC_PAGE', fetchFeaturedTopicPage)
     yield takeLatest('FETCH_NEW_TOPIC_LANDING_PAGE', fetchFeaturedTopicLanding)
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
-    yield takeLatest('FETCH_GENERAL_COMMENTS', fetchGeneralComments)
-    yield takeLatest('FETCH_KEY_CLAIM_COMMENTS', fetchKeyClaimComments)
-    yield takeLatest('FETCH_STREAM_COMMENTS', fetchStreamComments)
     yield takeLatest('SET_NEW_TOPIC', setNewTopic)
 
     //ATTICUS ADDED:
