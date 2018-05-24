@@ -131,9 +131,8 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
 
 
 //SET REDUX STORE TO HOLD SELECTED TOPIC TO BE EDITED 
-        case 'EDIT_SELECTED_TOPIC':
+        case 'CACHE_TOPIC_TO_EDIT':
             return action.payload
-
         default: 
         return state
     }

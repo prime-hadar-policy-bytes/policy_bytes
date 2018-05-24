@@ -44,7 +44,7 @@ const App = () => (
             component={CommentManage}
           /> */}
           <Route
-            path="/topicEdit"
+            path="/topicEdit/:id?"  //<-- optional route param is id of topic to populate edit
             component={TopicEdit}
           />
 

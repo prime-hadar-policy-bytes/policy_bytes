@@ -142,6 +142,28 @@ function* deleteTopicSaga(action) {
     }
 }
 
+
+//WRITTEN BY ATTICUS
+function* fetchEditTopicInfoSaga(action) {
+    try {
+         let fetchedEditTopic = yield call (axios.get, `/api/topic/fetchEditTopicInfo/${action.payload}`)
+         console.log('fetched edit topic',fetchedEditTopic.data);
+         
+        yield put ({
+            type: 'CACHE_TOPIC_TO_EDIT',
+            payload: fetchedEditTopic.data[0]
+        })
+
+    } catch (error) {
+        console.log('Error fetchEditTopicInfoSaga: ', error);
+    }
+}
+
+
+
+
+
+
 function* topicSaga() {
     yield takeLatest('FETCH_ALL_TOPICS', fetchAllTopics)
     // yield takeLatest('FETCH_ALL_KEY_CLAIMS', fetchAllKeyClaims)
@@ -159,6 +181,8 @@ function* topicSaga() {
     yield takeEvery('TOGGLE_PUBLISHED', togglePublishedSaga)
     yield takeEvery('TOGGLE_FEATURED', toggleFeaturedSaga)
     yield takeEvery('DELETE_TOPIC', deleteTopicSaga)
+    yield takeEvery('FETCH_EDIT_TOPIC_INFO', fetchEditTopicInfoSaga)
+
   }
 
   export default topicSaga;

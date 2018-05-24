@@ -17,7 +17,20 @@ class TopicEdit extends Component {
   }
 
   componentDidMount() {
+    this.populateEditCache(); 
     this.fetchEditCache();
+  }
+
+
+  populateEditCache = () => {
+    let editTopicId = this.props.match.params.id; 
+    if (editTopicId) {
+      this.props.dispatch({
+        type: 'FETCH_EDIT_TOPIC_INFO',
+        payload: editTopicId
+      })
+      this.fetchEditCache();
+    }
   }
 
   fetchEditCache = () => {
@@ -90,7 +103,11 @@ class TopicEdit extends Component {
   }
 
 
+
   render() {
+
+    console.log('ROUTE PARAMS', this.props.match.params.id);
+
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
     let keyClaimForms = []
@@ -110,6 +127,7 @@ class TopicEdit extends Component {
           <h1>Topic Edit</h1>
 
           {/* SHOW STATE ON DOM */}
+          <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre>
           <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicTitle, null, 3)}</pre>
           <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre>
 
