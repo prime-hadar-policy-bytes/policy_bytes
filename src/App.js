@@ -21,7 +21,6 @@ import './styles/main.css';
 
 const App = () => (
   <div>
-    <Header title="Policy Bytes" />
     <Router>
       <div>
         <Nav/>

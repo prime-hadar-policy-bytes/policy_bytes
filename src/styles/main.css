@@ -42,8 +42,7 @@ body {
 
 .instructions {
     background-color: #CA4A00;
-    padding: 5px;
-    color: #ece7e7;
+    color: #fff;
 }
 
 form {
@@ -83,6 +82,7 @@ input[type="submit"] {
   background-color: #CA4A00;
   width: 100%;
   border-radius: 0px;
+  padding: 1em 1em 0em 1em; 
 }
 
 ul {
@@ -100,8 +100,9 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 14px 16px;
+    padding: 12px 15px;
     text-decoration: none;
+
 
 }
 

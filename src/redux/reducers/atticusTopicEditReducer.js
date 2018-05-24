@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
 let emptyTopicEditCache = {
-    topicTitle: '',
+    topicTitle: 'Does this work',
     topicSummary: '',
     topicPremise: '',
     topicReadMore: '',
