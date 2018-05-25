@@ -34,6 +34,21 @@ CREATE TABLE "topic" (
     "icon_url" VARCHAR(5000)
  );
 
+ --GET for Topic Edit Page
+SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, 
+"topic"."id" as "topic.id", 
+"contributor"."id" as "contributor.id", 
+"key_claim"."id" as "key_claim.id", 
+key_claim.claim, key_claim.claim_order, contributor.first_name, 
+contributor.last_name, contributor.bio, proposal.proposal, 
+"stream"."text" as "stream.text", stream.evidence
+FROM key_claim 
+JOIN topic ON key_claim.topic_id = topic.id 
+JOIN contributor ON key_claim.contributor_id = contributor.id
+JOIN proposal ON proposal.contributor_id = contributor.id
+JOIN stream ON stream.contributor_id = contributor.id 
+WHERE topic.id = 1;
+
 
 CREATE TABLE "key_claim" (
     "id" SERIAL PRIMARY KEY,
@@ -179,22 +194,6 @@ JOIN contributor ON key_claim.contributor_id = contributor.id
 JOIN proposal ON proposal.contributor_id = contributor.id
 JOIN stream ON stream.contributor_id = contributor.id;
 
-
-
---GET for Topic Edit Page
-SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, 
-"topic"."id" as "topic.id", 
-"contributor"."id" as "contributor.id", 
-"key_claim"."id" as "key_claim.id", 
-key_claim.claim, key_claim.claim_order, contributor.first_name, 
-contributor.last_name, contributor.bio, proposal.proposal, 
-"stream"."text" as "stream.text", stream.evidence
-FROM key_claim 
-JOIN topic ON key_claim.topic_id = topic.id 
-JOIN contributor ON key_claim.contributor_id = contributor.id
-JOIN proposal ON proposal.contributor_id = contributor.id
-JOIN stream ON stream.contributor_id = contributor.id 
-WHERE topic.id = 1;
 
 
 

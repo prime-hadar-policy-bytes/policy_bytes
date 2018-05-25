@@ -7,6 +7,8 @@ import SubmitAlert from './SubmitAlert.jsx'
 
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
+let debug = false;
+
 class TopicEdit extends Component {
   constructor(props) {
     super(props)
@@ -30,8 +32,15 @@ class TopicEdit extends Component {
         payload: editTopicId
       })
       this.fetchEditCache();
+    } else {
+      this.props.dispatch({
+        type: 'RESET_EDIT_CACHE',
+        payload: editTopicId
+      })
+      this.fetchEditCache();
     }
   }
+
 
   fetchEditCache = () => {
     this.props.dispatch({
@@ -47,8 +56,8 @@ class TopicEdit extends Component {
   }
 
   handleStreamChange = (event, claimId, streamId) => {
-    console.log('in topicEdit handle stream change, claim id:', claimId, 'streamId:', streamId);
-    console.log('event.target: ', event.target);
+    if (debug){console.log('in topicEdit handle stream change, claim id:', claimId, 'streamId:', streamId);}
+    if (debug){console.log('event.target: ', event.target);}
     let payloadPackage = {
       claimId: claimId,
       streamId: streamId,
@@ -63,7 +72,7 @@ class TopicEdit extends Component {
   //Send local state object to Redux
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log('form submit clicked, contents:', this.state);
+    if (debug){console.log('form submit clicked, contents:', this.state);}
     this.props.dispatch({
       type: 'SET_NEW_TOPIC',
       payload: this.state,
@@ -77,7 +86,7 @@ class TopicEdit extends Component {
 
   //currying function TO CHANGE REDUX STATE
   handleTextChange = (event) => {
-    console.log('in handleTextChange, event.target: ', event.target.value);
+    if (debug){console.log('in handleTextChange, event.target: ', event.target.value);}
     this.props.dispatch({
       type: 'CHANGE_TOPIC_INFO',
       payload: event.target
@@ -87,7 +96,7 @@ class TopicEdit extends Component {
   //ADDING A NEW KEY CLAIM OBJECT TO THE EDITTOPICCACHE
   addKeyClaim = () => {
     const claimAddId = Object.keys(this.props.keyClaims).length;
-    console.log(claimAddId);
+    if (debug) {console.log(claimAddId);}
     this.props.dispatch({
       type: 'ADD_KEY_CLAIM',
       payload: claimAddId
@@ -95,7 +104,7 @@ class TopicEdit extends Component {
   }
 
   handleDismiss = () => {
-    console.log('in handledismiss');
+    if (debug) {console.log('in handledismiss');}
     
     this.setState({
       submitAlert: false
@@ -106,7 +115,7 @@ class TopicEdit extends Component {
 
   render() {
 
-    console.log('ROUTE PARAMS', this.props.match.params.id);
+    if (debug) {console.log('ROUTE PARAMS', this.props.match.params.id);}
 
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
@@ -129,6 +138,7 @@ class TopicEdit extends Component {
           {/* SHOW STATE ON DOM */}
           {/* <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre> */}
           <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre>
+          <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre>
           {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
 
           <form action="" onSubmit={this.handleSubmit}>
