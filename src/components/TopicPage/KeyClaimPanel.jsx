@@ -3,52 +3,60 @@ import { connect } from 'react-redux'
 
 import { Panel, Button, ButtonGroup } from 'react-bootstrap';
 
-import StreamItem from './StreamItem.jsx'
-
 import './TopicPage.css'
 
 
 
 export class KeyClaimPanel extends Component {
 
-  handleHover = (event) => {
-    console.log('in handleHover');
-    this.props.handleShowStream(this.props.keyClaimId)
+
+  handleMouseEnter = (event) => {
+    this.props.handleHoverShowStream(this.props.keyClaimId)
+  }
+
+  handleMouseLeave = (event) => {
+    this.props.handleHoverHideStream(); 
+  }
+
+  toggleLockKeyClaim = (event) => {
+    console.log('in KeyClaimPanel toggleLockKeyClaim');
+    this.props.toggleClickShowStream(this.props.keyClaimId)
   }
 
 
   render() {
-    
 
 
-    let streamItemArray = []
-    for (let i = 0; i < Object.keys(this.props.keyClaim.streamData).length; i++) {
-      let streamItem = this.props.keyClaim.streamData[i]
-
-      streamItemArray.push(
-        <Panel className="streamItem">
-          <Panel.Body>
-            <StreamItem key={i}
-                        streamItemId={i}
-                        streamItem={streamItem}/>
-          </Panel.Body>
-        </Panel>
-      )     
+//if a keyClaim is locked open, and the keyClaimId === the Id of the stream being shown, change class info
+    let keyClaimClass = "keyClaimPanel"
+    if (this.props.keyClaimLocked && this.props.keyClaimId === this.props.showStreamForClaim) {
+      keyClaimClass += " locked"      
     }
-    
+    if (this.props.keyClaim.claimContributor === 'contributor1') {
+      keyClaimClass += " contrib1"
+    }
+    if (this.props.keyClaim.claimContributor === 'contributor2') {
+      keyClaimClass += " contrib2"
+    }
+
+
     
     return (
       <div>
-        <Panel className="keyClaimPanel" onMouseEnter={this.handleHover}>
+        <Panel className={keyClaimClass}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                onClick={this.toggleLockKeyClaim}
+                >
           <Panel.Body>
             <p>{this.props.keyClaim.keyClaim}</p>
-            <pre>{this.props.keyClaim.claimContributor}</pre>
-            <pre>{this.props.keyClaimId}</pre>
+            {/* <pre>{this.props.keyClaim.claimContributor}</pre>
+            <pre>{this.props.keyClaimId}</pre> */}
           </Panel.Body>
         </Panel>
 
 
-        {streamItemArray}
+
 
       </div>
     )
