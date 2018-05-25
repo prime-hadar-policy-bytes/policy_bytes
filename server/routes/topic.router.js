@@ -200,6 +200,7 @@ router.post('/newtopic', (req, res) => {
              res.sendStatus(500);
          })
     }
+    })
 
 //WRITTEN BY ATTICUS
 //TOGGLES PUBLISHED STATUS IN TOPIC TABLE
