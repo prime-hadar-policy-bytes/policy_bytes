@@ -161,6 +161,8 @@ router.post('/newtopic', (req, res) => {
                  //text for posting contributor info to the database
                  let queryText1 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
+                 console.log('topic.contributor1FirstName: ', topic.contributor1FirstName);
+                 
                  const contributor1Result = await client.query(queryText1, [topic.contributor1FirstName, 
                     topic.contributor1LastName, topic.bio1, topic.photo1]);
                     console.log('successfully posted contributor1');
@@ -200,11 +202,14 @@ router.post('/newtopic', (req, res) => {
                 //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
                  for(key in topic.keyClaims){
                      console.log('key: ', key);
+                     console.log('topic.keyClaims: ', topic.keyClaims);
                      
                     let claim_order = key;
                      //keyData is the value of a property in the keyClaims object e.g. 
                      //{claimDbId: '0', claimContributor: 'contributor1', keyClaim: 'text', streamData: {}}
-                    let keyData = topic.keyClaim[key]
+                    let keyData = topic.keyClaims[key]
+                    console.log('keyData: ', keyData);
+                    
                     let keyClaimData = [];
                     
                      for(prop in keyData){
@@ -231,6 +236,7 @@ router.post('/newtopic', (req, res) => {
                     let streamData = keyClaimData[3]
 
                     for(stream in streamData){
+                        
                         let streamClaimData = [];
 
                         //stream is the 0 property, 1 property, etc. in the streamData object
@@ -248,6 +254,8 @@ router.post('/newtopic', (req, res) => {
                             let streamDataProp = streamDataObj[prop]
                             streamClaimData.push(streamDataProp)
                         }
+                        console.log('streamClaimData: ', streamClaimData);
+                        
                     let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
                     "stream_evidence", "stream_order")
                     VALUES ($1, $2, $3, $4, $5)`
@@ -257,7 +265,7 @@ router.post('/newtopic', (req, res) => {
                         contributor = contributor2Id
                     }
 
-                    await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
+                    await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3], stream_order])
                     console.log("successfully posted stream claim");
                     }
                  }
