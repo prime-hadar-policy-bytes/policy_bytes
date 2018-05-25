@@ -68,9 +68,11 @@ router.get('/featuredtopic', (req, res) => {
  */
 router.post('/newtopic', (req, res) => {
 
-    if(req.isAuthenticated){
+    // if(req.isAuthenticated){
          //game is the newInput object from state in GameInfo.js
          const topic = req.body;
+         console.log('topic: ', topic);
+         
 
          (async () => {
              //client does not allow the program to proceed until it is connected to the database
@@ -79,11 +81,12 @@ router.post('/newtopic', (req, res) => {
              try{
                  await client.query('BEGIN');
 
-                 //text for posting gameinfo to the database
+                 //text for posting contributor info to the database
                  let queryText1 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
                  const contributor1Result = await client.query(queryText1, [topic.contributor1FirstName, 
                     topic.contributor1LastName, topic.bio1, topic.photo1]);
+                    console.log('successfully posted contributor1');
                 
                 const contributor1Id = contributor1Result.rows[0].id
 
@@ -91,6 +94,7 @@ router.post('/newtopic', (req, res) => {
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
                  const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName, 
                     topic.contributor2LastName, topic.bio2, topic.photo2]);
+                    console.log('successfully posted contributor12');
                 
                 const contributor2Id = contributor2Result.rows[0].id
  
@@ -99,6 +103,7 @@ router.post('/newtopic', (req, res) => {
                  "contributor2_id", "archive_summary") VALUES($1, $2, $3, $4, $5, $6)  RETURNING "id";`;
                  const topicResult = await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, 
                     contributor1Id, contributor2Id, topic.topicSummary]);
+                    console.log('successfully posted topic');
  
                  //the id of the topic that was created in topicResult
                  const topicId = topicResult.rows[0].id
@@ -107,11 +112,13 @@ router.post('/newtopic', (req, res) => {
                     $2, $3);`
                     
                  await client.query(queryText3, [topicId, contributor1Id, topic.proposal1])
+                 console.log("successfully posted contributor1's proposal");
 
                  let queryText4 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
                     $2, $3);`
                     
                  await client.query(queryText4, [topicId, contributor2Id, topic.proposal2])
+                 console.log("successfully posted contributor2's proposal");
 
                 //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
                  for(key in topic.keyClaims){
@@ -140,6 +147,7 @@ router.post('/newtopic', (req, res) => {
                         contributor = contributor2Id
                     }
                     const keyClaimResult = await client.query(queryText5, [topicId, contributor, keyClaimData[2], claim_order])
+                    console.log("successfully posted key claim");
 
                     const keyClaimId = keyClaimResult.rows[0].id
 
@@ -173,6 +181,7 @@ router.post('/newtopic', (req, res) => {
                     }
 
                     await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
+                    console.log("successfully posted stream claim");
                     }
                  }
 
@@ -198,7 +207,7 @@ router.post('/newtopic', (req, res) => {
              console.log('CATCH', error);
              res.sendStatus(500);
          })
-    }
+    // }
 
 });
 
