@@ -118,12 +118,14 @@ router.post('/newtopic', (req, res) => {
                      console.log('key: ', key);
                      
                     let claim_order = key;
-                     //keyData is the value of a property in the keyClaims object
+                     //keyData is the value of a property in the keyClaims object e.g. 
+                     //{claimDbId: '0', claimContributor: 'contributor1', keyClaim: 'text', streamData: {}}
                     let keyData = topic.keyClaim[key]
                     let keyClaimData = [];
                     
                      for(prop in keyData){
-
+                        //keyDataProp is the value of a property in the keyData object e.g.
+                        //'0', 'contributor1', 'text' 
                         let keyDataProp = keyData[prop]
                         keyClaimData.push(keyDataProp);
                      }
@@ -142,13 +144,22 @@ router.post('/newtopic', (req, res) => {
                     const keyClaimId = keyClaimResult.rows[0].id
 
                     let streamData = keyClaimData[3]
-                    let streamClaimData = [];
-                    let stream_order;
 
                     for(stream in streamData){
-                        stream_order = stream;
+                        let streamClaimData = [];
+
+                        //stream is the 0 property, 1 property, etc. in the streamData object
+                        let stream_order = stream;
+
+                        //streamDataObj is the value of a property in the streamData object; this
+                        //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
+                        //streamComment: 'text', streamEvidence: 'more text',}
                         let streamDataObj = streamData[stream]
                         for(prop in streamDataObj){
+                            //prop is each property in the streamDataObj, but I want the values...
+
+                            //streamDataProp is the value of a property in the streamDataObj object e.g.
+                            //'0', 'contributor2', 'text', 'more text'
                             let streamDataProp = streamDataObj[prop]
                             streamClaimData.push(streamDataProp)
                         }
