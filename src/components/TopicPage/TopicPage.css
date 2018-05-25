@@ -1,7 +1,23 @@
+.arenaParentPanel{
+    float: right; 
+    height: 68em; 
+    width: 60%; 
+    background-color: lightgrey; 
+    margin: auto 5% auto 2%; 
+}
+
 .keyClaimPanel{
     height: 10em; 
     width: 30%; 
     background-color: lightgrey; 
-    margin: auto auto 2% 2%; 
+    margin: 0 0 2% 2%; 
+    display: inline-block; 
     padding-top: 1% !important;  
+}
+
+.streamItem{
+    margin-right: 4em; 
+    width: 60%; 
+    float: right; 
+    background-color: red; 
 }

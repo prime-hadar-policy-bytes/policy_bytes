@@ -7,6 +7,7 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
 
 import KeyClaimPanel from './KeyClaimPanel.jsx'
+import StreamItem from './StreamItem.jsx'
 import dummyTopicCache from './DummyData.js'
 
 import './TopicPage.css'
@@ -14,20 +15,44 @@ import './TopicPage.css'
 //TO-DO replace hard-coded topic_id in CommentSection component
 
 export class TopicPage extends Component {
+  constructor(props) {
+    super(props) 
+    
+    this.state = {
+      showStreamForClaim: ''
+    }
+  }
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
-  render() {
+  handleShowStream = (id) => {
+    console.log('in handleShowStream, id:', id);
+    this.setState({
+      showStreamForClaim: id
+    })
+  }
 
-    console.log(dummyTopicCache);
+
+
+
+
+
+
+
+
+
+  render() {
 
     let keyClaimsArray = []
     for (const keyClaimId in dummyTopicCache.keyClaims) {      
       keyClaimsArray.push(
         <KeyClaimPanel key={keyClaimId}
-                        keyClaim={dummyTopicCache.keyClaims[keyClaimId]}/>
+                        keyClaimId={keyClaimId}
+                        keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
+                        showStreamForClaim={this.state.showStreamForClaim}
+                        handleShowStream={this.handleShowStream}/>
       )
     }
     
