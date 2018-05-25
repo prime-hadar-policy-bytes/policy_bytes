@@ -25,7 +25,8 @@ export class TopicPage extends Component {
     
     this.state = {
       showStreamForClaim: undefined,
-      keyClaimLocked: false, 
+      keyClaimLocked: false,
+      contributorSelect: 'contributor1',  
     }
   }
 
@@ -63,23 +64,38 @@ export class TopicPage extends Component {
     })
   }
 
+  handleTabSelect = (key) => {
+    this.setState({
+      contributorSelect: key
+    })
+
+  }
+
+
+
+
   render() {
     
- //declare empty arrays that will fill with KeyClaimPanels and StreamItemPanels
+    //loop through keyclaim object to make keyClaimPanels 
     let keyClaimsArray = []
-
-//loop through keyclaim object to make keyClaimPanels 
     for (const keyClaimId in dummyTopicCache.keyClaims) {      
-      keyClaimsArray.push(
-        <KeyClaimPanel key={keyClaimId}
-                        keyClaimId={keyClaimId}
-                        keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
-                        showStreamForClaim={this.state.showStreamForClaim}
-                        keyClaimLocked={this.state.keyClaimLocked}
-                        handleHoverShowStream={this.handleHoverShowStream}
-                        handleHoverHideStream={this.handleHoverHideStream}
-                        toggleClickShowStream={this.toggleClickShowStream}/>
-      )
+      console.log(dummyTopicCache.keyClaims[keyClaimId]);
+      //if statement to see if contributor tab is selected
+      if (this.state.contributorSelect === dummyTopicCache.keyClaims[keyClaimId].claimContributor) {        
+        keyClaimsArray.push(
+          <KeyClaimPanel key={keyClaimId}
+                          keyClaimId={keyClaimId}
+                          keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
+                          showStreamForClaim={this.state.showStreamForClaim}
+                          keyClaimLocked={this.state.keyClaimLocked}
+                          handleHoverShowStream={this.handleHoverShowStream}
+                          handleHoverHideStream={this.handleHoverHideStream}
+                          toggleClickShowStream={this.toggleClickShowStream}/>
+        )
+
+
+        
+      }
     }
 
 
@@ -93,19 +109,20 @@ export class TopicPage extends Component {
         <TopicTitleContent />
 
 
-          <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title={dummyTopicCache.contributor1FirstName}>
-              Tab 1 content
-              </Tab>
-            <Tab eventKey={2} title={dummyTopicCache.contributor2FirstName}>
-              Tab 2 content
-              </Tab>
+          <Tabs className="tabParent"
+                bsStyle="pills"
+                defaultActiveKey='contributor1' 
+                id="contributorSelectTabs"
+                onSelect={this.handleTabSelect}
+                animation={false} 
+                >
+            <Tab tabClassName="tabChildren"  eventKey='contributor1' title={dummyTopicCache.contributor1FirstName}></Tab>
+            <Tab tabClassName="tabChildren" eventKey='contributor2' title={dummyTopicCache.contributor2FirstName}></Tab>
           </Tabs>
 
 
           {/* ARENA */}
           <Panel>
-            <Panel.Heading>Arena</Panel.Heading>
             <Panel.Body>
               <div className="wireArenaPhoto">Contrib. Photo</div>
               <Panel className="wireArenaSummary">

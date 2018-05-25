@@ -8,6 +8,17 @@
     margin: auto 5% auto 2%; 
 }
 
+.tabParent {
+    /* background: red !important;  */
+}
+
+.tabChildren {
+    margin-left: 15%; 
+    font-size: 200%;  
+    background: grey !important; 
+    
+}
+
 /* KEY CLAIMS */
 
 .keyClaimsContainer {
