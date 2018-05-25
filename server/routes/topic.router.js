@@ -66,6 +66,7 @@ router.get('/featuredtopic', (req, res) => {
 /**
  * POST route template
  */
+
 router.post('/newtopic', (req, res) => {
 
     if(req.isAuthenticated){
