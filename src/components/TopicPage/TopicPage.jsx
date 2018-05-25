@@ -108,7 +108,7 @@ export class TopicPage extends Component {
             </Panel.Body>
           </Panel>
 
-          <CommentSection topicId={5} />
+          <CommentSection topicId={1} />
 
           
           <Panel>
