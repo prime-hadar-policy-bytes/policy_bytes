@@ -75,7 +75,7 @@ class TopicEdit extends Component {
     if (debug){console.log('form submit clicked, contents:', this.state);}
     this.props.dispatch({
       type: 'SET_NEW_TOPIC',
-      payload: this.state,
+      payload: this.props.state.cacheEdit.topicEditCache,
     })
     this.setState({
       submitAlert: true
