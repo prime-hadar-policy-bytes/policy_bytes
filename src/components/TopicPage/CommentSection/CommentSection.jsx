@@ -28,6 +28,9 @@ class CommentSection extends Component {
         )
     }
     
+        //EXAMPLE JSON Stringify w null
+    // <pre>{JSON.stringify(this.props.user.userInfo , null, 2)}</pre>
+    // <pre>{JSON.stringify(this.props.comments.commentsGeneral, null, 2)}</pre>
     render() {
 
         let status = this.props.user.userInfo && this.props.user.userInfo.status;
@@ -59,8 +62,6 @@ class CommentSection extends Component {
                         {commentList}
                     </Panel.Body>
                 </Panel>
-                <pre>{JSON.stringify(this.props.user.userInfo , null, 2)}</pre>
-                <pre>{JSON.stringify(this.props.comments.commentsGeneral, null, 2)}</pre>
             </div>
         )
     }

@@ -12,6 +12,7 @@ import dummyTopicCache from './DummyData.js'
 
 import './TopicPage.css'
 
+
 //TO-DO replace hard-coded topic_id in CommentSection component
 
 export class TopicPage extends Component {
@@ -55,6 +56,7 @@ export class TopicPage extends Component {
                         handleShowStream={this.handleShowStream}/>
       )
     }
+
     
 
     return (
@@ -131,7 +133,7 @@ export class TopicPage extends Component {
             </Panel.Body>
           </Panel>
 
-          <CommentSection topicId={5} />
+          <CommentSection topicId={1} />
 
           
           <Panel>
