@@ -21,7 +21,7 @@ export default class componentName extends Component {
         let keyClaimId = i   //Each keyClaim gets an Id
         if (Number(this.props.showStreamForClaim) === keyClaimId) {
             let streamItemObject = this.props.keyClaims[i].streamData  //Pick out full streamItems object for each keyClaim
-            console.log('keyClaimId:', keyClaimId, 'streamItemObject', streamItemObject, 'this.props.showStreamForClaim:', this.props.showStreamForClaim);
+            // console.log('keyClaimId:', keyClaimId, 'streamItemObject', streamItemObject, 'this.props.showStreamForClaim:', this.props.showStreamForClaim);
                 for (const streamItemId in streamItemObject) { //Loop through each streamItem object and create correct number of StreamItemPanels
                         streamItemArray.push(
                             <StreamItem key={streamItemId}

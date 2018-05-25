@@ -32,6 +32,12 @@ export class KeyClaimPanel extends Component {
     if (this.props.keyClaimLocked && this.props.keyClaimId === this.props.showStreamForClaim) {
       keyClaimClass += " locked"      
     }
+    if (this.props.keyClaim.claimContributor === 'contributor1') {
+      keyClaimClass += " contrib1"
+    }
+    if (this.props.keyClaim.claimContributor === 'contributor2') {
+      keyClaimClass += " contrib2"
+    }
 
 
     
@@ -44,8 +50,8 @@ export class KeyClaimPanel extends Component {
                 >
           <Panel.Body>
             <p>{this.props.keyClaim.keyClaim}</p>
-            <pre>{this.props.keyClaim.claimContributor}</pre>
-            <pre>{this.props.keyClaimId}</pre>
+            {/* <pre>{this.props.keyClaim.claimContributor}</pre>
+            <pre>{this.props.keyClaimId}</pre> */}
           </Panel.Body>
         </Panel>
 

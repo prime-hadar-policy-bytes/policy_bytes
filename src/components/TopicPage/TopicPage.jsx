@@ -68,7 +68,6 @@ export class TopicPage extends Component {
     this.setState({
       contributorSelect: key
     })
-
   }
 
 
@@ -79,8 +78,7 @@ export class TopicPage extends Component {
     //loop through keyclaim object to make keyClaimPanels 
     let keyClaimsArray = []
     for (const keyClaimId in dummyTopicCache.keyClaims) {      
-      console.log(dummyTopicCache.keyClaims[keyClaimId]);
-      //if statement to see if contributor tab is selected
+      //if statement to render only the selected contributor's claims
       if (this.state.contributorSelect === dummyTopicCache.keyClaims[keyClaimId].claimContributor) {        
         keyClaimsArray.push(
           <KeyClaimPanel key={keyClaimId}
@@ -91,11 +89,21 @@ export class TopicPage extends Component {
                           handleHoverShowStream={this.handleHoverShowStream}
                           handleHoverHideStream={this.handleHoverHideStream}
                           toggleClickShowStream={this.toggleClickShowStream}/>
-        )
-
-
-        
+        )        
       }
+    }
+
+
+//DYNAMIC CSS CLASSES
+    let arenaContainer = 'arenaContainer'
+    let streamContainerClass = "streamItemsContainer"
+    if (this.state.contributorSelect === 'contributor1') {
+      arenaContainer = "arenaContainerContrib1"
+      streamContainerClass += " contrib1"
+    }
+    if (this.state.contributorSelect === 'contributor2') {
+      arenaContainer += " contrib2"
+      streamContainerClass += " contrib2"
     }
 
 
@@ -122,7 +130,7 @@ export class TopicPage extends Component {
 
 
           {/* ARENA */}
-          <Panel>
+          <Panel className="arenaContainer">
             <Panel.Body>
               <div className="wireArenaPhoto">Contrib. Photo</div>
               <Panel className="wireArenaSummary">
@@ -135,12 +143,10 @@ export class TopicPage extends Component {
                 {keyClaimsArray}
               </div>
 
-              <div className = "streamItemsContainer">
+              <div className = {streamContainerClass}>
                 <StreamItemFactory keyClaims = {dummyTopicCache.keyClaims} 
                                   showStreamForClaim = {this.state.showStreamForClaim}/>
               </div>
-
-
             </Panel.Body>
           </Panel>
 
