@@ -15,9 +15,15 @@
     padding-top: 1% !important;  
 }
 
+.locked{  
+    background-color: tomato; 
+    width: 35%; 
+    margin: 0 0 2% 2%; 
+}
+
 .streamItem{
-    margin-right: 4em; 
-    width: 60%; 
+    margin-right: 5em; 
+    width: 55%; 
     float: right; 
-    background-color: red; 
+    background-color: tomato; 
 }

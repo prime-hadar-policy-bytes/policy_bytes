@@ -127,9 +127,9 @@ class TopicEdit extends Component {
           <h1>Topic Edit</h1>
 
           {/* SHOW STATE ON DOM */}
-          <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre>
           <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicTitle, null, 3)}</pre>
-          <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre>
+          <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
 
           <form action="" onSubmit={this.handleSubmit}>
 

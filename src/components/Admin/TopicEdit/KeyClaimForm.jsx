@@ -67,7 +67,7 @@ class KeyClaimForm extends Component {
 
             <Panel.Heading>
 
-          <pre>claim Id: {JSON.stringify(this.props.keyClaims[this.props.claimId], null, 2)}</pre>
+          {/* <pre>claim Id: {JSON.stringify(this.props.keyClaims[this.props.claimId], null, 2)}</pre> */}
 
                 <FormGroup>
                     <FormControl componentClass="select" 

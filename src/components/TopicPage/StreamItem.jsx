@@ -8,7 +8,8 @@ export default class StreamItem extends Component {
       <div>
         <Panel className="streamItemPanel">
           <Panel.Body>
-            <pre>{this.props.streamItemId}</pre>
+            <pre>keyClaimId{this.props.keyClaimId}</pre>
+            <pre>StreamItemId{this.props.streamItemId}</pre>
             <pre>{this.props.streamItem.streamContributor}</pre>
             <span><strong>Comment:</strong> {this.props.streamItem.streamComment}
             <br/>

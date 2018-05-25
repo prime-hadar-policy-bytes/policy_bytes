@@ -19,7 +19,8 @@ export class TopicPage extends Component {
     super(props) 
     
     this.state = {
-      showStreamForClaim: ''
+      showStreamForClaim: '',
+      keyClaimLocked: false, 
     }
   }
 
@@ -27,13 +28,35 @@ export class TopicPage extends Component {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
-  handleShowStream = (id) => {
-    console.log('in handleShowStream, id:', id);
-    this.setState({
-      showStreamForClaim: id
-    })
+
+//called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
+  handleHoverShowStream = (id) => {
+    if (this.state.keyClaimLocked === false) {
+      console.log('in handleShowStream, id:', id);
+      this.setState({
+        showStreamForClaim: id
+      })   
+    }
   }
 
+//called on mouseLeave from keyClaimPanel IF keyClaimLocked === false
+  handleHoverHideStream = (id) => {
+    if (this.state.keyClaimLocked === false) {
+      console.log('in handleHideStream, id:', id);
+      this.setState({
+        showStreamForClaim: ''
+      })     
+    }
+  }
+
+//toggle this.state.keyClaimLocked
+  toggleClickShowStream = (id) => {
+    console.log('in handleShowStream, id:', id);
+    this.setState({
+      showStreamForClaim: id,
+      keyClaimLocked: !this.state.keyClaimLocked
+    })
+  }
 
 
 
@@ -47,12 +70,16 @@ export class TopicPage extends Component {
 
     let keyClaimsArray = []
     for (const keyClaimId in dummyTopicCache.keyClaims) {      
+      
       keyClaimsArray.push(
         <KeyClaimPanel key={keyClaimId}
                         keyClaimId={keyClaimId}
                         keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
                         showStreamForClaim={this.state.showStreamForClaim}
-                        handleShowStream={this.handleShowStream}/>
+                        keyClaimLocked={this.state.keyClaimLocked}
+                        handleHoverShowStream={this.handleHoverShowStream}
+                        handleHoverHideStream={this.handleHoverHideStream}
+                        toggleClickShowStream={this.toggleClickShowStream}/>
       )
     }
     
