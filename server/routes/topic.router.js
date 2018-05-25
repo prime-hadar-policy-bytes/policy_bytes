@@ -78,29 +78,30 @@ router.post('/newtopic', (req, res) => {
  
              try{
                  await client.query('BEGIN');
- 
-                 //creates an entry in the topic table in the database
-                 let queryText = `INSERT INTO "topic" ("topic_title", "premise", "common_ground", "archive_summary") 
-                 VALUES($1, $2, $3, $4)  RETURNING "id";`;
-                 const topicResult = await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, topic.topicSummary]);
- 
-                 //the id of the topic that was created in topicResult
-                 const topicId = topicResult.rows[0].id
- 
+
                  //text for posting gameinfo to the database
                  let queryText1 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
                  const contributor1Result = await client.query(queryText1, [topic.contributor1FirstName, 
-                    topic.contributor1LastName, topic.contributor1Bio, topic.contributor1Photo]);
+                    topic.contributor1LastName, topic.bio1, topic.photo1]);
                 
                 const contributor1Id = contributor1Result.rows[0].id
 
                 let queryText2 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
                  const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName, 
-                    topic.contributor2LastName, topic.contributor2Bio, topic.contributor2Photo]);
+                    topic.contributor2LastName, topic.bio2, topic.photo2]);
                 
                 const contributor2Id = contributor2Result.rows[0].id
+ 
+                 //creates an entry in the topic table in the database
+                 let queryText = `INSERT INTO "topic" ("topic_title", "premise", "common_ground", "contributor1_id",
+                 "contributor2_id", "archive_summary") VALUES($1, $2, $3, $4, $5, $6)  RETURNING "id";`;
+                 const topicResult = await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, 
+                    contributor1Id, contributor2Id, topic.topicSummary]);
+ 
+                 //the id of the topic that was created in topicResult
+                 const topicId = topicResult.rows[0].id
 
                 let queryText3 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
                     $2, $3);`
@@ -114,6 +115,8 @@ router.post('/newtopic', (req, res) => {
 
                 //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
                  for(key in topic.keyClaims){
+                     console.log('key: ', key);
+                     
                     let claim_order = key;
                      //keyData is the value of a property in the keyClaims object
                     let keyData = topic.keyClaim[key]
@@ -123,44 +126,44 @@ router.post('/newtopic', (req, res) => {
 
                         let keyDataProp = keyData[prop]
                         keyClaimData.push(keyDataProp);
+                     }
                         //end for loop of for(prop in keyData)
 
-                        let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
-                 VALUES($1, $2, $3, $4) RETURNING "id";`;
-                        let contributor;
-                        if(keyClaimData[1] === 'contributor1'){
-                            contributor = contributor1Id
-                        }else{
-                            contributor = contributor2Id
-                        }
-                        const keyClaimResult = await client.query(queryText5, [topicId, contributor, keyClaimData[2], claim_order])
+                    let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
+                    VALUES($1, $2, $3, $4) RETURNING "id";`;
+                    let contributor;
+                    if(keyClaimData[1] === 'contributor1'){
+                        contributor = contributor1Id
+                    }else{
+                        contributor = contributor2Id
+                    }
+                    const keyClaimResult = await client.query(queryText5, [topicId, contributor, keyClaimData[2], claim_order])
 
-                        const keyClaimId = keyClaimResult.rows[0].id
+                    const keyClaimId = keyClaimResult.rows[0].id
 
-                        let streamData = keyClaimData[3]
-                        let streamClaimData = [];
+                    let streamData = keyClaimData[3]
+                    let streamClaimData = [];
+                    let stream_order;
 
-                        for(stream in streamData){
-                            let streamDataProp = streamData[stream]
+                    for(stream in streamData){
+                        stream_order = stream;
+                        let streamDataObj = streamData[stream]
+                        for(prop in streamDataObj){
+                            let streamDataProp = streamDataObj[prop]
                             streamClaimData.push(streamDataProp)
                         }
-                        let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "text", "evidence")
-                        VALUES ($1, $2, $3, $4)`
-                        if(streamClaimData[0] === 'contributor1'){
-                            contributor = contributor1Id;
-                        }else{
-                            contributor = contributor2Id
-                        }
+                    let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
+                    "stream_evidence", "stream_order")
+                    VALUES ($1, $2, $3, $4, $5)`
+                    if(streamClaimData[1] === 'contributor1'){
+                        contributor = contributor1Id;
+                    }else{
+                        contributor = contributor2Id
+                    }
 
-                        await client.query(queryText6, [keyClaimId, contributor, streamClaimData[1], streamClaimData[2]])
-
-                     }
+                    await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
+                    }
                  }
-
-                 const contributor2Result = await client.query(queryText2, [topic.keyClaims, 
-                    topic.contributor2LastName, topic.contributor2Bio, topic.contributor2Photo]);
-                
-                const contributor2Id = contributor2Result.rows[0].id
 
                  await client.query('COMMIT');
                  res.sendStatus(201);
