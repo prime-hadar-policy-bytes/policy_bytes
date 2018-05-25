@@ -1,3 +1,5 @@
+/* ARENA */
+
 .arenaParentPanel{
     float: right; 
     height: 68em; 
@@ -6,24 +8,47 @@
     margin: auto 5% auto 2%; 
 }
 
-.keyClaimPanel{
-    height: 10em; 
-    width: 30%; 
-    background-color: lightgrey; 
+/* KEY CLAIMS */
+
+.keyClaimsContainer {
+    width: 40%;
+    height: 40em; 
     margin: 0 0 2% 2%; 
+    padding: 2% 2% 2% 2%; 
+    border: 2px solid red; 
+    overflow: scroll;
+    display: inline-block; 
+}
+
+
+.keyClaimPanel{
+    width: 90%; 
+    background-color: lightgrey; 
     display: inline-block; 
     padding-top: 1% !important;  
 }
 
 .locked{  
     background-color: tomato; 
-    width: 35%; 
+    width: 100%; 
+}
+
+/* STREAM ITEMS */
+
+.streamItemsContainer{
+    width: 50%;
+    height: 40em; 
     margin: 0 0 2% 2%; 
+    padding: 1% 1% 1% 1%; 
+    border: 2px solid red; 
+    overflow: scroll;
+    display: inline-block; 
+
+
 }
 
 .streamItem{
-    margin-right: 5em; 
-    width: 55%; 
-    float: right; 
+    margin-right: 0em; 
+    width: 100%; 
     background-color: tomato; 
 }

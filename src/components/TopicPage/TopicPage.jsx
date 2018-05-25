@@ -114,11 +114,14 @@ export class TopicPage extends Component {
                 </Panel.Body>
               </Panel>
 
-              {keyClaimsArray}
+              <div className="keyClaimsContainer">
+                {keyClaimsArray}
+              </div>
 
-
-              <StreamItemFactory keyClaims = {dummyTopicCache.keyClaims} 
+              <div className = "streamItemsContainer">
+                <StreamItemFactory keyClaims = {dummyTopicCache.keyClaims} 
                                   showStreamForClaim = {this.state.showStreamForClaim}/>
+              </div>
 
 
             </Panel.Body>

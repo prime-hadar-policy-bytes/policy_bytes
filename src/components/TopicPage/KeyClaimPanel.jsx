@@ -46,7 +46,6 @@ export class KeyClaimPanel extends Component {
             <p>{this.props.keyClaim.keyClaim}</p>
             <pre>{this.props.keyClaim.claimContributor}</pre>
             <pre>{this.props.keyClaimId}</pre>
-            <pre>{this.props.showStreamForClaim}</pre>
           </Panel.Body>
         </Panel>
 
