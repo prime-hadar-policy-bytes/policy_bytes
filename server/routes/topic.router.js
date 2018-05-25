@@ -175,7 +175,6 @@ router.post('/newtopic', (req, res) => {
 
                         await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
                     }
-                }
 
                 await client.query('COMMIT');
                 res.sendStatus(201);
