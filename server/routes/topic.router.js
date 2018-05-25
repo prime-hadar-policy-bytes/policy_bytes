@@ -112,9 +112,52 @@ router.post('/newtopic', (req, res) => {
                     
                  await client.query(queryText4, [topicId, contributor2Id, topic.proposal2])
 
-                 let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
+                //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
+                 for(key in topic.keyClaims){
+                    let claim_order = key;
+                     //keyData is the value of a property in the keyClaims object
+                    let keyData = topic.keyClaim[key]
+                    let keyClaimData = [];
+                    
+                     for(prop in keyData){
+
+                        let keyDataProp = keyData[prop]
+                        keyClaimData.push(keyDataProp);
+                        //end for loop of for(prop in keyData)
+
+                        let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
-                 const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName, 
+                        let contributor;
+                        if(keyClaimData[1] === 'contributor1'){
+                            contributor = contributor1Id
+                        }else{
+                            contributor = contributor2Id
+                        }
+                        const keyClaimResult = await client.query(queryText5, [topicId, contributor, keyClaimData[2], claim_order])
+
+                        const keyClaimId = keyClaimResult.rows[0].id
+
+                        let streamData = keyClaimData[3]
+                        let streamClaimData = [];
+
+                        for(stream in streamData){
+                            let streamDataProp = streamData[stream]
+                            streamClaimData.push(streamDataProp)
+                        }
+                        let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "text", "evidence")
+                        VALUES ($1, $2, $3, $4)`
+                        if(streamClaimData[0] === 'contributor1'){
+                            contributor = contributor1Id;
+                        }else{
+                            contributor = contributor2Id
+                        }
+
+                        await client.query(queryText6, [keyClaimId, contributor, streamClaimData[1], streamClaimData[2]])
+
+                     }
+                 }
+
+                 const contributor2Result = await client.query(queryText2, [topic.keyClaims, 
                     topic.contributor2LastName, topic.contributor2Bio, topic.contributor2Photo]);
                 
                 const contributor2Id = contributor2Result.rows[0].id
