@@ -151,7 +151,7 @@ function* fetchEditTopicInfoSaga(action) {
          
         yield put ({
             type: 'CACHE_TOPIC_TO_EDIT',
-            payload: fetchedEditTopic.data[0]
+            payload: fetchedEditTopic.data
         })
 
     } catch (error) {
