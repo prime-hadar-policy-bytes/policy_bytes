@@ -1,4 +1,3 @@
-
 CREATE TABLE "person" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR (100) UNIQUE,
@@ -12,6 +11,14 @@ CREATE TABLE "person" (
     "status" INT
 );
 
+CREATE TABLE "contributor" (
+    "id" SERIAL PRIMARY KEY,
+    "first_name" VARCHAR(50),
+    "last_name" VARCHAR(50),
+    "bio" VARCHAR(1000),
+    "photo_url" VARCHAR(5000)   
+);  
+
 CREATE TABLE "topic" (
     "id" SERIAL PRIMARY KEY,
     "topic_title" VARCHAR(100),
@@ -19,22 +26,14 @@ CREATE TABLE "topic" (
     "common_ground" VARCHAR(1000),
     "published_date" timestamp with time zone default current_timestamp,
     "published" boolean default false,
-	"featured" boolean default false,
+    "contributor1_id" INT REFERENCES "contributor",
+    "contributor2_id" INT REFERENCES "contributor",
+    "featured" boolean default false,
     "archive_summary" VARCHAR(5000),
     "archive_date" timestamp with time zone default current_timestamp,
     "icon_url" VARCHAR(5000)
  );
 
- 
- 
-CREATE TABLE "contributor" (
-	"id" SERIAL PRIMARY KEY,
-	"first_name" VARCHAR(50),
-	"last_name" VARCHAR(50),
-	"bio" VARCHAR(1000),
-	"photo_url" VARCHAR(5000)	
-);	
- 
 
 CREATE TABLE "key_claim" (
     "id" SERIAL PRIMARY KEY,
@@ -49,72 +48,73 @@ CREATE TABLE "stream" (
     "id" SERIAL PRIMARY KEY,
     "key_claim_id" INT REFERENCES "key_claim",
     "contributor_id" INT REFERENCES "contributor",
-	"text" VARCHAR(5000),
-	"evidence" VARCHAR(1000)
+    "stream_comment" VARCHAR(5000),
+    "stream_evidence" VARCHAR(1000),
+    "stream_order" INT
 );
 
 
 CREATE TABLE "comments_stream" (
-	"id" SERIAL PRIMARY KEY,
-	"date" timestamp with time zone default current_timestamp,
-	"person_id" INT REFERENCES "person",
-	"topic_id" INT REFERENCES "topic",
-	"stream_id" INT REFERENCES "stream",
-	"comment" VARCHAR(5000),
-	"approved" boolean default false
+    "id" SERIAL PRIMARY KEY,
+    "date" timestamp with time zone default current_timestamp,
+    "person_id" INT REFERENCES "person",
+    "topic_id" INT REFERENCES "topic",
+    "stream_id" INT REFERENCES "stream",
+    "comment" VARCHAR(5000),
+    "approved" boolean default false
 ); 
 
 
 CREATE TABLE "comments_general" (
-	"id" SERIAL PRIMARY KEY,
-	"date" timestamp with time zone default current_timestamp,
-	"person_id" INT REFERENCES "person",
-	"topic_id" INT REFERENCES "topic",
-	"comment" VARCHAR(5000),
-	"approved" boolean default false
+    "id" SERIAL PRIMARY KEY,
+    "date" timestamp with time zone default current_timestamp,
+    "person_id" INT REFERENCES "person",
+    "topic_id" INT REFERENCES "topic",
+    "comment" VARCHAR(5000),
+    "approved" boolean default false
 );
 
 
 CREATE TABLE "comments_key_claim" (
-	"id" SERIAL PRIMARY KEY,
-	"date" timestamp with time zone default current_timestamp,
-	"person_id" INT REFERENCES "person",
-	"topic_id" INT REFERENCES "topic",
-	"key_claim_id" INT REFERENCES "key_claim",
-	"comment" VARCHAR(5000),
-	"approved" boolean default false
+    "id" SERIAL PRIMARY KEY,
+    "date" timestamp with time zone default current_timestamp,
+    "person_id" INT REFERENCES "person",
+    "topic_id" INT REFERENCES "topic",
+    "key_claim_id" INT REFERENCES "key_claim",
+    "comment" VARCHAR(5000),
+    "approved" boolean default false
 );
 
 
 CREATE TABLE "proposal" (
-	"id" SERIAL PRIMARY KEY,
-	"topic_id" INT REFERENCES "topic",
+    "id" SERIAL PRIMARY KEY,
+    "topic_id" INT REFERENCES "topic",
     "contributor_id" INT REFERENCES "contributor",
-	"proposal" VARCHAR(1000)
+    "proposal" VARCHAR(1000)
 );
 
 
 CREATE TABLE "like" ( 
-	"id" SERIAL PRIMARY KEY,
-	"person_id" INT REFERENCES "person",
-	"key_claim_id" INT REFERENCES "key_claim",
-	"stream_id" INT REFERENCES "stream",
-	"comments_key_claim_id" INT REFERENCES "comments_key_claim",
-	"comments_stream_id" INT REFERENCES "comments_stream",
-	"comments_general_id" INT REFERENCES "comments_general",
-	"proposal_id" INT REFERENCES "proposal"
+    "id" SERIAL PRIMARY KEY,
+    "person_id" INT REFERENCES "person",
+    "key_claim_id" INT REFERENCES "key_claim",
+    "stream_id" INT REFERENCES "stream",
+    "comments_key_claim_id" INT REFERENCES "comments_key_claim",
+    "comments_stream_id" INT REFERENCES "comments_stream",
+    "comments_general_id" INT REFERENCES "comments_general",
+    "proposal_id" INT REFERENCES "proposal"
 );
 
 
 CREATE TABLE "love" (
-	"id" SERIAL PRIMARY KEY,
-	"person_id" INT REFERENCES "person",
-	"key_claim_id" INT REFERENCES key_claim,
-	"stream_id" INT REFERENCES "stream",
-	"comments_key_claim_id" INT REFERENCES "comments_key_claim",
-	"comments_stream_id" INT REFERENCES "comments_stream",
-	"comments_general_id" INT REFERENCES "comments_general",
-	"proposal_id" INT REFERENCES "proposal"
+    "id" SERIAL PRIMARY KEY,
+    "person_id" INT REFERENCES "person",
+    "key_claim_id" INT REFERENCES key_claim,
+    "stream_id" INT REFERENCES "stream",
+    "comments_key_claim_id" INT REFERENCES "comments_key_claim",
+    "comments_stream_id" INT REFERENCES "comments_stream",
+    "comments_general_id" INT REFERENCES "comments_general",
+    "proposal_id" INT REFERENCES "proposal"
 );
 	
 
@@ -170,3 +170,42 @@ UPDATE topic SET published = NOT published WHERE id = 2;
 UPDATE topic SET featured = FALSE; 
 UPDATE topic SET featured = TRUE WHERE id = 2;
 
+
+--GET for Topic Page
+SELECT "topic"."id" as "topic.id", topic.topic_title, topic.premise, topic.common_ground, "contributor"."id" as "contributor.id", contributor.first_name, contributor.last_name, contributor.bio, contributor.photo_url, "key_claim"."id" as "key_claim.id", key_claim.claim, "proposal"."id" as "proposal.id", proposal.proposal, "stream"."id" as "stream.id", "stream"."text" as "stream.text", stream.evidence
+FROM key_claim
+JOIN topic ON key_claim.topic_id = topic.id
+JOIN contributor ON key_claim.contributor_id = contributor.id
+JOIN proposal ON proposal.contributor_id = contributor.id
+JOIN stream ON stream.contributor_id = contributor.id;
+
+
+
+--GET for Topic Edit Page
+SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, 
+"topic"."id" as "topic.id", 
+"contributor"."id" as "contributor.id", 
+"key_claim"."id" as "key_claim.id", 
+key_claim.claim, key_claim.claim_order, contributor.first_name, 
+contributor.last_name, contributor.bio, proposal.proposal, 
+"stream"."text" as "stream.text", stream.evidence
+FROM key_claim 
+JOIN topic ON key_claim.topic_id = topic.id 
+JOIN contributor ON key_claim.contributor_id = contributor.id
+JOIN proposal ON proposal.contributor_id = contributor.id
+JOIN stream ON stream.contributor_id = contributor.id 
+WHERE topic.id = 1;
+
+
+
+--GET for landing Page feature page
+SELECT "topic"."id" as "topic.id", topic.topic_title, topic.published_date, topic.published, topic.featured,
+"contributor"."id" as "contributor.id", contributor.first_name, contributor.last_name, contributor.bio, contributor.photo_url
+FROM key_claim
+JOIN topic ON key_claim.topic_id = topic.id 
+JOIN contributor ON key_claim.contributor_id = contributor.id;
+
+
+--GET for landing Page archive page
+SELECT "topic"."id" as "topic.id", topic.topic_title, topic.published_date, topic.published, topic.featured, topic.archive_date, topic.archive_summary, topic.icon_url
+FROM topic;

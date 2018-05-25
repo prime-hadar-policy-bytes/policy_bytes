@@ -6,32 +6,70 @@ import { USER_ACTIONS } from '../../redux/actions/userActions';
 
 import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
 
+import KeyClaimPanel from './KeyClaimPanel.jsx'
+import StreamItem from './StreamItem.jsx'
+import dummyTopicCache from './DummyData.js'
+
+import './TopicPage.css'
+
+
 //TO-DO replace hard-coded topic_id in CommentSection component
 
 export class TopicPage extends Component {
-
-  componentDidMount() {
-    this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  constructor(props) {
+    super(props) 
+    
+    this.state = {
+      showStreamForClaim: ''
+    }
   }
 
+  componentDidMount() {
+    // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+  }
+
+  handleShowStream = (id) => {
+    console.log('in handleShowStream, id:', id);
+    this.setState({
+      showStreamForClaim: id
+    })
+  }
+
+
+
+
+
+
+
+
+
+
   render() {
+
+    let keyClaimsArray = []
+    for (const keyClaimId in dummyTopicCache.keyClaims) {      
+      keyClaimsArray.push(
+        <KeyClaimPanel key={keyClaimId}
+                        keyClaimId={keyClaimId}
+                        keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
+                        showStreamForClaim={this.state.showStreamForClaim}
+                        handleShowStream={this.handleShowStream}/>
+      )
+    }
+
+    
+
     return (
       <div>
         <div className="wrapper">
-          <h1>Minimum Wage Increase</h1>
 
+          <h1>{dummyTopicCache.topicTitle}</h1>
 
           {/* INTRO */}
           <Panel>
             <Panel.Body>
               <p>
-                The Restaurant Opportunities Center of Minnesota (ROC MN)
-                is a movement led by local restaurant workers, employers,
-                and diners striving for higher standards in our industry.
-                In St. Paul, for over 30 years, we have had one wage for all workers
-                and we have created a thriving restaurant scene predicated on higher wages
-                for workers. St. Paul is a leader in the effort to support working
-                families and we should be proud of our commitment to an equal pay structure.
+                {dummyTopicCache.topicPremise}
               </p>
             </Panel.Body>
           </Panel>
@@ -40,7 +78,7 @@ export class TopicPage extends Component {
             <Panel.Body>
               <h4>Common Ground</h4>
               <p>
-                "The minimum wage is critical to consider."
+                "{dummyTopicCache.topicCommonGround}"
               </p>
             </Panel.Body>
           </Panel>
@@ -48,28 +86,32 @@ export class TopicPage extends Component {
           <Panel className="contributorPanel">
             <Panel.Body>
               <div className="wirePhoto"></div>
-              <h3>Eli Harrison</h3>
-              <i>Eli has a PhD in Economics from the University of Minnesota,
-                and has worked as a Financial Analyst at Ameriprise Financial for 15 years.
-                </i>
+              <h3>
+                {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
+              </h3>
+              <i>
+                {dummyTopicCache.bio1}
+              </i>
             </Panel.Body>
           </Panel>
 
           <Panel className="contributorPanel">
             <Panel.Body>
               <div className="wirePhoto"></div>
-              <h3>Jennifer Johnson</h3>
-              <i>Jennifer has a PhD in Economics from the University of Minnesota,
-                and has worked as a Financial Analyst at Ameriprise Financial for 15 years.
-                </i>
+              <h3>
+                {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
+              </h3>
+              <i>
+                {dummyTopicCache.bio2}
+              </i>
             </Panel.Body>
           </Panel>
 
           <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title="Eli">
+            <Tab eventKey={1} title={dummyTopicCache.contributor1FirstName}>
               Tab 1 content
               </Tab>
-            <Tab eventKey={2} title="Jennifer">
+            <Tab eventKey={2} title={dummyTopicCache.contributor2FirstName}>
               Tab 2 content
               </Tab>
           </Tabs>
@@ -82,23 +124,18 @@ export class TopicPage extends Component {
               <div className="wireArenaPhoto">Contrib. Photo</div>
               <Panel className="wireArenaSummary">
                 <Panel.Body>
-                  What restaurant owners might refer to as a tip credit,
-                  is a tip penalty for workers since they must discount tips from their wage.
-                  A tip penalty in St. Paul should not be considered; it would roll back 30 years of worker
-                  protections and leave tipped workers in a more vulnerable position. I support a $15
-                  minimum wage in St. Paul that leaves no worker behind.
-                  </Panel.Body>
+                  {dummyTopicCache.proposal1}
+                </Panel.Body>
               </Panel>
-              <Panel className="wireArena"></Panel>
-              <div className="wireKeyClaim">Guns</div>
-              <div className="wireKeyClaim">Pot</div>
-              <div className="wireKeyClaim">Iran</div>
-              <div className="wireKeyClaim">Traffic</div>
-              <div className="wireKeyClaim">Taxes</div>
-              <div className="wireKeyClaim">Rolling Stones/Beatles</div>
+
+              {keyClaimsArray}
+
             </Panel.Body>
           </Panel>
-          <CommentSection topicId={5} />
+
+          <CommentSection topicId={1} />
+
+          
           <Panel>
             <Panel.Body>
               <h4>Sponsored by Ameriprise Financial</h4>

@@ -93,11 +93,6 @@ class KeyClaimForm extends Component {
                             value={this.props.keyClaims[this.props.claimId].keyClaim} 
                             type="text"/>
                 <ControlLabel>Key Claim Evidence</ControlLabel>
-                <FormControl onChange={this.handleChange} 
-                                id={this.props.claimId} 
-                                name="keyClaimEvidence" 
-                                value={this.props.keyClaims[this.props.claimId].keyClaimEvidence} 
-                                type="text"/>
 
 {/* Variable holding .map of <StreamItemForm>  */}
             {streamItemForms}

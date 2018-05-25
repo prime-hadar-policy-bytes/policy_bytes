@@ -3,16 +3,34 @@ import { connect } from 'react-redux'
 
 import Footer from '../../Footer/Footer.jsx'
 import KeyClaimForm from './KeyClaimForm.jsx'
+import SubmitAlert from './SubmitAlert.jsx'
 
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 class TopicEdit extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      submitAlert: false
+    }
   }
 
   componentDidMount() {
+    this.populateEditCache(); 
     this.fetchEditCache();
+  }
+
+
+  populateEditCache = () => {
+    let editTopicId = this.props.match.params.id; 
+    if (editTopicId) {
+      this.props.dispatch({
+        type: 'FETCH_EDIT_TOPIC_INFO',
+        payload: editTopicId
+      })
+      this.fetchEditCache();
+    }
   }
 
   fetchEditCache = () => {
@@ -50,7 +68,9 @@ class TopicEdit extends Component {
       type: 'SET_NEW_TOPIC',
       payload: this.state,
     })
-
+    this.setState({
+      submitAlert: true
+    })
     ///SOME INDICATOR HERE
 
   }
@@ -74,9 +94,19 @@ class TopicEdit extends Component {
     })
   }
 
+  handleDismiss = () => {
+    console.log('in handledismiss');
+    
+    this.setState({
+      submitAlert: false
+    })
+  }
+
+
 
   render() {
 
+    console.log('ROUTE PARAMS', this.props.match.params.id);
 
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
@@ -91,19 +121,17 @@ class TopicEdit extends Component {
       )
     }
 
-
-
     return (
       <div>
         <div className="wrapper">
           <h1>Topic Edit</h1>
 
           {/* SHOW STATE ON DOM */}
-          <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicTitle, null, 3)}</pre>
-          <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre> */}
+          <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
 
           <form action="" onSubmit={this.handleSubmit}>
-
 
             <Panel>
               <Panel.Body>
@@ -213,10 +241,16 @@ class TopicEdit extends Component {
 
             <Button bsStyle="primary" onClick={this.addKeyClaim}>Add Key Claim</Button>
 
-
             {/* Mapped array of number of key claims in this.props.state.keyClaims */}
             {keyClaimForms}
 
+
+{/* Conditionally render a success/failure message based on result of submit */}
+          <div>
+            {this.state.submitAlert &&
+              <SubmitAlert handleDismiss={this.handleDismiss}/>
+            }
+          </div>
 
 
             <Button type="submit" bsStyle="primary">Submit!</Button>

@@ -11,19 +11,19 @@ let emptyTopicEditCache = {
     bio1: '',
     photo1: '',
     proposal1: '',
-    contributor1FirstName: '',
-    contributor1LastName: '',
+    contributor2FirstName: '',
+    contributor2LastName: '',
     bio2: '',
     photo2: '',
     proposal2: '',
     keyClaims: {
         0: {
-            claimId: 0,
+            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
             claimContributor: '',
             keyClaim: '',
-            keyClaimEvidence: '',
             streamData: {
                 0: {
+                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: '',
                     streamComment: '',
                     streamEvidence: '',
@@ -36,18 +36,18 @@ let emptyTopicEditCache = {
 const topicEditCache = (state = emptyTopicEditCache, action) => {
     switch (action.type) {
 
-        //RETURN CURRENT STATE ITEM
+//RETURN CURRENT STATE ITEM
         case 'FETCH_EDIT_CACHE':
             return state; 
 
-        //HANDLE CHANGE FOR TOPIC INFO (FIRST LEVEL OF OBJECT)
+//HANDLE CHANGE FOR TOPIC INFO (FIRST LEVEL OF OBJECT)
         case 'CHANGE_TOPIC_INFO':
             return {
                 ...state, 
                 [action.payload.name]: action.payload.value,
             }
 
-        //HANDLE CHANGE FOR KEY CLAIM INFO (SECOND LEVEL OF OBJECT)    
+//HANDLE CHANGE FOR KEY CLAIM INFO (SECOND LEVEL OF OBJECT)    
         case 'CHANGE_KEY_CLAIM_INFO':
             console.log('action', action);
             console.log('action.payload', action.payload);
@@ -65,7 +65,7 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
         }
             
 
-        //HANDLE CHANGE FOR STREAM ITEM INFO (THIRD LEVEL OF OBJECT)    
+//HANDLE CHANGE FOR STREAM ITEM INFO (THIRD LEVEL OF OBJECT)    
         case 'CHANGE_STREAM_ITEM_INFO': 
             return {
                 ...state,
@@ -86,7 +86,7 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
            
         
 
-        //ADD A NEW KEY CLAIM TO THE STATE OBJECT
+//ADD A NEW KEY CLAIM TO THE STATE OBJECT
         case 'ADD_KEY_CLAIM' :
             return {
                 ...state,
@@ -109,7 +109,7 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
             }
           
 
-        //ADD A NEW STREAM ITEM TO CLAIM BASED ON CLAIM ID
+//ADD A NEW STREAM ITEM TO CLAIM BASED ON CLAIM ID
         case 'ADD_STREAM_ITEM':
         console.log('in ADD_STREAM_ITEM, payload: ', action.payload);
             return {
@@ -130,6 +130,10 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
                 }
             }
 
+
+//SET REDUX STORE TO HOLD SELECTED TOPIC TO BE EDITED 
+        case 'CACHE_TOPIC_TO_EDIT':
+            return action.payload
         default: 
         return state
     }

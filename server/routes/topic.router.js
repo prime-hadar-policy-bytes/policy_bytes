@@ -268,6 +268,37 @@ router.delete('/deleteTopic/:id', (req, res) => {
 })
 
 
+//WRITTEN BY ATTICUS
+//FETCHES SELCTED TOPICS INFO TO POPULATE TOPICEDIT PAGE (BASED ON URL)
+router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
+    let topicId = req.params.id
+    console.log('in /api/topics/editTopicInfo, ID:', topicId);
+    let queryText = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, 
+                    "topic"."id" as "topic.id", 
+                    "contributor"."id" as "contributor.id", 
+                    "key_claim"."id" as "key_claim.id", 
+                    key_claim.claim, key_claim.claim_order, contributor.first_name, 
+                    contributor.last_name, contributor.bio, proposal.proposal, 
+                    "stream"."text" as "stream.text", stream.evidence
+                    FROM key_claim 
+                    JOIN topic ON key_claim.topic_id = topic.id 
+                    JOIN contributor ON key_claim.contributor_id = contributor.id
+                    JOIN proposal ON proposal.contributor_id = contributor.id
+                    JOIN stream ON stream.contributor_id = contributor.id 
+                    WHERE topic.id = $1;`; 
+    pool.query(queryText, [topicId])
+    .then((result) => {
+        console.log('successful GET in /api/topics/editTopicInfo result: ', result.rows);
+        res.send(result.rows)
+    })
+    .catch((err)=> {
+        console.log('error in DELETE /api/topics/editTopicInfo', err);
+        res.sendStatus(500); 
+    })
+    
+})
+
+
 
 
 module.exports = router;

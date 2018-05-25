@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-
+import { Link } from 'react-router-dom';
 import { Panel, Button, ButtonGroup, ButtonToolbar, FormGroup, ControlLabel, FormControl, Checkbox, Glyphicon, Alert } from 'react-bootstrap'; 
 
 class TopicManagePanel extends Component {
@@ -91,6 +91,8 @@ class TopicManagePanel extends Component {
       )
     }
  
+//EACH EDIT BUTTON SENDS ADMIN TO TOPIC EDIT PAGE WITH UNIQUE URL BASED ON SELECTED TOPIC'S ID  
+  let linkWithId = `/topicEdit/${this.props.topic.id}`
 
     return (
       <div>
@@ -116,7 +118,7 @@ class TopicManagePanel extends Component {
                       <Glyphicon glyph="trash"/>
                     </Button>
                     <Button onClick={this.handleEditTopic}>
-                      <Glyphicon glyph="pencil"/>
+                    <Link to={linkWithId}><Glyphicon glyph="pencil"/></Link>
                     </Button>
                   </ButtonGroup>
                 </ButtonToolbar>
