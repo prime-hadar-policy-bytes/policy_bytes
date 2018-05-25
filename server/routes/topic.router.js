@@ -69,75 +69,75 @@ router.get('/featuredtopic', (req, res) => {
 
 router.post('/newtopic', (req, res) => {
 
-    if(req.isAuthenticated){
-         //game is the newInput object from state in GameInfo.js
-         const topic = req.body;
+    if (req.isAuthenticated) {
+        //game is the newInput object from state in GameInfo.js
+        const topic = req.body;
 
-         (async () => {
-             //client does not allow the program to proceed until it is connected to the database
-             const client = await pool.connect();
- 
-             try{
-                 await client.query('BEGIN');
+        (async () => {
+            //client does not allow the program to proceed until it is connected to the database
+            const client = await pool.connect();
 
-                 //text for posting gameinfo to the database
-                 let queryText1 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
+            try {
+                await client.query('BEGIN');
+
+                //text for posting gameinfo to the database
+                let queryText1 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
-                 const contributor1Result = await client.query(queryText1, [topic.contributor1FirstName, 
-                    topic.contributor1LastName, topic.bio1, topic.photo1]);
-                
+                const contributor1Result = await client.query(queryText1, [topic.contributor1FirstName,
+                topic.contributor1LastName, topic.bio1, topic.photo1]);
+
                 const contributor1Id = contributor1Result.rows[0].id
 
                 let queryText2 = `INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url")
                  VALUES($1, $2, $3, $4) RETURNING "id";`;
-                 const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName, 
-                    topic.contributor2LastName, topic.bio2, topic.photo2]);
-                
+                const contributor2Result = await client.query(queryText2, [topic.contributor2FirstName,
+                topic.contributor2LastName, topic.bio2, topic.photo2]);
+
                 const contributor2Id = contributor2Result.rows[0].id
- 
-                 //creates an entry in the topic table in the database
-                 let queryText = `INSERT INTO "topic" ("topic_title", "premise", "common_ground", "contributor1_id",
+
+                //creates an entry in the topic table in the database
+                let queryText = `INSERT INTO "topic" ("topic_title", "premise", "common_ground", "contributor1_id",
                  "contributor2_id", "archive_summary") VALUES($1, $2, $3, $4, $5, $6)  RETURNING "id";`;
-                 const topicResult = await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, 
+                const topicResult = await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround,
                     contributor1Id, contributor2Id, topic.topicSummary]);
- 
-                 //the id of the topic that was created in topicResult
-                 const topicId = topicResult.rows[0].id
+
+                //the id of the topic that was created in topicResult
+                const topicId = topicResult.rows[0].id
 
                 let queryText3 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
                     $2, $3);`
-                    
-                 await client.query(queryText3, [topicId, contributor1Id, topic.proposal1])
 
-                 let queryText4 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
+                await client.query(queryText3, [topicId, contributor1Id, topic.proposal1])
+
+                let queryText4 = `INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") VALUES($1,
                     $2, $3);`
-                    
-                 await client.query(queryText4, [topicId, contributor2Id, topic.proposal2])
+
+                await client.query(queryText4, [topicId, contributor2Id, topic.proposal2])
 
                 //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
-                 for(key in topic.keyClaims){
-                     console.log('key: ', key);
-                     
+                for (key in topic.keyClaims) {
+                    console.log('key: ', key);
+
                     let claim_order = key;
-                     //keyData is the value of a property in the keyClaims object e.g. 
-                     //{claimDbId: '0', claimContributor: 'contributor1', keyClaim: 'text', streamData: {}}
+                    //keyData is the value of a property in the keyClaims object e.g. 
+                    //{claimDbId: '0', claimContributor: 'contributor1', keyClaim: 'text', streamData: {}}
                     let keyData = topic.keyClaim[key]
                     let keyClaimData = [];
-                    
-                     for(prop in keyData){
+
+                    for (prop in keyData) {
                         //keyDataProp is the value of a property in the keyData object e.g.
                         //'0', 'contributor1', 'text' 
                         let keyDataProp = keyData[prop]
                         keyClaimData.push(keyDataProp);
-                     }
-                        //end for loop of for(prop in keyData)
+                    }
+                    //end for loop of for(prop in keyData)
 
                     let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
                     VALUES($1, $2, $3, $4) RETURNING "id";`;
                     let contributor;
-                    if(keyClaimData[1] === 'contributor1'){
+                    if (keyClaimData[1] === 'contributor1') {
                         contributor = contributor1Id
-                    }else{
+                    } else {
                         contributor = contributor2Id
                     }
                     const keyClaimResult = await client.query(queryText5, [topicId, contributor, keyClaimData[2], claim_order])
@@ -146,7 +146,7 @@ router.post('/newtopic', (req, res) => {
 
                     let streamData = keyClaimData[3]
 
-                    for(stream in streamData){
+                    for (stream in streamData) {
                         let streamClaimData = [];
 
                         //stream is the 0 property, 1 property, etc. in the streamData object
@@ -156,7 +156,7 @@ router.post('/newtopic', (req, res) => {
                         //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
                         //streamComment: 'text', streamEvidence: 'more text',}
                         let streamDataObj = streamData[stream]
-                        for(prop in streamDataObj){
+                        for (prop in streamDataObj) {
                             //prop is each property in the streamDataObj, but I want the values...
 
                             //streamDataProp is the value of a property in the streamDataObj object e.g.
@@ -164,64 +164,63 @@ router.post('/newtopic', (req, res) => {
                             let streamDataProp = streamDataObj[prop]
                             streamClaimData.push(streamDataProp)
                         }
-                    let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
+                        let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
                     "stream_evidence", "stream_order")
                     VALUES ($1, $2, $3, $4, $5)`
-                    if(streamClaimData[1] === 'contributor1'){
-                        contributor = contributor1Id;
-                    }else{
-                        contributor = contributor2Id
+                        if (streamClaimData[1] === 'contributor1') {
+                            contributor = contributor1Id;
+                        } else {
+                            contributor = contributor2Id
+                        }
+
+                        await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
                     }
 
-                    await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
-                    }
-                 }
+                await client.query('COMMIT');
+                res.sendStatus(201);
 
-                 await client.query('COMMIT');
-                 res.sendStatus(201);
- 
-             } catch (e) {
- 
-                 //checks for errors at any point within the try block; if errors are found,
-                 //all the data is cleared to prevent data corruption
-                 console.log('ROLLBACK', e);
-                 await client.query('ROLLBACK');
-                 throw e;
-             } finally {
- 
-                 //allows res.sendStatus(201) to be sent
-                 client.release();
-             }
- 
-             //if an error occurs in posting the game info to the database, the error will
-             //appear in the console log
-         })().catch((error) => {
-             console.log('CATCH', error);
-             res.sendStatus(500);
-         })
-    }
-    })
+            } catch (e) {
 
-//WRITTEN BY ATTICUS
-//TOGGLES PUBLISHED STATUS IN TOPIC TABLE
-router.put('/togglePublished', (req, res) => {
-    console.log('in /api/topics/togglePublished', req.body);
+                //checks for errors at any point within the try block; if errors are found,
+                //all the data is cleared to prevent data corruption
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
 
-    //topicId contains the id of the topic whose status of published or not published
-    //we want to change
-    let topicId = req.body.id;
-    let queryText = `UPDATE topic SET published = NOT published WHERE id = $1;`
+                //allows res.sendStatus(201) to be sent
+                client.release();
+            }
 
-    pool.query(queryText, [topicId])
-        .then((result) => {
-            console.log('successful PUT /api/topic/togglePublished');
-            res.sendStatus(200);
-        })
-
-        .catch((err) => {
-            console.log('error in PUT /api/topic/togglePublished');
+            //if an error occurs in posting the game info to the database, the error will
+            //appear in the console log
+        })().catch((error) => {
+            console.log('CATCH', error);
             res.sendStatus(500);
         })
+    }
+
+    //WRITTEN BY ATTICUS
+    //TOGGLES PUBLISHED STATUS IN TOPIC TABLE
+    router.put('/togglePublished', (req, res) => {
+        console.log('in /api/topics/togglePublished', req.body);
+
+        //topicId contains the id of the topic whose status of published or not published
+        //we want to change
+        let topicId = req.body.id;
+        let queryText = `UPDATE topic SET published = NOT published WHERE id = $1;`
+
+        pool.query(queryText, [topicId])
+            .then((result) => {
+                console.log('successful PUT /api/topic/togglePublished');
+                res.sendStatus(200);
+            })
+
+            .catch((err) => {
+                console.log('error in PUT /api/topic/togglePublished');
+                res.sendStatus(500);
+            })
+    })
 })
 
 //WRITTEN BY ATTICUS
@@ -283,47 +282,184 @@ router.delete('/deleteTopic/:id', (req, res) => {
 //FETCHES SELCTED TOPICS INFO TO POPULATE TOPICEDIT PAGE (BASED ON URL)
 router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
     let topicId = req.params.id;
+    //main object being added to and returned below.
     let selectedTopicToSend = {};
     let contributor1Id = '';
     let contributor2Id = '';
 
-    console.log('in /api/topics/editTopicInfo, ID:', topicId);
-    let queryText = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, contributor1_id, contributor2_id,
-    "topic"."id" as "topic_id" FROM topic 
-    WHERE topic.id = $1;`;
-    pool.query(queryText, [topicId])
-        .then((result) => {
-            //Package Topic in selectedTopicToSend
+    (async () => {
+        //client does not allow the program to proceed until it is connected to the database
+        const client = await pool.connect();
+
+        try {
+            await client.query('BEGIN');
+
+            //begins series of async database SELECTS to add to selectedTopicToSend
+            let queryText1 = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, contributor1_id, contributor2_id,
+            "topic"."id" as "topic_id" FROM topic 
+            WHERE topic.id = $1;`;
+            const topicResult = await client.query(queryText1, [topicId]);
             selectedTopicToSend = {
-                topicTitle: result.rows[0].topic_title,
-                topicSummary: result.rows[0].archive_summary,
-                topicPremise: result.rows[0].premise,
+                topicTitle: topicResult.rows[0].topic_title,
+                topicSummary: topicResult.rows[0].archive_summary,
+                topicPremise: topicResult.rows[0].premise,
                 topicReadMore: '',
-                topicCommonGround: result.rows[0].common_ground
+                topicCommonGround: topicResult.rows[0].common_ground
             };
-            contributor1Id = result.rows[0].contributor1_id;
-            contributor2Id = result.rows[0].contributor2_id;
+            contributor1Id = topicResult.rows[0].contributor1_id;
+            contributor2Id = topicResult.rows[0].contributor2_id;
 
-            let queryText = `SELECT id, first_name, last_name, bio, photo_url from contributor where id = $1 OR id = $2;
-            ;`;
-            pool.query(queryText, [contributor1Id, contributor2Id])
-                .then((result) => {
-                    let contributorsToSend 
+            let queryText2 = `SELECT id, first_name, last_name, bio, photo_url from contributor where id = $1 OR id = $2;`;
+            const contributorResult = await client.query(queryText2, [contributor1Id, contributor2Id]);
 
-                    // console.log('successful GET CONTRIBUTORS in /api/topics/editTopicInfo result: ', result.rows);
-                    selectedTopicToSend = {...selectedTopicToSend, contributorsToSend};
-                    res.send(selectedTopicToSend)
-                })
-                .catch((err) => {
-                    console.log('error in GET /api/topics/editTopicInfo', err);
-                    res.sendStatus(500);
-                })
+            // console.log('successful GET CONTRIBUTORS in /api/topics/editTopicInfo result: ', contributorResult.rows);
+            selectedTopicToSend = {
+                ...selectedTopicToSend, contributor1FirstName: contributorResult.rows[0].first_name,
+                contributor1LastName: contributorResult.rows[0].last_name,
+                bio1: contributorResult.rows[0].bio,
+                photo1: contributorResult.rows[0].photo_url,
+                contributor2FirstName: contributorResult.rows[1].first_name,
+                contributor2LastName: contributorResult.rows[1].last_name,
+                bio2: contributorResult.rows[1].bio,
+                photo2: contributorResult.rows[1].photo_url
+            };
+     
+            let queryText3 = `SELECT proposal from proposal WHERE id = $1;`;
+            const proposal1Result = await client.query(queryText3, [contributor1Id]);
 
-        })
-        .catch((err) => {
-            console.log('error in GET /api/topics/editTopicInfo', err);
-            res.sendStatus(500);
-        })
+            selectedTopicToSend = {
+                ...selectedTopicToSend, proposal1: proposal1Result.rows[0].proposal
+            }
+
+            console.log('successful GET PROPOSAL1 in /api/topics/editTopicInfo result: ', proposal1Result.rows);
+
+            let queryText4 = `SELECT proposal from proposal WHERE id = $1;`;
+            const proposal2Result = await client.query(queryText4, [contributor2Id]);
+
+            selectedTopicToSend = {
+                ...selectedTopicToSend, proposal2: proposal2Result.rows[0].proposal
+            }
+
+            // let queryText5 = `SELECT * from key_claim WHERE topic_id = $1 ORDER BY claim_order;`;
+            // const keyClaimResult = await client.query(queryText5, [topicId]);
+
+            //     let keyClaimObject = {};
+
+            //     for (keyClaim of keyClaimResult.rows) {
+            //         keyClaimObject = {...keyClaimObject, {
+                        
+            //         }}
+            //     }
+
+
+                console.log('this is keyClaimResult', keyClaimResult.rows);
+            
+            
+            //    //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
+            //     for(key in topic.keyClaims){
+            //         console.log('key: ', key);
+
+            //        let claim_order = key;
+            //         //keyData is the value of a property in the keyClaims object e.g. 
+            //         //{claimDbId: '0', claimContributor: 'contributor1', keyClaim: 'text', streamData: {}}
+            //        let keyData = topic.keyClaim[key]
+            //        let keyClaimData = [];
+
+            //         for(prop in keyData){
+            //            //keyDataProp is the value of a property in the keyData object e.g.
+            //            //'0', 'contributor1', 'text' 
+            //            let keyDataProp = keyData[prop]
+            //            keyClaimData.push(keyDataProp);
+            //         }
+            //            //end for loop of for(prop in keyData)
+
+            //        let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
+            //        VALUES($1, $2, $3, $4) RETURNING "id";`;
+            //        let contributor;
+            //        if(keyClaimData[1] === 'contributor1'){
+            //            contributor = contributor1Id
+            //        }else{
+            //            contributor = contributor2Id
+            //        }
+            //        const keyClaimResult = await client.query(queryText5, [topicId, contributor, keyClaimData[2], claim_order])
+
+            //        const keyClaimId = keyClaimResult.rows[0].id
+
+            //        let streamData = keyClaimData[3]
+
+            //        for(stream in streamData){
+            //            let streamClaimData = [];
+
+            //            //stream is the 0 property, 1 property, etc. in the streamData object
+            //            let stream_order = stream;
+
+            //            //streamDataObj is the value of a property in the streamData object; this
+            //            //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
+            //            //streamComment: 'text', streamEvidence: 'more text',}
+            //            let streamDataObj = streamData[stream]
+            //            for(prop in streamDataObj){
+            //                //prop is each property in the streamDataObj, but I want the values...
+
+            //                //streamDataProp is the value of a property in the streamDataObj object e.g.
+            //                //'0', 'contributor2', 'text', 'more text'
+            //                let streamDataProp = streamDataObj[prop]
+            //                streamClaimData.push(streamDataProp)
+            //            }
+            //        let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
+            //        "stream_evidence", "stream_order")
+            //        VALUES ($1, $2, $3, $4, $5)`
+            //        if(streamClaimData[1] === 'contributor1'){
+            //            contributor = contributor1Id;
+            //        }else{
+            //            contributor = contributor2Id
+            //        }
+
+            //        await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3]])
+            //        }
+            //     }
+
+            await client.query('COMMIT');
+            res.send(selectedTopicToSend);
+
+        } catch (e) {
+
+            //checks for errors at any point within the try block; if errors are found,
+            //all the data is cleared to prevent data corruption
+            console.log('ROLLBACK', e);
+            await client.query('ROLLBACK');
+            throw e;
+        } finally {
+
+            //allows res.sendStatus(201) to be sent
+            client.release();
+        }
+
+        //if an error occurs in posting the game info to the database, the error will
+        //appear in the console log
+    })().catch((error) => {
+        console.log('CATCH', error);
+        res.sendStatus(500);
+    })
+
+    console.log('in /api/topics/editTopicInfo, ID:', topicId);
+
+
+    // let queryText = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, contributor1_id, contributor2_id,
+    // "topic"."id" as "topic_id" FROM topic 
+    // WHERE topic.id = $1;`;
+    // pool.query(queryText, [topicId])
+    //     .then((result) => {
+    //         //Package Topic in selectedTopicToSend
+    //         selectedTopicToSend = {
+    //             topicTitle: result.rows[0].topic_title,
+    //             topicSummary: result.rows[0].archive_summary,
+    //             topicPremise: result.rows[0].premise,
+    //             topicReadMore: '',
+    //             topicCommonGround: result.rows[0].common_ground
+    //         };
+    //         contributor1Id = result.rows[0].contributor1_id;
+    //         contributor2Id = result.rows[0].contributor2_id;
+
 
 
 })

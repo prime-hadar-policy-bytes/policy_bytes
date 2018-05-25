@@ -8,6 +8,10 @@ import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
 
 import KeyClaimPanel from './KeyClaimPanel.jsx'
 import StreamItem from './StreamItem.jsx'
+import TopicTitleContent from './TopicTitleContent.jsx'
+import StreamItemFactory from './StreamItemFactory.jsx'
+
+
 import dummyTopicCache from './DummyData.js'
 
 import './TopicPage.css'
@@ -20,7 +24,9 @@ export class TopicPage extends Component {
     super(props) 
     
     this.state = {
-      showStreamForClaim: ''
+      showStreamForClaim: undefined,
+      keyClaimLocked: false,
+      contributorSelect: 'contributor1',  
     }
   }
 
@@ -28,34 +34,79 @@ export class TopicPage extends Component {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
   }
 
-  handleShowStream = (id) => {
+
+//called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
+  handleHoverShowStream = (id) => {
+    if (this.state.keyClaimLocked === false) {
+      console.log('in handleShowStream, id:', id);
+      this.setState({
+        showStreamForClaim: id
+      })   
+    }
+  }
+
+//called on mouseLeave from keyClaimPanel IF keyClaimLocked === false
+  handleHoverHideStream = (id) => {
+    if (this.state.keyClaimLocked === false) {
+      console.log('in handleHideStream, id:', id);
+      this.setState({
+        showStreamForClaim: undefined
+      })     
+    }
+  }
+
+//toggle this.state.keyClaimLocked
+  toggleClickShowStream = (id) => {
     console.log('in handleShowStream, id:', id);
     this.setState({
-      showStreamForClaim: id
+      showStreamForClaim: id,
+      keyClaimLocked: !this.state.keyClaimLocked
+    })
+  }
+
+  handleTabSelect = (key) => {
+    this.setState({
+      contributorSelect: key
     })
   }
 
 
 
 
-
-
-
-
-
-
   render() {
-
+    
+    //loop through keyclaim object to make keyClaimPanels 
     let keyClaimsArray = []
     for (const keyClaimId in dummyTopicCache.keyClaims) {      
-      keyClaimsArray.push(
-        <KeyClaimPanel key={keyClaimId}
-                        keyClaimId={keyClaimId}
-                        keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
-                        showStreamForClaim={this.state.showStreamForClaim}
-                        handleShowStream={this.handleShowStream}/>
-      )
+      //if statement to render only the selected contributor's claims
+      if (this.state.contributorSelect === dummyTopicCache.keyClaims[keyClaimId].claimContributor) {        
+        keyClaimsArray.push(
+          <KeyClaimPanel key={keyClaimId}
+                          keyClaimId={keyClaimId}
+                          keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
+                          showStreamForClaim={this.state.showStreamForClaim}
+                          keyClaimLocked={this.state.keyClaimLocked}
+                          handleHoverShowStream={this.handleHoverShowStream}
+                          handleHoverHideStream={this.handleHoverHideStream}
+                          toggleClickShowStream={this.toggleClickShowStream}/>
+        )        
+      }
     }
+
+
+//DYNAMIC CSS CLASSES
+    let arenaContainer = 'arenaContainer'
+    let streamContainerClass = "streamItemsContainer"
+    if (this.state.contributorSelect === 'contributor1') {
+      arenaContainer = "arenaContainerContrib1"
+      streamContainerClass += " contrib1"
+    }
+    if (this.state.contributorSelect === 'contributor2') {
+      arenaContainer += " contrib2"
+      streamContainerClass += " contrib2"
+    }
+
+
 
     
 
@@ -63,63 +114,23 @@ export class TopicPage extends Component {
       <div>
         <div className="wrapper">
 
-          <h1>{dummyTopicCache.topicTitle}</h1>
+        <TopicTitleContent />
 
-          {/* INTRO */}
-          <Panel>
-            <Panel.Body>
-              <p>
-                {dummyTopicCache.topicPremise}
-              </p>
-            </Panel.Body>
-          </Panel>
 
-          <Panel>
-            <Panel.Body>
-              <h4>Common Ground</h4>
-              <p>
-                "{dummyTopicCache.topicCommonGround}"
-              </p>
-            </Panel.Body>
-          </Panel>
-
-          <Panel className="contributorPanel">
-            <Panel.Body>
-              <div className="wirePhoto"></div>
-              <h3>
-                {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
-              </h3>
-              <i>
-                {dummyTopicCache.bio1}
-              </i>
-            </Panel.Body>
-          </Panel>
-
-          <Panel className="contributorPanel">
-            <Panel.Body>
-              <div className="wirePhoto"></div>
-              <h3>
-                {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
-              </h3>
-              <i>
-                {dummyTopicCache.bio2}
-              </i>
-            </Panel.Body>
-          </Panel>
-
-          <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
-            <Tab eventKey={1} title={dummyTopicCache.contributor1FirstName}>
-              Tab 1 content
-              </Tab>
-            <Tab eventKey={2} title={dummyTopicCache.contributor2FirstName}>
-              Tab 2 content
-              </Tab>
+          <Tabs className="tabParent"
+                bsStyle="pills"
+                defaultActiveKey='contributor1' 
+                id="contributorSelectTabs"
+                onSelect={this.handleTabSelect}
+                animation={false} 
+                >
+            <Tab tabClassName="tabChildren"  eventKey='contributor1' title={dummyTopicCache.contributor1FirstName}></Tab>
+            <Tab tabClassName="tabChildren" eventKey='contributor2' title={dummyTopicCache.contributor2FirstName}></Tab>
           </Tabs>
 
 
           {/* ARENA */}
-          <Panel>
-            <Panel.Heading>Arena</Panel.Heading>
+          <Panel className="arenaContainer">
             <Panel.Body>
               <div className="wireArenaPhoto">Contrib. Photo</div>
               <Panel className="wireArenaSummary">
@@ -128,10 +139,22 @@ export class TopicPage extends Component {
                 </Panel.Body>
               </Panel>
 
-              {keyClaimsArray}
+              <div className="keyClaimsContainer">
+                {keyClaimsArray}
+              </div>
 
+              <div className = {streamContainerClass}>
+                <StreamItemFactory keyClaims = {dummyTopicCache.keyClaims} 
+                                  showStreamForClaim = {this.state.showStreamForClaim}/>
+              </div>
             </Panel.Body>
           </Panel>
+
+
+
+
+
+
 
           <CommentSection topicId={1} />
 
