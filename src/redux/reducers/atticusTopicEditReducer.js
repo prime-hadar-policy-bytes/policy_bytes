@@ -47,6 +47,9 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
                 [action.payload.name]: action.payload.value,
             }
 
+        case 'RESET_EDIT_CACHE':
+        return emptyTopicEditCache;
+
 //HANDLE CHANGE FOR KEY CLAIM INFO (SECOND LEVEL OF OBJECT)    
         case 'CHANGE_KEY_CLAIM_INFO':
             console.log('action', action);
