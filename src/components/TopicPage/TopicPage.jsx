@@ -8,6 +8,10 @@ import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
 
 import KeyClaimPanel from './KeyClaimPanel.jsx'
 import StreamItem from './StreamItem.jsx'
+import TopicTitleContent from './TopicTitleContent.jsx'
+import StreamItemFactory from './StreamItemFactory.jsx'
+
+
 import dummyTopicCache from './DummyData.js'
 
 import './TopicPage.css'
@@ -20,7 +24,7 @@ export class TopicPage extends Component {
     super(props) 
     
     this.state = {
-      showStreamForClaim: '',
+      showStreamForClaim: undefined,
       keyClaimLocked: false, 
     }
   }
@@ -45,7 +49,7 @@ export class TopicPage extends Component {
     if (this.state.keyClaimLocked === false) {
       console.log('in handleHideStream, id:', id);
       this.setState({
-        showStreamForClaim: ''
+        showStreamForClaim: undefined
       })     
     }
   }
@@ -59,19 +63,13 @@ export class TopicPage extends Component {
     })
   }
 
-
-
-
-
-
-
-
-
   render() {
-
+    
+ //declare empty arrays that will fill with KeyClaimPanels and StreamItemPanels
     let keyClaimsArray = []
+
+//loop through keyclaim object to make keyClaimPanels 
     for (const keyClaimId in dummyTopicCache.keyClaims) {      
-      
       keyClaimsArray.push(
         <KeyClaimPanel key={keyClaimId}
                         keyClaimId={keyClaimId}
@@ -84,55 +82,16 @@ export class TopicPage extends Component {
       )
     }
 
+
+
     
 
     return (
       <div>
         <div className="wrapper">
 
-          <h1>{dummyTopicCache.topicTitle}</h1>
+        <TopicTitleContent />
 
-          {/* INTRO */}
-          <Panel>
-            <Panel.Body>
-              <p>
-                {dummyTopicCache.topicPremise}
-              </p>
-            </Panel.Body>
-          </Panel>
-
-          <Panel>
-            <Panel.Body>
-              <h4>Common Ground</h4>
-              <p>
-                "{dummyTopicCache.topicCommonGround}"
-              </p>
-            </Panel.Body>
-          </Panel>
-
-          <Panel className="contributorPanel">
-            <Panel.Body>
-              <div className="wirePhoto"></div>
-              <h3>
-                {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
-              </h3>
-              <i>
-                {dummyTopicCache.bio1}
-              </i>
-            </Panel.Body>
-          </Panel>
-
-          <Panel className="contributorPanel">
-            <Panel.Body>
-              <div className="wirePhoto"></div>
-              <h3>
-                {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
-              </h3>
-              <i>
-                {dummyTopicCache.bio2}
-              </i>
-            </Panel.Body>
-          </Panel>
 
           <Tabs defaultActiveKey={2} id="uncontrolled-tab-example">
             <Tab eventKey={1} title={dummyTopicCache.contributor1FirstName}>
@@ -157,8 +116,19 @@ export class TopicPage extends Component {
 
               {keyClaimsArray}
 
+
+              <StreamItemFactory keyClaims = {dummyTopicCache.keyClaims} 
+                                  showStreamForClaim = {this.state.showStreamForClaim}/>
+
+
             </Panel.Body>
           </Panel>
+
+
+
+
+
+
 
           <CommentSection topicId={1} />
 
