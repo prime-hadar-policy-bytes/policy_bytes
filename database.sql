@@ -52,7 +52,7 @@ WHERE topic.id = 1;
 
 CREATE TABLE "key_claim" (
     "id" SERIAL PRIMARY KEY,
-    "topic_id" INT REFERENCES "topic",
+    "topic_id" INT REFERENCES "topic" ON DELETE CASCADE,
     "contributor_id" INT REFERENCES "contributor",
     "claim" VARCHAR(500),
     "claim_order" int
@@ -61,7 +61,7 @@ CREATE TABLE "key_claim" (
 
 CREATE TABLE "stream" (
     "id" SERIAL PRIMARY KEY,
-    "key_claim_id" INT REFERENCES "key_claim",
+    "key_claim_id" INT REFERENCES "key_claim" ON DELETE CASCADE,
     "contributor_id" INT REFERENCES "contributor",
     "stream_comment" VARCHAR(5000),
     "stream_evidence" VARCHAR(1000),
@@ -103,10 +103,12 @@ CREATE TABLE "comments_key_claim" (
 
 CREATE TABLE "proposal" (
     "id" SERIAL PRIMARY KEY,
-    "topic_id" INT REFERENCES "topic",
+    "topic_id" INT REFERENCES "topic" ON DELETE CASCADE,
     "contributor_id" INT REFERENCES "contributor",
     "proposal" VARCHAR(1000)
 );
+
+
 
 
 CREATE TABLE "like" ( 
