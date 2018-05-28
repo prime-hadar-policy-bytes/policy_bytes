@@ -1,3 +1,70 @@
+/* TITLE CONTENT */
+
+h1{
+    margin-bottom: .5em !important; 
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 2em !important;  
+
+}
+
+.titleJumbotron{
+    text-align: justify; 
+    width: 100% !important; 
+    background-color: oldlace !important; 
+    margin: 0px;
+    padding-left: 8em; 
+    padding-right: 8em; 
+    font-family: 'Montserrat', sans-serif;
+
+}
+
+.commonGroundJumbotron{
+    text-align: center; 
+    width: 100% !important; 
+    background-color: oldlace !important; 
+    margin: 0px;
+    padding-left: 11em; 
+    padding-right: 11em; 
+    border-top: 1px solid rgba(128, 128, 128, 0.289);  
+    border-bottom: 1px solid rgba(128, 128, 128, 0.289);  
+}
+
+.titleLogo{
+    display: inline-block; 
+}
+
+
+
+
+
+
+/* CONTRIBUTORS SECTION */
+
+.contributorPanel{
+    width: 100%;
+    margin: 4em auto; 
+    border: 4px solid #006666; 
+}
+
+.contributorPhoto {
+    height: 10em !important;
+}
+
+.contributorText{
+    margin-top: 1em; 
+    text-align: center; 
+}
+
+.contributorText h3 {
+    text-align: center;  
+    margin-bottom: .5em; 
+} 
+
+
+
+
+
 /* ARENA */
 
 .arenaContainerContrib1 {
@@ -63,12 +130,12 @@
 /* CONTRIBUTOR STUFF */
 
 .contrib1 {
-    border: 2px solid #006666 !important;
+    border: 3px solid #006666 !important;
 }
 
 
 .contrib2 {
-    border: 2px solid #666600 !important;
+    border: 3px solid #666600 !important;
 }
 
 
@@ -85,5 +152,4 @@
     background-color: #66660035;
     width: 90%; 
     margin-left: 4em; 
-
 }

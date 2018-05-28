@@ -10,6 +10,7 @@ import KeyClaimPanel from './KeyClaimPanel.jsx'
 import StreamItem from './StreamItem.jsx'
 import TopicTitleContent from './TopicTitleContent.jsx'
 import StreamItemFactory from './StreamItemFactory.jsx'
+import TopicContributors from './TopicContributors.jsx'
 
 
 import dummyTopicCache from './DummyData.js'
@@ -112,9 +113,9 @@ export class TopicPage extends Component {
 
     return (
       <div>
-        <div className="wrapper">
-
         <TopicTitleContent />
+        <div className="wrapper">
+        <TopicContributors />
 
 
           <Tabs className="tabParent"
