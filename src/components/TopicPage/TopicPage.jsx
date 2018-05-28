@@ -103,7 +103,7 @@ export class TopicPage extends Component {
     let arenaProposal = dummyTopicCache.proposal1; 
     let selectedContributor = dummyTopicCache.contributor1FirstName; 
     if (this.state.contributorSelect === 'contributor1') {
-      arenaContainer = "arenaContainerContrib1"
+      arenaContainer += " contrib1"
       streamContainerClass += " contrib1"
       arenaSummaryClass += " contrib1"
       arenaPicture = dummyTopicCache.photo1
@@ -143,7 +143,7 @@ export class TopicPage extends Component {
 
           {/* ARENA */}
 
-          <Panel className="arenaContainer">
+          <Panel className={arenaContainer}>
             <Panel.Body>
             <Grid>
               <Row id="arenaTop">

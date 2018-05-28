@@ -16,7 +16,7 @@ export default class TopicContributors extends Component {
                         <Panel className="contributorPanel ">
                             <Panel.Body>
                                 <Col xs={4} md={4}>
-                                    <Image className="contributorPhoto contrib1" src="/assets/headshot1.jpeg" rounded responsive/>
+                                    <Image className="contributorPhoto contrib1" src="/assets/headshot1.jpeg" rounded/>
                                 </Col>
                                 <Col xs={8} md={8}>
                                     <div className="contributorText">
@@ -52,7 +52,7 @@ export default class TopicContributors extends Component {
                                     </div>
                                 </Col>
                                 <Col  xs={4} md={4}>
-                                    <Image className="contributorPhoto contrib2" src="/assets/headshot2.jpeg" rounded responsive/>
+                                    <Image className="contributorPhoto contrib2" src="/assets/headshot2.jpeg" rounded/>
                                 </Col>
                             </Panel.Body>
 

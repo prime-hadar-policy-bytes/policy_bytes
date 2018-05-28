@@ -67,13 +67,11 @@ export class KeyClaimPanel extends Component {
             <Panel.Footer className="keyClaimFooter">
               <ButtonGroup className="keyClaimFooterButtons">
                 <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="thumbs-up" />
-                </Button>
+                  <i class="fa fa-thumbs-o-up" aria-hidden="true"></i>                </Button>
                 <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="heart" />
-                </Button>
+                  <i class="fa fa-heart" aria-hidden="true"></i>                </Button>
                 <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="comment" />
+                  <i class="fa fa-comment" aria-hidden="true"></i>
                 </Button>
               </ButtonGroup>
               <p className="keyClaimFooterLikes">Likes: 4 </p>
