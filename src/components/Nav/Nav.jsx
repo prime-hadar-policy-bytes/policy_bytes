@@ -52,6 +52,11 @@ class Nav extends Component {
                 Topic Edit
           </Link>
             </li>
+            <li>
+              <Link to="/Images">
+                Images
+          </Link>
+            </li>
           </ul>
         </div>
       </div>

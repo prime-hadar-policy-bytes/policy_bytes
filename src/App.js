@@ -14,7 +14,7 @@ import TopicPage from './components/TopicPage/TopicPage.jsx'
 import TopicManage from './components/Admin/TopicManage/TopicManage.jsx'
 import TopicEdit from './components/Admin/TopicEdit/TopicEdit.jsx';
 // import CommentManage from './components/Admin/CommentManage/CommentManage.jsx';
-
+import Images from './components/Images/Images.jsx';
 import Nav from './components/Nav/Nav.jsx'
 
 import './styles/main.css';
@@ -45,6 +45,10 @@ const App = () => (
           <Route
             path="/topicEdit/:id?"  //<-- optional route param is id of topic to populate edit
             component={TopicEdit}
+          />
+          <Route
+            path="/Images"
+            component={Images}
           />
 
   {/* predefined routes */}

@@ -241,7 +241,7 @@ router.post('/newtopic', (req, res) => {
                 res.sendStatus(500);
             })
     })
-})
+
 
 //WRITTEN BY ATTICUS
 //TOGGLES FEATURED STATUS IN TOPIC TABLE (SETS ALL TO UNFEATURED, SETS SELECTED TO FEATURED)
