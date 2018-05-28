@@ -92,6 +92,35 @@ h1{
 
 /* ARENA */
 
+#arenaTop{
+    /* border: 1px solid red !important;  */
+    padding: 1em 1em 1em 0em; 
+}
+
+.arenaPhoto{
+    margin: 1em 1em 1em 1em; 
+}
+
+.arenaSummary{
+    height: 100%; 
+    width: 100%; 
+    background-color: lightgrey; 
+    margin: 3.5em auto 2% 2%; 
+    padding: 1em; 
+    /* background-color: #00666697;  */
+}
+
+.arenaSummary p {
+    font-size: 1.2em; 
+}
+
+
+
+
+
+
+
+
 .arenaContainerContrib1 {
     background: red; 
     border: 2px solid #006666 !important;

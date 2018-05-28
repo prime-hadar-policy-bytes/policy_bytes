@@ -7,13 +7,13 @@ let dummyTopicCache = {
     contributor1FirstName: 'Eli',
     contributor1LastName: 'Harrison',
     bio1: 'Eli has a PhD in Economics from the University of Minnesota, and has worked as a Financial Analyst at Ameriprise Financial for 15 years.',
-    photo1: '',
+    photo1: '/assets/headshot1.jpeg',
     proposal1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
     contributor2FirstName: 'Jennifer',
     contributor2LastName: 'Osters',
     bio2: 'Jennifer currently teaches Microeconomics at St. Thomas University, and has a PhD in Economic Theory from Georgetown University.',
-    photo2: '',
-    proposal2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
+    photo2: '/assets/headshot2.jpeg',
+    proposal2: 'Loulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
     keyClaims: {
         0: {
             claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
