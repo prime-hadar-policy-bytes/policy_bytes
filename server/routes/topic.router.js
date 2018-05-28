@@ -220,6 +220,7 @@ router.post('/newtopic', (req, res) => {
 
 });
 
+
 //WRITTEN BY ATTICUS
 //TOGGLES PUBLISHED STATUS IN TOPIC TABLE
 router.put('/togglePublished', (req, res) => {
@@ -241,6 +242,7 @@ router.put('/togglePublished', (req, res) => {
             res.sendStatus(500);
         })
 })
+
 
 
 //WRITTEN BY ATTICUS
