@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
+import { Panel, Jumbotron, Image, Grid, Row, Col } from 'react-bootstrap';
 
 import dummyTopicCache from './DummyData.js'
 
@@ -10,49 +10,29 @@ export default class TopicTitleContent extends Component {
     return (
       <div>
 
-          <h1>{dummyTopicCache.topicTitle}</h1>
 
             {/* INTRO */}
-            <Panel>
-            <Panel.Body>
-                <p>
-                {dummyTopicCache.topicPremise}
-                </p>
-            </Panel.Body>
-            </Panel>
+            <Jumbotron className="titleJumbotron" >
+            <Grid>
+                <Row>
+                    <Col xs={12} md={12}>
+                        {/* <hr/> */}
+                        <h1><strong>{dummyTopicCache.topicTitle}</strong></h1>
+                    </Col>
+                    <Col xs={12} md={12}>
+                    <p>{dummyTopicCache.topicPremise}</p>
+                    {/* <hr/> */}
+                    </Col>
+                </Row>
+            </Grid>
+            </Jumbotron>
 
-            <Panel>
-            <Panel.Body>
-                <h4>Common Ground</h4>
+            <Jumbotron className="commonGroundJumbotron">
+                <h1>Common Ground</h1>
                 <p>
                 "{dummyTopicCache.topicCommonGround}"
                 </p>
-            </Panel.Body>
-            </Panel>
-
-            <Panel className="contributorPanel">
-            <Panel.Body>
-                <div className="wirePhoto"></div>
-                <h3>
-                {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
-                </h3>
-                <i>
-                {dummyTopicCache.bio1}
-                </i>
-            </Panel.Body>
-            </Panel>
-
-            <Panel className="contributorPanel">
-            <Panel.Body>
-                <div className="wirePhoto"></div>
-                <h3>
-                {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
-                </h3>
-                <i>
-                {dummyTopicCache.bio2}
-                </i>
-            </Panel.Body>
-            </Panel>
+            </Jumbotron>
 
         
       </div>
