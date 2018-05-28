@@ -31,9 +31,13 @@ table {
 
 body {
     -webkit-text-size-adjust: none;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    /* background-color: rgb(228, 226, 226);  */
-    background-color: oldlace; 
+    /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+    background-color: rgba(228, 226, 226, 0.447); 
+    /* font-family: Helvetica, sans-serif;  */
+    font-family: 'Montserrat', sans-serif;
+
+    font-size: large; 
+    /* background-color: oldlace;  */
 }
 
 .instructions h1 {
@@ -84,6 +88,7 @@ input[type="submit"] {
   width: 100%;
   border-radius: 0px;
   padding: 1em 1em 0em 1em; 
+  margin-bottom: 0em; 
 }
 
 ul {
@@ -117,11 +122,6 @@ li a:hover {
 
 /* NEW CSS FRIDAY MAY 18 */
 
-.contributorPanel{
-    margin-left: 15%; 
-    width: 30%;
-    display: inline-block; 
-}
 
 .footer{
     width: 100%;
@@ -140,13 +140,6 @@ li a:hover {
     padding-bottom: 100px;
 }
 
-.wirePhoto{
-    height: 150px; 
-    width: 150px; 
-    background-color: lightgrey; 
-    display: inline-block; 
-    margin-left: 20%; 
-}
 
 .wireArchive{
     height: 150px; 
@@ -157,21 +150,7 @@ li a:hover {
 }
 
 
-.wireArenaPhoto{
-    height: 10em; 
-    width: 10em; 
-    background-color: lightgrey; 
-    margin: auto auto 2% 2%; 
-    display: inline-block;
-}
 
-.wireArenaSummary{
-    float: right; 
-    height: 10em; 
-    width: 60%; 
-    background-color: lightgrey; 
-    margin: auto 5% auto 2%; 
-}
 
 
 .wireComment{

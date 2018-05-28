@@ -4,12 +4,13 @@ import Footer from '../Footer/Footer.jsx'
 import CommentSection from './CommentSection/CommentSection.jsx'
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-import { Panel, Tab, Tabs, Button, ButtonGroup } from 'react-bootstrap';
+import { Panel, Tab, Tabs, Button, ButtonGroup, Image, Grid, Col, Row } from 'react-bootstrap';
 
 import KeyClaimPanel from './KeyClaimPanel.jsx'
 import StreamItem from './StreamItem.jsx'
 import TopicTitleContent from './TopicTitleContent.jsx'
 import StreamItemFactory from './StreamItemFactory.jsx'
+import TopicContributors from './TopicContributors.jsx'
 
 
 import dummyTopicCache from './DummyData.js'
@@ -94,17 +95,30 @@ export class TopicPage extends Component {
     }
 
 
-//DYNAMIC CSS CLASSES
-    let arenaContainer = 'arenaContainer'
-    let streamContainerClass = "streamItemsContainer"
+//CHANGING ARENA CONTENT BASED ON SELECTED CONTRIBUTOR
+    let arenaContainer = 'arenaContainer';
+    let streamContainerClass = "streamItemsContainer";
+    let arenaSummaryClass = 'arenaSummary';  
+    let arenaPicture = dummyTopicCache.photo1; 
+    let arenaProposal = dummyTopicCache.proposal1; 
+    let selectedContributor = dummyTopicCache.contributor1FirstName; 
     if (this.state.contributorSelect === 'contributor1') {
       arenaContainer = "arenaContainerContrib1"
       streamContainerClass += " contrib1"
+      arenaSummaryClass += " contrib1"
+      arenaPicture = dummyTopicCache.photo1
+      arenaProposal = dummyTopicCache.proposal1; 
+      selectedContributor = dummyTopicCache.contributor1FirstName;
     }
     if (this.state.contributorSelect === 'contributor2') {
       arenaContainer += " contrib2"
       streamContainerClass += " contrib2"
+      arenaSummaryClass += " contrib2"
+      arenaPicture = dummyTopicCache.photo2
+      arenaProposal = dummyTopicCache.proposal2; 
+      selectedContributor = dummyTopicCache.contributor2FirstName
     }
+    
 
 
 
@@ -112,11 +126,10 @@ export class TopicPage extends Component {
 
     return (
       <div>
-        <div className="wrapper">
-
         <TopicTitleContent />
+        <TopicContributors />
 
-
+        <div className="wrapper">
           <Tabs className="tabParent"
                 bsStyle="pills"
                 defaultActiveKey='contributor1' 
@@ -128,16 +141,25 @@ export class TopicPage extends Component {
             <Tab tabClassName="tabChildren" eventKey='contributor2' title={dummyTopicCache.contributor2FirstName}></Tab>
           </Tabs>
 
-
           {/* ARENA */}
+
           <Panel className="arenaContainer">
             <Panel.Body>
-              <div className="wireArenaPhoto">Contrib. Photo</div>
-              <Panel className="wireArenaSummary">
-                <Panel.Body>
-                  {dummyTopicCache.proposal1}
-                </Panel.Body>
-              </Panel>
+            <Grid>
+              <Row id="arenaTop">
+                <Col xs={12} md={3}>
+                  <Image className="arenaPhoto" src={arenaPicture} rounded height="250"/>                
+                </Col>  
+                <Col xs={12} md={9}>
+                  <Panel className={arenaSummaryClass}>
+                    <Panel.Body>
+                      <p><strong>{selectedContributor}'s Proposal: </strong></p>
+                      <p>{arenaProposal}</p>
+                    </Panel.Body>
+                  </Panel>
+                </Col>  
+              </Row>
+            </Grid>
 
               <div className="keyClaimsContainer">
                 {keyClaimsArray}
@@ -149,12 +171,6 @@ export class TopicPage extends Component {
               </div>
             </Panel.Body>
           </Panel>
-
-
-
-
-
-
 
           <CommentSection topicId={1} />
 

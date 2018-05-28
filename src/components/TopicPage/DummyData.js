@@ -1,19 +1,19 @@
 let dummyTopicCache = {
-    topicTitle: 'Lorem ipsum dolor sit amet.',
+    topicTitle: 'Minimum Wage Increase',
     topicSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam metus augue, volutpat ut hendrerit ac.',
-    topicPremise: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctorLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctorLorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
+    topicPremise: "The Restaurant Opportunities Center of Minnesota (ROC MN) is a movement led by local restaurant workers, employers, and diners striving for higher standards in our industry. In St. Paul, for over 30 years, we have had one wage for all workers and we have created a thriving restaurant scene predicated on higher wages for workers. St. Paul is a leader in the effort to support working families and we should be proud of our commitment to an equal pay structure.",
     topicReadMore: '',
-    topicCommonGround: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi finibus quis neque eu aliquam. Nulla',
+    topicCommonGround: '"The minimum wage is critical to consider."',
     contributor1FirstName: 'Eli',
     contributor1LastName: 'Harrison',
-    bio1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam metus augue, volutpat ut hendrerit ac.',
-    photo1: '',
+    bio1: 'Eli has a PhD in Economics from the University of Minnesota, and has worked as a Financial Analyst at Ameriprise Financial for 15 years.',
+    photo1: '/assets/headshot1.jpeg',
     proposal1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
     contributor2FirstName: 'Jennifer',
     contributor2LastName: 'Osters',
-    bio2: 'consectetur adipiscing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo',
-    photo2: '',
-    proposal2: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
+    bio2: 'Jennifer currently teaches Microeconomics at St. Thomas University, and has a PhD in Economic Theory from Georgetown University.',
+    photo2: '/assets/headshot2.jpeg',
+    proposal2: 'Loulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
     keyClaims: {
         0: {
             claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement

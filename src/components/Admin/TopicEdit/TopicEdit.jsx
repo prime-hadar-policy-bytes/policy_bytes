@@ -137,8 +137,8 @@ class TopicEdit extends Component {
 
           {/* SHOW STATE ON DOM */}
           {/* <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre> */}
-          <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre>
-          <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre>
+          <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
 
           <form action="" onSubmit={this.handleSubmit}>
@@ -159,7 +159,7 @@ class TopicEdit extends Component {
                 <ControlLabel>Topic Summary (for archive)</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="topicSummary"
-                  value={this.props.state.cacheEdit.topicSummary}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.topicSummary}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
               </Panel.Body>
             </Panel>
@@ -169,12 +169,12 @@ class TopicEdit extends Component {
                 <ControlLabel>Topic Premise</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="topicPremise"
-                  value={this.props.state.cacheEdit.topicPremise}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.topicPremise}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                 <ControlLabel>Link to read more?</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="topicReadMore"
-                  value={this.props.state.cacheEdit.topicReadMore}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.topicReadMore}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
               </Panel.Body>
             </Panel>
@@ -184,7 +184,7 @@ class TopicEdit extends Component {
                 <ControlLabel>Common Ground</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="topicCommonGround"
-                  value={this.props.state.cacheEdit.topicCommonGround}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.topicCommonGround}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
               </Panel.Body>
             </Panel>
@@ -196,24 +196,24 @@ class TopicEdit extends Component {
                   name="bio1"
                   type="text" 
                   name="contributor1FirstName"
-                  value={this.props.state.cacheEdit.contributor1FirstName}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.contributor1FirstName}  //<-- VALUE COMES FROM REDUX STATE 
                   />
                 <ControlLabel>Contributor 1 Last Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio1"
                   type="text" 
                   name="contributor1LastName"
-                  value={this.props.state.cacheEdit.contributor1LastName}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.contributor1LastName}  //<-- VALUE COMES FROM REDUX STATE 
                   />
                 <ControlLabel>Contributor 1 Bio</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio1"
-                  value={this.props.state.cacheEdit.bio1}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.bio1}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                 <ControlLabel>Contributor 1 Proposal Summary</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="proposal1"
-                  value={this.props.state.cacheEdit.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>
@@ -226,24 +226,24 @@ class TopicEdit extends Component {
                   name="bio1"
                   type="text" 
                   name="contributor2FirstName"
-                  value={this.props.state.cacheEdit.contributor2FirstName}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.contributor2FirstName}  //<-- VALUE COMES FROM REDUX STATE 
                   />
                 <ControlLabel>Contributor 2 Last Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio1"
                   type="text" 
                   name="contributor2LastName"
-                  value={this.props.state.cacheEdit.contributor2LastName}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.contributor2LastName}  //<-- VALUE COMES FROM REDUX STATE 
                   />
                 <ControlLabel>Contributor 2 Bio</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio2"
-                  value={this.props.state.cacheEdit.bio2}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.bio2}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                 <ControlLabel>Contributor 2 Proposal Summary</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="proposal2"
-                  value={this.props.state.cacheEdit.proposal2}  //<-- VALUE COMES FROM REDUX STATE 
+                  value={this.props.state.cacheEdit.topicEditCache.proposal2}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                 <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
               </Panel.Body>

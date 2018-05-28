@@ -1,20 +1,25 @@
 import { combineReducers } from 'redux';
 
 let emptyTopicEditCache = {
+    topicDBId: '',
     topicTitle: '',
     topicSummary: '',
     topicPremise: '',
     topicReadMore: '',
     topicCommonGround: '',
+    contributor1DbId: '',
     contributor1FirstName: '',
     contributor1LastName: '',
     bio1: '',
     photo1: '',
+    proposal1DbId: '',
     proposal1: '',
+    contributor2DbId: '',
     contributor2FirstName: '',
     contributor2LastName: '',
     bio2: '',
     photo2: '',
+    proposal2DbId: '',
     proposal2: '',
     keyClaims: {
         0: {
