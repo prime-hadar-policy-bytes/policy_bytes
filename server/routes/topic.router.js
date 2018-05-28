@@ -285,8 +285,11 @@ router.put('/toggleFeatured', (req, res) => {
 //DELETES SELECTED TOPIC
 router.delete('/deleteTopic/:id', (req, res) => {
     let topicId = req.params.id;
-    console.log('in /api/topics/deleteTopic', topicId);
-    let queryText = `DELETE from topic WHERE id = $1;`
+    
+    //queryText deletes the topic with the same topic id as topicId;
+    //this will delete everything associated with that topic except for 
+    //the contributors
+    let queryText = `DELETE FROM "topic" WHERE id = $1;`
     pool.query(queryText, [topicId])
         .then((result) => {
             console.log('successful DELETE /api/topic/deleteTopic');
