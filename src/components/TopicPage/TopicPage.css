@@ -13,7 +13,7 @@ h1{
     width: 100% !important; 
     /* background-color: inherit !important;  */
     background-color: white !important; 
-    margin: 0px;
+    margin: 0px 0px;
     padding-left: 8em; 
     padding-right: 8em; 
     font-family: 'Montserrat', sans-serif;
@@ -151,9 +151,25 @@ h1{
 
 .keyClaimPanel{
     width: 90%; 
-    background-color: lightgrey; 
+    background-color: lightgrey !important; 
     display: inline-block; 
     padding-top: 1% !important;  
+}
+
+.keyClaimFooter{
+    background-color: lightgrey !important; 
+    border: none; 
+}
+
+.keyClaimFooterLikes{
+    float:right; 
+    /* margin-top: -.5em;  */
+    margin-right: 1em; 
+}
+
+.keyClaimFooterButtons{
+    margin-top: -.7em; 
+    margin-right: 1em; 
 }
 
 .locked{  

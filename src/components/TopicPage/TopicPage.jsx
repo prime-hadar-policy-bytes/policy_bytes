@@ -130,8 +130,6 @@ export class TopicPage extends Component {
         <TopicContributors />
 
         <div className="wrapper">
-
-
           <Tabs className="tabParent"
                 bsStyle="pills"
                 defaultActiveKey='contributor1' 
@@ -142,7 +140,6 @@ export class TopicPage extends Component {
             <Tab tabClassName="tabChildren"  eventKey='contributor1' title={dummyTopicCache.contributor1FirstName}></Tab>
             <Tab tabClassName="tabChildren" eventKey='contributor2' title={dummyTopicCache.contributor2FirstName}></Tab>
           </Tabs>
-
 
           {/* ARENA */}
 
@@ -160,11 +157,9 @@ export class TopicPage extends Component {
                       <p>{arenaProposal}</p>
                     </Panel.Body>
                   </Panel>
-                
                 </Col>  
               </Row>
             </Grid>
-
 
               <div className="keyClaimsContainer">
                 {keyClaimsArray}
@@ -176,12 +171,6 @@ export class TopicPage extends Component {
               </div>
             </Panel.Body>
           </Panel>
-
-
-
-
-
-
 
           <CommentSection topicId={1} />
 
