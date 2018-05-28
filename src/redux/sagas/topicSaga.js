@@ -106,6 +106,19 @@ function* setNewTopic(action){
     }
 }
 
+//updates topic admin edited
+function* updateTopic(action){
+    try{
+        yield call(axios.put, `/api/topic/updatetopic/${action.payload}`, action.payload)
+        yield put({
+            type: 'FETCH_ALL_TOPICS'
+        })
+
+    }catch(error){
+        console.log('Error in updating topic: ', error);
+    }
+}
+
 //WRITTEN BY ATTICUS
 function* togglePublishedSaga(action) {
     try {
