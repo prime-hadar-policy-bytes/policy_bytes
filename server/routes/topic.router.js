@@ -302,8 +302,9 @@ router.delete('/deleteTopic/:id', (req, res) => {
 //FETCHES SELCTED TOPICS INFO TO POPULATE TOPICEDIT PAGE (BASED ON URL)
 router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
     let topicId = req.params.id;
-    //main object being added to and returned below.
+    //selectedTopicToSend is the master object exported at the end of the async function.
     let selectedTopicToSend = {};
+    //preserves contributor ids globally.
     let contributor1Id = '';
     let contributor2Id = '';
 
@@ -333,7 +334,6 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             let queryText2 = `SELECT id, first_name, last_name, bio, photo_url from contributor where id = $1 OR id = $2;`;
             const contributorResult = await client.query(queryText2, [contributor1Id, contributor2Id]);
 
-            // console.log('successful GET CONTRIBUTORS in /api/topics/editTopicInfo result: ', contributorResult.rows);
             selectedTopicToSend = {
                 ...selectedTopicToSend, contributor1DbId: contributorResult.rows[0].id,
                 contributor1FirstName: contributorResult.rows[0].first_name,
@@ -344,7 +344,8 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 contributor2FirstName: contributorResult.rows[1].first_name,
                 contributor2LastName: contributorResult.rows[1].last_name,
                 bio2: contributorResult.rows[1].bio,
-                photo2: contributorResult.rows[1].photo_url
+                photo2: contributorResult.rows[1].photo_url,
+                keyClaims: ''
             };
 
             let queryText3 = `SELECT proposal, id from proposal WHERE id = $1;`;
@@ -354,8 +355,6 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 ...selectedTopicToSend, proposal1: proposal1Result.rows[0].proposal,
                 proposal1DbId: proposal1Result.rows[0].id
             }
-
-            // console.log('successful GET PROPOSAL1 in /api/topics/editTopicInfo result: ', proposal1Result.rows);
 
             let queryText4 = `SELECT proposal, id from proposal WHERE id = $1;`;
             const proposal2Result = await client.query(queryText4, [contributor2Id]);
@@ -368,56 +367,58 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             let queryText5 = `SELECT * from key_claim WHERE topic_id = $1 ORDER BY claim_order;`;
             const keyClaimResult = await client.query(queryText5, [topicId]);
 
+            //instantiate empty object to hold all key claims, to be added to selectedTopicToSend 
+            allKeyClaimsObject = {};
+
             for (let keyClaim of keyClaimResult.rows) {
                 let queryText6 = `SELECT * from stream WHERE key_claim_id = $1 ORDER BY stream_order;`;
                 let streamResult = await client.query(queryText6, [keyClaim.id]);
 
-                // console.log('this is streamResult', streamResult.rows);//CORRECT HERE
-
+                //iterates over all streams from dB and packages them as a single object.
                 let streamToSpread = {};
 
                 for (let stream of streamResult.rows) {
-
-                    streamToSpread = {
-                        ...streamToSpread, [stream.stream_order]: {
-                            streamDbId: stream.id,
-                            streamContributor: 'contributor1',
-                            streamComment: stream.stream_comment,
-                            streamEvidence: stream.stream_evidence
+                    if (stream.contributor_id === contributor1Id) {
+                        streamToSpread = {
+                            ...streamToSpread, [stream.stream_order]: {
+                                streamDbId: stream.id,
+                                streamContributor: 'contributor1',
+                                streamComment: stream.stream_comment,
+                                streamEvidence: stream.stream_evidence
+                            }
+                        }
+                    } else {
+                        streamToSpread = {
+                            ...streamToSpread, [stream.stream_order]: {
+                                streamDbId: stream.id,
+                                streamContributor: 'contributor2',
+                                streamComment: stream.stream_comment,
+                                streamEvidence: stream.stream_evidence
+                            }
                         }
                     }
-                    console.log('this is streamToSpread', streamToSpread);
                 }
+
+                //adds objects to allKeyClaimsObject
+                if (keyClaim.contributor_id === contributor1Id) {
+                    allKeyClaimsObject[keyClaim.claim_order] = {
+                        claimDbId: keyClaim.id,
+                        claimContributor: 'contributor1',
+                        keyClaim: keyClaim.claim,
+                    }
+                } else {
+                    allKeyClaimsObject[keyClaim.claim_order] = {
+                        claimDbId: keyClaim.id,
+                        claimContributor: 'contributor2',
+                        keyClaim: keyClaim.claim,
+
+                    }
+                }
+                //attaches streamData to end of each keyClaim object
+                allKeyClaimsObject[keyClaim.claim_order].streamData = streamToSpread;
             }
-
-
-            // let keyClaimObject = {};
-
-            // for (let keyClaim of keyClaimResult.rows) {
-            //     if (keyClaim.contributor_id === contributor1Id) {
-            //         keyClaimObject = {
-            //             ...keyClaimObject,
-            //             [keyClaim.claim_order]: {
-            //                 claimDbId: keyClaim.id,
-            //                 claimContributor: 'contributor1',
-            //                 keyClaim: keyClaim.claim,
-            //                 streamData: ''
-            //             }
-            //         }
-            //     } else {
-            //         keyClaimObject = {
-            //             ...keyClaimObject,
-            //             [keyClaim.claim_order]: {
-            //                 claimDbId: keyClaim.id,
-            //                 claimContributor: 'contributor2',
-            //                 keyClaim: keyClaim.claim,
-            //                 streamData: ''
-            //             }
-            //         }
-            //     }
-            // }
-
-            // console.log(keyClaimObject);
+ 
+            selectedTopicToSend.keyClaims = allKeyClaimsObject;
 
             await client.query('COMMIT');
             res.send(selectedTopicToSend);
@@ -443,26 +444,6 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
     })
 
     console.log('in /api/topics/editTopicInfo, ID:', topicId);
-
-
-    // let queryText = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, contributor1_id, contributor2_id,
-    // "topic"."id" as "topic_id" FROM topic 
-    // WHERE topic.id = $1;`;
-    // pool.query(queryText, [topicId])
-    //     .then((result) => {
-    //         //Package Topic in selectedTopicToSend
-    //         selectedTopicToSend = {
-    //             topicTitle: result.rows[0].topic_title,
-    //             topicSummary: result.rows[0].archive_summary,
-    //             topicPremise: result.rows[0].premise,
-    //             topicReadMore: '',
-    //             topicCommonGround: result.rows[0].common_ground
-    //         };
-    //         contributor1Id = result.rows[0].contributor1_id;
-    //         contributor2Id = result.rows[0].contributor2_id;
-
-
-
 })
 
 
