@@ -114,8 +114,8 @@ export class TopicPage extends Component {
     return (
       <div>
         <TopicTitleContent />
-        <div className="wrapper">
         <TopicContributors />
+        <div className="wrapper">
 
 
           <Tabs className="tabParent"

@@ -8,14 +8,15 @@ import dummyTopicCache from './DummyData.js'
 export default class TopicContributors extends Component {
   render() {
     return (
-      <div>
+      <div className="contributorsSection">
             <Grid>
                 <Row>
                     <Col xs={12} md={6}>
-                        <Panel className="contributorPanel contrib1">
+                        <div >
+                        <Panel className="contributorPanel ">
                             <Panel.Body>
                                 <Col xs={4} md={4}>
-                                    <Image className="contributorPhoto" src="/assets/headshot1.jpeg" rounded />
+                                    <Image className="contributorPhoto contrib1" src="/assets/headshot1.jpeg" rounded responsive/>
                                 </Col>
                                 <Col xs={8} md={8}>
                                     <div className="contributorText">
@@ -31,10 +32,12 @@ export default class TopicContributors extends Component {
                                 </Col>
                             </Panel.Body>
                         </Panel>
+                        </div>
                     </Col>
 
                     <Col xs={12} md={6}>
-                        <Panel className="contributorPanel contrib2">
+                        <div >
+                        <Panel className="contributorPanel ">
                             <Panel.Body>
                                 <Col xs={8} md={8}>
                                     <div className="contributorText">
@@ -49,13 +52,14 @@ export default class TopicContributors extends Component {
                                     </div>
                                 </Col>
                                 <Col  xs={4} md={4}>
-                                    <Image className="contributorPhoto" src="/assets/headshot2.jpeg" rounded />
+                                    <Image className="contributorPhoto contrib2" src="/assets/headshot2.jpeg" rounded responsive/>
                                 </Col>
                             </Panel.Body>
+
                         </Panel>
+                        </div>
                     </Col>
                 </Row>
-
             </Grid>
 
         
