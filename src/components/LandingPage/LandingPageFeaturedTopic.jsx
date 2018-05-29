@@ -29,10 +29,10 @@ export default class LandingPageFeaturedTopic extends Component {
         {/* CONTRIBUTORS */}
                     <Row>
                           <div >
-                                  <Col xs={4} md={2}>
-                                      <img className="featuredTopicPhotoLeft contrib1" src="/assets/headshot1.jpeg" rounded/>
+                                  <Col xs={12} md={12} lg={2}>
+                                      <img className="featuredTopicPhotoLeft contrib1" src="/assets/headshot1.jpeg"/>
                                   </Col>
-                                  <Col xs={8} md={4}>
+                                  <Col xs={12} md={12} lg={4}>
                                       <div className="contributorText">
                                           <h3>
                                               <strong>
@@ -47,7 +47,7 @@ export default class LandingPageFeaturedTopic extends Component {
                           </div>
 
                           <div >
-                                  <Col xs={8} md={4}>
+                                  <Col xs={12} md={12} lg={4}>
                                       <div className="contributorText">
                                               <h3>
                                                   <strong>
@@ -59,8 +59,8 @@ export default class LandingPageFeaturedTopic extends Component {
                                               </p>
                                       </div>
                                   </Col>
-                                  <Col  xs={4} md={2}>
-                                      <img className="featuredTopicPhotoRight contrib2" src="/assets/headshot2.jpeg" rounded/>
+                                  <Col  xs={12} md={12} lg={2}>
+                                      <img className="featuredTopicPhotoRight contrib2" src="/assets/headshot2.jpeg"/>
                                   </Col>
                           </div>
                   </Row>

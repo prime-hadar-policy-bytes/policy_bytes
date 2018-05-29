@@ -24,30 +24,29 @@ export class LandingPage extends Component {
             <Grid>
                   <div className="landingJumbotronInner">
                     <Row>
-                          <Col xs={12} md={12}>
-                              {/* <hr/> */}
+                          <Col xs={12} s={12} md={12} lg={12}>
                               <h1><strong>Our Format</strong></h1>
                           </Col>
                     </Row>
                     <Row>
-                          <Col xs={12} md={12}>
+                          <Col xs={12} s={12} md={12} lg={12}>
                           <p>
                               Designed to facilitate better debate. 
                               You can scan arguments and cut to the chase examining evidence in 
                               these curated conversations. 
                               Creating intentional dialogue that focuses on individual argumentation.
                           </p>
-                          {/* <hr/> */}
                           </Col>
                     </Row>
                   </div>
             </Grid>
           </Jumbotron>
 
-          <div className="dottedLine"></div>
-
+            <div className="dottedLine"></div>
 
             <LandingPageFeaturedTopic />
+
+            <div className="dottedLine"></div>
 
             <LandingPageArchive /> 
 
