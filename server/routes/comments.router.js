@@ -25,15 +25,64 @@ router.get('/getGeneralcomments', (req, res) => {
 
 router.post('/addComment', (req, res) => {
     console.log('in api/comments/addComment');
-    
-    if (req.isAuthenticated()) {//in order to post an item, user must be signed in
-    let queryText = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved", "order") VALUES ($1, $2, $3, $4, $5);`;
-    pool.query(queryText, [req.body.personId, req.body.topicId, req.body.comment, req.body.approved, req.body.order]).then((result) => {
-        res.sendStatus(201);
-    }).catch((err) => {
-        console.log(err);
-        res.sendStatus(500)
-    })
+
+    if (req.isAuthenticated()) {
+
+        // let queryText = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved") VALUES ($1, $2, $3, $4);`;
+        // pool.query(queryText, [req.body.personId, req.body.topicId, req.body.comment, req.body.approved, req.body.order]).then((result) => {
+        //     res.sendStatus(201);
+        // }).catch((err) => {
+        //     console.log(err);
+        //     res.sendStatus(500)
+        // })
+        (async () => {
+            const client = await pool.connect();
+
+            try {
+                await client.query('BEGIN');
+
+                //begins series of async database SELECTS to add to selectedTopicToSend
+                let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved") VALUES ($1, $2, $3, $4) RETURNING id;`;
+                const commentId = await client.query(queryText1, [req.body.personId, req.body.topicId, req.body.comment, req.body.approved]);
+
+                console.log(commentId.rows[0].id)
+
+                //concatenates previous comment's order plus current comment id to make "order" and sends it to the database
+
+                let orderToSend;
+                
+                if (req.body.lastOrder === '') {
+                orderToSend = commentId.rows[0].id
+                } else {
+                orderToSend = req.body.lastOrder + '.' + commentId.rows[0].id;
+                }
+                let queryText2 = `UPDATE comments_general SET "order" = $1 WHERE "id" = $2;`;
+                await client.query(queryText2, [orderToSend, commentId.rows[0].id]);
+
+
+                await client.query('COMMIT');
+                res.sendStatus(201);
+
+            } catch (e) {
+
+                //checks for errors at any point within the try block; if errors are found,
+                //all the data is cleared to prevent data corruption
+                console.log('ROLLBACK', e);
+                await client.query('ROLLBACK');
+                throw e;
+            } finally {
+
+                //allows res.sendStatus(201) to be sent
+                client.release();
+            }
+
+            //if an error occurs in posting the game info to the database, the error will
+            //appear in the console log
+        })().catch((error) => {
+            console.log('CATCH', error);
+            res.sendStatus(500);
+        })
+
     } else {
         res.sendStatus(403);
     }
