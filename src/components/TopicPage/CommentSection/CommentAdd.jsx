@@ -14,51 +14,90 @@ class CommentAdd extends Component {
             referenceText: '',
             typeRef: '',
             itemId: '',
-            placeholder: 'Join the conversation...',
+            placeholder: '',
             warning: '',
             comment: '',
             personId: '',
             topicId: '',
-            approved: true
+            approved: true,
+            lastOrder: ''
         }
     }
 
-    componentDidMount = () => {
+    componentWillMount= () => {
+        if (this.props.isReply) {
+            this.setState ({
+                placeholder: 'Write a reply...'
+            })
+        } else {
+            this.setState ({
+                placeholder: 'Join the conversation...'
+            })
+        }
+    }
 
+    componentWillReceiveProps = (nextProps) => {
+        if (nextProps.comments.commentsGeneral !== this.props.comments.commentsGeneral && !this.props.isReply) {
+            this.setState({
+                referenceText: '',
+                typeRef: '',
+                itemId: '',
+                placeholder: 'Join the conversation...',
+                warning: '',
+                comment: '',
+                personId: '',
+                topicId: '',
+                approved: true,
+                lastOrder: ''
+            }) 
+        } else if (nextProps.comments.commentsGeneral !== this.props.comments.commentsGeneral && this.props.isReply) {
+            this.setState({
+                referenceText: '',
+                typeRef: '',
+                itemId: '',
+                placeholder: 'Write a reply...',
+                warning: '',
+                comment: '',
+                personId: '',
+                topicId: '',
+                approved: true,
+                lastOrder: ''
+            }) 
+        }
     }
 
     handleSubmit = (event) => {
         // event.preventDefault(); 
-        if (this.state.comment != '') {
+        if ((this.state.comment != '') && !this.props.isReply) {
             this.setState({
                 personId: this.props.user.userInfo.id,
                 topicId: this.props.topicId,
-                approved: true
+                approved: true,
+                lastOrder: ''
             }, () => {
                 this.props.dispatch({
                     type: 'SET_NEW_COMMENT',
                     payload: this.state,
                 })
             });
-            //TO-DO Correct for reset in react lifecycle
-            // this.setState({
-            //     comment: ''
-            // });
-        } else {
+        } else if ((this.state.comment != '') && this.props.isReply) {
             this.setState({
-                warning: `Did you want to write something?`,
-                placeholder: 'Submitted!'
+                personId: this.props.user.userInfo.id,
+                topicId: this.props.topicId,
+                approved: true,
+                lastOrder: this.props.lastOrder
+            }, () => {
+                this.props.dispatch({
+                    type: 'SET_NEW_COMMENT',
+                    payload: this.state,
+                })
+            });
+        }else {
+            this.setState({
+                warning: `Did you want to write something?`
             });
         }
     }
-
-    // handleTextChange = (event) => {
-    //     this.props.dispatch({
-    //         type: 'SET_NEW_COMMENT',
-    //         payload: this.state,
-    //     })
-    // }
-
 
     handleTextChange = (event) => {
         this.setState({

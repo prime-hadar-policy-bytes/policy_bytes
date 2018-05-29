@@ -3,66 +3,59 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 
-//gets all contributors from database
+//gets all comments from database
 
 router.get('/getGeneralcomments', (req, res) => {
 
-    // if(req.isAuthenticated()){
-//TO-DO write a GET that grabs user's picture URL
-    const queryText = `SELECT comments_general.id, comments_general.date, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.date;`
+    const queryText = `SELECT comments_general.id, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.order;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText).then((result) => {
-    //all of the comments are stored in result.rows; therefore we will send back
-    //result.rows
+        //all of the comments are stored in result.rows; therefore we will send back
+        //result.rows
         res.send(result.rows)
-    //if there was an error in getting the comments from the database,
-    //the error will be displayed in the console log
+        //if there was an error in getting the comments from the database,
+        //the error will be displayed in the console log
     }).catch((error) => {
         console.log('Error in getting comments_general: ', error);
-        
-    })
-    // } else{
 
-    //     //if req.isAuthenticated() is false, the forbidden error will appear
-    //     //on the webpage
-    //     res.sendStatus(403)
-    // }
+    })
+
 });
 
 router.post('/addComment', (req, res) => {
     console.log('in api/comments/addComment');
-    // console.log(req.body);
-    // console.log('is authenticated?', req.isAuthenticated());
-    // console.log('user', req.user);
-    // if (req.isAuthenticated()) {//in order to post an item, user must be signed in
-        let queryText = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved") VALUES ($1, $2, $3, $4);`;
-        pool.query(queryText, [req.body.personId, req.body.topicId, req.body.comment, req.body.approved]).then((result) => { res.sendStatus(201);
-        }).catch((err) => {
-            console.log(err);
-            res.sendStatus(500)
-        })
-    // } else {
-    //     res.sendStatus(403);
-    // }
+    
+    if (req.isAuthenticated()) {//in order to post an item, user must be signed in
+    let queryText = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved", "order") VALUES ($1, $2, $3, $4, $5);`;
+    pool.query(queryText, [req.body.personId, req.body.topicId, req.body.comment, req.body.approved, req.body.order]).then((result) => {
+        res.sendStatus(201);
+    }).catch((err) => {
+        console.log(err);
+        res.sendStatus(500)
+    })
+    } else {
+        res.sendStatus(403);
+    }
 });
 
 
 router.delete('/deleteComment/:id', (req, res) => {
     //TO-DO add isAuthenticated AND status === 2 for Admin access
-        // if(req.isAuthenticated && req.user.status === 2){
-    let commentId = req.params.id; 
-    console.log('in /api/comments/deleteComment', commentId);
-    let queryText = `DELETE from comments_general WHERE id = $1;`
-    pool.query(queryText, [commentId])
-    .then((result)=> {
-        console.log('successful DELETE /api/comments/deleteComment');
-        res.sendStatus(200);
-    })
-    .catch((err)=> {
-        console.log('error in DELETE /api/comments/deleteComment');
-        res.sendStatus(500); 
-    })
+    if (req.isAuthenticated && req.user.status === 2) {
+        let commentId = req.params.id;
+        console.log('in /api/comments/deleteComment', commentId);
+        let queryText = `DELETE from comments_general WHERE id = $1;`
+        pool.query(queryText, [commentId])
+            .then((result) => {
+                console.log('successful DELETE /api/comments/deleteComment');
+                res.sendStatus(200);
+            })
+            .catch((err) => {
+                console.log('error in DELETE /api/comments/deleteComment');
+                res.sendStatus(500);
+            })
+    }
 })
 
 

@@ -162,6 +162,10 @@ li a:hover {
     float: right; 
 }
 
+.commentButton {
+    margin: 5px
+}
+
 .wireStreamInput{
     width: 90%; 
     margin-left: 5%; 
