@@ -109,7 +109,7 @@ function* setNewTopic(action){
 //updates topic admin edited
 function* updateTopic(action){
     try{
-        yield call(axios.put, `/api/topic/updatetopic/${action.payload}`, action.payload)
+        yield call(axios.put, '/api/topic/updatetopic', action.payload)
         yield put({
             type: 'FETCH_ALL_TOPICS'
         })
@@ -189,6 +189,7 @@ function* topicSaga() {
     yield takeLatest('FETCH_NEW_TOPIC_LANDING_PAGE', fetchFeaturedTopicLanding)
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
     yield takeLatest('SET_NEW_TOPIC', setNewTopic)
+    yield takeLatest('UPDATE_TOPIC', updateTopic)
 
     //ATTICUS ADDED:
     yield takeEvery('TOGGLE_PUBLISHED', togglePublishedSaga)

@@ -26,6 +26,7 @@ class TopicEdit extends Component {
 
   populateEditCache = () => {
     let editTopicId = this.props.match.params.id; 
+    
     if (editTopicId) {
       this.props.dispatch({
         type: 'FETCH_EDIT_TOPIC_INFO',
@@ -73,13 +74,26 @@ class TopicEdit extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     if (debug){console.log('form submit clicked, contents:', this.state);}
-    this.props.dispatch({
-      type: 'SET_NEW_TOPIC',
-      payload: this.props.state.cacheEdit.topicEditCache,
-    })
-    this.setState({
-      submitAlert: true
-    })
+
+    let editTopicId = this.props.match.params.id; 
+    
+    if (editTopicId) {
+      this.props.dispatch({
+        type: 'UPDATE_TOPIC',
+        payload: this.props.state.cacheEdit.topicEditCache,
+      })
+      this.setState({
+        submitAlert: true
+      })
+    } else {
+      this.props.dispatch({
+        type: 'SET_NEW_TOPIC',
+        payload: this.props.state.cacheEdit.topicEditCache,
+      })
+      this.setState({
+        submitAlert: true
+      })
+    }
     ///SOME INDICATOR HERE
 
   }
