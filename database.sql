@@ -76,6 +76,7 @@ CREATE TABLE "comments_stream" (
     "topic_id" INT REFERENCES "topic",
     "stream_id" INT REFERENCES "stream",
     "comment" VARCHAR(5000),
+    "order" VARCHAR(5000),
     "approved" boolean default false
 ); 
 
@@ -86,6 +87,7 @@ CREATE TABLE "comments_general" (
     "person_id" INT REFERENCES "person",
     "topic_id" INT REFERENCES "topic",
     "comment" VARCHAR(5000),
+    "order" VARCHAR(5000),
     "approved" boolean default false
 );
 
@@ -97,9 +99,9 @@ CREATE TABLE "comments_key_claim" (
     "topic_id" INT REFERENCES "topic",
     "key_claim_id" INT REFERENCES "key_claim",
     "comment" VARCHAR(5000),
+    "order" VARCHAR(5000),
     "approved" boolean default false
 );
-
 
 CREATE TABLE "proposal" (
     "id" SERIAL PRIMARY KEY,
@@ -107,9 +109,6 @@ CREATE TABLE "proposal" (
     "contributor_id" INT REFERENCES "contributor",
     "proposal" VARCHAR(1000)
 );
-
-
-
 
 CREATE TABLE "like" ( 
     "id" SERIAL PRIMARY KEY,
@@ -119,9 +118,9 @@ CREATE TABLE "like" (
     "comments_key_claim_id" INT REFERENCES "comments_key_claim",
     "comments_stream_id" INT REFERENCES "comments_stream",
     "comments_general_id" INT REFERENCES "comments_general",
-    "proposal_id" INT REFERENCES "proposal"
+    "proposal_id" INT REFERENCES "proposal",
+     "count" INT
 );
-
 
 CREATE TABLE "love" (
     "id" SERIAL PRIMARY KEY,
@@ -134,16 +133,11 @@ CREATE TABLE "love" (
     "proposal_id" INT REFERENCES "proposal"
 );
 	
-
-	
 INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
 VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt', 'byrne', 1);
   
 INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
-VALUES ('kerry', 'kerry5', 'kerry_byrne34', 'kerry_byrne', 'url', 'kerry@mail', 'kerry', 'byrne', 2);
-
-   
-  
+VALUES ('kerry', 'kerry5', 'kerry_byrne34', 'kerry_byrne', 'url', 'kerry@mail', 'kerry', 'byrne', 2); 
       
 INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "featured", "archive_summary", "icon_url") 
 VALUES ('guns', 'more guns', 'people should be able to own', false,
@@ -251,7 +245,6 @@ UPDATE topic SET published = NOT published WHERE id = 2;
 UPDATE topic SET featured = FALSE; 
 UPDATE topic SET featured = TRUE WHERE id = 2;
 
-
 --GET for Topic Page
 SELECT "topic"."id" as "topic.id", topic.topic_title, topic.premise, topic.common_ground, "contributor"."id" as "contributor.id", contributor.first_name, contributor.last_name, contributor.bio, contributor.photo_url, "key_claim"."id" as "key_claim.id", key_claim.claim, "proposal"."id" as "proposal.id", proposal.proposal, "stream"."id" as "stream.id", "stream"."text" as "stream.text", stream.evidence
 FROM key_claim
@@ -259,9 +252,6 @@ JOIN topic ON key_claim.topic_id = topic.id
 JOIN contributor ON key_claim.contributor_id = contributor.id
 JOIN proposal ON proposal.contributor_id = contributor.id
 JOIN stream ON stream.contributor_id = contributor.id;
-
-
-
 
 --GET for landing Page feature page
 SELECT "topic"."id" as "topic.id", topic.topic_title, topic.published_date, topic.published, topic.featured,

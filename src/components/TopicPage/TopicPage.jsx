@@ -172,7 +172,7 @@ export class TopicPage extends Component {
             </Panel.Body>
           </Panel>
 
-          <CommentSection topicId={1} />
+          <CommentSection topic_id={1} />
 
           
           <Panel>
