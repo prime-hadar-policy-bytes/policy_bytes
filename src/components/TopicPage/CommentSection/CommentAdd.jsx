@@ -4,6 +4,9 @@ import { USER_ACTIONS } from '../../../redux/actions/userActions';
 
 import { Panel, Tab, Tabs, Button, ButtonGroup, Glyphicon, Form, FormGroup, ControlLabel, FormControl, Image } from 'react-bootstrap';
 
+import './CommentSection.css'
+
+
 class CommentAdd extends Component {
 
     constructor() {
@@ -15,7 +18,6 @@ class CommentAdd extends Component {
             typeRef: '',
             itemId: '',
             placeholder: '',
-            warning: '',
             comment: '',
             personId: '',
             topicId: '',
@@ -24,13 +26,13 @@ class CommentAdd extends Component {
         }
     }
 
-    componentWillMount= () => {
+    componentWillMount = () => {
         if (this.props.isReply) {
-            this.setState ({
+            this.setState({
                 placeholder: 'Write a reply...'
             })
         } else {
-            this.setState ({
+            this.setState({
                 placeholder: 'Join the conversation...'
             })
         }
@@ -43,26 +45,24 @@ class CommentAdd extends Component {
                 typeRef: '',
                 itemId: '',
                 placeholder: 'Join the conversation...',
-                warning: '',
                 comment: '',
                 personId: '',
                 topicId: '',
                 approved: true,
                 lastOrder: ''
-            }) 
+            })
         } else if (nextProps.comments.commentsGeneral !== this.props.comments.commentsGeneral && this.props.isReply) {
             this.setState({
                 referenceText: '',
                 typeRef: '',
                 itemId: '',
                 placeholder: 'Write a reply...',
-                warning: '',
                 comment: '',
                 personId: '',
                 topicId: '',
                 approved: true,
                 lastOrder: ''
-            }) 
+            })
         }
     }
 
@@ -90,18 +90,22 @@ class CommentAdd extends Component {
                 this.props.dispatch({
                     type: 'SET_NEW_COMMENT',
                     payload: this.state,
-                })
+                });
+                this.props.showAddCommentShown();
             });
-        }else {
+        } else {
             this.setState({
-                warning: `Did you want to write something?`
+                placeholder: `Did you want to write something?`
             });
         }
     }
 
+    handleClose = () => {
+        this.props.showAddCommentShown();
+    }
+
     handleTextChange = (event) => {
         this.setState({
-            warning: '',
             comment: event.target.value
         })
     }
@@ -110,16 +114,17 @@ class CommentAdd extends Component {
 
         let fbPicture = this.props.user.userInfo && this.props.user.userInfo.fbPicture;
         return (
-            <Panel className="wireComment">
+            <Panel className="addCommentPanel">
                 <Panel.Body>
                     <Form>
                         <FormGroup controlId="formControlsTextarea">
-                            <span style={{ 'padding': '10px' }}><Image rounded src={   fbPicture} /></span>
-                            <div><p>{this.state.warning}</p></div>
+                            <span><Image style={{'height': '50px', 'width': '50px'}} circle src={fbPicture} /></span>
                             <FormControl style={{ 'margin': '10px' }} componentClass="textarea" value={this.state.comment} onChange={this.handleTextChange} placeholder={this.state.placeholder} />
                         </FormGroup>
                     </Form>
-                    <div><Button onClick={this.handleSubmit}>Submit</Button></div>
+                    <div><Button style={{'margin-right': '10px'}} onClick={this.handleSubmit}>Submit</Button>
+                        {this.props.isReply ? <Button onClick={this.handleClose} >Cancel</Button> : null }
+                    </div>
                 </Panel.Body>
             </Panel>
         )

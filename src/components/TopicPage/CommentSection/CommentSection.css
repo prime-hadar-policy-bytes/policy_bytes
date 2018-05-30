@@ -1,0 +1,91 @@
+.addCommentPanel{
+    width: 80%; 
+    margin: 1em auto; 
+}
+
+.commentPanelWrapper {
+    width: 80% !important; 
+    margin: 1em auto; 
+}
+
+.commentPanel1 {
+    width: 100% !important; 
+    margin-top: 1em auto; 
+    margin-bottom: 1em auto; 
+    margin-left: 0em; 
+    /* border: none;  */
+    box-shadow: none; 
+    /* background-color: yellow; */  
+}
+
+.commentPanel2 {
+    width: 100% !important; 
+    margin-top: 1em auto; 
+    margin-bottom: 1em auto; 
+    margin-left: 5em; 
+    /* border: none;  */
+    box-shadow: none; 
+    /* background-color: yellow; */  
+}
+
+.commentPanel3 {
+    width: 100% !important; 
+    margin-top: 1em auto; 
+    margin-bottom: 1em auto; 
+    margin-left: 10em; 
+    /* border: none;  */
+    box-shadow: none; 
+    /* background-color: yellow; */  
+}
+
+.commentPanel4 {
+    width: 100% !important; 
+    margin-top: 1em auto; 
+    margin-bottom: 1em auto; 
+    margin-left: 15em; 
+    /* border: none;  */
+    box-shadow: none; 
+    /* background-color: yellow; */  
+}
+
+.commentPic {
+    /* border: 1px solid red;  */
+    display: inline-block; 
+    margin-top: 1em;
+    float: left;
+}
+
+.commentComment {
+    margin-top: 1em;
+    width: 70% !important; 
+    display: inline-block; 
+
+}
+
+.userName {
+    color: #337AB7;
+    margin-left: 0em;
+    margin-bottom: 1em;
+}
+
+.commentTextWrapper {
+    margin-top: -0.5em;
+}
+
+.commentText {
+    font-size: 0.8em;
+    margin-left: 1.5em;
+}
+
+.commentButtons{
+    float: right; 
+    display: inline-block;
+    margin-bottom: -1em;
+}
+
+.commentButton {
+    margin: 5px
+}
+
+
+

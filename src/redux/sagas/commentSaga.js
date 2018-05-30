@@ -1,16 +1,40 @@
 import { call, put, takeLatest, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 
-function* setNewComment(action) {
+function* setNewGeneralComment(action) {
     try {
         yield call (axios.post, '/api/comments/addComment', action.payload)
         yield put ({
             type: 'FETCH_GENERAL_COMMENTS'
         })
     } catch (error) {
-        console.log('Error setNewComment Saga: ', error)
+        console.log('Error setNewGeneralComment Saga: ', error)
     }
 }
+
+function* likeGeneralComment(action) {
+    try {
+        yield call (axios.put, `/api/comments/likeincrement/${action.payload.id}`, action.payload)
+        yield put ({
+            type: 'FETCH_GENERAL_COMMENTS'
+        })
+    } catch (error) {
+        console.log('Error likeGeneralComment Saga: ', error)
+    }
+}
+
+function* unlikeGeneralComment(action) {
+    try {
+        yield call (axios.put, `/api/comments/likedecrement/${action.payload.id}`, action.payload)
+        yield put ({
+            type: 'FETCH_GENERAL_COMMENTS'
+        })
+    } catch (error) {
+        console.log('Error likeGeneralComment Saga: ', error)
+    }
+}
+
+
 
 function* deleteGeneralComment(action) {
     try {
@@ -92,11 +116,13 @@ function* fetchStreamComments(action){
 
 function* commentSaga() {
 
-    yield takeLatest('SET_NEW_COMMENT', setNewComment)
+    yield takeLatest('SET_NEW_COMMENT', setNewGeneralComment)
     yield takeLatest('FETCH_GENERAL_COMMENTS', fetchGeneralComments)
     yield takeLatest('FETCH_KEY_CLAIM_COMMENTS', fetchKeyClaimComments)
     yield takeLatest('FETCH_STREAM_COMMENTS', fetchStreamComments)
     yield takeLatest('DELETE_GENERAL_COMMENT', deleteGeneralComment)
+    yield takeLatest('LIKE_GENERAL_COMMENT', likeGeneralComment)
+    yield takeLatest('UNLIKE_GENERAL_COMMENT', unlikeGeneralComment)
 
   }
 

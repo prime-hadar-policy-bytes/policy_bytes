@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.get('/getGeneralcomments', (req, res) => {
 
-    const queryText = `SELECT comments_general.id, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.order;`
+    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.order;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText).then((result) => {
@@ -50,11 +50,11 @@ router.post('/addComment', (req, res) => {
                 //concatenates previous comment's order plus current comment id to make "order" and sends it to the database
 
                 let orderToSend;
-                
+
                 if (req.body.lastOrder === '') {
-                orderToSend = commentId.rows[0].id
+                    orderToSend = commentId.rows[0].id
                 } else {
-                orderToSend = req.body.lastOrder + '.' + commentId.rows[0].id;
+                    orderToSend = req.body.lastOrder + '-' + commentId.rows[0].id;
                 }
                 let queryText2 = `UPDATE comments_general SET "order" = $1 WHERE "id" = $2;`;
                 await client.query(queryText2, [orderToSend, commentId.rows[0].id]);
@@ -106,6 +106,35 @@ router.delete('/deleteComment/:id', (req, res) => {
             })
     }
 })
+
+router.put('/likeincrement/:id', (req, res) => {
+    //in order to like an item, user must be signed in
+    if (req.isAuthenticated) {
+        console.log(req.body);
+        pool.query(`UPDATE "comments_general" SET "likes" = $1 WHERE "id" = $2;`, [req.body.likes + 1, req.body.id]).then((result) => {
+            res.sendStatus(201);
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500)
+        })
+    }
+});
+
+router.put('/likedecrement/:id', (req, res) => {
+    //in order to like an item, user must be signed in
+
+    if (req.isAuthenticated) {
+        console.log(req.body.likes);
+        pool.query(`UPDATE "comments_general" SET "likes" = $1 WHERE "id" = $2;`, [req.body.likes - 1, req.body.id]).then((result) => {
+            res.sendStatus(201);
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500)
+        })
+    }
+});
+
+
 
 
 module.exports = router;
