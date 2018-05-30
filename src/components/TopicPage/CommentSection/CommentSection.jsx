@@ -20,7 +20,10 @@ class CommentSection extends Component {
 
     componentDidMount() {
         // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.props.dispatch({ type: 'FETCH_GENERAL_COMMENTS' });
+        this.props.dispatch({ 
+            type: 'FETCH_GENERAL_COMMENTS',
+            payload: {topic_id: this.props.topic_id}
+        });
     }
 
     deleteComment = (commentInput) => {
@@ -46,21 +49,21 @@ class CommentSection extends Component {
 
     //EXAMPLE JSON Stringify w null
     // <pre>{JSON.stringify(this.props.user.userInfo , null, 2)}</pre>
-    // <pre>{JSON.stringify(this.props.comments.commentsGeneral, null, 2)}</pre>
+
     render() {
 
         let commentList = this.props.comments.commentsGeneral.map((comment) => {
             return (
-                <CommentSectionItem key={comment.id} comment={comment}/>
+                <CommentSectionItem  topic_id={this.props.topic_id} key={comment.id} comment={comment}/>
             )
         })
 
         return (
             <div>
-                <Panel>
+                <Panel className="commentPanel">
                     <Panel.Heading>Comment Section</Panel.Heading>
                     <Panel.Body>
-                        {(this.props.user.userInfo) ? <CommentAdd topicId={this.props.topicId} /> : this.loginUserInvite()}
+                        {(this.props.user.userInfo) ? <CommentAdd topic_id={this.props.topic_id} /> : this.loginUserInvite()}
                         <div className="commentPanelWrapper">
                         {commentList}</div>
                     </Panel.Body>

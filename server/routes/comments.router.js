@@ -5,12 +5,17 @@ const router = express.Router();
 
 //gets all comments from database
 
-router.get('/getGeneralcomments', (req, res) => {
+router.get('/getGeneralcomments/:id', (req, res) => {
 
-    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.order;`
+    console.log('in getCommentsGeneral, here is req.params.id', req.params.id)
+    let topicId = req.params.id;
+
+    
+
+    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id WHERE "topic_id" = $1 ORDER BY comments_general.order;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
-    pool.query(queryText).then((result) => {
+    pool.query(queryText, [topicId]).then((result) => {
         //all of the comments are stored in result.rows; therefore we will send back
         //result.rows
         res.send(result.rows)
@@ -35,6 +40,7 @@ router.post('/addComment', (req, res) => {
         //     console.log(err);
         //     res.sendStatus(500)
         // })
+
         (async () => {
             const client = await pool.connect();
 
@@ -43,7 +49,7 @@ router.post('/addComment', (req, res) => {
 
                 //begins series of async database SELECTS to add to selectedTopicToSend
                 let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved") VALUES ($1, $2, $3, $4) RETURNING id;`;
-                const commentId = await client.query(queryText1, [req.body.personId, req.body.topicId, req.body.comment, req.body.approved]);
+                const commentId = await client.query(queryText1, [req.body.personId, req.body.topic_id, req.body.comment, req.body.approved]);
 
                 console.log(commentId.rows[0].id)
 

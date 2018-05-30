@@ -5,7 +5,8 @@ function* setNewGeneralComment(action) {
     try {
         yield call (axios.post, '/api/comments/addComment', action.payload)
         yield put ({
-            type: 'FETCH_GENERAL_COMMENTS'
+            type: 'FETCH_GENERAL_COMMENTS',
+            payload: action.payload
         })
     } catch (error) {
         console.log('Error setNewGeneralComment Saga: ', error)
@@ -16,7 +17,8 @@ function* likeGeneralComment(action) {
     try {
         yield call (axios.put, `/api/comments/likeincrement/${action.payload.id}`, action.payload)
         yield put ({
-            type: 'FETCH_GENERAL_COMMENTS'
+            type: 'FETCH_GENERAL_COMMENTS',
+            payload: action.payload
         })
     } catch (error) {
         console.log('Error likeGeneralComment Saga: ', error)
@@ -27,7 +29,8 @@ function* unlikeGeneralComment(action) {
     try {
         yield call (axios.put, `/api/comments/likedecrement/${action.payload.id}`, action.payload)
         yield put ({
-            type: 'FETCH_GENERAL_COMMENTS'
+            type: 'FETCH_GENERAL_COMMENTS',
+            payload: action.payload
         })
     } catch (error) {
         console.log('Error likeGeneralComment Saga: ', error)
@@ -38,9 +41,10 @@ function* unlikeGeneralComment(action) {
 
 function* deleteGeneralComment(action) {
     try {
-        yield call (axios.delete, `/api/comments/deleteComment/${action.payload}`);
+        yield call (axios.delete, `/api/comments/deleteComment/${action.payload.id}`);
         yield put ({
-            type: 'FETCH_GENERAL_COMMENTS'
+            type: 'FETCH_GENERAL_COMMENTS',
+            payload: action.payload
         })
     } catch (error) {
         console.log('Error deleteCommentSaga: ', error);
@@ -54,7 +58,7 @@ function* fetchGeneralComments(action){
 
         //commentResponse sends get request to router '/api/topic/generalcomments' and 
         //receives back all general comments and store them in commentResponse.data
-        const commentResponse = yield call(axios.get, '/api/comments/getGeneralcomments')
+        const commentResponse = yield call(axios.get, `/api/comments/getGeneralcomments/${action.payload.topic_id}`)
 
         //sends all general comments to commentsGeneral reducer via action 'SET_GENERAL_COMMENTS'
         //and payload commentResponse.data

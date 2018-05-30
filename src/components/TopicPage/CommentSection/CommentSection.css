@@ -1,3 +1,8 @@
+.commentPanel {
+    height: 50em;
+    overflow: scroll;
+}
+
 .addCommentPanel{
     width: 80%; 
     margin: 1em auto; 

@@ -20,7 +20,7 @@ class CommentAdd extends Component {
             placeholder: '',
             comment: '',
             personId: '',
-            topicId: '',
+            topic_id: '',
             approved: true,
             lastOrder: ''
         }
@@ -47,7 +47,7 @@ class CommentAdd extends Component {
                 placeholder: 'Join the conversation...',
                 comment: '',
                 personId: '',
-                topicId: '',
+                topic_id: '',
                 approved: true,
                 lastOrder: ''
             })
@@ -59,7 +59,7 @@ class CommentAdd extends Component {
                 placeholder: 'Write a reply...',
                 comment: '',
                 personId: '',
-                topicId: '',
+                topic_id: '',
                 approved: true,
                 lastOrder: ''
             })
@@ -71,7 +71,7 @@ class CommentAdd extends Component {
         if ((this.state.comment != '') && !this.props.isReply) {
             this.setState({
                 personId: this.props.user.userInfo.id,
-                topicId: this.props.topicId,
+                topic_id: this.props.topic_id,
                 approved: true,
                 lastOrder: ''
             }, () => {
@@ -83,7 +83,7 @@ class CommentAdd extends Component {
         } else if ((this.state.comment != '') && this.props.isReply) {
             this.setState({
                 personId: this.props.user.userInfo.id,
-                topicId: this.props.topicId,
+                topic_id: this.props.topic_id,
                 approved: true,
                 lastOrder: this.props.lastOrder
             }, () => {
