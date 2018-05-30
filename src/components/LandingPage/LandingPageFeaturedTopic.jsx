@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
 import { Panel, Grid, Col, Row, Jumbotron, Image } from 'react-bootstrap';
 
@@ -6,8 +7,26 @@ import dummyTopicCache from '../TopicPage/DummyData.js'
 
 import './LandingPage.css'
 
-export default class LandingPageFeaturedTopic extends Component {
+import moment from 'moment'
+
+const mapStateToProps = state => ({
+    user: state.user,
+    login: state.login,
+    state
+  });
+
+class LandingPageFeaturedTopic extends Component {
+
+    componentDidMount(){
+        this.props.dispatch({
+            type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
+        })
+    }
+
   render() {
+
+    let featuredTopic = this.props.state.landing.featuredLandingPage;
+
     return (
       <div>
         
@@ -17,11 +36,12 @@ export default class LandingPageFeaturedTopic extends Component {
                     <Row>
                           <Col xs={12} md={12}>
                               <h3><strong>- Current Conversation -</strong></h3>
+                              {/* Conditional rendering, only show the title after props have loaded. */}
                           </Col>
                     </Row>
                     <Row>
                           <Col xs={12} md={12}>
-                              <h2><strong>Minimum Wage in MPLS/STP</strong></h2>
+                              <h2><strong>{featuredTopic[0] && featuredTopic[0].topic_title}</strong></h2>
                           </Col>
                     </Row>
 
@@ -30,17 +50,17 @@ export default class LandingPageFeaturedTopic extends Component {
                     <Row>
                           <div >
                                   <Col xs={12} md={12} lg={2}>
-                                      <img className="featuredTopicPhotoLeft contrib1" src="/assets/headshot1.jpeg"/>
+                                      <img className="featuredTopicPhotoLeft contrib1" src={featuredTopic[0] && featuredTopic[0].photo_url}/>
                                   </Col>
                                   <Col xs={12} md={12} lg={4}>
                                       <div className="contributorText">
                                           <h3>
                                               <strong>
-                                                  {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
+                                              {featuredTopic[0] && featuredTopic[0].first_name} {featuredTopic[0] && featuredTopic[0].last_name}
                                               </strong>
                                           </h3>
                                           <p>
-                                          {dummyTopicCache.bio1}
+                                          {featuredTopic[0] && featuredTopic[0].bio}
                                           </p>
                                       </div>
                                   </Col>
@@ -51,23 +71,23 @@ export default class LandingPageFeaturedTopic extends Component {
                                       <div className="contributorText">
                                               <h3>
                                                   <strong>
-                                                      {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
+                                                  {featuredTopic[1] && featuredTopic[1].first_name} {featuredTopic[1] && featuredTopic[1].last_name}
                                                   </strong>
                                               </h3>
                                               <p>
-                                                  {dummyTopicCache.bio2}
+                                              {featuredTopic[1] && featuredTopic[1].bio}
                                               </p>
                                       </div>
                                   </Col>
                                   <Col  xs={12} md={12} lg={2}>
-                                      <img className="featuredTopicPhotoRight contrib2" src="/assets/headshot2.jpeg"/>
+                                      <img className="featuredTopicPhotoRight contrib2" src={featuredTopic[1] && featuredTopic[1].photo_url}/>
                                   </Col>
                           </div>
                   </Row>
 
                 <Row>
                         <Col xs={12} md={12}>
-                            <h3>Published: April 16, 2018</h3>
+                            <h3>{moment(featuredTopic[1] && featuredTopic[1].published_date).format('MMMM Do YYYY, h:mm a')}</h3>
                         </Col>
                 </Row>
                   {/* </div> */}
@@ -77,3 +97,5 @@ export default class LandingPageFeaturedTopic extends Component {
     )
   }
 }
+  
+  export default connect(mapStateToProps)(LandingPageFeaturedTopic);
