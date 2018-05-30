@@ -33,13 +33,22 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    this.fetchTopicPageContent(1); 
+
+  }
+
+  fetchTopicPageContent = (id) => {
+    console.log('in fetchTopicPageContent, id:', id);
+    this.props.dispatch({
+      type: 'FETCH_TOPIC_PAGE_CONTENT',
+      payload: id
+    })
   }
 
 
 //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
   handleHoverShowStream = (id) => {
     if (this.state.keyClaimLocked === false) {
-      console.log('in handleShowStream, id:', id);
       this.setState({
         showStreamForClaim: id
       })   
@@ -49,7 +58,6 @@ export class TopicPage extends Component {
 //called on mouseLeave from keyClaimPanel IF keyClaimLocked === false
   handleHoverHideStream = (id) => {
     if (this.state.keyClaimLocked === false) {
-      console.log('in handleHideStream, id:', id);
       this.setState({
         showStreamForClaim: undefined
       })     
@@ -58,7 +66,6 @@ export class TopicPage extends Component {
 
 //toggle this.state.keyClaimLocked
   toggleClickShowStream = (id) => {
-    console.log('in handleShowStream, id:', id);
     this.setState({
       showStreamForClaim: id,
       keyClaimLocked: !this.state.keyClaimLocked
@@ -78,13 +85,13 @@ export class TopicPage extends Component {
     
     //loop through keyclaim object to make keyClaimPanels 
     let keyClaimsArray = []
-    for (const keyClaimId in dummyTopicCache.keyClaims) {      
+    for (const keyClaimId in this.props.topicPageContent.keyClaims) {      
       //if statement to render only the selected contributor's claims
-      if (this.state.contributorSelect === dummyTopicCache.keyClaims[keyClaimId].claimContributor) {        
+      if (this.state.contributorSelect === this.props.topicPageContent.keyClaims[keyClaimId].claimContributor) {        
         keyClaimsArray.push(
           <KeyClaimPanel key={keyClaimId}
                           keyClaimId={keyClaimId}
-                          keyClaim={dummyTopicCache.keyClaims[keyClaimId]}
+                          keyClaim={this.props.topicPageContent.keyClaims[keyClaimId]}
                           showStreamForClaim={this.state.showStreamForClaim}
                           keyClaimLocked={this.state.keyClaimLocked}
                           handleHoverShowStream={this.handleHoverShowStream}
@@ -99,35 +106,32 @@ export class TopicPage extends Component {
     let arenaContainer = 'arenaContainer';
     let streamContainerClass = "streamItemsContainer";
     let arenaSummaryClass = 'arenaSummary';  
-    let arenaPicture = dummyTopicCache.photo1; 
-    let arenaProposal = dummyTopicCache.proposal1; 
-    let selectedContributor = dummyTopicCache.contributor1FirstName; 
+    let arenaPicture = dummyTopicCache.photo1; //< -- STILL DUMMY DATA
+    let arenaProposal = this.props.topicPageContent.proposal1; 
+    let selectedContributor = this.props.topicPageContent.contributor1FirstName; 
     if (this.state.contributorSelect === 'contributor1') {
       arenaContainer = "arenaContainerContrib1"
       streamContainerClass += " contrib1"
       arenaSummaryClass += " contrib1"
-      arenaPicture = dummyTopicCache.photo1
-      arenaProposal = dummyTopicCache.proposal1; 
-      selectedContributor = dummyTopicCache.contributor1FirstName;
+      arenaPicture = dummyTopicCache.photo1  //< -- STILL DUMMY DATA
+      arenaProposal = this.props.topicPageContent.proposal1; 
+      selectedContributor = this.props.topicPageContent.contributor1FirstName;
     }
     if (this.state.contributorSelect === 'contributor2') {
       arenaContainer += " contrib2"
       streamContainerClass += " contrib2"
       arenaSummaryClass += " contrib2"
-      arenaPicture = dummyTopicCache.photo2
-      arenaProposal = dummyTopicCache.proposal2; 
-      selectedContributor = dummyTopicCache.contributor2FirstName
+      arenaPicture = dummyTopicCache.photo2  //< -- STILL DUMMY DATA
+      arenaProposal = this.props.topicPageContent.proposal2; 
+      selectedContributor = this.props.topicPageContent.contributor2FirstName
     }
     
-
-
-
-    
-
     return (
       <div>
-        <TopicTitleContent />
-        <TopicContributors />
+
+        <TopicTitleContent topicPageContent={this.props.topicPageContent}/>
+        <TopicContributors topicPageContent={this.props.topicPageContent}/>
+
 
         <div className="wrapper">
           <Tabs className="tabParent"
@@ -137,8 +141,8 @@ export class TopicPage extends Component {
                 onSelect={this.handleTabSelect}
                 animation={false} 
                 >
-            <Tab tabClassName="tabChildren"  eventKey='contributor1' title={dummyTopicCache.contributor1FirstName}></Tab>
-            <Tab tabClassName="tabChildren" eventKey='contributor2' title={dummyTopicCache.contributor2FirstName}></Tab>
+            <Tab tabClassName="tabChildren"  eventKey='contributor1' title={this.props.topicPageContent.contributor1FirstName}></Tab>
+            <Tab tabClassName="tabChildren" eventKey='contributor2' title={this.props.topicPageContent.contributor2FirstName}></Tab>
           </Tabs>
 
           {/* ARENA */}
@@ -166,13 +170,13 @@ export class TopicPage extends Component {
               </div>
 
               <div className = {streamContainerClass}>
-                <StreamItemFactory keyClaims = {dummyTopicCache.keyClaims} 
+                <StreamItemFactory keyClaims = {this.props.topicPageContent.keyClaims} 
                                   showStreamForClaim = {this.state.showStreamForClaim}/>
               </div>
             </Panel.Body>
           </Panel>
 
-          <CommentSection topicId={1} />
+          <CommentSection topic_id={1} />
 
           
           <Panel>
@@ -190,6 +194,7 @@ export class TopicPage extends Component {
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
+  topicPageContent: state.topicPageContent.topicPageReducer, //<-- All content for page
 });
 
 export default connect(mapStateToProps)(TopicPage);
