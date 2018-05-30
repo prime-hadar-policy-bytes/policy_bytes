@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import Images from '../../Images/Images.jsx'
 import Footer from '../../Footer/Footer.jsx'
 import KeyClaimForm from './KeyClaimForm.jsx'
 import SubmitAlert from './SubmitAlert.jsx'
 
+import ReactFilestack, { client } from 'filestack-react';
+import filestack from 'filestack-js';
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
 let debug = false;
@@ -143,6 +145,7 @@ class TopicEdit extends Component {
                       handleStreamChange={this.handleStreamChange} />
       )
     }
+   
 
     return (
       <div>
@@ -207,14 +210,12 @@ class TopicEdit extends Component {
               <Panel.Body>
                 <ControlLabel>Contributor 1 First Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  name="bio1"
                   type="text" 
                   name="contributor1FirstName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor1FirstName}  //<-- VALUE COMES FROM REDUX STATE 
                   />
                 <ControlLabel>Contributor 1 Last Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  name="bio1"
                   type="text" 
                   name="contributor1LastName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor1LastName}  //<-- VALUE COMES FROM REDUX STATE 
@@ -229,7 +230,7 @@ class TopicEdit extends Component {
                   name="proposal1"
                   value={this.props.state.cacheEdit.topicEditCache.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
-                <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
+                  <Images/>
               </Panel.Body>
             </Panel>
 
@@ -237,14 +238,12 @@ class TopicEdit extends Component {
               <Panel.Body>
               <ControlLabel>Contributor 2 First Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  name="bio1"
                   type="text" 
                   name="contributor2FirstName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor2FirstName}  //<-- VALUE COMES FROM REDUX STATE 
                   />
                 <ControlLabel>Contributor 2 Last Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  name="bio1"
                   type="text" 
                   name="contributor2LastName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor2LastName}  //<-- VALUE COMES FROM REDUX STATE 
@@ -259,7 +258,7 @@ class TopicEdit extends Component {
                   name="proposal2"
                   value={this.props.state.cacheEdit.topicEditCache.proposal2}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
-                <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
+                  <Images/>
               </Panel.Body>
             </Panel>
 
