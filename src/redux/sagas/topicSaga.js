@@ -46,29 +46,6 @@ function* fetchFeaturedTopicPage(action){
     }
 }
 
-//gets the featured topic to be displayed on the landing page from the database
-function* fetchFeaturedTopicLanding(action){
-    try{
-
-        //topicResponse sends get request to router '/api/topic/featuredlanding' and 
-        //receives back the topic admin wants to be the featured topic on the landing
-        //page and stores it in topicResponse.data
-        const topicResponse = yield call(axios.get, '/api/topic/featuredlanding')
-
-        //sends new featured topic to featuredLandingPage reducer via action 'SET_NEW_FEATURED_TOPIC'
-        //and payload topicResponse.data
-        yield put({
-            type: 'SET_FEATURED_TOPIC_LANDING_PAGE',
-            payload: topicResponse.data
-        })
-
-    //if there is an error in sending get request to router, the error
-    //will display in the console log
-    }catch(error){
-        console.log('Error in getting topic: ', error);
-    }
-}
-
 //gets all of the archived topics for displaying them on the landing page
 function* fetchArchivedTopics(action){
     try{
@@ -186,7 +163,6 @@ function* topicSaga() {
     // yield takeLatest('FETCH_ALL_LIKES', fetchAllLikes)
     // yield takeLatest('FETCH_ALL_LOVES', fetchAllLoves)
     yield takeLatest('FETCH_NEW_TOPIC_TOPIC_PAGE', fetchFeaturedTopicPage)
-    yield takeLatest('FETCH_NEW_TOPIC_LANDING_PAGE', fetchFeaturedTopicLanding)
     yield takeLatest('FETCH_ARCHIVED_TOPICS', fetchArchivedTopics)
     yield takeLatest('SET_NEW_TOPIC', setNewTopic)
     yield takeLatest('UPDATE_TOPIC', updateTopic)

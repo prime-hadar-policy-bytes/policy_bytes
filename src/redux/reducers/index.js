@@ -4,13 +4,15 @@ import login from './loginReducer';
 import topics from './topicEditReducer'; 
 import comments from './commentReducer'; 
 import cacheEdit from './atticusTopicEditReducer'
+import landing from './landingPageReducer'
 
 const store = combineReducers({
   user,
   login,
   topics,
   comments,
-  cacheEdit
+  cacheEdit,
+  landing
 });
 
 export default store;

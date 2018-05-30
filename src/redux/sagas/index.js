@@ -3,6 +3,7 @@ import userSaga from './userSaga';
 import loginSaga from './loginSaga';
 import topicSaga from './topicSaga';
 import commentSaga from './commentSaga';
+import landingSaga from './landingPageSaga'
 
 
 export default function* rootSaga() {
@@ -10,7 +11,8 @@ export default function* rootSaga() {
     userSaga(),
     loginSaga(),
     commentSaga(),
-    topicSaga()
+    topicSaga(),
+    landingSaga()
     // watchIncrementAsync()
   ]);
 }
