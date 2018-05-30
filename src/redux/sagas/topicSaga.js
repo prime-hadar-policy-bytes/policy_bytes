@@ -149,6 +149,25 @@ function* fetchEditTopicInfoSaga(action) {
     }
 }
 
+//WRITTEN BY ATTICUS 
+function* fetchTopicPageContentSaga(action) {
+    try {
+        console.log('in topicSaga fetchTopicPageContent, id:', action.payload);
+                                                //below: using the same GET route as the editTopicInfo above but
+                                                //storing it in a different reducer
+        let fetchedTopicPageContent = yield call (axios.get, `/api/topic/fetchEditTopicInfo/${action.payload}`)
+        console.log('fetchedTopicPageContent: ',fetchedTopicPageContent);
+        
+        yield put({
+            type: 'SET_TOPIC_PAGE_CONTENT',
+            payload: fetchedTopicPageContent.data
+        })
+
+    } catch (error) {
+        console.log('Error fetchTopicPageContentSaga: ', error)
+    }
+}
+
 
 
 
@@ -172,6 +191,7 @@ function* topicSaga() {
     yield takeEvery('TOGGLE_FEATURED', toggleFeaturedSaga)
     yield takeEvery('DELETE_TOPIC', deleteTopicSaga)
     yield takeEvery('FETCH_EDIT_TOPIC_INFO', fetchEditTopicInfoSaga)
+    yield takeEvery('FETCH_TOPIC_PAGE_CONTENT', fetchTopicPageContentSaga)
 
   }
 

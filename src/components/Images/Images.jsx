@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import ReactFilestack, { client } from 'filestack-react';
 import filestack from 'filestack-js';
-import Footer from '../Footer/Footer.jsx'
-// import FILESTACK_API_KEY from '../'
 
 
 class Images extends Component {
@@ -12,48 +10,44 @@ class Images extends Component {
         this.state = {
             uploadItem: ''
         }
-
     }
 
     handleUploadContent = (result) => {
-        console.log('upload clicked', this.state);
-        this.setState({   
-            uploadItem: result.filesUploaded[0].url     
-        })
-        this.props.dispatch({
-            type: 'ADD_UPLOAD',
-            payload: this.state.uploadItem
-        })
-        console.log('picture upload', this.state.uploadItem);
+        console.log('in IMAGES result', result);
+        this.props.handleUploadContent(result.filesUploaded[0],this.props.contributor)
     }
 
 
     render() {
 
-        const client = filestack.init('AMdZyEtwSaP0XBNOaUMvAz');
-        // console.log('in process.env', apikey ,process.env.FILESTACK_API_KEY)
         const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
-        //process.env.FILESTACK_API_KEY
+        // const security = {policy: "eyJleHBpcnkiOjE1MjgyNjY2MDAsImNhbGwiOlsicGljayIsInJlYWQiLCJzdGF0Iiwid3JpdGUiLCJ3cml0ZVVybCIsInN0b3JlIiwiY29udmVydCIsInJlbW92ZSIsImV4aWYiXX0=",
+        //                 signature: "67168f3af0d8c11b316cce342f7e551222e838f82afc6697aa9a142d1db93390"};
+        // const client = filestack.init(apikey,security);
+        // client.retrieve(options);
         const options = {
             accept: ['image/*', 'video/*'],
             maxFiles: 1,
+            imageDim: [500, 500], 
             storeTo: {
               location: 's3'
-            }
+            },
+            // dl: true
         }
 
         return(
             <div>
-                <h1>Images</h1>
-                    <ReactFilestack
-                    apikey={apikey}
-                    buttonText="Click here to upload content"
-                    buttonClass="classname"
-                    options={options}
-                    onSuccess={this.handleUploadContent}
-                    />
-                    <Footer/>
+                {JSON.stringify(this.state.uploadItem)}
+                <ReactFilestack
+                apikey={apikey}
+                buttonText="Click here to upload content"
+                buttonClass="classname"
+                options={options}
+                onSuccess={this.handleUploadContent}
+                // security={security}
+                />
             </div>
+
             )
         }
     }
