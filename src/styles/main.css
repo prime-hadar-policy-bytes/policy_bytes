@@ -123,14 +123,6 @@ li a:hover {
 /* NEW CSS FRIDAY MAY 18 */
 
 
-.footer{
-    width: 100%;
-    background-color: #CA4A00;
-    height: 5em; 
-    position: static; 
-    bottom: 0; 
-}
-
 .textCenter{
     text-align: center; 
 }
@@ -140,7 +132,6 @@ li a:hover {
     padding-bottom: 100px;
 }
 
-
 .wireArchive{
     height: 150px; 
     width: 150px; 
@@ -148,9 +139,6 @@ li a:hover {
     display: inline-block; 
     margin-left: 12%; 
 }
-
-
-
 
 
 .wireComment{

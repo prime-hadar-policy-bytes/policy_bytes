@@ -1,9 +1,65 @@
-.helloUser {
-color: white;
+#footerBody{
+    /* height: 10em;  */
+    width: 100%;
+    background-color: #CA4A00;
+    position: static; 
+    bottom: 0; 
+    color: white; 
 }
 
-#footerButtons {
-    display: flex;
-    align-items: flex-start;
-    float: left;
+/* NEWSLETTER */
+
+#footerNewsletter{
+    width: 80%;
+    /* border: 1px solid white;  */
+    padding: 2em 0em; 
+    font-size: 12px; 
 }
+
+#footerNewsletter input {
+    width: 250px; 
+    color: rgb(80, 80, 80); 
+    margin-left: 0px; 
+}
+
+#newsletterSubmit{
+    width: 250px; 
+}
+
+
+/* LINKS */
+#footerLinks {
+    width: 90%; 
+    margin-top: 2em; 
+}
+
+#footerLinks p a {
+    color: white; 
+    font-size: 20px; 
+    float: left; 
+    margin: auto 0em auto 0em;
+    padding: 0px;  
+    line-height: 40px; 
+        /* border: 1px solid white;  */
+
+}
+
+/* ADDRES */
+
+#footerAddress{
+    /* border: 1px solid white;  */
+    margin-top: 2em; 
+    margin-bottom: 2em; 
+}
+
+#footerAddress p {
+    margin-left: 2.5em; 
+    letter-spacing: .04px;
+}
+
+#footerAddress li{
+    margin-left: 1em;  
+    font-size: 2em; 
+}
+
+
