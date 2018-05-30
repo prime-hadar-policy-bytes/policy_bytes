@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Images from '../../Images/Images.jsx'
+import ImageUpload from '../../Images/Images.jsx'
 import Footer from '../../Footer/Footer.jsx'
 import KeyClaimForm from './KeyClaimForm.jsx'
 import SubmitAlert from './SubmitAlert.jsx'
@@ -16,7 +16,9 @@ class TopicEdit extends Component {
     super(props)
 
     this.state = {
-      submitAlert: false
+      submitAlert: false,
+      photo1: '',
+      photo2: '',
     }
   }
 
@@ -24,7 +26,6 @@ class TopicEdit extends Component {
     this.populateEditCache(); 
     this.fetchEditCache();
   }
-
 
   populateEditCache = () => {
     let editTopicId = this.props.match.params.id; 
@@ -126,20 +127,40 @@ class TopicEdit extends Component {
       submitAlert: false
     })
   }
-  handleUploadContent = (event, result) => {
-    this.setState({   
-        uploadItem: result.filesUploaded[0].url     
-    })
+  handleUploadContent = (fileUploded, contributor) => {
+    let fileUrl = fileUploded.url; 
+    console.log('file uploaded url:', fileUrl, "contributor", contributor);
+    let pictureUploadPackage = {
+      value: fileUrl, //<-- action.payload.value
+      name: contributor //<-- action.payload.name is contributor1 or contributor2 
+    }
     this.props.dispatch({
-      type: 'CHANGE_TOPIC_INFO',
-      payload: event.target
+      type: 'CHANGE_TOPIC_INFO', 
+      payload: pictureUploadPackage
     })
-    console.log('picture upload');
 }
 
 
 
   render() {
+
+    // const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
+    // const security = {policy: "eyJleHBpcnkiOjE1MjgyNjY2MDAsImNhbGwiOlsicGljayIsInJlYWQiLCJzdGF0Iiwid3JpdGUiLCJ3cml0ZVVybCIsInN0b3JlIiwiY29udmVydCIsInJlbW92ZSIsImV4aWYiXX0=",
+    //                 signature: "67168f3af0d8c11b316cce342f7e551222e838f82afc6697aa9a142d1db93390"};
+    // const client = filestack.init(apikey,security);
+    // const options = {
+    //     accept: ['image/*', 'video/*'],
+    //     maxFiles: 1,
+    //     storeTo: {
+    //       location: 's3'
+    //     },
+    //     dl: true
+    // }
+    // client.retrieve(options);
+
+
+
+
 
     if (debug) {console.log('ROUTE PARAMS', this.props.match.params.id);}
 
@@ -160,10 +181,12 @@ class TopicEdit extends Component {
     return (
       <div>
         <div className="wrapper">
+
+        
           <h1>Topic Edit</h1>
 
           {/* SHOW STATE ON DOM */}
-          <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.state, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre>
           <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
@@ -181,16 +204,6 @@ class TopicEdit extends Component {
               </Panel.Body>
             </Panel>
 
-            <Panel>
-              <Panel.Body>
-              <ControlLabel>Photo 1</ControlLabel>
-                <FormControl  
-                  name="photo1"
-                  onChange={this.handleUploadContent}
-                  value={this.props.state.cacheEdit.topicEditCache.photo1}
-                />
-              </Panel.Body>
-            </Panel>
 
             <Panel>
               <Panel.Body>
@@ -251,7 +264,14 @@ class TopicEdit extends Component {
                   name="proposal1"
                   value={this.props.state.cacheEdit.topicEditCache.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
-                  <Images/>
+
+                <img src={this.props.state.cacheEdit.topicEditCache.photo1} width="300"/>
+
+
+                <ImageUpload handleUploadContent={this.handleUploadContent} 
+                              contributor='photo1'/>
+
+
               </Panel.Body>
             </Panel>
 
@@ -279,7 +299,14 @@ class TopicEdit extends Component {
                   name="proposal2"
                   value={this.props.state.cacheEdit.topicEditCache.proposal2}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
-                  <Images/>
+
+                <img src={this.props.state.cacheEdit.topicEditCache.photo2} width="300"/>
+
+
+                <ImageUpload handleUploadContent={this.handleUploadContent} 
+                                contributor='photo2'/>
+
+
               </Panel.Body>
             </Panel>
 
@@ -295,8 +322,6 @@ class TopicEdit extends Component {
               <SubmitAlert handleDismiss={this.handleDismiss}/>
             }
           </div>
-
-
             <Button type="submit" bsStyle="primary">Submit!</Button>
           </form>
         </div>
