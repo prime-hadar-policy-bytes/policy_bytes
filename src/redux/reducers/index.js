@@ -4,7 +4,8 @@ import login from './loginReducer';
 import topics from './topicEditReducer'; 
 import comments from './commentReducer'; 
 import cacheEdit from './atticusTopicEditReducer'; 
-import topicPageContent from './topicPageReducer.js'; 
+import topicPageContent from './topicPageReducer.js';
+import landing from './landingPageReducer' 
 
 
 const store = combineReducers({
@@ -13,7 +14,8 @@ const store = combineReducers({
   topics,
   comments,
   cacheEdit,
-  topicPageContent
+  topicPageContent,
+  landing
 
 });
 
