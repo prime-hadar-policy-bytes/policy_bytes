@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import { Panel, Grid, Col, Row, Jumbotron, Image } from 'react-bootstrap';
 
@@ -7,24 +6,8 @@ import dummyTopicCache from '../TopicPage/DummyData.js'
 
 import './LandingPage.css'
 
-const mapStateToProps = state => ({
-    user: state.user,
-    login: state.login,
-    state
-  });
-
-class LandingPageFeaturedTopic extends Component {
-
-    componentDidMount(){
-        this.props.dispatch({
-            type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
-        })
-    }
-
+export default class LandingPageFeaturedTopic extends Component {
   render() {
-
-    let featuredTopic = this.props.state.landing.featuredLandingPage;
-
     return (
       <div>
         
@@ -34,12 +17,11 @@ class LandingPageFeaturedTopic extends Component {
                     <Row>
                           <Col xs={12} md={12}>
                               <h3><strong>- Current Conversation -</strong></h3>
-                              {/* Conditional rendering, only show the title after props have loaded. */}
                           </Col>
                     </Row>
                     <Row>
                           <Col xs={12} md={12}>
-                              <h2><strong>{featuredTopic[0] && featuredTopic[0].topic_title}</strong></h2>
+                              <h2><strong>Minimum Wage in MPLS/STP</strong></h2>
                           </Col>
                     </Row>
 
@@ -95,5 +77,3 @@ class LandingPageFeaturedTopic extends Component {
     )
   }
 }
-  
-  export default connect(mapStateToProps)(LandingPageFeaturedTopic);
