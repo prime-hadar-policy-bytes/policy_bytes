@@ -126,6 +126,16 @@ class TopicEdit extends Component {
       submitAlert: false
     })
   }
+  handleUploadContent = (event, result) => {
+    this.setState({   
+        uploadItem: result.filesUploaded[0].url     
+    })
+    this.props.dispatch({
+      type: 'CHANGE_TOPIC_INFO',
+      payload: event.target
+    })
+    console.log('picture upload');
+}
 
 
 
@@ -153,10 +163,11 @@ class TopicEdit extends Component {
           <h1>Topic Edit</h1>
 
           {/* SHOW STATE ON DOM */}
-          {/* <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre> */}
+          <pre>state: {JSON.stringify(this.props.state, null, 3)}</pre>
           {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre>
           <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
+          {/* <pre>state: {JSON.stringify(this.props.uploadItem, null, 3)}</pre> */}
 
           <form action="" onSubmit={this.handleSubmit}>
 
@@ -166,8 +177,18 @@ class TopicEdit extends Component {
                 <FormControl onChange={this.handleTextChange}
                   name="topicTitle"
                   value={this.props.state.cacheEdit.topicEditCache.topicTitle}  //<-- VALUE COMES FROM REDUX STATE 
-                  type="text" />
-                <Button bsSize="large" bsStyle="primary">Icon Upload</Button>
+                  type="text" />             
+              </Panel.Body>
+            </Panel>
+
+            <Panel>
+              <Panel.Body>
+              <ControlLabel>Photo 1</ControlLabel>
+                <FormControl  
+                  name="photo1"
+                  onChange={this.handleUploadContent}
+                  value={this.props.state.cacheEdit.topicEditCache.photo1}
+                />
               </Panel.Body>
             </Panel>
 
