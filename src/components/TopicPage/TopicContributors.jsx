@@ -16,17 +16,18 @@ export default class TopicContributors extends Component {
                         <Panel className="contributorPanel ">
                             <Panel.Body>
                                 <Col xs={4} md={4}>
+                                                                                {/* STILL DUMMY DATA FOR PHOTO */}
                                     <Image className="contributorPhoto contrib1" src="/assets/headshot1.jpeg" rounded responsive/>
                                 </Col>
                                 <Col xs={8} md={8}>
                                     <div className="contributorText">
                                         <h3>
                                             <strong>
-                                                {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
+                                                {this.props.topicPageContent.contributor1FirstName} {this.props.topicPageContent.contributor1LastName}
                                             </strong>
                                         </h3>
                                         <i>
-                                        {dummyTopicCache.bio1}
+                                        {this.props.topicPageContent.bio1}
                                         </i>
                                     </div>
                                 </Col>
@@ -43,15 +44,16 @@ export default class TopicContributors extends Component {
                                     <div className="contributorText">
                                             <h3>
                                                 <strong>
-                                                    {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
+                                                    {this.props.topicPageContent.contributor2FirstName} {this.props.topicPageContent.contributor2LastName}
                                                 </strong>
                                             </h3>
                                             <i>
-                                                {dummyTopicCache.bio2}
+                                                {this.props.topicPageContent.bio2}
                                             </i>
                                     </div>
                                 </Col>
-                                <Col  xs={4} md={4}>
+                                <Col  xs={4} md={4}>                
+                                                                                {/* STILL DUMMY DATA FOR PHOTO */}
                                     <Image className="contributorPhoto contrib2" src="/assets/headshot2.jpeg" rounded responsive/>
                                 </Col>
                             </Panel.Body>

@@ -447,9 +447,11 @@ router.put('/updatetopic', (req, res) => {
     // }
 })
 
-
+//THIS IS ALSO BEING USED TO POPULATE THE TOPIC PAGE - SAGA TYPE FETCH_TOPIC_PAGE_CONTENT
 //FETCHES SELCTED TOPICS INFO TO POPULATE TOPICEDIT PAGE (BASED ON URL)
 router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
+    console.log('HELLO',req.params.id);
+    
     let topicId = req.params.id;
     //selectedTopicToSend is the master object exported at the end of the async function.
     let selectedTopicToSend = {};
