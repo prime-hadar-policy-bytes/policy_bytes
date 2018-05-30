@@ -2,21 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import ReactFilestack, { client } from 'filestack-react';
 import filestack from 'filestack-js';
-import Footer from '../Footer/Footer.jsx'
-// import FILESTACK_API_KEY from '../'
-
+import { Tooltip } from 'react-bootstrap';
 
 class Images extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            uploadItem: ''
+            uploadItem: '',
+            show: false
         }
 
     }
 
+
     handleUploadContent = (result) => {
-        console.log('upload clicked', this.state);
         this.setState({   
             uploadItem: result.filesUploaded[0].url     
         })
@@ -30,10 +29,10 @@ class Images extends Component {
 
     render() {
 
-        const client = filestack.init('AMdZyEtwSaP0XBNOaUMvAz');
-        // console.log('in process.env', apikey ,process.env.FILESTACK_API_KEY)
         const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
-        //process.env.FILESTACK_API_KEY
+        const security = {policy: "eyJleHBpcnkiOjE1MjgzNTQ4MDB9",
+                        signature: "082801620021a268b20700e8a56e83e074d19a0f9a0bda26a1273c4db4935398"};
+        const client = filestack.init(apikey,security);
         const options = {
             accept: ['image/*', 'video/*'],
             maxFiles: 1,
@@ -44,16 +43,16 @@ class Images extends Component {
 
         return(
             <div>
-                <h1>Images</h1>
-                    <ReactFilestack
-                    apikey={apikey}
-                    buttonText="Click here to upload content"
-                    buttonClass="classname"
-                    options={options}
-                    onSuccess={this.handleUploadContent}
-                    />
-                    <Footer/>
+                <ReactFilestack
+                apikey={apikey}
+                buttonText="Click here to upload content"
+                buttonClass="classname"
+                options={options}
+                onSuccess={this.handleUploadContent}
+                security={security}
+                />
             </div>
+            
             )
         }
     }
