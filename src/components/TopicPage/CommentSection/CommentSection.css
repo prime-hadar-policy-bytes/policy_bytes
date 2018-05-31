@@ -53,18 +53,18 @@
     /* background-color: yellow; */  
 }
 
-.commentPic {
-    /* border: 1px solid red;  */
-    display: inline-block; 
-    margin-top: 1em;
-    float: left;
-}
-
 .commentComment {
     margin-top: 1em;
     width: 70% !important; 
     display: inline-block; 
 
+}
+
+.commentPic {
+    /* border: 1px solid red;  */
+    display: inline-block; 
+    margin-top: 1em;
+    float: left;
 }
 
 .userName {

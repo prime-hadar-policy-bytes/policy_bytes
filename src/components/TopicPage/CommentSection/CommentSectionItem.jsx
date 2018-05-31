@@ -97,7 +97,7 @@ class CommentSectionItem extends Component {
                     <span ><Image style={{ 'height': '56px', 'width': '56px', 'padding': '10px' }} circle src={this.props.comment.fb_picture} /></span>
                 </div>
 
-                <Well className="commentComment">
+                <Well className={"commentComment"}>
 
                     <div className="userName">{this.props.comment.fb_display_name}:</div>
                     <div className="commentTextWrapper">

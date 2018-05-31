@@ -101,6 +101,7 @@ class CommentAdd extends Component {
                 topic_id: this.props.topic_id,
                 approved: true,
                 lastOrder: this.props.lastOrder,
+                owner: this.props
                 stream_id: '',
                 proposal_id: '',
                 key_claim_id: ''
