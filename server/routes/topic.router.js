@@ -481,7 +481,7 @@ router.put('/updatetopic', (req, res) => {
 //THIS IS ALSO BEING USED TO POPULATE THE TOPIC PAGE - SAGA TYPE FETCH_TOPIC_PAGE_CONTENT
 //FETCHES SELCTED TOPICS INFO TO POPULATE TOPICEDIT PAGE (BASED ON URL)
 router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
-    console.log('HELLO',req.params.id);
+    // console.log('HELLO',req.params.id);
     
     let topicId = req.params.id;
     //selectedTopicToSend is the master object exported at the end of the async function.
@@ -530,7 +530,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 keyClaims: ''
             };
 
-            let queryText3 = `SELECT proposal, id from proposal WHERE id = $1;`;
+            let queryText3 = `SELECT proposal, id from proposal WHERE contributor_id = $1;`;
             const proposal1Result = await client.query(queryText3, [contributor1Id]);
 
             selectedTopicToSend = {
@@ -538,7 +538,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 proposal1DbId: proposal1Result.rows[0].id
             }
 
-            let queryText4 = `SELECT proposal, id from proposal WHERE id = $1;`;
+            let queryText4 = `SELECT proposal, id from proposal WHERE contributor_id = $1;`;
             const proposal2Result = await client.query(queryText4, [contributor2Id]);
 
             selectedTopicToSend = {
