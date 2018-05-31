@@ -24,6 +24,7 @@ class CommentAdd extends Component {
             stream_id: '',
             key_claim_id: '',
             proposal_id: '',
+            owner: '',
             approved: true,
             lastOrder: ''
         }
@@ -54,6 +55,7 @@ class CommentAdd extends Component {
                 stream_id: '',
                 key_claim_id: '',
                 proposal_id: '',
+                owner: '',
                 approved: true,
                 lastOrder: ''
             })
@@ -69,6 +71,7 @@ class CommentAdd extends Component {
                 stream_id: '',
                 key_claim_id: '',
                 proposal_id: '',
+                owner: '',
                 approved: true,
                 lastOrder: ''
             })
@@ -88,6 +91,7 @@ class CommentAdd extends Component {
                 stream_id: this.props.comments.streamComment.streamDbId,
                 key_claim_id: this.props.comments.keyClaimComment.claimDbId,
                 proposal_id: this.props.comments.proposalComment.proposalDbId,
+                owner: '',
                 lastOrder: ''
             }, () => {
                 this.handleSubmitDispatch();
@@ -95,12 +99,13 @@ class CommentAdd extends Component {
                 console.log('state key_claim_Id', this.state.key_claim_id);
 
             });
-        }  else if ((this.state.comment != '') && this.props.isReply) {
+        } else if ((this.state.comment != '') && this.props.isReply) {
             this.setState({
                 personId: this.props.user.userInfo.id,
                 topic_id: this.props.topic_id,
                 approved: true,
                 lastOrder: this.props.lastOrder,
+                owner: this.props.owner,
                 stream_id: '',
                 proposal_id: '',
                 key_claim_id: ''
@@ -146,15 +151,33 @@ class CommentAdd extends Component {
         let streamText = this.props.comments.streamComment && this.props.comments.streamComment.streamComment;
         let proposalText = this.props.comments.proposalComment && this.props.comments.proposalComment.proposal;
 
+        let keyClaimContributor = this.props.comments.keyClaimComment && this.props.comments.keyClaimComment.claimContributor;
+        let streamContributor = this.props.comments.streamComment && this.props.comments.streamComment.streamContributor;
+        let proposalContributor = this.props.comments.proposalComment && this.props.comments.proposalComment.proposalContributor;
+
+
+        let referenceTextClass = 'referenceTextContrib2';
+
+        if (keyClaimContributor === 'contributor2' || streamContributor === 'contributor2' || proposalContributor === 'contributor2') {
+            referenceTextClass = 'referenceTextContrib2';
+        } else {
+            referenceTextClass = 'referenceTextContrib1';
+        }
+
+
+        console.log('this is referenceTextClass', referenceTextClass);
+
         return (
             <Panel className="addCommentPanel">
                 <Panel.Body>
                     <Form>
                         <FormGroup controlId="formControlsTextarea">
-                            <span><Image style={{ 'height': '50px', 'width': '50px' }} circle src={fbPicture} /></span>
-                            
-                            {(keyClaimText || streamText || proposalText) ? 
-                            <span className="referenceText">responding to...   "{keyClaimText}{streamText}{proposalText}"</span> : null }
+                            <div className="addCommentPicAndResponse">
+                                <span><Image style={{ 'height': '50px', 'width': '50px' }} circle src={fbPicture} /></span>
+
+                                {(keyClaimText || streamText || proposalText) ?
+                                    <Panel className={referenceTextClass}>responding to...   "{keyClaimText}{streamText}{proposalText}"</Panel> : null}
+                            </div>
                             <FormControl style={{ 'margin': '10px' }} componentClass="textarea" value={this.state.comment} onChange={this.handleTextChange} placeholder={this.state.placeholder} />
                         </FormGroup>
                     </Form>
