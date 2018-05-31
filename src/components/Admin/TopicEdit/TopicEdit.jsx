@@ -25,6 +25,15 @@ class TopicEdit extends Component {
   componentDidMount() {
     this.populateEditCache(); 
     this.fetchEditCache();
+    if (!this.props.user.userInfo) {
+      this.props.history.push('login');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.user.userInfo) {
+      this.props.history.push('login');
+    }
   }
 
   populateEditCache = () => {
@@ -332,8 +341,9 @@ class TopicEdit extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  user: state.user,
   keyClaims: state.cacheEdit.topicEditCache.keyClaims,
-  state
+  state,
 })
 
 
