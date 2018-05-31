@@ -1,5 +1,5 @@
-.commentPanel {
-    height: 50em;
+#commentPanelMaster {
+    height: 40em;
     overflow: scroll;
 }
 
@@ -79,6 +79,18 @@
 
 .commentText {
     font-size: 0.8em;
+    margin-left: 1.5em;
+}
+
+.referenceText {
+    font-size: 0.7em;
+    font-style: italic;
+    margin-left: 1.5em;
+}
+
+.referenceTextCommentList {
+    font-size: 0.7em;
+    font-style: italic;
     margin-left: 1.5em;
 }
 

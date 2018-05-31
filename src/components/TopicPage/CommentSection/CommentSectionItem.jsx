@@ -74,7 +74,7 @@ class CommentSectionItem extends Component {
             }
         }
 
-        console.log('orderCharacterCounter', orderCharacterCounter);
+        // console.log('orderCharacterCounter', orderCharacterCounter);
 
         if (orderCharacterCounter === 0) {
             commentIndentClass = "commentPanel1";
@@ -87,7 +87,7 @@ class CommentSectionItem extends Component {
 
         } else commentIndentClass = "commentPanel3";
 
-        console.log('commentIndentClass', commentIndentClass);
+        // console.log('commentIndentClass', commentIndentClass);
 
 
         return (
@@ -100,7 +100,10 @@ class CommentSectionItem extends Component {
                 <Well className="commentComment">
 
                     <div className="userName">{this.props.comment.fb_display_name}:</div>
-                    <div className="commentTextWrapper"><p className="commentText">{this.props.comment.comment}</p></div>
+                    <div className="commentTextWrapper">
+                    
+                    {(this.props.comment.claim || this.props.comment.stream_comment ||this.props.comment.proposal) ? <span className="referenceTextCommentList">responding to...  "{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"</span> : null}
+                    <span className="commentText">{this.props.comment.comment}</span></div>
                     <ButtonGroup className="commentButtons">
                         {!this.state.likedComment ? <Button className="commentButton" onClick={() => this.likeComment(this.props.comment)} bsSize="small"><Glyphicon glyph="thumbs-up" /> {likesCounter}</Button> : <Button bsStyle="success" className="commentButton" onClick={() => this.unlikeComment(this.props.comment)} bsSize="small"><Glyphicon glyph="thumbs-up" /> {likesCounter}</Button>}
                         {(this.props.comment.order.length <= 16) ? <Button className="commentButton" onClick={this.showAddCommentShown} bsSize="small">Reply</Button> : <Button disabled className="commentButton" onClick={this.showAddCommentShown} bsSize="small">Reply</Button>}
