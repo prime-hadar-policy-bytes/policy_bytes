@@ -35,10 +35,7 @@ class KeyClaimForm extends Component {
 
   render() {
     //ID of the keyClaim
-    let claimId = this.props.claimId;
-    console.log('key claim ', claimId);
-    
-    
+    let claimId = this.props.claimId; 
     //Object containg all keyClaim information passed down on props
     //individual keyClaim ID used to pick out the streamData object on each keyClaim
     //looping over this unique streamData object to create the correct number of streamInputForms
@@ -53,10 +50,7 @@ class KeyClaimForm extends Component {
                         handleKeyClaimChange={this.handleKeyClaimChange}
                         handleStreamChange={this.props.handleStreamChange}/>
       )
-    }
-
-    console.log('TESTSETSE',this.props.keyClaimIdObject[claimId]);
-    
+    }    
 
     return (
       <div>
