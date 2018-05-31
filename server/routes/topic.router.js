@@ -171,8 +171,13 @@ router.post('/newtopic', (req, res) => {
                     //keyDataProp is the value of a property in the keyData object e.g.
                     //'0', 'contributor1', 'text' 
                     let keyDataProp = keyData[prop]
+                    console.log(' HIIIIIIII prop: ', prop);
+                    console.log(' MMMMMMMMEEEEEE  keyData at prop: ', keyDataProp);
+                    
                     keyClaimData.push(keyDataProp);
                 }
+                console.log('JJJJJJJKKKKKKKKK keyClaimDataArray: ', keyClaimData);
+                
                 //end for loop of for(prop in keyData)
 
                 let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
@@ -189,6 +194,8 @@ router.post('/newtopic', (req, res) => {
                 const keyClaimId = keyClaimResult.rows[0].id
 
                 let streamData = keyClaimData[3]
+
+                console.log('streamDataaaaaaaaaaaaaa: ', streamData);
 
                 for (stream in streamData) {
 
@@ -207,9 +214,13 @@ router.post('/newtopic', (req, res) => {
                         //streamDataProp is the value of a property in the streamDataObj object e.g.
                         //'0', 'contributor2', 'text', 'more text'
                         let streamDataProp = streamDataObj[prop]
+                        console.log('HIIIIIIIII prop in stream: ', prop);
+                        console.log('HIIIIIIIIII streamDataProp at prop: ', streamDataProp);
+                        
+                        
                         streamClaimData.push(streamDataProp)
                     }
-                    console.log('streamClaimData: ', streamClaimData);
+                    console.log('streamClaimDataAAAAAAAAAAAA: ', streamClaimData);
 
                     let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
                     "stream_evidence", "stream_order")

@@ -158,6 +158,7 @@ class TopicEdit extends Component {
 
   render() {
 
+
     // const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
     // const security = {policy: "eyJleHBpcnkiOjE1MjgyNjY2MDAsImNhbGwiOlsicGljayIsInJlYWQiLCJzdGF0Iiwid3JpdGUiLCJ3cml0ZVVybCIsInN0b3JlIiwiY29udmVydCIsInJlbW92ZSIsImV4aWYiXX0=",
     //                 signature: "67168f3af0d8c11b316cce342f7e551222e838f82afc6697aa9a142d1db93390"};
@@ -177,6 +178,7 @@ class TopicEdit extends Component {
 
 
     if (debug) { console.log('ROUTE PARAMS', this.props.match.params.id); }
+
 
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
