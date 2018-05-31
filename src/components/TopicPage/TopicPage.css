@@ -54,8 +54,8 @@ h1{
 
 .contributorPhoto {
     overflow: hidden; 
-    height: 10em !important;
-    width: 8em !important; 
+    /* height: 10em !important;
+    width: 8em !important;  */
     margin-top: 2em; 
 
 }
@@ -112,12 +112,6 @@ h1{
 .arenaSummary p {
     font-size: 1.2em; 
 }
-
-
-
-
-
-
 
 
 .arenaContainerContrib1 {

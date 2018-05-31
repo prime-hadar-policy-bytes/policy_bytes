@@ -7,8 +7,6 @@ import dummyTopicCache from '../TopicPage/DummyData.js'
 
 import './LandingPage.css'
 
-import moment from 'moment'
-
 const mapStateToProps = state => ({
     user: state.user,
     login: state.login,
@@ -48,42 +46,46 @@ class LandingPageFeaturedTopic extends Component {
 
         {/* CONTRIBUTORS */}
                     <Row>
+                          <div >
                                   <Col xs={12} md={12} lg={2}>
-                                      <img className="featuredTopicPhotoLeft contrib1" src={featuredTopic[0] && featuredTopic[0].photo_url}/>
+                                      <img className="featuredTopicPhotoLeft contrib1" src="/assets/headshot1.jpeg"/>
                                   </Col>
                                   <Col xs={12} md={12} lg={4}>
                                       <div className="contributorText">
                                           <h3>
                                               <strong>
-                                              {featuredTopic[0] && featuredTopic[0].first_name} {featuredTopic[0] && featuredTopic[0].last_name}
+                                                  {dummyTopicCache.contributor1FirstName} {dummyTopicCache.contributor1LastName}
                                               </strong>
                                           </h3>
                                           <p>
-                                          {featuredTopic[0] && featuredTopic[0].bio}
+                                          {dummyTopicCache.bio1}
                                           </p>
                                       </div>
                                   </Col>
-                     
+                          </div>
+
+                          <div >
                                   <Col xs={12} md={12} lg={4}>
                                       <div className="contributorText">
                                               <h3>
                                                   <strong>
-                                                  {featuredTopic[1] && featuredTopic[1].first_name} {featuredTopic[1] && featuredTopic[1].last_name}
+                                                      {dummyTopicCache.contributor2FirstName} {dummyTopicCache.contributor2LastName}
                                                   </strong>
                                               </h3>
                                               <p>
-                                              {featuredTopic[1] && featuredTopic[1].bio}
+                                                  {dummyTopicCache.bio2}
                                               </p>
                                       </div>
                                   </Col>
                                   <Col  xs={12} md={12} lg={2}>
-                                      <img className="featuredTopicPhotoRight contrib2" src={featuredTopic[1] && featuredTopic[1].photo_url}/>
+                                      <img className="featuredTopicPhotoRight contrib2" src="/assets/headshot2.jpeg"/>
                                   </Col>
+                          </div>
                   </Row>
 
                 <Row>
                         <Col xs={12} md={12}>
-                            <h3>{moment(featuredTopic[1] && featuredTopic[1].published_date).format('MMMM Do YYYY, h:mm a')}</h3>
+                            <h3>Published: April 16, 2018</h3>
                         </Col>
                 </Row>
                   {/* </div> */}

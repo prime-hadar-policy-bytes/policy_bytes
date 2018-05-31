@@ -61,6 +61,35 @@ router.get('/featuredtopic', (req, res) => {
     // }
 });
 
+//gets the featured topic from database
+//for explanation of any variables or methods in the following get request, see
+//router.get('/alltopics') as the same variables and methods are used there
+router.get('/featuredlanding', (req, res) => {
+    console.log('Inside featuredlanding');
+    
+
+    // if(req.isAuthenticated()){
+
+    const queryText = `SELECT "topic_title", "published_date", "first_name", "last_name", "bio", "photo_url" 
+    FROM "topic" JOIN "contributor" ON "topic"."contributor1_id" = "contributor"."id" OR 
+    "topic"."contributor2_id" = "contributor"."id" WHERE "featured" = true;`
+
+    pool.query(queryText).then((result) => {
+        console.log('result.rows: ', result.rows);
+        
+        res.send(result.rows)
+
+    }).catch((error) => {
+        console.log('Error in getting loves: ', error);
+    })
+    // } else{
+
+    //     //if req.isAuthenticated() is false, the forbidden error will appear
+    //     //on the webpage
+    //     res.sendStatus(403)
+    // }
+});
+
 
 
 /**
@@ -378,7 +407,9 @@ router.put('/updatetopic', (req, res) => {
 
                 let queryText5 = `UPDATE "key_claim" SET "contributor_id" = $1, "claim" = $2 WHERE "id" = $3;`;
                 let contributor;
-                if (keyClaimData[1] === topic.contributor1FirstName) {
+                console.log('keyClaimData[1]: ', keyClaimData[1]);
+                
+                if (keyClaimData[1] === 'contributor1') {
                     contributor = topic.contributor1DbId
                 } else {
                     contributor = topic.contributor2DbId
@@ -411,7 +442,7 @@ router.put('/updatetopic', (req, res) => {
 
                     let queryText6 = `UPDATE "stream" SET "contributor_id" = $1, "stream_comment" = $2, 
                     "stream_evidence" = $3 WHERE "id" = $4;`
-                    if (streamClaimData[1] === topic.contributor1FirstName) {
+                    if (streamClaimData[1] === 'contributor1') {
                         contributor = topic.contributor1DbId
                     } else {
                         contributor = topic.contributor2DbId
@@ -472,7 +503,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             WHERE topic.id = $1;`;
             const topicResult = await client.query(queryText1, [topicId]);
             selectedTopicToSend = {
-                topidDbId: topicResult.rows[0].topic_id,
+                topicDbId: topicResult.rows[0].topic_id,
                 topicTitle: topicResult.rows[0].topic_title,
                 topicSummary: topicResult.rows[0].archive_summary,
                 topicPremise: topicResult.rows[0].premise,

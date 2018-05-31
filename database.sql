@@ -69,38 +69,18 @@ CREATE TABLE "stream" (
 );
 
 
-CREATE TABLE "comments_stream" (
-    "id" SERIAL PRIMARY KEY,
-    "date" timestamp with time zone default current_timestamp,
-    "person_id" INT REFERENCES "person",
-    "topic_id" INT REFERENCES "topic",
-    "stream_id" INT REFERENCES "stream",
-    "comment" VARCHAR(5000),
-    "order" VARCHAR(5000),
-    "approved" boolean default false
-); 
-
-
 CREATE TABLE "comments_general" (
     "id" SERIAL PRIMARY KEY,
     "date" timestamp with time zone default current_timestamp,
     "person_id" INT REFERENCES "person",
     "topic_id" INT REFERENCES "topic",
     "comment" VARCHAR(5000),
-    "order" VARCHAR(5000),
     "approved" boolean default false
-);
-
-
-CREATE TABLE "comments_key_claim" (
-    "id" SERIAL PRIMARY KEY,
-    "date" timestamp with time zone default current_timestamp,
-    "person_id" INT REFERENCES "person",
-    "topic_id" INT REFERENCES "topic",
-    "key_claim_id" INT REFERENCES "key_claim",
-    "comment" VARCHAR(5000),
     "order" VARCHAR(5000),
-    "approved" boolean default false
+    "likes" INT,
+    "key_claim_id" INT REFERENCES "key_claim",
+    "stream_id" INT REFERENCES "stream",
+    "proposal_id" INT REFERENCES "proposal"
 );
 
 CREATE TABLE "proposal" (
@@ -133,18 +113,6 @@ CREATE TABLE "love" (
     "proposal_id" INT REFERENCES "proposal"
 );
 	
-INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
-VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt', 'byrne', 1);
-  
-INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
-VALUES ('kerry', 'kerry5', 'kerry_byrne34', 'kerry_byrne', 'url', 'kerry@mail', 'kerry', 'byrne', 2); 
-      
-INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "featured", "archive_summary", "icon_url") 
-VALUES ('guns', 'more guns', 'people should be able to own', false,
-false, 'this is the archive summary','url'), 
-('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, 
-false, 'Taxes are important for a government to function','url');
-
 --person  
 INSERT INTO "person" ("username", "password", "fb_id", "fb_display_name", "fb_picture", "email", "first_name", "last_name", "status") 
 VALUES ('matt', 'matt5', 'matt_byrne34', 'matt_byrne', 'url', 'matt@mail', 'matt', 'byrne', 1);
@@ -172,12 +140,12 @@ VALUES ('guns', 'more guns or less guns?', 'people should be able to own', false
 --key claim
 INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order") 
 VALUES 
-1(1, 1,'guns make us safer', 1), 
-2(1, 2,'guns are dangerous', 2), 
-3(2, 1,'decrease taxes because..', 3), 
-4(2, 2,'increase taxes because..', 4), 
-5(3, 1,'Legalize it because..', 5), 
-6(3, 2,'keep it illegal because..', 6);
+(1, 1,'guns make us safer', 1), 
+(1, 2,'guns are dangerous', 2), 
+(2, 1,'decrease taxes because..', 3), 
+(2, 2,'increase taxes because..', 4), 
+(3, 1,'Legalize it because..', 5), 
+(3, 2,'keep it illegal because..', 6);
 
 --stream
 INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", "stream_evidence", "stream_order") 

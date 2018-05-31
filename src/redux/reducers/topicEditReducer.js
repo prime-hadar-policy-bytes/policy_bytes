@@ -33,20 +33,7 @@ const featuredTopicPage = (state = [], action) => {
     return state
 }
 
-//featuredLandingPage contains the information needed to display the featured topic
-//the featured topic on the landing page
-const featuredLandingPage = (state = [], action) => {
 
-    //sets state of featuredLandingPage to an array of objects where each object is a section
-    //of the featured topic on the landing page e.g. contributor names, contributor bios, etc.
-    if(action.type === 'SET_FEATURED_TOPIC_LANDING_PAGE'){
-        return action.paylod
-    }
-
-    //if action 'SET_FEATURED_TOPIC_LANDING_PAGE' is not received, state is set to its 
-    //default empty array
-    return state
-}
 
 //archivedTopics contains all of the archived topics from the database
 const archivedTopics = (state = [], action) => {
@@ -66,6 +53,5 @@ const archivedTopics = (state = [], action) => {
 export default combineReducers({
     allTopics,
     featuredTopicPage,
-    featuredLandingPage,
-    archivedTopics,
+    archivedTopics
 })

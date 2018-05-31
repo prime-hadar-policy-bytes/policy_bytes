@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { triggerLogin, formError, clearError } from '../../redux/actions/loginActions';
+import { triggerLogin, formError, clearError } from '../../../redux/actions/loginActions';
 import { Button, FormControl, FormGroup, Modal } from 'react-bootstrap'; 
 
 const mapStateToProps = state => ({
@@ -30,6 +30,7 @@ class LoginModal extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    console.log(nextProps.user);
     if (nextProps.user.userName) {
       this.props.history.push('/user');
     }
