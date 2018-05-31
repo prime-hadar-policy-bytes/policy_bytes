@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 
 import Header from './components/Header/Header';
-import LoginModal from './components/LoginModal/LoginModal';
-import RegisterModal from './components/RegisterModal/RegisterModal';
+import LoginPage from './components/Admin/LoginPage/LoginPage';
+import RegisterModal from './components/Admin/RegisterModal/RegisterModal';
 import LandingPage from './components/LandingPage/LandingPage.jsx'
 import TopicPage from './components/TopicPage/TopicPage.jsx'
 import TopicManage from './components/Admin/TopicManage/TopicManage.jsx'
@@ -35,7 +35,7 @@ const App = () => (
             component={TopicPage}
           />
           <Route
-            path="/topicManage"
+            path="/admin"
             component={TopicManage}
           />
           {/* <Route
@@ -54,7 +54,7 @@ const App = () => (
   {/* predefined routes */}
           <Route
             path="/login"
-            component={LoginModal}
+            component={LoginPage}
           />
           <Route
             path="/register"

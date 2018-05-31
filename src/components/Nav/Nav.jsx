@@ -3,10 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-import RegisterModal from '../RegisterModal/RegisterModal';
-import LoginModal from '../LoginModal/LoginModal';
 import { triggerLogout } from '../../redux/actions/loginActions';
-import FacebookLogin from '../FacebookLogin/FacebookLogin.jsx';
 
 import { Button } from 'react-bootstrap';
 
@@ -31,49 +28,37 @@ class Nav extends Component {
 
   logout = () => {
     this.props.dispatch(triggerLogout());
-}
-
-loginFacebook = () => {
-    this.props.dispatch({
-      type: 'LOGIN_FACEBOOK'
-    });
   }
 
-renderGreetingAdmin() {
+  renderGreetingAdmin() {
     if (this.props.user.userInfo.status === 2) {
-        return (
-            <span>Hello Admin!</span>
-        )
+      return (
+        <span>Hello Admin!</span>
+      )
     } else {
-        return (
-            <div>
-            <span>Welcome, {this.props.user.userInfo.firstName}!</span>
-            </div>
-        )
-    }
-}
-
-renderLoginItems() {
-    if (!this.props.user.userInfo) {
-        return (
-            <div className="footer" id="footerButtons">
-                <div> <RegisterModal /></div>
-                <div> <LoginModal /></div>
-            </div>
-        )
-    }
-    return (
-        <div className="footer" id="footerButtons">
-        <div> {this.renderGreetingAdmin()} </div>
-        <div> <Button bsSize="small" onClick={this.logout}>Log Out</Button></div>
+      return (
+        <div>
+          <span>Welcome, {this.props.user.userInfo.firstName}!</span>
         </div>
-    )
-}
+      )
+    }
+  }
+
+  renderLoginItems() {
+    if (this.props.user.userInfo) {
+      return (
+        <div className="footer" id="footerButtons">
+          <div> {this.renderGreetingAdmin()} </div>
+          <div> <Button bsSize="small" onClick={this.logout}>Log Out</Button></div>
+        </div>
+      )
+    }
+  }
 
 
   render() {
 
-    
+
 
 
 
@@ -83,7 +68,7 @@ renderLoginItems() {
           <ul>
             <li>
               <Header title="Policy Bytes" />
-            </li> 
+            </li>
             <li>
               <Link to="/home">
                 Home
@@ -95,7 +80,7 @@ renderLoginItems() {
           </Link>
             </li>
             <li>
-              <Link to="/topicManage">
+              <Link to="/admin">
                 ADMIN Topic Manage
           </Link>
             </li>
@@ -109,9 +94,9 @@ renderLoginItems() {
                 Images
           </Link>
             </li>
-              <li>
-                {this.renderLoginItems()}
-              </li>
+            <li>
+              {this.renderLoginItems()}
+            </li>
 
           </ul>
         </div>

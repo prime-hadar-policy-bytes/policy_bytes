@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import LoginModal from '../LoginModal/LoginModal';
-import { Button, FormControl, FormGroup, Modal } from 'react-bootstrap'; 
+import { Button, FormControl, FormGroup, Modal } from 'react-bootstrap';
 
 class RegisterModal extends Component {
   constructor(props) {
@@ -37,8 +36,15 @@ class RegisterModal extends Component {
           if (response.status === 201) {
             // this.props.history.push('/home');
             this.setState({
+              message: 'Success! Write down your new username and password, then close.',
               registered: true
+            }, () => {
+              // let millisecondsToWait = 1000;
+              // setTimeout( () => {
+              //   this.handleClose();
+              // }, millisecondsToWait);
             });
+
           } else {
             this.setState({
               message: 'Ooops! That didn\'t work. The username might already be taken. Try again!',
@@ -60,7 +66,10 @@ class RegisterModal extends Component {
   }
 
   handleOpen = () => {
-    this.setState({ open: true });
+    this.setState({ 
+      open: true,
+      registered: false
+    });
   };
 
   handleClose = () => {
@@ -83,15 +92,10 @@ class RegisterModal extends Component {
 
   render() {
 
-    if (this.state.registered) {
-      return (
-        <LoginModal registered={true} />
-      )
-    }
     return (
       <div>
         <Button bsSize="small" onClick={this.handleOpen}>
-          Admin Register
+          Register a New Admin
         </Button>
 
         <Modal show={this.state.open} onHide={this.handleClose}>
@@ -121,7 +125,7 @@ class RegisterModal extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose}>Close</Button>
-            <Button onClick={this.registerUser}>Register</Button>
+            {!this.state.registered ? <Button onClick={this.registerUser}>Register</Button> : <Button onClick={this.registerUser}>Register Another User</Button>}
           </Modal.Footer>
         </Modal>
       </div>

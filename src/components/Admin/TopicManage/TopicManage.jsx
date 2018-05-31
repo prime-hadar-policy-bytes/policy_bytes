@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Footer from '../../Footer/Footer.jsx'
 import TopicManagePanel from './TopicManagePanel.jsx'
 import TopicManageModal from './TopicManageModal.jsx'
+import RegisterModal from '../RegisterModal/RegisterModal.js'
 
 import './TopicManage.css'; 
 
@@ -21,6 +22,15 @@ class TopicManage extends Component {
 
   componentDidMount () {
     this.fetchAllTopics(); 
+    if (!this.props.user.userInfo) {
+      this.props.history.push('login');
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.user.userInfo) {
+      this.props.history.push('login');
+    }
   }
 
   fetchAllTopics = () => {
@@ -73,6 +83,7 @@ class TopicManage extends Component {
           <Button className="newTopicButton" bsStyle="success">
             <Link to='/topicEdit'>Create A New Topic</Link>
           </Button>
+          <RegisterModal/>
         </h1>             
 
           
@@ -88,7 +99,8 @@ class TopicManage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  state
+  state,
+  user: state.user
 })
 
 
