@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import dummyTopicCache from '../../components/TopicPage/DummyData.js'
 
 let emptyTopicEditCache = {
     topicDBId: '',
@@ -38,43 +39,7 @@ let emptyTopicEditCache = {
     }
 }
 
-let demoTopicCache = {
-    topicDBId: '',
-    topicTitle: '',
-    topicSummary: '',
-    topicPremise: '',
-    topicReadMore: '',
-    topicCommonGround: '',
-    contributor1DbId: '',
-    contributor1FirstName: '',
-    contributor1LastName: '',
-    bio1: '',
-    photo1: '',
-    proposal1DbId: '',
-    proposal1: '',
-    contributor2DbId: '',
-    contributor2FirstName: '',
-    contributor2LastName: '',
-    bio2: '',
-    photo2: '',
-    proposal2DbId: '',
-    proposal2: '',
-    keyClaims: {
-        0: {
-            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-            claimContributor: '',
-            keyClaim: '',
-            streamData: {
-                0: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: '',
-                    streamComment: '',
-                    streamEvidence: '',
-                }
-            }
-        }
-    }
-}
+
 
 const topicEditCache = (state = emptyTopicEditCache, action) => {
     switch (action.type) {
@@ -181,10 +146,15 @@ const topicEditCache = (state = emptyTopicEditCache, action) => {
 //SET REDUX STORE TO HOLD SELECTED TOPIC TO BE EDITED 
         case 'CACHE_TOPIC_TO_EDIT':
             return action.payload
+
+        case 'DEMO_BUTTON':
+            return dummyTopicCache; 
+        
         default: 
         return state
     }
 }
+
 
 
 export default combineReducers({
