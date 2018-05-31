@@ -23,22 +23,27 @@ class TopicEdit extends Component {
   }
 
   componentDidMount() {
-    this.populateEditCache(); 
+    this.populateEditCache();
     this.fetchEditCache();
-    if (!this.props.user.userInfo) {
-      this.props.history.push('login');
-    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.user.userInfo) {
-      this.props.history.push('login');
+  componentDidUpdate() {
+    if (!this.props.user.isLoading) {
+      if(!this.props.user.userInfo) {
+        // userInfo is null, that means the user isn't logged in
+        this.props.history.push('/login');
+      } else if(this.props.user.userInfo.status !== 2) {
+        // user is not an admin
+        this.props.history.push('/login');
+      } else {
+        // user is an admin, do nothing
+      }
     }
   }
 
   populateEditCache = () => {
-    let editTopicId = this.props.match.params.id; 
-    
+    let editTopicId = this.props.match.params.id;
+
     if (editTopicId) {
       this.props.dispatch({
         type: 'FETCH_EDIT_TOPIC_INFO',
@@ -69,8 +74,8 @@ class TopicEdit extends Component {
   }
 
   handleStreamChange = (event, claimId, streamId) => {
-    if (debug){console.log('in topicEdit handle stream change, claim id:', claimId, 'streamId:', streamId);}
-    if (debug){console.log('event.target: ', event.target);}
+    if (debug) { console.log('in topicEdit handle stream change, claim id:', claimId, 'streamId:', streamId); }
+    if (debug) { console.log('event.target: ', event.target); }
     let payloadPackage = {
       claimId: claimId,
       streamId: streamId,
@@ -85,10 +90,10 @@ class TopicEdit extends Component {
   //Send local state object to Redux
   handleSubmit = (event) => {
     event.preventDefault();
-    if (debug){console.log('form submit clicked, contents:', this.state);}
+    if (debug) { console.log('form submit clicked, contents:', this.state); }
 
-    let editTopicId = this.props.match.params.id; 
-    
+    let editTopicId = this.props.match.params.id;
+
     if (editTopicId) {
       this.props.dispatch({
         type: 'UPDATE_TOPIC',
@@ -112,7 +117,7 @@ class TopicEdit extends Component {
 
   //currying function TO CHANGE REDUX STATE
   handleTextChange = (event) => {
-    if (debug){console.log('in handleTextChange, event.target: ', event.target.value);}
+    if (debug) { console.log('in handleTextChange, event.target: ', event.target.value); }
     this.props.dispatch({
       type: 'CHANGE_TOPIC_INFO',
       payload: event.target
@@ -122,7 +127,7 @@ class TopicEdit extends Component {
   //ADDING A NEW KEY CLAIM OBJECT TO THE EDITTOPICCACHE
   addKeyClaim = () => {
     const claimAddId = Object.keys(this.props.keyClaims).length;
-    if (debug) {console.log(claimAddId);}
+    if (debug) { console.log(claimAddId); }
     this.props.dispatch({
       type: 'ADD_KEY_CLAIM',
       payload: claimAddId
@@ -130,30 +135,50 @@ class TopicEdit extends Component {
   }
 
   handleDismiss = () => {
-    if (debug) {console.log('in handledismiss');}
-    
+    if (debug) { console.log('in handledismiss'); }
+
     this.setState({
       submitAlert: false
     })
   }
   handleUploadContent = (fileUploded, contributor) => {
-    let fileUrl = fileUploded.url; 
+    let fileUrl = fileUploded.url;
     console.log('file uploaded url:', fileUrl, "contributor", contributor);
     let pictureUploadPackage = {
       value: fileUrl, //<-- action.payload.value
       name: contributor //<-- action.payload.name is contributor1 or contributor2 
     }
     this.props.dispatch({
-      type: 'CHANGE_TOPIC_INFO', 
+      type: 'CHANGE_TOPIC_INFO',
       payload: pictureUploadPackage
     })
-}
+  }
 
 
 
   render() {
 
-    if (debug) {console.log('ROUTE PARAMS', this.props.match.params.id);}
+
+    // const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
+    // const security = {policy: "eyJleHBpcnkiOjE1MjgyNjY2MDAsImNhbGwiOlsicGljayIsInJlYWQiLCJzdGF0Iiwid3JpdGUiLCJ3cml0ZVVybCIsInN0b3JlIiwiY29udmVydCIsInJlbW92ZSIsImV4aWYiXX0=",
+    //                 signature: "67168f3af0d8c11b316cce342f7e551222e838f82afc6697aa9a142d1db93390"};
+    // const client = filestack.init(apikey,security);
+    // const options = {
+    //     accept: ['image/*', 'video/*'],
+    //     maxFiles: 1,
+    //     storeTo: {
+    //       location: 's3'
+    //     },
+    //     dl: true
+    // }
+    // client.retrieve(options);
+
+
+
+
+
+    if (debug) { console.log('ROUTE PARAMS', this.props.match.params.id); }
+
 
 
     let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
@@ -161,19 +186,19 @@ class TopicEdit extends Component {
     for (const keyClaim in keyClaimIdObject) {
       keyClaimForms.push(
         <KeyClaimForm key={keyClaim}
-                      claimId={keyClaim}
-                      keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims}
-                      handleKeyClaimChange={this.handleKeyClaimChange}
-                      handleStreamChange={this.handleStreamChange} />
+          claimId={keyClaim}
+          keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims}
+          handleKeyClaimChange={this.handleKeyClaimChange}
+          handleStreamChange={this.handleStreamChange} />
       )
     }
-   
+
 
     return (
       <div>
         <div className="wrapper">
 
-        
+
           <h1>Topic Edit</h1>
 
           {/* SHOW STATE ON DOM */}
@@ -191,7 +216,7 @@ class TopicEdit extends Component {
                 <FormControl onChange={this.handleTextChange}
                   name="topicTitle"
                   value={this.props.state.cacheEdit.topicEditCache.topicTitle}  //<-- VALUE COMES FROM REDUX STATE 
-                  type="text" />             
+                  type="text" />
               </Panel.Body>
             </Panel>
 
@@ -235,16 +260,16 @@ class TopicEdit extends Component {
               <Panel.Body>
                 <ControlLabel>Contributor 1 First Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  type="text" 
+                  type="text"
                   name="contributor1FirstName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor1FirstName}  //<-- VALUE COMES FROM REDUX STATE 
-                  />
+                />
                 <ControlLabel>Contributor 1 Last Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  type="text" 
+                  type="text"
                   name="contributor1LastName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor1LastName}  //<-- VALUE COMES FROM REDUX STATE 
-                  />
+                />
                 <ControlLabel>Contributor 1 Bio</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio1"
@@ -256,11 +281,11 @@ class TopicEdit extends Component {
                   value={this.props.state.cacheEdit.topicEditCache.proposal1}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
 
-                <img src={this.props.state.cacheEdit.topicEditCache.photo1} width="300"/>
+                <img src={this.props.state.cacheEdit.topicEditCache.photo1} width="300" />
 
 
-                <ImageUpload handleUploadContent={this.handleUploadContent} 
-                              contributor='photo1'/>
+                <ImageUpload handleUploadContent={this.handleUploadContent}
+                  contributor='photo1' />
 
 
               </Panel.Body>
@@ -268,18 +293,18 @@ class TopicEdit extends Component {
 
             <Panel>
               <Panel.Body>
-              <ControlLabel>Contributor 2 First Name</ControlLabel>
+                <ControlLabel>Contributor 2 First Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  type="text" 
+                  type="text"
                   name="contributor2FirstName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor2FirstName}  //<-- VALUE COMES FROM REDUX STATE 
-                  />
+                />
                 <ControlLabel>Contributor 2 Last Name</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
-                  type="text" 
+                  type="text"
                   name="contributor2LastName"
                   value={this.props.state.cacheEdit.topicEditCache.contributor2LastName}  //<-- VALUE COMES FROM REDUX STATE 
-                  />
+                />
                 <ControlLabel>Contributor 2 Bio</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
                   name="bio2"
@@ -291,11 +316,11 @@ class TopicEdit extends Component {
                   value={this.props.state.cacheEdit.topicEditCache.proposal2}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
 
-                <img src={this.props.state.cacheEdit.topicEditCache.photo2} width="300"/>
+                <img src={this.props.state.cacheEdit.topicEditCache.photo2} width="300" />
 
 
-                <ImageUpload handleUploadContent={this.handleUploadContent} 
-                                contributor='photo2'/>
+                <ImageUpload handleUploadContent={this.handleUploadContent}
+                  contributor='photo2' />
 
 
               </Panel.Body>
@@ -307,12 +332,12 @@ class TopicEdit extends Component {
             {keyClaimForms}
 
 
-{/* Conditionally render a success/failure message based on result of submit */}
-          <div>
-            {this.state.submitAlert &&
-              <SubmitAlert handleDismiss={this.handleDismiss}/>
-            }
-          </div>
+            {/* Conditionally render a success/failure message based on result of submit */}
+            <div>
+              {this.state.submitAlert &&
+                <SubmitAlert handleDismiss={this.handleDismiss} />
+              }
+            </div>
             <Button type="submit" bsStyle="primary">Submit!</Button>
           </form>
         </div>
