@@ -75,9 +75,6 @@ class TopicManage extends Component {
       <div>
         <div className="wrapper">
 
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
-        <pre>all topics reducer:::<br/>{JSON.stringify(this.props.state.topics.allTopics, null, 2)}</pre>
-
         <h1>
           Topic Manage Page
           <Button className="newTopicButton" bsStyle="success">

@@ -153,24 +153,6 @@ class TopicEdit extends Component {
 
   render() {
 
-    // const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
-    // const security = {policy: "eyJleHBpcnkiOjE1MjgyNjY2MDAsImNhbGwiOlsicGljayIsInJlYWQiLCJzdGF0Iiwid3JpdGUiLCJ3cml0ZVVybCIsInN0b3JlIiwiY29udmVydCIsInJlbW92ZSIsImV4aWYiXX0=",
-    //                 signature: "67168f3af0d8c11b316cce342f7e551222e838f82afc6697aa9a142d1db93390"};
-    // const client = filestack.init(apikey,security);
-    // const options = {
-    //     accept: ['image/*', 'video/*'],
-    //     maxFiles: 1,
-    //     storeTo: {
-    //       location: 's3'
-    //     },
-    //     dl: true
-    // }
-    // client.retrieve(options);
-
-
-
-
-
     if (debug) {console.log('ROUTE PARAMS', this.props.match.params.id);}
 
 

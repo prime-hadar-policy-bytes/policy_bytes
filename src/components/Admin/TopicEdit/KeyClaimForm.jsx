@@ -20,7 +20,7 @@ class KeyClaimForm extends Component {
 //adding a new value to this.state.streamData object that will be the ID of the new key claim 
     addStreamItem = () => {
         let streamItemId = Object.keys(this.props.keyClaims[this.props.claimId].streamData).length;
-        let claimId = this.props.claimId; 
+        let claimId = this.props.claimId; //<-- local ID of the key claim that this lives in
         //packaging up the object to send to the reducer
         let payloadObject = {
             streamItemId: streamItemId,
@@ -55,13 +55,13 @@ class KeyClaimForm extends Component {
     return (
       <div>
 {/* SHOW STATE ON DOM */}
-          <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre>
+          {/* <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre> */}
 
           <Panel bsStyle="primary">
 
             <Panel.Heading>
 
-          {/* <pre>claim Id: {JSON.stringify(this.props.keyClaims[this.props.claimId], null, 2)}</pre> */}
+          <pre>claim Id: {JSON.stringify(this.props.keyClaims, null, 2)}</pre>
 
                 <FormGroup>
                     <FormControl componentClass="select" 
