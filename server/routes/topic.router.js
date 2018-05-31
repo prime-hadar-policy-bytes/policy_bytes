@@ -198,40 +198,20 @@ router.post('/newtopic', (req, res) => {
                 console.log('streamDataaaaaaaaaaaaaa: ', streamData);
 
                 for (stream in streamData) {
+                    let stream_order = stream; //<-- local stream Id number
 
-                    let streamClaimData = [];
-
-                    //stream is the 0 property, 1 property, etc. in the streamData object
-                    let stream_order = stream;
-
-                    //streamDataObj is the value of a property in the streamData object; this
-                    //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
-                    //streamComment: 'text', streamEvidence: 'more text',}
-                    let streamDataObj = streamData[stream]
-                    for (prop in streamDataObj) {
-                        //prop is each property in the streamDataObj, but I want the values...
-
-                        //streamDataProp is the value of a property in the streamDataObj object e.g.
-                        //'0', 'contributor2', 'text', 'more text'
-                        let streamDataProp = streamDataObj[prop]
-                        console.log('HIIIIIIIII prop in stream: ', prop);
-                        console.log('HIIIIIIIIII streamDataProp at prop: ', streamDataProp);
-                        
-                        
-                        streamClaimData.push(streamDataProp)
-                    }
-                    console.log('streamClaimDataAAAAAAAAAAAA: ', streamClaimData);
+                    let streamDataObj = streamData[stream] //<--all content for a single stream
+                    
 
                     let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
                     "stream_evidence", "stream_order")
                     VALUES ($1, $2, $3, $4, $5)`
-                    if (streamClaimData[1] === 'contributor1') {
+                    if (streamDataObj.streamContributor === 'contributor1') {
                         contributor = contributor1Id;
                     } else {
                         contributor = contributor2Id
                     }
-
-                    await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3], stream_order])
+                    await client.query(queryText6, [keyClaimId, contributor, streamDataObj.streamComment, streamDataObj.streamEvidence, stream_order])
                     console.log("successfully posted stream claim");
                 }
             }
@@ -383,7 +363,7 @@ router.put('/updatetopic', (req, res) => {
             let queryText = `UPDATE "topic" SET "topic_title" = $1, "premise" = $2, "common_ground" = $3, 
             "archive_summary" = $4 WHERE "id" = $5;`;
             await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, 
-                topic.topicSummary, topic.topicDBId]);
+                topic.topicSummary, topic.topicDbId]);
             console.log('successfully posted topic');
 
             let queryText3 = `UPDATE "proposal" SET "proposal" = $1 WHERE "id" = $2;`
@@ -431,35 +411,18 @@ router.put('/updatetopic', (req, res) => {
                 let streamData = keyClaimData[3]
 
                 for (stream in streamData) {
+                    let stream_order = stream; //<-- local stream Id number
 
-                    let streamClaimData = [];
-
-                    //stream is the 0 property, 1 property, etc. in the streamData object
-                    let stream_order = stream;
-
-                    //streamDataObj is the value of a property in the streamData object; this
-                    //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
-                    //streamComment: 'text', streamEvidence: 'more text',}
-                    let streamDataObj = streamData[stream]
-                    for (prop in streamDataObj) {
-                        //prop is each property in the streamDataObj, but I want the values...
-
-                        //streamDataProp is the value of a property in the streamDataObj object e.g.
-                        //'0', 'contributor2', 'text', 'more text'
-                        let streamDataProp = streamDataObj[prop]
-                        streamClaimData.push(streamDataProp)
-                    }
-                    console.log('streamClaimData: ', streamClaimData);
+                    let streamDataObj = streamData[stream] //<--all content for a single stream
 
                     let queryText6 = `UPDATE "stream" SET "contributor_id" = $1, "stream_comment" = $2, 
                     "stream_evidence" = $3 WHERE "id" = $4;`
-                    if (streamClaimData[1] === 'contributor1') {
-                        contributor = topic.contributor1DbId
+                    if (streamDataObj.streamContributor === 'contributor1') {
+                        contributor = topic.contributor1DbId;
                     } else {
                         contributor = topic.contributor2DbId
                     }
-
-                    await client.query(queryText6, [contributor, streamClaimData[2], streamClaimData[3], streamClaimData[0]])
+                    await client.query(queryText6, [contributor, streamDataObj.streamComment, streamDataObj.streamEvidence, streamDataObj.streamDbId])
                     console.log("successfully posted stream claim");
                 }
             }

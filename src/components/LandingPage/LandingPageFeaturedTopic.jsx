@@ -87,7 +87,7 @@ class LandingPageFeaturedTopic extends Component {
 
                 <Row>
                         <Col xs={12} md={12}>
-                            <h3>{moment(featuredTopic[1] && featuredTopic[1].published_date).format('MMMM Do YYYY, h:mm a')}</h3>
+                            <h3>{moment(featuredTopic[1] && featuredTopic[1].published_date).format('MMMM Do YYYY')}</h3>
                         </Col>
                 </Row>
                   {/* </div> */}

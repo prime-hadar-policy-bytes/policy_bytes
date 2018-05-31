@@ -33,7 +33,7 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.fetchTopicPageContent(1);
+    this.fetchTopicPageContent(20);
 
   }
 

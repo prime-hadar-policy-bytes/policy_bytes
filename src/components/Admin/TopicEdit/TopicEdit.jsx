@@ -43,7 +43,6 @@ class TopicEdit extends Component {
 
   populateEditCache = () => {
     let editTopicId = this.props.match.params.id;
-
     if (editTopicId) {
       this.props.dispatch({
         type: 'FETCH_EDIT_TOPIC_INFO',
@@ -126,7 +125,7 @@ class TopicEdit extends Component {
 
   //ADDING A NEW KEY CLAIM OBJECT TO THE EDITTOPICCACHE
   addKeyClaim = () => {
-    const claimAddId = Object.keys(this.props.keyClaims).length;
+    const claimAddId = Object.keys(this.props.keyClaims).length; //REDUX, entire keyclaim object
     if (debug) { console.log(claimAddId); }
     this.props.dispatch({
       type: 'ADD_KEY_CLAIM',
@@ -154,40 +153,25 @@ class TopicEdit extends Component {
     })
   }
 
+  demoButton = () => {
+    this.props.dispatch({
+      type: 'DEMO_BUTTON',
+    })
+  }
+
 
 
   render() {
 
-
-    // const apikey = 'AMdZyEtwSaP0XBNOaUMvAz';
-    // const security = {policy: "eyJleHBpcnkiOjE1MjgyNjY2MDAsImNhbGwiOlsicGljayIsInJlYWQiLCJzdGF0Iiwid3JpdGUiLCJ3cml0ZVVybCIsInN0b3JlIiwiY29udmVydCIsInJlbW92ZSIsImV4aWYiXX0=",
-    //                 signature: "67168f3af0d8c11b316cce342f7e551222e838f82afc6697aa9a142d1db93390"};
-    // const client = filestack.init(apikey,security);
-    // const options = {
-    //     accept: ['image/*', 'video/*'],
-    //     maxFiles: 1,
-    //     storeTo: {
-    //       location: 's3'
-    //     },
-    //     dl: true
-    // }
-    // client.retrieve(options);
-
-
-
-
-
     if (debug) { console.log('ROUTE PARAMS', this.props.match.params.id); }
 
-
-
-    let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims;
+    let keyClaimIdObject = this.props.state.cacheEdit.topicEditCache.keyClaims; //REDUX, everything in keyclaims
     let keyClaimForms = []
     for (const keyClaim in keyClaimIdObject) {
       keyClaimForms.push(
         <KeyClaimForm key={keyClaim}
-          claimId={keyClaim}
-          keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims}
+          claimId={keyClaim}  //LOCAL, count to populate the view 
+          keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims} ////REDUX, everything in keyclaims
           handleKeyClaimChange={this.handleKeyClaimChange}
           handleStreamChange={this.handleStreamChange} />
       )
@@ -200,6 +184,7 @@ class TopicEdit extends Component {
 
 
           <h1>Topic Edit</h1>
+          <Button onClick={this.demoButton}>Demo</Button>
 
           {/* SHOW STATE ON DOM */}
           {/* <pre>state: {JSON.stringify(this.state, null, 3)}</pre> */}

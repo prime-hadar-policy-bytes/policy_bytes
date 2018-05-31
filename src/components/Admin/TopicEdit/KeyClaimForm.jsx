@@ -68,7 +68,7 @@ class KeyClaimForm extends Component {
                                     placeholder="select" 
                                     name="claimContributor" 
                                     onChange={this.handleChange}
-                                    id={this.props.claimId} 
+                                    id={this.props.claimId}  //<-- LOOK AT ME 
                                     value={this.props.keyClaims[this.props.claimId].claimContributor} 
                                     >
                         <option key="0" value="">-- Select Contributor --</option>
@@ -82,7 +82,7 @@ class KeyClaimForm extends Component {
               <Panel.Body>
                 <ControlLabel>Key Claim</ControlLabel>
                 <FormControl onChange={this.handleChange} 
-                            id={this.props.claimId} 
+                            id={this.props.claimId} //<-- LOOK AT ME 
                             name="keyClaim" 
                             value={this.props.keyClaims[this.props.claimId].keyClaim} 
                             type="text"/>
