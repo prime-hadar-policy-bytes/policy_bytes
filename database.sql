@@ -69,38 +69,18 @@ CREATE TABLE "stream" (
 );
 
 
-CREATE TABLE "comments_stream" (
-    "id" SERIAL PRIMARY KEY,
-    "date" timestamp with time zone default current_timestamp,
-    "person_id" INT REFERENCES "person",
-    "topic_id" INT REFERENCES "topic",
-    "stream_id" INT REFERENCES "stream",
-    "comment" VARCHAR(5000),
-    "order" VARCHAR(5000),
-    "approved" boolean default false
-); 
-
-
 CREATE TABLE "comments_general" (
     "id" SERIAL PRIMARY KEY,
     "date" timestamp with time zone default current_timestamp,
     "person_id" INT REFERENCES "person",
     "topic_id" INT REFERENCES "topic",
     "comment" VARCHAR(5000),
-    "order" VARCHAR(5000),
     "approved" boolean default false
-);
-
-
-CREATE TABLE "comments_key_claim" (
-    "id" SERIAL PRIMARY KEY,
-    "date" timestamp with time zone default current_timestamp,
-    "person_id" INT REFERENCES "person",
-    "topic_id" INT REFERENCES "topic",
-    "key_claim_id" INT REFERENCES "key_claim",
-    "comment" VARCHAR(5000),
     "order" VARCHAR(5000),
-    "approved" boolean default false
+    "likes" INT,
+    "key_claim_id" INT REFERENCES "key_claim",
+    "stream_id" INT REFERENCES "stream",
+    "proposal_id" INT REFERENCES "proposal"
 );
 
 CREATE TABLE "proposal" (
