@@ -13,17 +13,18 @@ import './CommentSection.css'
 
 class CommentSection extends Component {
 
-    constructor () {
-        super();
+    constructor(props) {
+        super(props);
 
     }
 
-    componentDidMount() {
-        // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-        this.props.dispatch({ 
-            type: 'FETCH_GENERAL_COMMENTS',
-            payload: {topic_id: this.props.topic_id}
-        });
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.topicPageContent !== this.props.topicPageContent) {
+            this.props.dispatch({
+                type: 'FETCH_GENERAL_COMMENTS',
+                payload: { topic_id: nextProps.topicPageContent.topicDbId }
+            });
+        }
     }
 
     deleteComment = (commentInput) => {
@@ -52,20 +53,22 @@ class CommentSection extends Component {
 
     render() {
 
+
+        // console.log('this is topic_id', this.props.topic_id);
         let commentList = this.props.comments.commentsGeneral.map((comment) => {
             return (
-                <CommentSectionItem  topic_id={this.props.topic_id} key={comment.id} comment={comment}/>
+                <CommentSectionItem topic_id={this.props.topic_id} key={comment.id} comment={comment} />
             )
         })
 
         return (
             <div>
-                <Panel className="commentPanel">
+                <Panel id="commentPanelMaster">
                     <Panel.Heading>Comment Section</Panel.Heading>
                     <Panel.Body>
                         {(this.props.user.userInfo) ? <CommentAdd topic_id={this.props.topic_id} /> : this.loginUserInvite()}
                         <div className="commentPanelWrapper">
-                        {commentList}</div>
+                            {commentList}</div>
                     </Panel.Body>
                 </Panel>
             </div>
@@ -76,7 +79,8 @@ class CommentSection extends Component {
 const mapStateToProps = state => ({
     user: state.user,
     login: state.login,
-    comments: state.comments
+    comments: state.comments,
+    topicPageContent: state.topicPageContent.topicPageReducer
 });
 
 export default connect(mapStateToProps)(CommentSection);

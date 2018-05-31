@@ -7,12 +7,11 @@ const router = express.Router();
 
 router.get('/getGeneralcomments/:id', (req, res) => {
 
-    console.log('in getCommentsGeneral, here is req.params.id', req.params.id)
     let topicId = req.params.id;
 
     
 
-    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id WHERE "topic_id" = $1 ORDER BY comments_general.order;`
+    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id, key_claim.claim, stream.stream_comment, proposal.proposal FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id LEFT JOIN "key_claim" on comments_general.key_claim_id = key_claim.id LEFT JOIN "stream" on comments_general.stream_id = stream.id LEFT JOIN "proposal" on comments_general.proposal_id = proposal.id WHERE comments_general.topic_id = $1 ORDER BY comments_general.order;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText, [topicId]).then((result) => {
@@ -29,7 +28,7 @@ router.get('/getGeneralcomments/:id', (req, res) => {
 });
 
 router.post('/addComment', (req, res) => {
-    console.log('in api/comments/addComment');
+    // console.log('in api/comments/addComment');
 
     if (req.isAuthenticated()) {
 
@@ -47,11 +46,28 @@ router.post('/addComment', (req, res) => {
             try {
                 await client.query('BEGIN');
 
-                //begins series of async database SELECTS to add to selectedTopicToSend
-                let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved") VALUES ($1, $2, $3, $4) RETURNING id;`;
-                const commentId = await client.query(queryText1, [req.body.personId, req.body.topic_id, req.body.comment, req.body.approved]);
+                console.log('this is req.body as it enters addComment', req.body);
 
-                console.log(commentId.rows[0].id)
+                let commentId;
+                if (req.body.key_claim_id) {
+                    let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved", "key_claim_id") VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
+                    commentId = await client.query(queryText1, [req.body.personId, req.body.topic_id, req.body.comment, req.body.approved, req.body.key_claim_id]);
+                    console.log('addComment key_claim_id');
+                } else if (req.body.stream_id) {
+                    let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved", "stream_id") VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
+                    commentId = await client.query(queryText1, [req.body.personId, req.body.topic_id, req.body.comment, req.body.approved, req.body.stream_id]);
+                    console.log('addComment stream_id');
+                } else if (req.body.proposal_id) {
+                    let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved", "proposal_id") VALUES ($1, $2, $3, $4, $5) RETURNING id;`;
+                    commentId = await client.query(queryText1, [req.body.personId, req.body.topic_id, req.body.comment, req.body.approved, req.body.proposal_id]);
+                    console.log('addComment proposal_id');
+                }  else {
+                    let queryText1 = `INSERT INTO comments_general ("person_id", "topic_id", "comment", "approved") VALUES ($1, $2, $3, $4) RETURNING id;`;
+                    commentId = await client.query(queryText1, [req.body.personId, req.body.topic_id, req.body.comment, req.body.approved]);
+                    console.log(commentId.rows[0].id)
+                }
+
+                //begins series of async database SELECTS to add to selectedTopicToSend
 
                 //concatenates previous comment's order plus current comment id to make "order" and sends it to the database
 

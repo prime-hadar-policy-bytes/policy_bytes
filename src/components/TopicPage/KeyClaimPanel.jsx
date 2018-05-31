@@ -12,7 +12,7 @@ export class KeyClaimPanel extends Component {
     super(props);
 
     this.state = {
-      open: false 
+      open: false
     }
   }
 
@@ -25,7 +25,7 @@ export class KeyClaimPanel extends Component {
   }
 
   handleMouseLeave = (event) => {
-    this.props.handleHoverHideStream(); 
+    this.props.handleHoverHideStream();
     this.setState({
       open: false
     })
@@ -36,14 +36,28 @@ export class KeyClaimPanel extends Component {
     this.props.toggleClickShowStream(this.props.keyClaimId)
   }
 
+  handleCommentKeyClaim = (keyClaimInput) => {
+    console.log('clicked!');
+    this.props.dispatch({
+      type: 'SET_KEY_CLAIM_COMMENT',
+      payload: keyClaimInput,
+    })
+    this.props.dispatch({
+      type: 'CLEAR_PROPOSAL_COMMENT'
+    });
+    this.props.dispatch({
+      type: 'CLEAR_STREAM_COMMENT'
+    });
+  }
+
 
   render() {
 
 
-//if a keyClaim is locked open, and the keyClaimId === the Id of the stream being shown, change class info
+    //if a keyClaim is locked open, and the keyClaimId === the Id of the stream being shown, change class info
     let keyClaimClass = "keyClaimPanel"
     if (this.props.keyClaimLocked && this.props.keyClaimId === this.props.showStreamForClaim) {
-      keyClaimClass += " locked"      
+      keyClaimClass += " locked"
     }
     if (this.props.keyClaim.claimContributor === 'contributor1') {
       keyClaimClass += " contrib1"
@@ -53,14 +67,14 @@ export class KeyClaimPanel extends Component {
     }
 
 
-    
     return (
       <div>
+
         <Panel className={keyClaimClass}
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
-                expanded={this.state.open}>
-          <Panel.Body  onClick={this.toggleLockKeyClaim}>
+          onMouseEnter={this.handleMouseEnter}
+          onMouseLeave={this.handleMouseLeave}
+          expanded={this.state.open}>
+          <Panel.Body onClick={this.toggleLockKeyClaim}>
             <p>{this.props.keyClaim.keyClaim}</p>
           </Panel.Body>
           <Panel.Collapse>
@@ -72,7 +86,8 @@ export class KeyClaimPanel extends Component {
                 <Button className="keyClaimFooterItem">
                   <Glyphicon glyph="heart" />
                 </Button>
-                <Button className="keyClaimFooterItem">
+                <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentKeyClaim(this.props.keyClaim)}
+                  className="keyClaimFooterItem">
                   <Glyphicon glyph="comment" />
                 </Button>
               </ButtonGroup>

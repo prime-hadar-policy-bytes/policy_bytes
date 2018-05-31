@@ -472,7 +472,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             WHERE topic.id = $1;`;
             const topicResult = await client.query(queryText1, [topicId]);
             selectedTopicToSend = {
-                topidDbId: topicResult.rows[0].topic_id,
+                topicDbId: topicResult.rows[0].topic_id,
                 topicTitle: topicResult.rows[0].topic_title,
                 topicSummary: topicResult.rows[0].archive_summary,
                 topicPremise: topicResult.rows[0].premise,

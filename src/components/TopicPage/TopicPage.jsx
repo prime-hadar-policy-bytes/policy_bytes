@@ -1,16 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Footer from '../Footer/Footer.jsx'
-import CommentSection from './CommentSection/CommentSection.jsx'
 import { USER_ACTIONS } from '../../redux/actions/userActions';
 
-import { Panel, Tab, Tabs, Button, ButtonGroup, Image, Grid, Col, Row } from 'react-bootstrap';
+import { Panel, Tab, Tabs, Button, ButtonGroup, Glyphicon, Image, Grid, Col, Row } from 'react-bootstrap';
 
 import KeyClaimPanel from './KeyClaimPanel.jsx'
 import StreamItem from './StreamItem.jsx'
 import TopicTitleContent from './TopicTitleContent.jsx'
 import StreamItemFactory from './StreamItemFactory.jsx'
 import TopicContributors from './TopicContributors.jsx'
+import CommentSection from './CommentSection/CommentSection.jsx'
 
 
 import dummyTopicCache from './DummyData.js'
@@ -22,18 +22,18 @@ import './TopicPage.css'
 
 export class TopicPage extends Component {
   constructor(props) {
-    super(props) 
-    
+    super(props)
+
     this.state = {
       showStreamForClaim: undefined,
       keyClaimLocked: false,
-      contributorSelect: 'contributor1',  
+      contributorSelect: 'contributor1',
     }
   }
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.fetchTopicPageContent(1); 
+    this.fetchTopicPageContent(1);
 
   }
 
@@ -46,25 +46,25 @@ export class TopicPage extends Component {
   }
 
 
-//called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
+  //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
   handleHoverShowStream = (id) => {
     if (this.state.keyClaimLocked === false) {
       this.setState({
         showStreamForClaim: id
-      })   
+      })
     }
   }
 
-//called on mouseLeave from keyClaimPanel IF keyClaimLocked === false
+  //called on mouseLeave from keyClaimPanel IF keyClaimLocked === false
   handleHoverHideStream = (id) => {
     if (this.state.keyClaimLocked === false) {
       this.setState({
         showStreamForClaim: undefined
-      })     
+      })
     }
   }
 
-//toggle this.state.keyClaimLocked
+  //toggle this.state.keyClaimLocked
   toggleClickShowStream = (id) => {
     this.setState({
       showStreamForClaim: id,
@@ -78,43 +78,63 @@ export class TopicPage extends Component {
     })
   }
 
+  handleCommentProposal = (proposalInput, proposalIdInput) => {
+
+    let proposalObject = { proposal: proposalInput, proposalContributor: this.state.contributorSelect,
+      proposalDbId: proposalIdInput};
+      console.log('in handleCommentProposal', proposalObject);
+    this.props.dispatch({
+      type: 'SET_PROPOSAL_COMMENT',
+      payload: proposalObject,   
+    })
+    this.props.dispatch({
+      type: 'CLEAR_KEY_CLAIM_COMMENT'
+    });
+    this.props.dispatch({
+      type: 'CLEAR_STREAM_COMMENT'
+    });
+  }
+
 
 
 
   render() {
-    
+
     //loop through keyclaim object to make keyClaimPanels 
     let keyClaimsArray = []
-    for (const keyClaimId in this.props.topicPageContent.keyClaims) {      
+    for (const keyClaimId in this.props.topicPageContent.keyClaims) {
       //if statement to render only the selected contributor's claims
-      if (this.state.contributorSelect === this.props.topicPageContent.keyClaims[keyClaimId].claimContributor) {        
+      if (this.state.contributorSelect === this.props.topicPageContent.keyClaims[keyClaimId].claimContributor) {
         keyClaimsArray.push(
           <KeyClaimPanel key={keyClaimId}
-                          keyClaimId={keyClaimId}
-                          keyClaim={this.props.topicPageContent.keyClaims[keyClaimId]}
-                          showStreamForClaim={this.state.showStreamForClaim}
-                          keyClaimLocked={this.state.keyClaimLocked}
-                          handleHoverShowStream={this.handleHoverShowStream}
-                          handleHoverHideStream={this.handleHoverHideStream}
-                          toggleClickShowStream={this.toggleClickShowStream}/>
-        )        
+            keyClaimId={keyClaimId}
+            keyClaim={this.props.topicPageContent.keyClaims[keyClaimId]}
+            showStreamForClaim={this.state.showStreamForClaim}
+            keyClaimLocked={this.state.keyClaimLocked}
+            handleHoverShowStream={this.handleHoverShowStream}
+            handleHoverHideStream={this.handleHoverHideStream}
+            toggleClickShowStream={this.toggleClickShowStream}
+          />
+        )
       }
     }
 
 
-//CHANGING ARENA CONTENT BASED ON SELECTED CONTRIBUTOR
+    //CHANGING ARENA CONTENT BASED ON SELECTED CONTRIBUTOR
     let arenaContainer = 'arenaContainer';
     let streamContainerClass = "streamItemsContainer";
-    let arenaSummaryClass = 'arenaSummary';  
+    let arenaSummaryClass = 'arenaSummary';
     let arenaPicture = dummyTopicCache.photo1; //< -- STILL DUMMY DATA
-    let arenaProposal = this.props.topicPageContent.proposal1; 
-    let selectedContributor = this.props.topicPageContent.contributor1FirstName; 
+    let arenaProposal = this.props.topicPageContent.proposal1;
+    let arenaProposalId = this.props.topicPageContent.proposal1DbId;
+    let selectedContributor = this.props.topicPageContent.contributor1FirstName;
     if (this.state.contributorSelect === 'contributor1') {
       arenaContainer = "arenaContainerContrib1"
       streamContainerClass += " contrib1"
       arenaSummaryClass += " contrib1"
       arenaPicture = dummyTopicCache.photo1  //< -- STILL DUMMY DATA
-      arenaProposal = this.props.topicPageContent.proposal1; 
+      arenaProposal = this.props.topicPageContent.proposal1;
+      arenaProposalId = this.props.topicPageContent.proposal1DbId;
       selectedContributor = this.props.topicPageContent.contributor1FirstName;
     }
     if (this.state.contributorSelect === 'contributor2') {
@@ -122,26 +142,27 @@ export class TopicPage extends Component {
       streamContainerClass += " contrib2"
       arenaSummaryClass += " contrib2"
       arenaPicture = dummyTopicCache.photo2  //< -- STILL DUMMY DATA
-      arenaProposal = this.props.topicPageContent.proposal2; 
+      arenaProposal = this.props.topicPageContent.proposal2;
+      arenaProposalId = this.props.topicPageContent.proposal2DbId;
       selectedContributor = this.props.topicPageContent.contributor2FirstName
     }
-    
+
     return (
       <div>
 
-        <TopicTitleContent topicPageContent={this.props.topicPageContent}/>
-        <TopicContributors topicPageContent={this.props.topicPageContent}/>
+        <TopicTitleContent topicPageContent={this.props.topicPageContent} />
+        <TopicContributors topicPageContent={this.props.topicPageContent} />
 
 
         <div className="wrapper">
           <Tabs className="tabParent"
-                bsStyle="pills"
-                defaultActiveKey='contributor1' 
-                id="contributorSelectTabs"
-                onSelect={this.handleTabSelect}
-                animation={false} 
-                >
-            <Tab tabClassName="tabChildren"  eventKey='contributor1' title={this.props.topicPageContent.contributor1FirstName}></Tab>
+            bsStyle="pills"
+            defaultActiveKey='contributor1'
+            id="contributorSelectTabs"
+            onSelect={this.handleTabSelect}
+            animation={false}
+          >
+            <Tab tabClassName="tabChildren" eventKey='contributor1' title={this.props.topicPageContent.contributor1FirstName}></Tab>
             <Tab tabClassName="tabChildren" eventKey='contributor2' title={this.props.topicPageContent.contributor2FirstName}></Tab>
           </Tabs>
 
@@ -149,36 +170,50 @@ export class TopicPage extends Component {
 
           <Panel className="arenaContainer">
             <Panel.Body>
-            <Grid>
-              <Row id="arenaTop">
-                <Col xs={12} md={3}>
-                  <Image className="arenaPhoto" src={arenaPicture} rounded height="250"/>                
-                </Col>  
-                <Col xs={12} md={9}>
-                  <Panel className={arenaSummaryClass}>
-                    <Panel.Body>
-                      <p><strong>{selectedContributor}'s Proposal: </strong></p>
-                      <p>{arenaProposal}</p>
+              <Grid>
+                <Row id="arenaTop">
+                  <Col xs={12} md={3}>
+                    <Image className="arenaPhoto" src={arenaPicture} rounded height="250" />
+                  </Col>
+                  <Col xs={12} md={9}>
+                    <Panel className={arenaSummaryClass}>
+                      <Panel.Body>
+                        <p><strong>{selectedContributor}'s Proposal: </strong></p>
+                        <p>{arenaProposal}</p>
                     </Panel.Body>
-                  </Panel>
-                </Col>  
-              </Row>
-            </Grid>
+                      <Panel.Footer className="keyClaimFooter">
+                        <ButtonGroup className="keyClaimFooterButtons">
+                          <Button className="keyClaimFooterItem">
+                            <Glyphicon glyph="thumbs-up" />
+                          </Button>
+                          <Button className="keyClaimFooterItem">
+                            <Glyphicon glyph="heart" />
+                          </Button>
+                          <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentProposal(arenaProposal, arenaProposalId)}
+                            className="keyClaimFooterItem">
+                            <Glyphicon glyph="comment" />
+                          </Button>
+                        </ButtonGroup>
+                        <p className="keyClaimFooterLikes">Likes: 4 </p>
+
+                      </Panel.Footer>
+                    </Panel>
+                  </Col>
+                </Row>
+              </Grid>
 
               <div className="keyClaimsContainer">
                 {keyClaimsArray}
               </div>
 
-              <div className = {streamContainerClass}>
-                <StreamItemFactory keyClaims = {this.props.topicPageContent.keyClaims} 
-                                  showStreamForClaim = {this.state.showStreamForClaim}/>
+              <div className={streamContainerClass}>
+                <StreamItemFactory keyClaims={this.props.topicPageContent.keyClaims}
+                  showStreamForClaim={this.state.showStreamForClaim} />
               </div>
             </Panel.Body>
           </Panel>
 
-          <CommentSection topic_id={1} />
-
-          
+          <CommentSection topic_id={this.props.topicPageContent.topicDbId} />
           <Panel>
             <Panel.Body>
               <h4>Sponsored by Ameriprise Financial</h4>
@@ -195,6 +230,7 @@ const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
   topicPageContent: state.topicPageContent.topicPageReducer, //<-- All content for page
+  comments: state.comments
 });
 
 export default connect(mapStateToProps)(TopicPage);
