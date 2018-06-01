@@ -34,6 +34,14 @@
     box-shadow: 1px 1px 4px #888888;
 }
 
+.landingLink{
+    color: black;
+}
+
+.landingLink:hover{
+    color: black
+}
+
 .dottedLine {
     margin: 0em 0em 1em 49%; 
     width: 3px; 
