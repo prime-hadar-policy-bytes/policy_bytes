@@ -37,7 +37,6 @@ class Images extends Component {
 
         return(
             <div>
-                {JSON.stringify(this.state.uploadItem)}
                 <ReactFilestack
                 apikey={apikey}
                 buttonText="Click here to upload content"
@@ -47,7 +46,6 @@ class Images extends Component {
                 // security={security}
                 />
             </div>
-
             )
         }
     }

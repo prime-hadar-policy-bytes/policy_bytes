@@ -1,12 +1,24 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Panel, Grid, Col, Row, Jumbotron, Image } from 'react-bootstrap';
 
 import dummyTopicCache from '../TopicPage/DummyData.js'
 
 import './LandingPage.css'
 
-export default class LandingPageArchive extends Component {
+const mapStateToProps = state => ({
+    user: state.user,
+    login: state.login,
+    state
+})
+
+class LandingPageArchive extends Component {
+    componentDidMount(){
+        this.props.dispatch({
+            type: 'FETCH_ARCHIVED_TOPICS'
+        })
+    }
+
   render() {
     return (
       <div>
@@ -110,3 +122,5 @@ export default class LandingPageArchive extends Component {
     )
   }
 }
+export default connect(mapStateToProps)(LandingPageArchive);
+

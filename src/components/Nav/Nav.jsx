@@ -89,11 +89,11 @@ class Nav extends Component {
                 Topic Edit
           </Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/Images">
                 Images
           </Link>
-            </li>
+            </li> */}
             <li>
               {this.renderLoginItems()}
             </li>
