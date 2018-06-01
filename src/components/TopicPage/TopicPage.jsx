@@ -33,17 +33,17 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.fetchTopicPageContent(1);
+    // this.fetchTopicPageContent(3);
 
   }
 
-  fetchTopicPageContent = (id) => {
-    console.log('in fetchTopicPageContent, id:', id);
-    this.props.dispatch({
-      type: 'FETCH_TOPIC_PAGE_CONTENT',
-      payload: id
-    })
-  }
+  // fetchTopicPageContent = (id) => {
+  //   console.log('in fetchTopicPageContent, id:', id);
+  //   this.props.dispatch({
+  //     type: 'FETCH_TOPIC_PAGE_CONTENT',
+  //     payload: id
+  //   })
+  // }
 
 
   //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
