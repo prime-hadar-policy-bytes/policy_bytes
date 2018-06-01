@@ -33,7 +33,7 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.fetchTopicPageContent(this.props.state.landing.featuredLandingPage.id);
+    this.fetchTopicPageContent(this.props.state.landing.featuredLandingPage[0].id);
 
   }
 
