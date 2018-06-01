@@ -33,7 +33,7 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.fetchTopicPageContent(1);
+    this.fetchTopicPageContent(this.props.state.landing.featuredLandingPage.id);
 
   }
 
@@ -230,7 +230,8 @@ const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
   topicPageContent: state.topicPageContent.topicPageReducer, //<-- All content for page
-  comments: state.comments
+  comments: state.comments,
+  state
 });
 
 export default connect(mapStateToProps)(TopicPage);
