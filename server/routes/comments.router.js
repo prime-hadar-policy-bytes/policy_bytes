@@ -11,7 +11,18 @@ router.get('/getGeneralcomments/:id', (req, res) => {
 
     
 
-    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.owner, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id, key_claim.claim, stream.stream_comment, proposal.proposal FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id LEFT JOIN "key_claim" on comments_general.key_claim_id = key_claim.id LEFT JOIN "stream" on comments_general.stream_id = stream.id LEFT JOIN "proposal" on comments_general.proposal_id = proposal.id WHERE comments_general.topic_id = $1 ORDER BY comments_general.owner DESC, comments_general.order ASC;`
+    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.owner, 
+                        comments_general.date, comments_general.order, comments_general.person_id, 
+                        comments_general.topic_id, comments_general.comment, comments_general.approved, 
+                        person.fb_display_name, person.fb_picture, person.id as person_id, 
+                        key_claim.claim, stream.stream_comment, proposal.proposal 
+                        FROM "comments_general" 
+                        LEFT JOIN "person" ON comments_general.person_id = person.id 
+                        LEFT JOIN "key_claim" on comments_general.key_claim_id = key_claim.id 
+                        LEFT JOIN "stream" on comments_general.stream_id = stream.id 
+                        LEFT JOIN "proposal" on comments_general.proposal_id = proposal.id 
+                        WHERE comments_general.topic_id = $1 
+                        ORDER BY comments_general.owner DESC, comments_general.order ASC;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText, [topicId]).then((result) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { USER_ACTIONS } from '../../../redux/actions/userActions';
 
-import { Panel, Tab, Tabs, Button, ButtonGroup, Glyphicon, Form, FormGroup, ControlLabel, FormControl, Image } from 'react-bootstrap';
+import { Panel, Tab, Tabs, Button, ButtonGroup, Glyphicon, Form, FormGroup, ControlLabel, FormControl, Image, Well } from 'react-bootstrap';
 
 import './CommentSection.css'
 
@@ -37,7 +37,7 @@ class CommentAdd extends Component {
             })
         } else {
             this.setState({
-                placeholder: 'Join the conversation...'
+                placeholder: 'Write your comment here...'
             })
         }
     }
@@ -48,7 +48,7 @@ class CommentAdd extends Component {
                 referenceText: '',
                 typeRef: '',
                 itemId: '',
-                placeholder: 'Join the conversation...',
+                placeholder: 'Write your comment here...',
                 comment: '',
                 personId: '',
                 topic_id: '',
@@ -169,22 +169,28 @@ class CommentAdd extends Component {
 
         return (
             <Panel className="addCommentPanel">
-                <Panel.Body>
-                    <Form>
-                        <FormGroup controlId="formControlsTextarea">
-                            <div className="addCommentPicAndResponse">
-                                <span><Image style={{ 'height': '50px', 'width': '50px' }} circle src={fbPicture} /></span>
+                {/* <Panel.Body> */}
+                    <div >
+                        <Form>
+                            <FormGroup className="addCommentPicAndResponse" controlId="formControlsTextarea">
+                                    {(keyClaimText || streamText || proposalText) ?
+                                        <Panel className={referenceTextClass}>
+                                            responding to...   "{keyClaimText}{streamText}{proposalText}"                                    
+                                        </Panel> : null}
+                                    <Image className='addCommentPic' circle src={fbPicture} />
 
-                                {(keyClaimText || streamText || proposalText) ?
-                                    <Panel className={referenceTextClass}>responding to...   "{keyClaimText}{streamText}{proposalText}"</Panel> : null}
-                            </div>
-                            <FormControl style={{ 'margin': '10px' }} componentClass="textarea" value={this.state.comment} onChange={this.handleTextChange} placeholder={this.state.placeholder} />
-                        </FormGroup>
-                    </Form>
-                    <div><Button style={{ 'margin-right': '10px' }} onClick={this.handleSubmit}>Submit</Button>
+                                <FormControl id='addCommentResponseField' 
+                                            componentClass="textarea" 
+                                            value={this.state.comment} 
+                                            onChange={this.handleTextChange} 
+                                            placeholder={this.state.placeholder} />
+                            </FormGroup>
+                        </Form>
+                    </div>
+                    <div className="addCommentButton"><Button bsStyle="primary" onClick={this.handleSubmit}>Submit</Button>
                         {this.props.isReply ? <Button onClick={this.handleClose} >Cancel</Button> : null}
                     </div>
-                </Panel.Body>
+                {/* </Panel.Body> */}
             </Panel>
         )
     }
