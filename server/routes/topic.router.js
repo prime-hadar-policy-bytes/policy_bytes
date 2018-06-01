@@ -70,7 +70,7 @@ router.get('/featuredlanding', (req, res) => {
 
     // if(req.isAuthenticated()){
 
-    const queryText = `SELECT "topic_title", "published_date", "first_name", "last_name", "bio", "photo_url" 
+    const queryText = `SELECT "topic"."id", "topic_title", "published_date", "first_name", "last_name", "bio", "photo_url" 
     FROM "topic" JOIN "contributor" ON "topic"."contributor1_id" = "contributor"."id" OR 
     "topic"."contributor2_id" = "contributor"."id" WHERE "featured" = true;`
 
