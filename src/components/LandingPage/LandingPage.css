@@ -6,7 +6,7 @@
     margin: 1em 0 0 0;
     padding: 3em 10em 2em 10em ;
     font-family: 'Montserrat', sans-serif;
-    font-size: 18px; 
+    font-size: 16px; 
 }
 
 .landingJumbotron p {
@@ -67,7 +67,7 @@
     width: 90% !important; 
     background-color: white !important; 
     margin: 2em 5%;
-    padding: 2em 4em 5em 4em ;
+    padding: 2em 4em 4em 4em ;
     font-family: 'Montserrat', sans-serif;
     font-size: 22px; 
     box-shadow: 1px 1px 6px #888888;
@@ -80,28 +80,27 @@
     margin-top: 1em; 
 }
 .featuredTopicJumbotron p {
-    
     font-size: 20px; 
     line-height: 1.5em; 
     /* border: 1px solid red;  */
-    padding: 0em 1em; 
+    padding: 0em 0em; 
 }
 
 
 .featuredTopicPhotoLeft {
-    max-width: 10em !important;
+    max-width: 11em !important;
     height: auto  !important; 
-    overflow: auto;
-    margin: 0 0 0 -3em; 
-    /* height: 15em;  */
-    /* width: 12em !important;  */
+    margin: 2em 0 0 -3em; 
+    border: 4px solid #006666 !important;
+    border-radius: 100%; 
 }
 
 .featuredTopicPhotoRight {
-    max-width: 10em;
-    width: 15em !important; 
+    max-width: 11em;
     height: auto !important;
-    margin-bottom: 2em; 
+    margin: 2em 0 2em -1em; 
+    border: 4px solid #666600 !important;
+    border-radius: 100%; 
 }
 
 .featuredTopicContributors{

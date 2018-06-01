@@ -4,6 +4,13 @@ import { Panel, Glyphicon, Button, ButtonGroup } from 'react-bootstrap';
 
 
 class StreamItem extends Component {
+  constructor(props, context) {
+    super(props, context);
+
+    this.state = {
+      open: false
+    };
+  }
 
   handleCommentStream = (streamItemInput) => {
     console.log('clicked!');
@@ -17,6 +24,12 @@ class StreamItem extends Component {
   this.props.dispatch({
       type: 'CLEAR_KEY_CLAIM_COMMENT'
   });
+  }
+
+  handleOpen = () => {
+    this.setState({
+      open: !this.state.open
+    })
   }
 
 
@@ -33,37 +46,43 @@ class StreamItem extends Component {
     // console.log(this.props.streamItem);
 
     return (
-      <div>
-        {/* <Panel className="streamItem"> */}
-        {/* <Panel.Body> */}
-        <Panel className={streamItemClass}>
-          <Panel.Body>
-            {/* <pre>{this.props.streamItem}</pre> */}
-            {/* <pre>StreamItemId{this.props.streamItemId}</pre> */}
-            {/* <pre>{this.props.streamItem.streamContributor}</pre> */}
-            <span><strong>Comment:</strong> {this.props.streamItem.streamComment}
-              <br />
-              <br />
-              <strong>Evidence:</strong> {this.props.streamItem.streamEvidence}</span>
-          </Panel.Body>
-          <Panel.Footer className="keyClaimFooter">
-            <ButtonGroup className="keyClaimFooterButtons">
-              <Button className="keyClaimFooterItem">
-                <Glyphicon glyph="thumbs-up" />
-              </Button>
-              <Button className="keyClaimFooterItem">
-                <Glyphicon glyph="heart" />
-              </Button>
-              <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentStream(this.props.streamItem)} className="keyClaimFooterItem">
-                <Glyphicon glyph="comment" />
-              </Button>
-            </ButtonGroup>
-            <p className="keyClaimFooterLikes">Likes: 4 </p>
+      <div onClick={this.handleOpen}>
 
-          </Panel.Footer>
+        <Panel className={streamItemClass} expanded={this.state.open}>
+          <Panel.Body>
+            <strong>Comment:</strong> 
+            <br/>
+            {this.props.streamItem.streamComment}
+
+            <Panel.Collapse>
+              <br/>
+              <br/>
+              <strong>Evidence:</strong> 
+              <br/>
+              {this.props.streamItem.streamEvidence}
+              
+              <br/>
+              <br/>
+              <Panel.Footer className="keyClaimFooter">
+
+                <ButtonGroup className="keyClaimFooterButtons">
+                  <Button className="keyClaimFooterItem">
+                    <Glyphicon glyph="thumbs-up" />
+                  </Button>
+                  <Button className="keyClaimFooterItem">
+                    <Glyphicon glyph="heart" />
+                  </Button>
+                  <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentStream(this.props.streamItem)} className="keyClaimFooterItem">
+                    <Glyphicon glyph="comment" />
+                  </Button>
+                </ButtonGroup>
+
+                <p className="keyClaimFooterLikes">Likes: 4 </p>
+              </Panel.Footer>
+            </Panel.Collapse>
+          </Panel.Body>
+
         </Panel>
-        {/* </Panel.Body> */}
-        {/* // </Panel> */}
 
       </div>
     )

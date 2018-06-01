@@ -25,13 +25,13 @@ export class LandingPage extends Component {
                   <div className="landingJumbotronInner">
                     <Row>
                           <Col xs={12} s={12} md={12} lg={12}>
-                              <h1><strong>Our Format</strong></h1>
+                              <h1><strong>The Policy Bytes Format</strong></h1>
                           </Col>
                     </Row>
                     <Row>
                           <Col xs={12} s={12} md={12} lg={12}>
                           <p>
-                              Designed to facilitate better debate. 
+                              This site is designed to facilitate better debate. 
                               You can scan arguments and cut to the chase examining evidence in 
                               these curated conversations. 
                               Creating intentional dialogue that focuses on individual argumentation.

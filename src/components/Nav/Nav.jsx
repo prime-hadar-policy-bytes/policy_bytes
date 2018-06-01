@@ -9,7 +9,7 @@ import { Button } from 'react-bootstrap';
 
 
 
-import Header from '../Header/Header';
+// import Header from '../Header/Header';
 
 import './Nav.css';
 
@@ -68,12 +68,7 @@ class Nav extends Component {
           <ul>
             <li>
               <Link to="/home">
-                <img src="/assets/policybytes_logo.png" alt="" width="140"/>
-              </Link>
-            </li>
-            <li>
-              <Link to="/home">
-                Home
+                <img src="/assets/policybytes_logo.png" alt="" height="100"/>
               </Link>
             </li>
             <li className="loginButton">

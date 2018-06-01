@@ -16,8 +16,7 @@ export default class TopicContributors extends Component {
                         <Panel className="contributorPanel ">
                             <Panel.Body>
                                 <Col xs={4} md={4}>
-                                                                                {/* STILL DUMMY DATA FOR PHOTO */}
-                                    <Image className="contributorPhoto contrib1" src={this.props.topicPageContent.photo1} responsive/>
+                                    <Image className="contributorPhotoLeft" src={this.props.topicPageContent.photo1} responsive/>
                                 </Col>
                                 <Col xs={8} md={8}>
                                     <div className="contributorText">
@@ -38,7 +37,7 @@ export default class TopicContributors extends Component {
 
                     <Col xs={12} md={6}>
                         <div >
-                        <Panel className="contributorPanel ">
+                        <Panel className="contributorPanel">
                             <Panel.Body>
                                 <Col xs={8} md={8}>
                                     <div className="contributorText">
@@ -53,8 +52,7 @@ export default class TopicContributors extends Component {
                                     </div>
                                 </Col>
                                 <Col  xs={4} md={4}>                
-                                                                                {/* STILL DUMMY DATA FOR PHOTO */}
-                                    <Image className="contributorPhoto contrib2" src={this.props.topicPageContent.photo1} responsive/>
+                                    <Image className="contributorPhotoRight" src={this.props.topicPageContent.photo1} responsive/>
                                 </Col>
                             </Panel.Body>
 

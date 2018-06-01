@@ -50,7 +50,7 @@ class LandingPageFeaturedTopic extends Component {
         {/* CONTRIBUTORS */}
                     <Row>
                                   <Col xs={12} md={12} lg={2}>
-                                      <img className="featuredTopicPhotoLeft contrib1" src={featuredTopic[0] && featuredTopic[0].photo_url}/>
+                                      <img className="featuredTopicPhotoLeft" src={featuredTopic[0] && featuredTopic[0].photo_url}/>
                                   </Col>
                                   <Col xs={12} md={12} lg={4}>
                                       <div className="contributorText">
@@ -78,7 +78,7 @@ class LandingPageFeaturedTopic extends Component {
                                       </div>
                                   </Col>
                                   <Col  xs={12} md={12} lg={2}>
-                                      <img className="featuredTopicPhotoRight contrib2" src={featuredTopic[1] && featuredTopic[1].photo_url}/>
+                                      <img className="featuredTopicPhotoRight" src={featuredTopic[1] && featuredTopic[1].photo_url}/>
                                   </Col>
                   </Row>
 
