@@ -124,7 +124,7 @@ export class TopicPage extends Component {
     let arenaContainer = 'arenaContainer';
     let streamContainerClass = "streamItemsContainer";
     let arenaSummaryClass = 'arenaSummary';
-    let arenaPicture = dummyTopicCache.photo1; //< -- STILL DUMMY DATA
+    let arenaPicture = this.props.topicPageContent.photo1; 
     let arenaProposal = this.props.topicPageContent.proposal1;
     let arenaProposalId = this.props.topicPageContent.proposal1DbId;
     let selectedContributor = this.props.topicPageContent.contributor1FirstName;
@@ -132,7 +132,7 @@ export class TopicPage extends Component {
       arenaContainer = "arenaContainerContrib1"
       streamContainerClass += " contrib1"
       arenaSummaryClass += " contrib1"
-      arenaPicture = dummyTopicCache.photo1  //< -- STILL DUMMY DATA
+      arenaPicture = this.props.topicPageContent.photo1  
       arenaProposal = this.props.topicPageContent.proposal1;
       arenaProposalId = this.props.topicPageContent.proposal1DbId;
       selectedContributor = this.props.topicPageContent.contributor1FirstName;
@@ -141,7 +141,7 @@ export class TopicPage extends Component {
       arenaContainer += " contrib2"
       streamContainerClass += " contrib2"
       arenaSummaryClass += " contrib2"
-      arenaPicture = dummyTopicCache.photo2  //< -- STILL DUMMY DATA
+      arenaPicture = this.props.topicPageContent.photo2  
       arenaProposal = this.props.topicPageContent.proposal2;
       arenaProposalId = this.props.topicPageContent.proposal2DbId;
       selectedContributor = this.props.topicPageContent.contributor2FirstName
