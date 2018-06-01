@@ -7,18 +7,12 @@ import { triggerLogout } from '../../redux/actions/loginActions';
 
 import { Button } from 'react-bootstrap';
 
-
-
-// import Header from '../Header/Header';
-
 import './Nav.css';
 
 const mapStateToProps = state => ({
   user: state.user,
   login: state.login,
 });
-
-// console.log(process.env.LOCALHOST_SUCCESS_URL)
 
 class Nav extends Component {
 
@@ -30,16 +24,28 @@ class Nav extends Component {
     this.props.dispatch(triggerLogout());
   }
 
-  renderGreetingAdmin() {
-    if (this.props.user.userInfo.status === 2) {
+  renderAdminNav() {
+    if (this.props.user.userInfo && this.props.user.userInfo.status === 2) {
       return (
-        <span>Hello Admin!</span>
+        <li className="navItem">
+          <Link to="/admin">Admin Landing Page</Link>
+        </li>
       )
     } else {
       return (
-        <div>
-          <span>Welcome, {this.props.user.userInfo.firstName}!</span>
-        </div>
+        <div></div>
+      )
+    }
+  }
+
+  renderGreetingAdmin() {
+    if (this.props.user.userInfo.status === 2) {
+      return (
+        <span className="helloUser">Hello Admin!</span>
+      )
+    } else {
+      return (
+        <span className="helloUser">Welcome, {this.props.user.userInfo.firstName}!</span>
       )
     }
   }
@@ -48,8 +54,8 @@ class Nav extends Component {
     if (this.props.user.userInfo) {
       return (
         <div className="footer" id="footerButtons">
-          <div> {this.renderGreetingAdmin()} </div>
-          <div> <Button bsSize="small" onClick={this.logout}>Log Out</Button></div>
+          {this.renderGreetingAdmin()}
+          <Button bsSize="small" onClick={this.logout}>Log Out</Button>
         </div>
       )
     }
@@ -68,9 +74,11 @@ class Nav extends Component {
           <ul>
             <li>
               <Link to="/home">
-                <img src="/assets/policybytes_logo.png" alt="" height="100"/>
+                <img src="/assets/policybytes_logo.png" alt="" height="100" />
               </Link>
             </li>
+
+            {this.renderAdminNav()}
 
             <li className="loginButton">
               {this.renderLoginItems()}
