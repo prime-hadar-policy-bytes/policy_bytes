@@ -67,34 +67,17 @@ class Nav extends Component {
         <div>
           <ul>
             <li>
-              <Header title="Policy Bytes" />
+              <Link to="/home">
+                <img src="/assets/policybytes_logo.png" alt="" width="140"/>
+              </Link>
             </li>
             <li>
               <Link to="/home">
                 Home
               </Link>
             </li>
-            <li>
-              <Link to="/topicPage">
-                Topic Page
-          </Link>
-            </li>
-            <li>
-              <Link to="/admin">
-                ADMIN Topic Manage
-          </Link>
-            </li>
-            <li>
-              <Link to="/topicEdit">
-                Topic Edit
-          </Link>
-            </li>
-            {/* <li>
-              <Link to="/Images">
-                Images
-          </Link>
-            </li> */}
-            <li>
+
+            <li className="loginButton">
               {this.renderLoginItems()}
             </li>
 

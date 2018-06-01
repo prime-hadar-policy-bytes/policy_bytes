@@ -1,9 +1,9 @@
 let dummyTopicCache = {
-    topicTitle: 'Minimum Wage Increase',
+    topicTitle: 'School Taxes',
     topicSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam metus augue, volutpat ut hendrerit ac.',
     topicPremise: "The Restaurant Opportunities Center of Minnesota (ROC MN) is a movement led by local restaurant workers, employers, and diners striving for higher standards in our industry. In St. Paul, for over 30 years, we have had one wage for all workers and we have created a thriving restaurant scene predicated on higher wages for workers. St. Paul is a leader in the effort to support working families and we should be proud of our commitment to an equal pay structure.",
     topicReadMore: '',
-    topicCommonGround: '"The minimum wage is critical to consider."',
+    topicCommonGround: "Schools do need adequate funding.",
     contributor1FirstName: 'Eli',
     contributor1LastName: 'Harrison',
     bio1: 'Eli has a PhD in Economics from the University of Minnesota, and has worked as a Financial Analyst at Ameriprise Financial for 15 years.',

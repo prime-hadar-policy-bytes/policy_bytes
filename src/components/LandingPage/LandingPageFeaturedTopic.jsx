@@ -8,6 +8,7 @@ import dummyTopicCache from '../TopicPage/DummyData.js'
 import './LandingPage.css'
 
 import moment from 'moment'
+import { Link } from 'react-router-dom';
 
 const mapStateToProps = state => ({
     user: state.user,
@@ -28,14 +29,14 @@ class LandingPageFeaturedTopic extends Component {
     let featuredTopic = this.props.state.landing.featuredLandingPage;
 
     return (
-      <div>
+        <Link className='landingLink' to="/topicPage"><div>
         
         <Jumbotron className="featuredTopicJumbotron" >
             <Grid>
                   {/* <div className="featuredTopicJumbotronInner"> */}
                     <Row>
                           <Col xs={12} md={12}>
-                              <h3><strong>- Current Conversation -</strong></h3>
+                          <h3><strong>- Current Conversation -</strong></h3>
                               {/* Conditional rendering, only show the title after props have loaded. */}
                           </Col>
                     </Row>
@@ -93,7 +94,7 @@ class LandingPageFeaturedTopic extends Component {
                   {/* </div> */}
             </Grid>
           </Jumbotron>
-      </div>
+      </div></Link>
     )
   }
 }

@@ -34,3 +34,7 @@
 .helloUser {
 color: white;
 }
+
+.loginButton{
+    float: right; 
+}
