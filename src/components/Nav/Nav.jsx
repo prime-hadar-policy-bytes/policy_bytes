@@ -76,6 +76,7 @@ class Nav extends Component {
                 Home
               </Link>
             </li>
+
             <li className="loginButton">
               {this.renderLoginItems()}
             </li>
