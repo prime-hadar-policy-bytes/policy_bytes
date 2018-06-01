@@ -11,7 +11,7 @@ router.get('/getGeneralcomments/:id', (req, res) => {
 
     
 
-    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id, key_claim.claim, stream.stream_comment, proposal.proposal FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id LEFT JOIN "key_claim" on comments_general.key_claim_id = key_claim.id LEFT JOIN "stream" on comments_general.stream_id = stream.id LEFT JOIN "proposal" on comments_general.proposal_id = proposal.id WHERE comments_general.topic_id = $1 ORDER BY comments_general.order;`
+    const queryText = `SELECT comments_general.id, comments_general.likes, comments_general.owner, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id, key_claim.claim, stream.stream_comment, proposal.proposal FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id LEFT JOIN "key_claim" on comments_general.key_claim_id = key_claim.id LEFT JOIN "stream" on comments_general.stream_id = stream.id LEFT JOIN "proposal" on comments_general.proposal_id = proposal.id WHERE comments_general.topic_id = $1 ORDER BY comments_general.owner DESC, comments_general.order ASC;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText, [topicId]).then((result) => {
@@ -72,14 +72,21 @@ router.post('/addComment', (req, res) => {
                 //concatenates previous comment's order plus current comment id to make "order" and sends it to the database
 
                 let orderToSend;
+                let owner;
+
+                if (req.body.owner === '') {
+                    owner = commentId.rows[0].id
+                } else {
+                    owner = req.body.owner
+                }
 
                 if (req.body.lastOrder === '') {
                     orderToSend = commentId.rows[0].id
                 } else {
                     orderToSend = req.body.lastOrder + '-' + commentId.rows[0].id;
                 }
-                let queryText2 = `UPDATE comments_general SET "order" = $1 WHERE "id" = $2;`;
-                await client.query(queryText2, [orderToSend, commentId.rows[0].id]);
+                let queryText2 = `UPDATE comments_general SET "order" = $1, "owner" = $2 WHERE "id" = $3;`;
+                await client.query(queryText2, [orderToSend, owner, commentId.rows[0].id]);
 
 
                 await client.query('COMMIT');

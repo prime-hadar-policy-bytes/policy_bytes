@@ -12,6 +12,7 @@ class StreamItemForm extends Component {
       streamContributor: '',
       streamComment: '',
       streamEvidence: '',
+      streamDbId: '',
     }
   }
 
@@ -21,7 +22,8 @@ class StreamItemForm extends Component {
     console.log('claim id: ',this.props.claimId);
     let claimId = this.props.claimId; 
     let streamId = this.props.streamId;
-    this.props.handleStreamChange(event, claimId, streamId)
+    let streamDbId = '';
+    this.props.handleStreamChange(event, claimId, streamId, streamDbId)
   }
 
     
@@ -32,7 +34,7 @@ class StreamItemForm extends Component {
         {/* STREAM INPUTS */}
         <Panel className="wireStreamInput">
           <Panel.Body>
-          <h4>stream item Id: {JSON.stringify(this.props.streamId)}</h4>
+          <h4>stream item Id: {JSON.stringify(this.props.id)}</h4>
           <br/>
 
             

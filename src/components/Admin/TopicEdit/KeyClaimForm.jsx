@@ -20,7 +20,7 @@ class KeyClaimForm extends Component {
 //adding a new value to this.state.streamData object that will be the ID of the new key claim 
     addStreamItem = () => {
         let streamItemId = Object.keys(this.props.keyClaims[this.props.claimId].streamData).length;
-        let claimId = this.props.claimId; 
+        let claimId = this.props.claimId; //<-- local ID of the key claim that this lives in
         //packaging up the object to send to the reducer
         let payloadObject = {
             streamItemId: streamItemId,
@@ -35,10 +35,7 @@ class KeyClaimForm extends Component {
 
   render() {
     //ID of the keyClaim
-    let claimId = this.props.claimId;
-    console.log('key claim ', claimId);
-    
-    
+    let claimId = this.props.claimId; 
     //Object containg all keyClaim information passed down on props
     //individual keyClaim ID used to pick out the streamData object on each keyClaim
     //looping over this unique streamData object to create the correct number of streamInputForms
@@ -53,28 +50,25 @@ class KeyClaimForm extends Component {
                         handleKeyClaimChange={this.handleKeyClaimChange}
                         handleStreamChange={this.props.handleStreamChange}/>
       )
-    }
-
-    console.log('TESTSETSE',this.props.keyClaimIdObject[claimId]);
-    
+    }    
 
     return (
       <div>
 {/* SHOW STATE ON DOM */}
-          <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre>
+          {/* <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre> */}
 
           <Panel bsStyle="primary">
 
             <Panel.Heading>
 
-          {/* <pre>claim Id: {JSON.stringify(this.props.keyClaims[this.props.claimId], null, 2)}</pre> */}
+          {/* <pre>claim Id: {JSON.stringify(this.props.keyClaims, null, 2)}</pre> */}
 
                 <FormGroup>
                     <FormControl componentClass="select" 
                                     placeholder="select" 
                                     name="claimContributor" 
                                     onChange={this.handleChange}
-                                    id={this.props.claimId} 
+                                    id={this.props.claimId}  //<-- LOOK AT ME 
                                     value={this.props.keyClaims[this.props.claimId].claimContributor} 
                                     >
                         <option key="0" value="">-- Select Contributor --</option>
@@ -88,7 +82,7 @@ class KeyClaimForm extends Component {
               <Panel.Body>
                 <ControlLabel>Key Claim</ControlLabel>
                 <FormControl onChange={this.handleChange} 
-                            id={this.props.claimId} 
+                            id={this.props.claimId} //<-- LOOK AT ME 
                             name="keyClaim" 
                             value={this.props.keyClaims[this.props.claimId].keyClaim} 
                             type="text"/>

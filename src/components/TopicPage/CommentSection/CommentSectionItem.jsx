@@ -20,6 +20,8 @@ class CommentSectionItem extends Component {
         }
     }
 
+
+
     deleteComment = (commentInput) => {
         this.props.dispatch({
             type: 'DELETE_GENERAL_COMMENT',
@@ -97,21 +99,23 @@ class CommentSectionItem extends Component {
                     <span ><Image style={{ 'height': '56px', 'width': '56px', 'padding': '10px' }} circle src={this.props.comment.fb_picture} /></span>
                 </div>
 
-                <Well className="commentComment">
+                <Well className={"commentComment"}>
 
                     <div className="userName">{this.props.comment.fb_display_name}:</div>
                     <div className="commentTextWrapper">
                     
                     {(this.props.comment.claim || this.props.comment.stream_comment ||this.props.comment.proposal) ? <span className="referenceTextCommentList">responding to...  "{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"</span> : null}
                     <span className="commentText">{this.props.comment.comment}</span></div>
-                    <ButtonGroup className="commentButtons">
+
+                    
+                    {(this.props.user.userInfo) ? <ButtonGroup className="commentButtons">
                         {!this.state.likedComment ? <Button className="commentButton" onClick={() => this.likeComment(this.props.comment)} bsSize="small"><Glyphicon glyph="thumbs-up" /> {likesCounter}</Button> : <Button bsStyle="success" className="commentButton" onClick={() => this.unlikeComment(this.props.comment)} bsSize="small"><Glyphicon glyph="thumbs-up" /> {likesCounter}</Button>}
                         {(this.props.comment.order.length <= 16) ? <Button className="commentButton" onClick={this.showAddCommentShown} bsSize="small">Reply</Button> : <Button disabled className="commentButton" onClick={this.showAddCommentShown} bsSize="small">Reply</Button>}
                         {(status === 2) ? <Button onClick={() => this.deleteComment(this.props.comment)} className="commentButton" bsSize="small"><Glyphicon glyph="trash" /></Button> : null}
-                    </ButtonGroup>
+                    </ButtonGroup> : null }
                 </Well>
 
-                {(this.state.addCommentShown === true) ? <CommentAdd  topic_id={this.props.topic_id} isReply={true} showAddCommentShown={this.showAddCommentShown} lastOrder={this.props.comment.order} /> : null}
+                {(this.state.addCommentShown === true) ? <CommentAdd  topic_id={this.props.topic_id} isReply={true} showAddCommentShown={this.showAddCommentShown} lastOrder={this.props.comment.order} owner={this.props.comment.owner} /> : null}
             </div>
         )
     }

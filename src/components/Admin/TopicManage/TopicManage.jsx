@@ -22,14 +22,19 @@ class TopicManage extends Component {
 
   componentDidMount () {
     this.fetchAllTopics(); 
-    if (!this.props.user.userInfo) {
-      this.props.history.push('login');
-    }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (!nextProps.user.userInfo) {
-      this.props.history.push('login');
+  componentDidUpdate() {
+    if (!this.props.user.isLoading) {
+      if(!this.props.user.userInfo) {
+        // userInfo is null, that means the user isn't logged in
+        this.props.history.push('/login');
+      } else if(this.props.user.userInfo.status !== 2) {
+        // user is not an admin
+        this.props.history.push('/login');
+      } else {
+        // user is an admin, do nothing
+      }
     }
   }
 
@@ -74,9 +79,6 @@ class TopicManage extends Component {
     return (
       <div>
         <div className="wrapper">
-
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
-        <pre>all topics reducer:::<br/>{JSON.stringify(this.props.state.topics.allTopics, null, 2)}</pre>
 
         <h1>
           Topic Manage Page
