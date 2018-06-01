@@ -70,7 +70,7 @@ router.get('/featuredlanding', (req, res) => {
 
     // if(req.isAuthenticated()){
 
-    const queryText = `SELECT "topic_title", "published_date", "first_name", "last_name", "bio", "photo_url" 
+    const queryText = `SELECT "topic"."id", "topic_title", "published_date", "first_name", "last_name", "bio", "photo_url" 
     FROM "topic" JOIN "contributor" ON "topic"."contributor1_id" = "contributor"."id" OR 
     "topic"."contributor2_id" = "contributor"."id" WHERE "featured" = true;`
 
@@ -90,7 +90,26 @@ router.get('/featuredlanding', (req, res) => {
     // }
 });
 
+//gets archived topics from database to display on landing page
+router.get('/archived', (req, res)=>{
+    console.log('in archive GET LP');
+    // if(req.isAuthenticated()){
+    let queryText = `SELECT "topic_title", "published_date", "icon_url", "archive_summary" 
+                    FROM "topic" WHERE "featured" = 'false' ORDER BY published_date DESC;`
 
+    pool.query(queryText).then((result) => {
+        console.log('result.rows:', result.rows);
+        res.send(result.rows)
+    }).catch((error)=> {
+        console.log('error get archived for LP:', error);
+    })
+      // } else{
+
+    //     //if req.isAuthenticated() is false, the forbidden error will appear
+    //     //on the webpage
+    //     res.sendStatus(403)
+    // }
+});
 
 /**
  * POST route template

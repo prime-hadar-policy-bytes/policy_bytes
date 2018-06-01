@@ -71,6 +71,7 @@ class Nav extends Component {
                 <img src="/assets/policybytes_logo.png" alt="" height="100"/>
               </Link>
             </li>
+
             <li className="loginButton">
               {this.renderLoginItems()}
             </li>
