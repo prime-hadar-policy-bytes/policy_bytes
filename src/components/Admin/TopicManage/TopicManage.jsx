@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Footer from '../../Footer/Footer.jsx'
 import TopicManagePanel from './TopicManagePanel.jsx'
 import TopicManageModal from './TopicManageModal.jsx'
+import RegisterModal from '../RegisterModal/RegisterModal.js'
 
 import './TopicManage.css'; 
 
@@ -21,6 +22,20 @@ class TopicManage extends Component {
 
   componentDidMount () {
     this.fetchAllTopics(); 
+  }
+
+  componentDidUpdate() {
+    if (!this.props.user.isLoading) {
+      if(!this.props.user.userInfo) {
+        // userInfo is null, that means the user isn't logged in
+        this.props.history.push('/login');
+      } else if(this.props.user.userInfo.status !== 2) {
+        // user is not an admin
+        this.props.history.push('/login');
+      } else {
+        // user is an admin, do nothing
+      }
+    }
   }
 
   fetchAllTopics = () => {
@@ -65,14 +80,12 @@ class TopicManage extends Component {
       <div>
         <div className="wrapper">
 
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
-        <pre>all topics reducer:::<br/>{JSON.stringify(this.props.state.topics.allTopics, null, 2)}</pre>
-
         <h1>
           Topic Manage Page
           <Button className="newTopicButton" bsStyle="success">
             <Link to='/topicEdit'>Create A New Topic</Link>
           </Button>
+          <RegisterModal/>
         </h1>             
 
           
@@ -88,7 +101,8 @@ class TopicManage extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  state
+  state,
+  user: state.user
 })
 
 

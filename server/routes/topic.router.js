@@ -171,8 +171,13 @@ router.post('/newtopic', (req, res) => {
                     //keyDataProp is the value of a property in the keyData object e.g.
                     //'0', 'contributor1', 'text' 
                     let keyDataProp = keyData[prop]
+                    console.log(' HIIIIIIII prop: ', prop);
+                    console.log(' MMMMMMMMEEEEEE  keyData at prop: ', keyDataProp);
+                    
                     keyClaimData.push(keyDataProp);
                 }
+                console.log('JJJJJJJKKKKKKKKK keyClaimDataArray: ', keyClaimData);
+                
                 //end for loop of for(prop in keyData)
 
                 let queryText5 = `INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order")
@@ -190,37 +195,23 @@ router.post('/newtopic', (req, res) => {
 
                 let streamData = keyClaimData[3]
 
+                console.log('streamDataaaaaaaaaaaaaa: ', streamData);
+
                 for (stream in streamData) {
+                    let stream_order = stream; //<-- local stream Id number
 
-                    let streamClaimData = [];
-
-                    //stream is the 0 property, 1 property, etc. in the streamData object
-                    let stream_order = stream;
-
-                    //streamDataObj is the value of a property in the streamData object; this
-                    //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
-                    //streamComment: 'text', streamEvidence: 'more text',}
-                    let streamDataObj = streamData[stream]
-                    for (prop in streamDataObj) {
-                        //prop is each property in the streamDataObj, but I want the values...
-
-                        //streamDataProp is the value of a property in the streamDataObj object e.g.
-                        //'0', 'contributor2', 'text', 'more text'
-                        let streamDataProp = streamDataObj[prop]
-                        streamClaimData.push(streamDataProp)
-                    }
-                    console.log('streamClaimData: ', streamClaimData);
+                    let streamDataObj = streamData[stream] //<--all content for a single stream
+                    
 
                     let queryText6 = `INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", 
                     "stream_evidence", "stream_order")
                     VALUES ($1, $2, $3, $4, $5)`
-                    if (streamClaimData[1] === 'contributor1') {
+                    if (streamDataObj.streamContributor === 'contributor1') {
                         contributor = contributor1Id;
                     } else {
                         contributor = contributor2Id
                     }
-
-                    await client.query(queryText6, [keyClaimId, contributor, streamClaimData[2], streamClaimData[3], stream_order])
+                    await client.query(queryText6, [keyClaimId, contributor, streamDataObj.streamComment, streamDataObj.streamEvidence, stream_order])
                     console.log("successfully posted stream claim");
                 }
             }
@@ -372,7 +363,7 @@ router.put('/updatetopic', (req, res) => {
             let queryText = `UPDATE "topic" SET "topic_title" = $1, "premise" = $2, "common_ground" = $3, 
             "archive_summary" = $4 WHERE "id" = $5;`;
             await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, 
-                topic.topicSummary, topic.topicDBId]);
+                topic.topicSummary, topic.topicDbId]);
             console.log('successfully posted topic');
 
             let queryText3 = `UPDATE "proposal" SET "proposal" = $1 WHERE "id" = $2;`
@@ -420,35 +411,18 @@ router.put('/updatetopic', (req, res) => {
                 let streamData = keyClaimData[3]
 
                 for (stream in streamData) {
+                    let stream_order = stream; //<-- local stream Id number
 
-                    let streamClaimData = [];
-
-                    //stream is the 0 property, 1 property, etc. in the streamData object
-                    let stream_order = stream;
-
-                    //streamDataObj is the value of a property in the streamData object; this
-                    //value is an object e.g. {streamDbId: '0', streamContributor: 'contributor2', 
-                    //streamComment: 'text', streamEvidence: 'more text',}
-                    let streamDataObj = streamData[stream]
-                    for (prop in streamDataObj) {
-                        //prop is each property in the streamDataObj, but I want the values...
-
-                        //streamDataProp is the value of a property in the streamDataObj object e.g.
-                        //'0', 'contributor2', 'text', 'more text'
-                        let streamDataProp = streamDataObj[prop]
-                        streamClaimData.push(streamDataProp)
-                    }
-                    console.log('streamClaimData: ', streamClaimData);
+                    let streamDataObj = streamData[stream] //<--all content for a single stream
 
                     let queryText6 = `UPDATE "stream" SET "contributor_id" = $1, "stream_comment" = $2, 
                     "stream_evidence" = $3 WHERE "id" = $4;`
-                    if (streamClaimData[1] === 'contributor1') {
-                        contributor = topic.contributor1DbId
+                    if (streamDataObj.streamContributor === 'contributor1') {
+                        contributor = topic.contributor1DbId;
                     } else {
                         contributor = topic.contributor2DbId
                     }
-
-                    await client.query(queryText6, [contributor, streamClaimData[2], streamClaimData[3], streamClaimData[0]])
+                    await client.query(queryText6, [contributor, streamDataObj.streamComment, streamDataObj.streamEvidence, streamDataObj.streamDbId])
                     console.log("successfully posted stream claim");
                 }
             }
@@ -481,7 +455,7 @@ router.put('/updatetopic', (req, res) => {
 //THIS IS ALSO BEING USED TO POPULATE THE TOPIC PAGE - SAGA TYPE FETCH_TOPIC_PAGE_CONTENT
 //FETCHES SELCTED TOPICS INFO TO POPULATE TOPICEDIT PAGE (BASED ON URL)
 router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
-    console.log('HELLO',req.params.id);
+    // console.log('HELLO',req.params.id);
     
     let topicId = req.params.id;
     //selectedTopicToSend is the master object exported at the end of the async function.
@@ -503,7 +477,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             WHERE topic.id = $1;`;
             const topicResult = await client.query(queryText1, [topicId]);
             selectedTopicToSend = {
-                topidDbId: topicResult.rows[0].topic_id,
+                topicDbId: topicResult.rows[0].topic_id,
                 topicTitle: topicResult.rows[0].topic_title,
                 topicSummary: topicResult.rows[0].archive_summary,
                 topicPremise: topicResult.rows[0].premise,
@@ -530,7 +504,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 keyClaims: ''
             };
 
-            let queryText3 = `SELECT proposal, id from proposal WHERE id = $1;`;
+            let queryText3 = `SELECT proposal, id from proposal WHERE contributor_id = $1;`;
             const proposal1Result = await client.query(queryText3, [contributor1Id]);
 
             selectedTopicToSend = {
@@ -538,7 +512,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 proposal1DbId: proposal1Result.rows[0].id
             }
 
-            let queryText4 = `SELECT proposal, id from proposal WHERE id = $1;`;
+            let queryText4 = `SELECT proposal, id from proposal WHERE contributor_id = $1;`;
             const proposal2Result = await client.query(queryText4, [contributor2Id]);
 
             selectedTopicToSend = {
