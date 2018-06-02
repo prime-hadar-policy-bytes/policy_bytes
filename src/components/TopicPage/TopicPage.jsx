@@ -34,17 +34,19 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
+    
     this.props.dispatch({
       type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
   })
   }
 //allows reducer to be populated before it looks for data
-  componentWillReceiveProps(nextProps){
-    this.setState({
-      ...this.state, topicId: nextProps.state.landing.featuredLandingPage[0].id
-    })
-    this.fetchTopicPageContent(this.state.topicId);
-  }
+  // componentWillReceiveProps(nextProps){
+    
+  //   this.setState({
+  //     ...this.state, topicId: nextProps.state.landing.featuredLandingPage[0].id
+  //   })
+  //   this.fetchTopicPageContent(this.state.topicId);
+  // }
 
 fetchTopicPageContent = (id) => {
     console.log('in fetchTopicPageContent, id:', id);
