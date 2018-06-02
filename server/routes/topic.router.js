@@ -385,12 +385,12 @@ router.put('/updatetopic', (req, res) => {
             console.log('successfully posted topic');
 
             let queryText3 = `UPDATE "proposal" SET "proposal" = $1 WHERE "id" = $2;`
-            await client.query(queryText3, [topic.proposal1, topic.contributor1DbId])
+            await client.query(queryText3, [topic.proposal1, topic.proposal1DbId])
             console.log("successfully posted contributor1's proposal");
 
             let queryText4 = `UPDATE "proposal" SET "proposal" = $1 WHERE "id" = $2;`
 
-            await client.query(queryText4, [topic.proposal2, topic.contributor2DbId])
+            await client.query(queryText4, [topic.proposal2, topic.proposal2DbId])
             console.log("successfully posted contributor2's proposal");
 
             //key is each property in keyClaims e.g. 0:{topicId: 1, ...}, 1:{topicId: 2, ...}, ...
@@ -494,6 +494,8 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             "topic"."id" as "topic_id" FROM topic 
             WHERE topic.id = $1;`;
             const topicResult = await client.query(queryText1, [topicId]);
+            console.log('TOPIIIIIIICCCCCC: ', topicResult.rows[0]);
+            
             selectedTopicToSend = {
                 topicDbId: topicResult.rows[0].topic_id,
                 topicTitle: topicResult.rows[0].topic_title,
@@ -505,20 +507,27 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             contributor1Id = topicResult.rows[0].contributor1_id;
             contributor2Id = topicResult.rows[0].contributor2_id;
 
-            let queryText2 = `SELECT id, first_name, last_name, bio, photo_url from contributor where id = $1 OR id = $2;`;
-            const contributorResult = await client.query(queryText2, [contributor1Id, contributor2Id]);
+            let queryText2 = `SELECT id, first_name, last_name, bio, photo_url from contributor where id = $1;`;
+            const contributor1Result = await client.query(queryText2, [contributor1Id]);
 
             selectedTopicToSend = {
-                ...selectedTopicToSend, contributor1DbId: contributorResult.rows[0].id,
-                contributor1FirstName: contributorResult.rows[0].first_name,
-                contributor1LastName: contributorResult.rows[0].last_name,
-                bio1: contributorResult.rows[0].bio,
-                photo1: contributorResult.rows[0].photo_url,
-                contributor2DbId: contributorResult.rows[1].id,
-                contributor2FirstName: contributorResult.rows[1].first_name,
-                contributor2LastName: contributorResult.rows[1].last_name,
-                bio2: contributorResult.rows[1].bio,
-                photo2: contributorResult.rows[1].photo_url,
+                ...selectedTopicToSend, contributor1DbId: contributor1Result.rows[0].id,
+                contributor1FirstName: contributor1Result.rows[0].first_name,
+                contributor1LastName: contributor1Result.rows[0].last_name,
+                bio1: contributor1Result.rows[0].bio,
+                photo1: contributor1Result.rows[0].photo_url
+
+            };
+
+            let queryText2B = `SELECT id, first_name, last_name, bio, photo_url from contributor where id = $1`;
+            const contributor2Result = await client.query(queryText2B, [contributor2Id]);
+
+            selectedTopicToSend = {
+                ...selectedTopicToSend, contributor2DbId: contributor2Result.rows[0].id,
+                contributor2FirstName: contributor2Result.rows[0].first_name,
+                contributor2LastName: contributor2Result.rows[0].last_name,
+                bio2: contributor2Result.rows[0].bio,
+                photo2: contributor2Result.rows[0].photo_url,
                 keyClaims: ''
             };
 
