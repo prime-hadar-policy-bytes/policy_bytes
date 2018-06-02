@@ -27,6 +27,8 @@ class LandingPageFeaturedTopic extends Component {
   render() {
 
     let featuredTopic = this.props.state.landing.featuredLandingPage;
+    console.log('featuredTopic = ', featuredTopic);
+    
 
     return (
         <Link className='landingLink' to="/topicPage"><div>

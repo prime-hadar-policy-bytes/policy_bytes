@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
 
+let defaultStateArray = [{id: 0, topic_title: '', published_date: '', first_name: '', 
+last_name: '', bio: '', photo_url: ''}, {id: 0, topic_title: '', published_date: '', first_name: '', 
+last_name: '', bio: '', photo_url: ''}]
 //featuredLandingPage contains the information needed to display the featured topic
 //the featured topic on the landing page
-const featuredLandingPage = (state = [], action) => {
+const featuredLandingPage = (state = defaultStateArray, action) => {
 
     //sets state of featuredLandingPage to an array of objects where each object is a section
     //of the featured topic on the landing page e.g. contributor names, contributor bios, etc.
