@@ -222,13 +222,13 @@ export class TopicPage extends Component {
             </Panel.Body>
           </Panel>
 
+      
+
+
           <CommentSection topic_id={this.props.topicPageContent.topicDbId} />
-          <Panel>
-            <Panel.Body>
-              <h4>Sponsored by Ameriprise Financial</h4>
-            </Panel.Body>
-          </Panel>
-        </div>
+        </div>   {/* <---  WRAPPER DIV ENDS */}
+
+
         <Footer />
       </div>
     )

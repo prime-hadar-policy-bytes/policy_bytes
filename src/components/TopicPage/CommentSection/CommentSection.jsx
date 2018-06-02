@@ -44,7 +44,7 @@ class CommentSection extends Component {
     //if user is logged out, facebook login appears
     loginUserInvite = () => {
         return (
-            <div>To join the conversation...<FacebookLogin /></div>
+            <div id="facebookLoginPrompt">To join the conversation...<FacebookLogin /></div>
         )
     }
 
@@ -67,7 +67,7 @@ class CommentSection extends Component {
             <div>
 
                 <Panel id="commentPanelMaster">
-                <h3 id="commentsHeader"><strong>- Join The Conversation -</strong></h3>
+                {/* <h3 id="commentsHeader"><strong>- Join The Conversation -</strong></h3> */}
                     <Panel.Body>
                         {(this.props.user.userInfo) ? <CommentAdd topic_id={this.props.topic_id} /> : this.loginUserInvite()}
                         <div className="commentPanelWrapper">

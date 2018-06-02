@@ -37,7 +37,7 @@ class CommentAdd extends Component {
             })
         } else {
             this.setState({
-                placeholder: 'Write your comment here...'
+                placeholder: 'Join the Conversation...'
             })
         }
     }
@@ -48,7 +48,7 @@ class CommentAdd extends Component {
                 referenceText: '',
                 typeRef: '',
                 itemId: '',
-                placeholder: 'Write your comment here...',
+                placeholder: 'Join the Conversation...',
                 comment: '',
                 personId: '',
                 topic_id: '',
