@@ -39,9 +39,10 @@ class LandingPageArchive extends Component {
                         <Panel.Body>
                             <Panel.Heading>{archivedTopic.topic_title}</Panel.Heading>
                                 <p>{archivedTopic.icon_url}</p>
-                                <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                                <p>Published: {date}</p>
-                                <p>Summary: {archivedTopic.archive_summary}</p>
+                                {/* <img src="./assets/Gun.png" alt="" width="100"/> */}
+                                <p>{date}</p>
+                                <br/>
+                                <p>{archivedTopic.archive_summary}</p>
                         </Panel.Body>
                         </Panel>
                     </Col>
@@ -68,7 +69,7 @@ class LandingPageArchive extends Component {
               </Row>
           </Grid>
 
-            </div>
+        </div>
       </div>
     )
   }
