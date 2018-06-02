@@ -55,17 +55,13 @@ export class TopicPage extends Component {
     }
   }
 
-
-  fetchTopicPageContent = (id) => {
+fetchTopicPageContent = (id) => {
     console.log('in fetchTopicPageContent, id:', id);
     this.props.dispatch({
       type: 'FETCH_TOPIC_PAGE_CONTENT',
       payload: id
     })
   }
-  
-
-
 
 
   //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
