@@ -4,7 +4,6 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
-import promise from 'redux-promise-middleware'
 
 import reducer from './redux/reducers';
 import 'font-awesome/css/font-awesome.min.css';   
