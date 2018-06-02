@@ -26,18 +26,22 @@ class CommentAdd extends Component {
             proposal_id: '',
             owner: '',
             approved: true,
-            lastOrder: ''
+            lastOrder: '',
+            commentPanelClass: 'addCommentPanel'
         }
     }
 
     componentWillMount = () => {
         if (this.props.isReply) {
             this.setState({
-                placeholder: 'Write a reply...'
+                placeholder: 'Write a reply...',
+                commentPanelClass: 'addCommentPanelReply'
             })
         } else {
             this.setState({
-                placeholder: 'Join the Conversation...'
+                placeholder: 'Join the Conversation...',
+                commentPanelClass: 'addCommentPanel'
+
             })
         }
     }
@@ -168,9 +172,9 @@ class CommentAdd extends Component {
         console.log('this is referenceTextClass', referenceTextClass);
 
         return (
-            <Panel className="addCommentPanel">
+            <Panel className={this.state.commentPanelClass}>
                 {/* <Panel.Body> */}
-                    <div >
+                    <div   >
                         <Form>
                             <FormGroup className="addCommentPicAndResponse" controlId="formControlsTextarea">
                                     {(keyClaimText || streamText || proposalText) ?
@@ -179,7 +183,7 @@ class CommentAdd extends Component {
                                         </Panel> : null}
                                     <Image className='addCommentPic' circle src={fbPicture} />
 
-                                <FormControl id='addCommentResponseField' 
+                                <FormControl className='addCommentResponseField' 
                                             componentClass="textarea" 
                                             value={this.state.comment} 
                                             onChange={this.handleTextChange} 
@@ -188,7 +192,7 @@ class CommentAdd extends Component {
                         </Form>
                     </div>
                     <div className="addCommentButton"><Button bsStyle="primary" onClick={this.handleSubmit}>Submit</Button>
-                        {this.props.isReply ? <Button onClick={this.handleClose} >Cancel</Button> : null}
+                        {/* {this.props.isReply ? <Button style={{'display': 'inline-block'}} onClick={this.handleClose} >Cancel</Button> : null} */}
                     </div>
                 {/* </Panel.Body> */}
             </Panel>

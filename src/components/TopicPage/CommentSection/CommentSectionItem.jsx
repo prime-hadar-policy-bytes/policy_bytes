@@ -133,7 +133,14 @@ class CommentSectionItem extends Component {
                     </ButtonGroup> : null}
                 </Well>
 
-                {(this.state.addCommentShown === true) ? <CommentAdd topic_id={this.props.topic_id} isReply={true} showAddCommentShown={this.showAddCommentShown} lastOrder={this.props.comment.order} owner={this.props.comment.owner} /> : null}
+                {(this.state.addCommentShown === true) 
+                ? <CommentAdd topic_id={this.props.topic_id} 
+                            isReply={true} 
+                            showAddCommentShown={this.showAddCommentShown} 
+                            lastOrder={this.props.comment.order} 
+                            owner={this.props.comment.owner} 
+                           /> 
+                : null}
             </div>
         )
     }
