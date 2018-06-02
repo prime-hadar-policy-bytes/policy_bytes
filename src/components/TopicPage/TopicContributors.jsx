@@ -52,10 +52,9 @@ export default class TopicContributors extends Component {
                                     </div>
                                 </Col>
                                 <Col  xs={4} md={4}>                
-                                    <Image className="contributorPhotoRight" src={this.props.topicPageContent.photo1} responsive/>
+                                    <Image className="contributorPhotoRight" src={this.props.topicPageContent.photo2} responsive/>
                                 </Col>
                             </Panel.Body>
-
                         </Panel>
                         </div>
                     </Col>

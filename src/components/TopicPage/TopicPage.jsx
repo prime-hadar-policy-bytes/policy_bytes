@@ -217,7 +217,7 @@ export class TopicPage extends Component {
               <div className={streamContainerClass}>
 
               <Image className="arenaMini1" src={this.props.topicPageContent.photo1} width="55"/>
-              <Image className="arenaMini2" src={this.props.topicPageContent.photo2}   width="55"/>
+              <Image className="arenaMini2" src={this.props.topicPageContent.photo2} width="55"/>
 
                 <StreamItemFactory keyClaims={this.props.topicPageContent.keyClaims}
                   showStreamForClaim={this.state.showStreamForClaim} />

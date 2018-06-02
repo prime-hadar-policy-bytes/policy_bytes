@@ -59,7 +59,6 @@ class LandingPageFeaturedTopic extends Component {
 
         {/* CONTRIBUTORS */}
                     <Row>
-
                                   <Col xs={12} md={12} lg={2}>
                                       <img className="featuredTopicPhotoLeft" src={featuredTopic[0] && featuredTopic[0].photo_url}/>
                                   </Col>

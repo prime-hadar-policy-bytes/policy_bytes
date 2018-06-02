@@ -39,9 +39,10 @@ class LandingPageArchive extends Component {
                         <Panel.Body>
                             <Panel.Heading>{archivedTopic.topic_title}</Panel.Heading>
                                 <p>{archivedTopic.icon_url}</p>
-                                <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                                <p>Published: {date}</p>
-                                <p>Summary: {archivedTopic.archive_summary}</p>
+                                {/* <img src="./assets/Gun.png" alt="" width="100"/> */}
+                                <p>{date}</p>
+                                <br/>
+                                <p>{archivedTopic.archive_summary}</p>
                         </Panel.Body>
                         </Panel>
                     </Col>
@@ -64,90 +65,11 @@ class LandingPageArchive extends Component {
         <div className="archiveWrapper">
           <Grid>
               <Row>
-                  {/* <Col xs={12} sm={6} md={4} lg={4}> */}
-                                {archiveArray}
-                    {/* <Panel className="archivePanel">
-                        <Panel.Body>
-                            <h4>
-                            "Minimum Wage"
-                            </h4>
-                            <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                            <p>
-                                "SUMMARY GOES HERE"
-                            </p>
-                        </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col xs={12} sm={6} md={4} lg={4}>
-                    <Panel className="archivePanel">
-                        <Panel.Body>
-                            <h4>
-                            "Minimum Wage"
-                            </h4>
-                            <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                            <p>
-                                "SUMMARY GOES HERE"
-                            </p>
-                        </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col xs={12} sm={6} md={4} lg={4}>
-                    <Panel className="archivePanel">
-                        <Panel.Body>
-                            <h4>
-                            "Minimum Wage"
-                            </h4>
-                            <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                            <p>
-                                "SUMMARY GOES HERE"
-                            </p>
-                        </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col xs={12} sm={6} md={4} lg={4}>
-                    <Panel className="archivePanel">
-                        <Panel.Body>
-                            <h4>
-                            "Minimum Wage"
-                            </h4>
-                            <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                            <p>
-                                "SUMMARY GOES HERE"
-                            </p>
-                        </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col xs={12} sm={6} md={4} lg={4}>
-                    <Panel className="archivePanel">
-                        <Panel.Body>
-                            <h4>
-                            "Minimum Wage"
-                            </h4>
-                            <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                            <p>
-                                "SUMMARY GOES HERE"
-                            </p>
-                        </Panel.Body>
-                    </Panel>
-                  </Col>
-                  <Col xs={12} sm={6} md={4} lg={4}>
-                    <Panel className="archivePanel">
-                        <Panel.Body>
-                            <h4>
-                            "Minimum Wage"
-                            </h4>
-                            <img src="./assets/politicsIcon.svg" alt="" width="200"/>
-                            <p>
-                                "SUMMARY GOES HERE"
-                            </p>
-                        </Panel.Body>
-                    </Panel> */}
-                  {/* </Col> */}
-
+                {archiveArray}
               </Row>
           </Grid>
 
-            </div>
+        </div>
       </div>
     )
   }
