@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Panel, Grid, Col, Row, Jumbotron, Image } from 'react-bootstrap';
-
 import dummyTopicCache from '../TopicPage/DummyData.js'
+import moment from 'moment';
+import { Link, withRouter } from 'react-router-dom';
 
 import './LandingPage.css'
 
@@ -19,10 +20,38 @@ class LandingPageArchive extends Component {
         })
     }
 
+    fetchTopicPageContent = (id) => {
+        console.log('in fetchTopicPageContent, id:', id);
+        this.props.dispatch({
+          type: 'FETCH_TOPIC_PAGE_CONTENT',
+          payload: id
+        })
+        this.props.history.push('/topicPage');
+      }
+
   render() {
+    let date = moment(this.props.state.landing.archivedTopics.published_date).format('MMMM Do YYYY');
+    let archiveArray = this.props.state.landing.archivedTopics.map((archivedTopic)=>{
+        return(  
+                <div onClick={()=>this.fetchTopicPageContent(archivedTopic.id)}>
+                    <Col xs={12} sm={6} md={4} lg={4}>
+                        <Panel className="archivePanel">
+                        <Panel.Body>
+                            <Panel.Heading>{archivedTopic.topic_title}</Panel.Heading>
+                                <p>{archivedTopic.icon_url}</p>
+                                <img src="./assets/politicsIcon.svg" alt="" width="200"/>
+                                <p>Published: {date}</p>
+                                <p>Summary: {archivedTopic.archive_summary}</p>
+                        </Panel.Body>
+                        </Panel>
+                    </Col>
+                </div>
+              )
+        })
+
     return (
       <div>
-
+          {/* <pre>{JSON.stringify(this.props.state.landing.archivedTopics, null, 2)}</pre> */}
           <Grid>
               <Row>
                   <Col xs={12} md={12}>
@@ -35,8 +64,9 @@ class LandingPageArchive extends Component {
         <div className="archiveWrapper">
           <Grid>
               <Row>
-                  <Col xs={12} sm={6} md={4} lg={4}>
-                    <Panel className="archivePanel">
+                  {/* <Col xs={12} sm={6} md={4} lg={4}> */}
+                                {archiveArray}
+                    {/* <Panel className="archivePanel">
                         <Panel.Body>
                             <h4>
                             "Minimum Wage"
@@ -111,8 +141,8 @@ class LandingPageArchive extends Component {
                                 "SUMMARY GOES HERE"
                             </p>
                         </Panel.Body>
-                    </Panel>
-                  </Col>
+                    </Panel> */}
+                  {/* </Col> */}
 
               </Row>
           </Grid>
@@ -122,5 +152,5 @@ class LandingPageArchive extends Component {
     )
   }
 }
-export default connect(mapStateToProps)(LandingPageArchive);
 
+export default withRouter(connect(mapStateToProps)(LandingPageArchive))

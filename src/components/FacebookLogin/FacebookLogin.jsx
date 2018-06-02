@@ -1,4 +1,6 @@
-import React from 'react'
+import React from 'react';
+
+import './FacebookLogin.css';
 
 const FacebookLogin = () => (
     <div style={{ 'padding': '10px' }}> <a href="https://localhost:5000/api/facebook/send" className="btn btn-lg btn-social btn-facebook">

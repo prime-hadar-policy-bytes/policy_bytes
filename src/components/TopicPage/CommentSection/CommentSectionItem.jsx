@@ -91,6 +91,15 @@ class CommentSectionItem extends Component {
 
         // console.log('commentIndentClass', commentIndentClass);
 
+        //set background of reply based on contributor number
+        let referenceTextCommentClass = ''; 
+        let contributorDeclaration = ''; 
+        if (this.props.comment.contributor_id %2 !== 0) {
+            referenceTextCommentClass = 'referenceTextCommentContainerContrib1'
+        } else {
+            referenceTextCommentClass = 'referenceTextCommentContainerContrib2'
+        } 
+
 
         return (
             <div className={commentIndentClass}>
@@ -100,22 +109,31 @@ class CommentSectionItem extends Component {
                 </div>
 
                 <Well className={"commentComment"}>
-
                     <div className="userName">{this.props.comment.fb_display_name}:</div>
-                    <div className="commentTextWrapper">
-                    
-                    {(this.props.comment.claim || this.props.comment.stream_comment ||this.props.comment.proposal) ? <span className="referenceTextCommentList">responding to...  "{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"</span> : null}
-                    <span className="commentText">{this.props.comment.comment}</span></div>
 
-                    
+                    <div className="commentTextWrapper">
+                        {(this.props.comment.claim || this.props.comment.stream_comment || this.props.comment.proposal) 
+                            ?
+                            //set container to contributor color
+                            <div className={referenceTextCommentClass}>  
+                                <span className='referenceTextCommentList'>{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"
+                                </span> 
+                            </div>
+                            : null}
+                            
+
+                        <span className="commentText">{this.props.comment.comment}</span>
+                    </div>
+
+
                     {(this.props.user.userInfo) ? <ButtonGroup className="commentButtons">
                         {!this.state.likedComment ? <Button className="commentButton" onClick={() => this.likeComment(this.props.comment)} bsSize="small"><Glyphicon glyph="thumbs-up" /> {likesCounter}</Button> : <Button bsStyle="success" className="commentButton" onClick={() => this.unlikeComment(this.props.comment)} bsSize="small"><Glyphicon glyph="thumbs-up" /> {likesCounter}</Button>}
                         {(this.props.comment.order.length <= 16) ? <Button className="commentButton" onClick={this.showAddCommentShown} bsSize="small">Reply</Button> : <Button disabled className="commentButton" onClick={this.showAddCommentShown} bsSize="small">Reply</Button>}
                         {(status === 2) ? <Button onClick={() => this.deleteComment(this.props.comment)} className="commentButton" bsSize="small"><Glyphicon glyph="trash" /></Button> : null}
-                    </ButtonGroup> : null }
+                    </ButtonGroup> : null}
                 </Well>
 
-                {(this.state.addCommentShown === true) ? <CommentAdd  topic_id={this.props.topic_id} isReply={true} showAddCommentShown={this.showAddCommentShown} lastOrder={this.props.comment.order} owner={this.props.comment.owner} /> : null}
+                {(this.state.addCommentShown === true) ? <CommentAdd topic_id={this.props.topic_id} isReply={true} showAddCommentShown={this.showAddCommentShown} lastOrder={this.props.comment.order} owner={this.props.comment.owner} /> : null}
             </div>
         )
     }
