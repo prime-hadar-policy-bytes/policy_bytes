@@ -48,7 +48,7 @@ class Footer extends Component {
 
                     <Col xs={12} sm={4} md={4}>
                         <div id="footerLinks">
-                            <Col xs={8} sm={6} md={8}>
+                            <Col xs={6} sm={6} md={6}>
                                 <p>
                                     <a href="https://citizensleague.org/who-we-are/">About Us</a>    
                                 </p>
@@ -62,7 +62,7 @@ class Footer extends Component {
                                 </p>
                                 
                             </Col>
-                            <Col xs={4} sm={6} md={4}>
+                            <Col xs={6} sm={6} md={6}>
                                 <p>
                                     <a href="https://citizensleague.org/events/">Events</a>    
                                 </p>
@@ -81,7 +81,7 @@ class Footer extends Component {
                     <Col xs={12} sm={4} md={4}>
                         <div id="footerAddress">
                             <p>
-                                <strong>Citizens Leauge</strong> <br/>
+                                <strong>Citizens League</strong> <br/>
                                 400 Robert St. N, Suite 1820 <br/>
                                 St. Paul, MN 55101 <br/>
                                 (651 293-0575)

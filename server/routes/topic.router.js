@@ -94,9 +94,8 @@ router.get('/featuredlanding', (req, res) => {
 router.get('/archived', (req, res)=>{
     console.log('in archive GET LP');
     // if(req.isAuthenticated()){
-    let queryText = `SELECT "topic_title", "published_date", "icon_url", "archive_summary" 
-                    FROM "topic" WHERE "featured" = 'false' ORDER BY published_date DESC;`
-
+    let queryText = `SELECT "topic"."id", "topic_title", "published_date", "icon_url", "archive_summary" FROM "topic"
+                    WHERE "featured" = 'false' ORDER BY published_date DESC;`
     pool.query(queryText).then((result) => {
         console.log('result.rows:', result.rows);
         res.send(result.rows)

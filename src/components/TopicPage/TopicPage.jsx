@@ -46,6 +46,7 @@ export class TopicPage extends Component {
     this.fetchTopicPageContent(this.state.topicId);
   }
 
+
   fetchTopicPageContent = (id) => {
     console.log('in fetchTopicPageContent, id:', id);
     this.props.dispatch({
@@ -54,6 +55,8 @@ export class TopicPage extends Component {
     })
   }
   
+
+
 
 
   //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
@@ -134,6 +137,7 @@ export class TopicPage extends Component {
     let arenaContainer = 'arenaContainer';
     let streamContainerClass = "streamItemsContainer";
     let arenaSummaryClass = 'arenaSummary';
+    let arenaPhotoClass = 'arenaPhotoContrib1'
     let arenaPicture = this.props.topicPageContent.photo1; 
     let arenaProposal = this.props.topicPageContent.proposal1;
     let arenaProposalId = this.props.topicPageContent.proposal1DbId;
@@ -142,6 +146,7 @@ export class TopicPage extends Component {
       arenaContainer = "arenaContainerContrib1"
       streamContainerClass += " contrib1"
       arenaSummaryClass += " contrib1"
+      arenaPhotoClass = 'arenaPhotoContrib1'
       arenaPicture = this.props.topicPageContent.photo1  
       arenaProposal = this.props.topicPageContent.proposal1;
       arenaProposalId = this.props.topicPageContent.proposal1DbId;
@@ -151,6 +156,7 @@ export class TopicPage extends Component {
       arenaContainer += " contrib2"
       streamContainerClass += " contrib2"
       arenaSummaryClass += " contrib2"
+      arenaPhotoClass = 'arenaPhotoContrib2'
       arenaPicture = this.props.topicPageContent.photo2  
       arenaProposal = this.props.topicPageContent.proposal2;
       arenaProposalId = this.props.topicPageContent.proposal2DbId;
@@ -183,8 +189,10 @@ export class TopicPage extends Component {
               <Grid>
                 <Row id="arenaTop">
                   <Col xs={12} md={3}>
-                    <Image className="arenaPhoto" src={arenaPicture} rounded height="250" />
+                    <Image className={arenaPhotoClass} src={arenaPicture} rounded/>
                   </Col>
+
+            {/* ARENA SUMMARY PANEL */}
                   <Col xs={12} md={9}>
                     <Panel className={arenaSummaryClass}>
                       <Panel.Body>
@@ -205,7 +213,6 @@ export class TopicPage extends Component {
                           </Button>
                         </ButtonGroup>
                         <p className="keyClaimFooterLikes">Likes: 4 </p>
-
                       </Panel.Footer>
                     </Panel>
                   </Col>
@@ -217,19 +224,23 @@ export class TopicPage extends Component {
               </div>
 
               <div className={streamContainerClass}>
+
+              <Image className="arenaMini1" src={this.props.topicPageContent.photo1} width="55"/>
+              <Image className="arenaMini2" src={this.props.topicPageContent.photo2}   width="55"/>
+
                 <StreamItemFactory keyClaims={this.props.topicPageContent.keyClaims}
                   showStreamForClaim={this.state.showStreamForClaim} />
               </div>
             </Panel.Body>
           </Panel>
 
+      
+
+
           <CommentSection topic_id={this.props.topicPageContent.topicDbId} />
-          <Panel>
-            <Panel.Body>
-              <h4>Sponsored by Ameriprise Financial</h4>
-            </Panel.Body>
-          </Panel>
-        </div>
+        </div>   {/* <---  WRAPPER DIV ENDS */}
+
+
         <Footer />
       </div>
     )

@@ -87,7 +87,7 @@ input[type="submit"] {
   background-color: #CA4A00;
   width: 100%;
   border-radius: 0px;
-  padding: 1em 1em 0em 1em; 
+  /* padding: 1em 1em 0em 1em;  */
   margin-bottom: 0em; 
 }
 
@@ -106,10 +106,8 @@ li a {
     display: block;
     color: white;
     text-align: center;
-    padding: 12px 15px;
+    padding: 0px 15px;
     text-decoration: none;
-
-
 }
 
 /* Change the link color to #111 (black) on hover */
@@ -121,8 +119,6 @@ li a:hover {
 
 
 /* NEW CSS FRIDAY MAY 18 */
-
-
 .textCenter{
     text-align: center; 
 }
