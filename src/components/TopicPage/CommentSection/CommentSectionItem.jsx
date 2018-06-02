@@ -102,10 +102,20 @@ class CommentSectionItem extends Component {
                 <Well className={"commentComment"}>
 
                     <div className="userName">{this.props.comment.fb_display_name}:</div>
-                    <div className="commentTextWrapper">
 
-                        {(this.props.comment.claim || this.props.comment.stream_comment || this.props.comment.proposal) ? <span className="referenceTextCommentList">responding to...  "{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"</span> : null}
-                        <span className="commentText">{this.props.comment.comment}</span></div>
+                    <div className="commentTextWrapper">
+                        {(this.props.comment.claim || this.props.comment.stream_comment || this.props.comment.proposal) 
+                            ?
+                             <span className="referenceTextCommentList">{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"
+                                <br/>
+                                <br/>
+                            </span> 
+                            : null}
+                            
+                            <br/>
+
+                        <span className="commentText">{this.props.comment.comment}</span>
+                    </div>
 
 
                     {(this.props.user.userInfo) ? <ButtonGroup className="commentButtons">

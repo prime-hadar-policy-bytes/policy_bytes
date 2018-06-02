@@ -33,7 +33,8 @@ export class TopicPage extends Component {
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    this.fetchTopicPageContent(this.props.state.landing.featuredLandingPage[0].id);
+    // this.fetchTopicPageContent(this.props.state.landing.featuredLandingPage[0].id);
+    this.fetchTopicPageContent(23);
 
   }
 
@@ -221,13 +222,13 @@ export class TopicPage extends Component {
             </Panel.Body>
           </Panel>
 
+      
+
+
           <CommentSection topic_id={this.props.topicPageContent.topicDbId} />
-          <Panel>
-            <Panel.Body>
-              <h4>Sponsored by Ameriprise Financial</h4>
-            </Panel.Body>
-          </Panel>
-        </div>
+        </div>   {/* <---  WRAPPER DIV ENDS */}
+
+
         <Footer />
       </div>
     )

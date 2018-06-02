@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom';
-import { Panel, Button, ButtonGroup, ButtonToolbar, FormGroup, ControlLabel, FormControl, Checkbox, Glyphicon, Alert } from 'react-bootstrap'; 
+import { Panel, Button, ButtonGroup, ButtonToolbar, Glyphicon, Alert, Grid, Row, Col } from 'react-bootstrap'; 
 
 class TopicManagePanel extends Component {
   constructor(props) {
@@ -71,22 +71,20 @@ class TopicManagePanel extends Component {
     }
     let featuredText = 'Set Featured';
     if (this.props.topic.featured) {
-      featuredText = 'Featured Topic'
+      featuredText = 'Featured'
     }
 
     let alertContent;
     if (this.state.show) {
       alertContent = (
-        <Alert bsStyle="danger" onDismiss={this.handleDismiss}>
+        <Alert bsStyle="danger" onDismiss={this.handleDismiss} className="alertContent">
           <h4>Are you sure you want to delete this topic?</h4>
-          <i>
-            This cannot be undone and you will lose all associated data
-          </i>
-          <p>
-            <Button onClick={this.deleteTopic} bsStyle="danger">Delete Topic</Button>
-            <span> or </span>
-            <Button onClick={this.handleDismiss}>Nevermind</Button>
-          </p>
+
+            <ButtonGroup className="alertButtons">
+              <Button onClick={this.deleteTopic} bsStyle="danger">Delete Topic</Button>
+              <Button onClick={this.handleDismiss}>Nevermind</Button>
+            </ButtonGroup>
+
         </Alert>
       )
     }
@@ -96,35 +94,46 @@ class TopicManagePanel extends Component {
 
     return (
       <div>
-               
-            <Panel className="topicManagePanel">
-              <Panel.Heading>
-                {this.props.topic.topic_title}
-                <Button bsStyle={publishStyle} onClick={this.togglePublished}>{publishText}</Button>
-                <Button bsStyle={featuredStyle} onClick={this.toggleFeatured}>{featuredText}</Button>
-              </Panel.Heading>
-              <Panel.Body>
-                <p>
-                {this.props.topic.archive_summary}
-                </p>
-                
-                <img src="./assets/politicsIcon.svg" alt="" width="200"/>
 
-              {alertContent}
+            <Col xs={12} sm={6} md={4} lg={4}>
+            
+              <Panel className="topicManagePanel">
+                <Panel.Heading className="topicManagePanelHeading">
+                  {this.props.topic.topic_title}
+                  <br/>
 
-                <ButtonToolbar>
-                  <ButtonGroup>
-                    <Button onClick={this.handleShow}>
-                      <Glyphicon glyph="trash"/>
-                    </Button>
-                    <Button onClick={this.handleEditTopic}>
-                    <Link to={linkWithId}><Glyphicon glyph="pencil"/></Link>
-                    </Button>
-                  </ButtonGroup>
-                </ButtonToolbar>
+                  {alertContent}
+                </Panel.Heading>
+                <Panel.Body>
+                  <div className="topicManagePanelText">
+                    <p>
+                    {this.props.topic.archive_summary}
+                    </p>
+                    
+                    <img src="./assets/politicsIcon.svg" alt="" width="200"/>
+                  </div>
 
-              </Panel.Body>
-            </Panel>
+                  <div className="topicManageButtongroup">
+                    <ButtonGroup>
+                      <Button bsStyle={publishStyle} onClick={this.togglePublished}>{publishText}</Button>
+                      <Button bsStyle={featuredStyle} onClick={this.toggleFeatured}>{featuredText}</Button>
+                      <Button onClick={this.handleEditTopic}>
+                        <Link to={linkWithId}>
+                          {/* <i class="fa fa-pencil" aria-hidden="true"></i> */}
+                          Edit
+                        </Link>
+                      </Button>
+                      <Button onClick={this.handleShow}>
+                        <i class="fa fa-trash" aria-hidden="true"></i>
+                      </Button>
+                    </ButtonGroup>
+                  </div>
+     
+                </Panel.Body>
+              </Panel>
+
+            </Col>
+
             
       </div>
     )

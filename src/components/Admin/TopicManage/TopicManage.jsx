@@ -3,13 +3,13 @@ import { connect } from 'react-redux'
 
 import Footer from '../../Footer/Footer.jsx'
 import TopicManagePanel from './TopicManagePanel.jsx'
-import TopicManageModal from './TopicManageModal.jsx'
 import RegisterModal from '../RegisterModal/RegisterModal.js'
+import TopicManageAddPanel from './TopicManageAddPanel.jsx'
 
 import './TopicManage.css'; 
 
 import { Link } from 'react-router-dom';
-import { Panel, Button, ButtonGroup, ButtonToolbar, FormGroup, ControlLabel, FormControl, Checkbox, Glyphicon, Modal } from 'react-bootstrap'; 
+import { Panel, Button, ButtonGroup, ButtonToolbar, Glyphicon, Modal, Grid, Row, Col } from 'react-bootstrap'; 
 
 class TopicManage extends Component {
   constructor(props) {
@@ -67,14 +67,6 @@ class TopicManage extends Component {
                               handleShowDelete={this.handleShowDelete}/>
     })
 
-    let modalContent;
-    if (this.state.showModal) {
-      modalContent = (
-        <TopicManageModal handleDismiss={this.handleDismiss}
-                          handleDelete={this.handleDelete}/>
-      )
-    }
-
 
     return (
       <div>
@@ -86,11 +78,16 @@ class TopicManage extends Component {
             <Link to='/topicEdit'>Create A New Topic</Link>
           </Button>
           <RegisterModal/>
-        </h1>             
+        </h1>   
 
-          
-          {modalContent}
-          {topicPanels}
+        <Grid>
+          <Row>
+
+          <TopicManageAddPanel />
+            {topicPanels}
+          </Row>
+        </Grid>          
+
 
         </div>
         {/* <Footer /> */}
