@@ -57,6 +57,7 @@
 .commentPanelWrapper {
     width: 80% !important; 
     margin: 1em auto; 
+    
 }
 
 .commentPanel1 {
@@ -103,6 +104,8 @@
     margin-top: 1em;
     width: 70% !important; 
     display: inline-block; 
+    background: rgba(245, 245, 245, 0.502); 
+
 
 }
 
@@ -127,6 +130,7 @@
 .commentText {
     font-size: 0.8em;
     margin-left: 1em;
+
 }
 
 .referenceText {
@@ -135,16 +139,31 @@
     margin-left: 1.5em;
 }
 
+
+
 .referenceTextCommentList {
     font-size: 0.7em;
     font-style: italic;
-    margin-left: 1.5em;
+}
+
+.referenceTextCommentContainerContrib1 {
+    padding: 1em;
+    border-radius: 10px; 
+    margin: 1.5em 1em 1em 1em; 
+    background-color: #00666629;
+}
+
+.referenceTextCommentContainerContrib2 {
+    padding: 1em;
+    border-radius: 10px; 
+    margin: 1.5em 1em 1em 1em; 
+    background-color: #66660035;
 }
 
 .commentButtons{
     float: right; 
     display: inline-block;
-    margin-bottom: -1em;
+    margin: .5em;
 }
 
 .commentButton {

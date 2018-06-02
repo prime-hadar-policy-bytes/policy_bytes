@@ -67,7 +67,6 @@ class CommentSection extends Component {
             <div>
 
                 <Panel id="commentPanelMaster">
-                {/* <h3 id="commentsHeader"><strong>- Join The Conversation -</strong></h3> */}
                     <Panel.Body>
                         {(this.props.user.userInfo) ? <CommentAdd topic_id={this.props.topic_id} /> : this.loginUserInvite()}
                         <div className="commentPanelWrapper">
