@@ -28,26 +28,40 @@ export class TopicPage extends Component {
       showStreamForClaim: undefined,
       keyClaimLocked: false,
       contributorSelect: 'contributor1',
+      topicId: 0
     }
   }
 
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-
-    // this.fetchTopicPageContent(3);
-
-    // this.fetchTopicPageContent(this.props.state.landing.featuredLandingPage[0].id);
-
-
+    
+    this.props.dispatch({
+      type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
+  })
+  
+  }
+//allows reducer to be populated before it looks for data
+  componentWillReceiveProps(nextProps){
+    
+    this.setState({
+      ...this.state, topicId: nextProps.state.landing.featuredLandingPage[0].id
+    })
+    // this.fetchTopicPageContent(this.state.topicId);
   }
 
-  // fetchTopicPageContent = (id) => {
-  //   console.log('in fetchTopicPageContent, id:', id);
-  //   this.props.dispatch({
-  //     type: 'FETCH_TOPIC_PAGE_CONTENT',
-  //     payload: id
-  //   })
-  // }
+  componentDidUpdate(prevProps) {
+    if(this.props.state.landing.featuredLandingPage[0].id !== prevProps.state.landing.featuredLandingPage[0].id){
+      this.fetchTopicPageContent(this.state.topicId);
+    }
+  }
+
+fetchTopicPageContent = (id) => {
+    console.log('in fetchTopicPageContent, id:', id);
+    this.props.dispatch({
+      type: 'FETCH_TOPIC_PAGE_CONTENT',
+      payload: id
+    })
+  }
 
 
   //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false

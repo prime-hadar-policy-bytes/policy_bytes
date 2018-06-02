@@ -22,8 +22,11 @@
     padding: 1em; 
     /* border: 1px solid rgba(119, 136, 153, 0.29);  */
     /* box-shadow: 1px 1px 2px rgba(119, 136, 153, 0.507);  */
-    background-color: whitesmoke; 
+    background: rgba(245, 245, 245, 0.502); 
+
 }
+
+
 
 .addCommentPicAndResponse{
     margin: -.5em 0 0 0; 
@@ -31,20 +34,19 @@
 }
 
 .addCommentPic{
-    height: 50;
+    height: 50px;
     width: 50px; 
     margin-left: 0em; 
     margin-top: -2.5em; 
     display: 'inline-block'; 
 }
 
-#addCommentResponseField{
+.addCommentResponseField{
    width: 90%; 
    margin-left: 2em; 
    margin-top: 1em; 
    display: inline-block; 
    border: 1px solid rgba(119, 136, 153, 0.29); 
-
 }
 
 .addCommentButton{
@@ -52,11 +54,42 @@
     
 }
 
+/* IF A COMMENT IS A REPLY:  */
+.addCommentPanelReply{
+    width: 70%; 
+    margin: 1em auto; 
+    padding: 1em; 
+    /* border: 1px solid rgba(119, 136, 153, 0.29);  */
+    /* box-shadow: 1px 1px 2px rgba(119, 136, 153, 0.507);  */
+    background: rgba(245, 245, 245, 0.502); 
+
+}
+
+.addCommentPanelReply .addCommentPic{
+    height: 50px;
+    width: 50px; 
+    margin-left: 0em; 
+    margin-top: -2.5em; 
+    display: 'inline-block'; 
+}
+
+.addCommentPanelReply .addCommentResponseField {
+    width: 85%; 
+    margin-left: 2em; 
+    margin-top: 1em; 
+    display: inline-block; 
+    border: 1px solid rgba(119, 136, 153, 0.29); 
+}
+
+.addCommentPanelReply .addCommentButton {
+    margin: 0 0 0 84%;
+}
 
 
 .commentPanelWrapper {
     width: 80% !important; 
     margin: 1em auto; 
+    
 }
 
 .commentPanel1 {
@@ -103,6 +136,8 @@
     margin-top: 1em;
     width: 70% !important; 
     display: inline-block; 
+    background: rgba(245, 245, 245, 0.502); 
+
 
 }
 
@@ -127,6 +162,7 @@
 .commentText {
     font-size: 0.8em;
     margin-left: 1em;
+
 }
 
 .referenceText {
@@ -135,16 +171,31 @@
     margin-left: 1.5em;
 }
 
+
+
 .referenceTextCommentList {
     font-size: 0.7em;
     font-style: italic;
-    margin-left: 1.5em;
+}
+
+.referenceTextCommentContainerContrib1 {
+    padding: 1em;
+    border-radius: 10px; 
+    margin: 1.5em 1em 1em 1em; 
+    background-color: #00666629;
+}
+
+.referenceTextCommentContainerContrib2 {
+    padding: 1em;
+    border-radius: 10px; 
+    margin: 1.5em 1em 1em 1em; 
+    background-color: #66660035;
 }
 
 .commentButtons{
     float: right; 
     display: inline-block;
-    margin-bottom: -1em;
+    margin: .5em;
 }
 
 .commentButton {

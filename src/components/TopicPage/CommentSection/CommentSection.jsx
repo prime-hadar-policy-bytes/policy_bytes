@@ -56,7 +56,6 @@ class CommentSection extends Component {
 
         // console.log('this is topic_id', this.props.topic_id);
         let commentList = this.props.comments.commentsGeneral.map((comment) => {
-            console.log('HELLO comment', comment);
             
             return (
                 <CommentSectionItem topic_id={this.props.topic_id} key={comment.id} comment={comment} />
@@ -67,9 +66,8 @@ class CommentSection extends Component {
             <div>
 
                 <Panel id="commentPanelMaster">
-                {/* <h3 id="commentsHeader"><strong>- Join The Conversation -</strong></h3> */}
                     <Panel.Body>
-                        {(this.props.user.userInfo) ? <CommentAdd topic_id={this.props.topic_id} /> : this.loginUserInvite()}
+                        {(this.props.user.userInfo) ? <CommentAdd conmmentAddClass='addCommentPanel' topic_id={this.props.topic_id} /> : this.loginUserInvite()}
                         <div className="commentPanelWrapper">
                             {commentList}</div>
                     </Panel.Body>

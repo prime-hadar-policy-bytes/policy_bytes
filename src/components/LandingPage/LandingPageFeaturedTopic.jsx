@@ -37,6 +37,8 @@ class LandingPageFeaturedTopic extends Component {
   render() {
 
     let featuredTopic = this.props.state.landing.featuredLandingPage;
+    console.log('featuredTopic = ', featuredTopic);
+    
 
     return (
 <div onClick={()=>this.fetchTopicPageContent(featuredTopic[0].id)}>

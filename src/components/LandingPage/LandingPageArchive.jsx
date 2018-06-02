@@ -65,7 +65,7 @@ class LandingPageArchive extends Component {
         <div className="archiveWrapper">
           <Grid>
               <Row>
-                {archiveArray}
+                    {archiveArray}
               </Row>
           </Grid>
 
