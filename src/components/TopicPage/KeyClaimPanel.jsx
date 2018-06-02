@@ -75,7 +75,7 @@ export class KeyClaimPanel extends Component {
           onMouseLeave={this.handleMouseLeave}
           expanded={this.state.open}>
           <Panel.Body onClick={this.toggleLockKeyClaim}>
-            <p>{this.props.keyClaim.keyClaim}</p>
+            <p dangerouslySetInnerHTML={{__html: this.props.keyClaim.keyClaim}}/>
           </Panel.Body>
           <Panel.Collapse>
             <Panel.Footer className="keyClaimFooter">

@@ -52,7 +52,7 @@ class StreamItem extends Component {
           <Panel.Body>
             <strong>Comment:</strong> 
             <br/>
-            {this.props.streamItem.streamComment}
+            <div dangerouslySetInnerHTML={{__html: this.props.streamItem.streamComment}}/>
 
             <Panel.Collapse>
               <br/>
