@@ -38,7 +38,7 @@ export class TopicPage extends Component {
       type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
   })
   }
-
+//allows reducer to be populated before it looks for data
   componentWillReceiveProps(nextProps){
     this.setState({
       ...this.state, topicId: nextProps.state.landing.featuredLandingPage[0].id
@@ -53,6 +53,7 @@ export class TopicPage extends Component {
       payload: id
     })
   }
+  
 
 
   //called on mouseEnter from keyClaimPanel IF keyClaimLocked === false
