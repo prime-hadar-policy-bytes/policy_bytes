@@ -50,6 +50,7 @@
 .topicManagePanelText{
     height: 15em;
     overflow: scroll; 
+    text-align: center;
 }
 
 .topicManageButtongroup{
