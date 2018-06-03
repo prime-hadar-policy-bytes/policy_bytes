@@ -111,7 +111,8 @@ class TopicManagePanel extends Component {
                     
                     {(this.state.show) ? alertContent 
                                       :<p>{this.props.topic.archive_summary}
-                                      <img src={this.props.topic.icon_url} alt="" width="200"/></p>}
+                                      <br/><br/>
+                                      <img src={this.props.topic.icon_url} alt="" width="170"/></p>}
 
         
                   </div>
