@@ -107,8 +107,11 @@ class KeyClaimForm extends Component {
             {streamItemForms}
 
               <ButtonGroup className="wireCommentButtons">
+                <Button bsStyle="danger" onClick={this.props.deleteKeyClaim}>Delete Key Claim</Button>
+                <Button>[arrow up]</Button>
+                <Button>[arrow down]</Button>
+                <Button onClick={this.addStreamItem}>Add Stream Item</Button>
                 <Button bsStyle="danger">Delete Key Claim</Button>
-                
                 {!match ? <Button onClick={this.addStreamItem}>Add Stream Item</Button> : <Button disabled>Add Stream Item</Button>}
               </ButtonGroup>
 

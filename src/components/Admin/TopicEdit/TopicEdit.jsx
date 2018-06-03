@@ -143,6 +143,13 @@ class TopicEdit extends Component {
     })
   }
 
+  deleteKeyClaim = (id) => {
+    this.props.dispatch({
+      type: 'DELETE_KEY_CLAIM',
+      payload: id
+    })
+  }
+
   handleDismiss = () => {
     if (debug) { console.log('in handledismiss'); }
 
@@ -186,7 +193,8 @@ class TopicEdit extends Component {
           claimId={keyClaim}  //LOCAL, count to populate the view 
           keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims} ////REDUX, everything in keyclaims
           handleKeyClaimChange={this.handleKeyClaimChange}
-          handleStreamChange={this.handleStreamChange} />
+          handleStreamChange={this.handleStreamChange}
+          deleteKeyClaim={this.deleteKeyClaim} />
       )
     }
     const { from } = this.props.location.state || '/'
