@@ -109,7 +109,7 @@ class TopicEdit extends Component {
         payload: this.props.state.cacheEdit.topicEditCache,
       })
       this.setState({
-        submitAlert: true
+        submitAlert: true,
       })
     } else {
       this.props.dispatch({
@@ -117,7 +117,8 @@ class TopicEdit extends Component {
         payload: this.props.state.cacheEdit.topicEditCache,
       })
       this.setState({
-        submitAlert: true
+        submitAlert: true,
+        fireRedirect: true  
       })
     }
     ///SOME INDICATOR HERE
