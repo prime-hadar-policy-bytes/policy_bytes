@@ -11,6 +11,15 @@ import { Stream } from 'stream';
 
 class KeyClaimForm extends Component {
 
+  constructor(props) {
+    super(props)
+
+
+  }
+
+
+  componentDidMount() {
+  }
 
 //currying function to setState on change of form fields
     handleChange = (event) => {
@@ -36,6 +45,12 @@ class KeyClaimForm extends Component {
   render() {
     //ID of the keyClaim
     let claimId = this.props.claimId; 
+
+    let match = this.props.edit && this.props.edit;
+
+    console.log(match);
+
+
     //Object containg all keyClaim information passed down on props
     //individual keyClaim ID used to pick out the streamData object on each keyClaim
     //looping over this unique streamData object to create the correct number of streamInputForms
@@ -93,9 +108,8 @@ class KeyClaimForm extends Component {
 
               <ButtonGroup className="wireCommentButtons">
                 <Button bsStyle="danger">Delete Key Claim</Button>
-                <Button>[arrow up]</Button>
-                <Button>[arrow down]</Button>
-                <Button onClick={this.addStreamItem}>Add Stream Item</Button>
+                
+                {!match ? <Button onClick={this.addStreamItem}>Add Stream Item</Button> : <Button disabled>Add Stream Item</Button>}
               </ButtonGroup>
 
             </Panel.Body>

@@ -22,6 +22,7 @@ class TopicEdit extends Component {
       photo1: '',
       photo2: '',
       fireRedirect: false,
+      edit: false,
     }
   }
 
@@ -51,11 +52,17 @@ class TopicEdit extends Component {
         type: 'FETCH_EDIT_TOPIC_INFO',
         payload: editTopicId
       })
+      this.setState({
+        edit: true,
+      })
       this.fetchEditCache();
     } else {
       this.props.dispatch({
         type: 'RESET_EDIT_CACHE',
         payload: editTopicId
+      })
+      this.setState({
+        edit: false,
       })
       this.fetchEditCache();
     }
@@ -173,7 +180,9 @@ class TopicEdit extends Component {
     let keyClaimForms = []
     for (const keyClaim in keyClaimIdObject) {
       keyClaimForms.push(
-        <KeyClaimForm key={keyClaim}
+        <KeyClaimForm 
+          edit={this.state.edit}
+          key={keyClaim}
           claimId={keyClaim}  //LOCAL, count to populate the view 
           keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims} ////REDUX, everything in keyclaims
           handleKeyClaimChange={this.handleKeyClaimChange}
