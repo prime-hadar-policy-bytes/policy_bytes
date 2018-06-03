@@ -59,8 +59,8 @@ class StreamItem extends Component {
               <br/>
               <strong>Evidence:</strong> 
               <br/>
-              {this.props.streamItem.streamEvidence}
-              
+
+              <p dangerouslySetInnerHTML={{__html: this.props.streamItem.streamEvidence}}/>  
               <br/>
               <br/>
               <Panel.Footer className="keyClaimFooter">

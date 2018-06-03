@@ -6,25 +6,30 @@ const router = express.Router();
 
 //gets all comments from database
 
-// router.get('/getLikes', (req, res) => {
+router.get('/get/proposal/:id', (req, res) => {
 
-//     const queryText = `SELECT comments_general.id, comments_general.date, comments_general.order, comments_general.person_id, comments_general.topic_id, comments_general.comment, comments_general.approved, person.fb_display_name, person.fb_picture, person.id as person_id FROM "comments_general" LEFT JOIN "person" ON comments_general.person_id = person.id ORDER BY comments_general.order;`
-//     //pool.query is the method that sends the queryText to the database and 
-//     //stores the results in the variable result
-//     pool.query(queryText).then((result) => {
-//         //all of the comments are stored in result.rows; therefore we will send back
-//         //result.rows
-//         res.send(result.rows)
-//         //if there was an error in getting the comments from the database,
-//         //the error will be displayed in the console log
-//     }).catch((error) => {
-//         console.log('Error in getting comments_general: ', error);
+    let id = req.params.id;
 
-//     })
+    if (req.isAuthenticated) {
 
-// });
+    const queryText = `SELECT * FROM "like" WHERE proposal_id = $1;`
+    //pool.query is the method that sends the queryText to the database and 
+    //stores the results in the variable result
+    pool.query(queryText, [id]).then((result) => {
+        //all of the comments are stored in result.rows; therefore we will send back
+        //result.rows
+        res.send(result.rows)
+        //if there was an error in getting the comments from the database,
+        //the error will be displayed in the console log
+    }).catch((error) => {
+        console.log('Error in getting comments_general: ', error);
 
-router.put('/:id', (req, res) => {
+    })
+}
+
+});
+
+router.put('/increment/:id', (req, res) => {
     //in order to post an item, user must be signed in
     console.log(req.body);
 
