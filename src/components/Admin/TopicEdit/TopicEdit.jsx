@@ -195,7 +195,7 @@ class TopicEdit extends Component {
           {/* SHOW STATE ON DOM */}
           {/* <pre>state: {JSON.stringify(this.state, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre> */}
-          <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicReadMore, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicReadMore, null, 3)}</pre> */}
           {/* <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre> */} 
           {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.uploadItem, null, 3)}</pre> */}
@@ -210,7 +210,8 @@ class TopicEdit extends Component {
                   value={this.props.state.cacheEdit.topicEditCache.topicTitle}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                   <img src={this.props.state.cacheEdit.topicEditCache.topicReadMore} width="100" />
-
+                
+                <ControlLabel>Upload Archive Icon</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='topicReadMore' />
 
@@ -280,7 +281,7 @@ class TopicEdit extends Component {
 
                 <img src={this.props.state.cacheEdit.topicEditCache.photo1} width="300" />
 
-
+                <ControlLabel>Upload Contributor 1 Photo</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='photo1' />
 
@@ -315,7 +316,7 @@ class TopicEdit extends Component {
 
                 <img src={this.props.state.cacheEdit.topicEditCache.photo2} width="300" />
 
-
+                <ControlLabel>Upload Contributor 2 Photo</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='photo2' />
 
