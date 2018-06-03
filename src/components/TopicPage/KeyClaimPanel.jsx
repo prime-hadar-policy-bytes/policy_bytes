@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { Panel, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 
+import LikeButtonKeyClaim from './LikeButtons/LikeButtonKeyClaim.jsx'
 import './TopicPage.css'
 
 
@@ -80,9 +81,7 @@ export class KeyClaimPanel extends Component {
           <Panel.Collapse>
             <Panel.Footer className="keyClaimFooter">
               <ButtonGroup className="keyClaimFooterButtons">
-                <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="thumbs-up" />
-                </Button>
+                <LikeButtonKeyClaim id={this.props.keyClaim.claimDbId}/>
                 <Button className="keyClaimFooterItem">
                   <Glyphicon glyph="heart" />
                 </Button>
