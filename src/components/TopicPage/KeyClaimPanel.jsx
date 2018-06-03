@@ -82,9 +82,6 @@ export class KeyClaimPanel extends Component {
             <Panel.Footer className="keyClaimFooter">
               <ButtonGroup className="keyClaimFooterButtons">
                 <LikeButtonKeyClaim id={this.props.keyClaim.claimDbId}/>
-                <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="heart" />
-                </Button>
                 <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentKeyClaim(this.props.keyClaim)}
                   className="keyClaimFooterItem">
                   <Glyphicon glyph="comment" />

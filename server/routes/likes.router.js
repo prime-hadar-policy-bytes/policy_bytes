@@ -34,7 +34,7 @@ router.get('/get/keyClaim/:id', (req, res) => {
 
     if (req.isAuthenticated) {
 
-    const queryText = `SELECT * FROM "like" WHERE stream_id = $1;`
+    const queryText = `SELECT * FROM "like" WHERE key_claim_id = $1;`
     //pool.query is the method that sends the queryText to the database and 
     //stores the results in the variable result
     pool.query(queryText, [id]).then((result) => {

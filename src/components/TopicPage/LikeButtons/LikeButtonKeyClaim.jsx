@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Panel, Glyphicon, Button, ButtonGroup } from 'react-bootstrap';
+import { connect } from 'react-redux'
 import axios from 'axios';
+
+import { Panel, Glyphicon, Button, ButtonGroup } from 'react-bootstrap';
 
 import '../TopicPage.css'
 
@@ -15,12 +17,21 @@ class LikeButtonKeyClaim extends Component {
     }
 
 
+    componentDidMount = () => {
+        if (this.props.id) {
+            this.getKeyClaimLikes(this.props.id);
+            console.log('componentDidMount, this.props.id', this.props.id);
+
+        }
+    }
+
+
     componentWillReceiveProps = (nextProps) => {
 
         if (this.props.id == !nextProps.id) {
-            this.getKeyCLaimLikes(nextProps.id);
-            console.log('nextProps', nextProps.id);
-            console.log('this.props', nextProps.id);
+            this.getKeyClaimLikes(nextProps.id);
+            console.log('componentWillReceiveProps, nextProps', nextProps.id);
+            console.log('componentWillReceiveProps, this.props', nextProps.id);
         }
     }
 
@@ -28,9 +39,17 @@ class LikeButtonKeyClaim extends Component {
         axios.get(`/api/likes/get/keyClaim/${id}`)
             .then((response) => {
                 console.log('here is response from axios.get', response.data);
-                this.setState({
-                    count: response.data[0].count
-                })
+                if (!response.data[0]) {
+                    this.setState({
+                        count: 0
+                    })
+
+                } else {
+                    this.setState({
+                        count: response.data[0].count
+                    })
+
+                }
                 console.log('this is state.count', this.state.count);
             }).catch((err) => {
                 console.log(err)
@@ -78,21 +97,32 @@ class LikeButtonKeyClaim extends Component {
 
     render() {
 
-        // console.log('this is this.props.id', this.props.id);
-        return (
+        if (this.props.user.userInfo) {
 
-            <span>{!this.state.likedKeyClaim ? <Button className="keyClaimFooterItem" onClick={() => this.likeKeyClaim(this.props.id)} ><Glyphicon glyph="thumbs-up" /> {this.state.count}</Button> : <Button className="keyClaimFooterItem" bsStyle="success" onClick={() => this.unlikeKeyClaim(this.props.id)} ><Glyphicon glyph="thumbs-up" /> {this.state.count}</Button>}</span>
+            return (
 
-        )
+                <span>{!this.state.likedKeyClaim ? <Button className="keyClaimFooterItem" onClick={() => this.likeKeyClaim(this.props.id)} ><Glyphicon glyph="thumbs-up" /> {this.state.count}</Button> : <Button className="keyClaimFooterItem" bsStyle="success" onClick={() => this.unlikeKeyClaim(this.props.id)} ><Glyphicon glyph="thumbs-up" /> {this.state.count}</Button>}</span>
+
+            )
+        } else {
+            return (
+
+                <span> <Button disabled className="keyClaimFooterItem" onClick={() => this.likeKeyClaim(this.props.id)} ><Glyphicon glyph="thumbs-up" /> {this.state.count}</Button></span>
+
+            )
+
+        }
     }
 }
 
-// const mapStateToProps = (state) => ({
-//     state
-// })
+const mapStateToProps = state => ({
+    user: state.user,
+});
 
 
-export default (LikeButtonKeyClaim);
+export default connect(mapStateToProps)(LikeButtonKeyClaim);
+
+
 
 
 

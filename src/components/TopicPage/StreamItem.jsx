@@ -4,6 +4,7 @@ import { Panel, Glyphicon, Button, ButtonGroup } from 'react-bootstrap';
 
 import LikeButtonStream from './LikeButtons/LikeButtonStream.jsx'
 
+
 class StreamItem extends Component {
   constructor(props, context) {
     super(props, context);
@@ -67,7 +68,7 @@ class StreamItem extends Component {
               <Panel.Footer className="keyClaimFooter">
 
                 <ButtonGroup className="keyClaimFooterButtons">
-                  <LikeButtonStream id={this.props.streamItem.streamDbId} />
+                   <LikeButtonStream id={this.props.streamItem.streamDbId} />
                   <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentStream(this.props.streamItem)} className="keyClaimFooterItem">
                     <Glyphicon glyph="comment" />
                   </Button>
