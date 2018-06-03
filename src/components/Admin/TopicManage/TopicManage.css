@@ -30,6 +30,7 @@
     box-shadow: 1px 1px 2px rgb(204, 207, 210); 
     transition-duration: 0.3s;
     transition-property: box-shadow;
+    overflow: hidden;
 }
 
 .topicManagePanel:hover {

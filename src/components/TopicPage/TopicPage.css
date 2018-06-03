@@ -138,8 +138,21 @@ h1{
     border: 2px solid #006666 !important;
 }
 
-.tabParent {
-    /* background: red !important;  */
+/* Inactive tab */
+.tabParent ul > li > a {
+    background-color: grey;
+    color: white;
+}
+.tabParent ul > li > a:hover {
+    background-color: rgb(116, 116, 116);
+}
+
+/* Active tab */
+.tabParent ul > li.active > a,
+.tabParent ul > li.active > a:hover,
+.tabParent ul > li.active > a:focus {
+    background-color: #337ab7;
+    color: white;
 }
 
 .tabChildren {
@@ -219,6 +232,15 @@ h1{
 .streamItem{
     margin-right: 0em; 
     width: 100%; 
+}
+
+@media only screen and (min-width: 1330px) {
+    .arenaMini1 {
+        display: none; 
+    }
+    .arenaMini2{
+        display: none; 
+    }
 }
 
 

@@ -45,7 +45,7 @@ class TopicEdit extends Component {
   }
 
   populateEditCache = () => {
-    let editTopicId = this.props.match.params.id;
+    let editTopicId = this.props.match.params.id;    
     if (editTopicId) {
       this.props.dispatch({
         type: 'FETCH_EDIT_TOPIC_INFO',
@@ -166,6 +166,8 @@ class TopicEdit extends Component {
 
 
   render() {
+    console.log('ROUTE PARAMS', this.props.match.params.id);
+    
 
     if (debug) { console.log('ROUTE PARAMS', this.props.match.params.id); }
 
