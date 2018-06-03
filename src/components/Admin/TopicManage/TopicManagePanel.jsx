@@ -88,6 +88,8 @@ class TopicManagePanel extends Component {
         </Alert>
       )
     }
+
+
  
 //EACH EDIT BUTTON SENDS ADMIN TO TOPIC EDIT PAGE WITH UNIQUE URL BASED ON SELECTED TOPIC'S ID  
   let linkWithId = `/topicEdit/${this.props.topic.id}`
@@ -102,15 +104,16 @@ class TopicManagePanel extends Component {
                   {this.props.topic.topic_title}
                   <br/>
 
-                  {alertContent}
                 </Panel.Heading>
                 <Panel.Body>
+                  {/* {alertContent} */}
                   <div className="topicManagePanelText">
-                    <p>
-                    {this.props.topic.archive_summary}
-                    </p>
                     
-                    <img src={this.props.topic.icon_url} alt="" width="200"/>
+                    {(this.state.show) ? alertContent 
+                                      :<p>{this.props.topic.archive_summary}
+                                      <img src={this.props.topic.icon_url} alt="" width="200"/></p>}
+
+        
                   </div>
 
                   <div className="topicManageButtongroup">
