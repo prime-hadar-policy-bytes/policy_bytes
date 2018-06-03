@@ -9,6 +9,8 @@ import ReactFilestack, { client } from 'filestack-react';
 import filestack from 'filestack-js';
 import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
 
+import { Redirect } from 'react-router';
+
 let debug = false;
 
 class TopicEdit extends Component {
@@ -19,6 +21,7 @@ class TopicEdit extends Component {
       submitAlert: false,
       photo1: '',
       photo2: '',
+      fireRedirect: false,
     }
   }
 
@@ -137,7 +140,8 @@ class TopicEdit extends Component {
     if (debug) { console.log('in handledismiss'); }
 
     this.setState({
-      submitAlert: false
+      submitAlert: false,
+      fireRedirect: true  
     })
   }
   handleUploadContent = (fileUploded, contributor) => {
@@ -176,7 +180,9 @@ class TopicEdit extends Component {
           handleStreamChange={this.handleStreamChange} />
       )
     }
-
+    const { from } = this.props.location.state || '/'
+    const { fireRedirect } = this.state
+    
 
     return (
       <div>
@@ -206,7 +212,7 @@ class TopicEdit extends Component {
                   <img src={this.props.state.cacheEdit.topicEditCache.topicReadMore} width="100" />
 
                 <ImageUpload handleUploadContent={this.handleUploadContent}
-                  icon='topicReadMore' />
+                  contributor='topicReadMore' />
 
               </Panel.Body>
             </Panel>
@@ -329,8 +335,12 @@ class TopicEdit extends Component {
                 <SubmitAlert handleDismiss={this.handleDismiss} />
               }
             </div>
-            <Button type="submit" bsStyle="primary">Submit!</Button>
+          
+              <Button type="submit" bsStyle="primary">Submit!</Button>
+            
           </form>
+              {fireRedirect && (
+              <Redirect to={from || '/admin'}/>)}
         </div>
 
       </div>

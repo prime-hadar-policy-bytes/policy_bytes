@@ -74,9 +74,9 @@ class TopicManage extends Component {
 
         <h1>
           Topic Manage Page
-          <Button className="newTopicButton" bsStyle="success">
+          {/* <Button className="newTopicButton" bsStyle="success">
             <Link to='/topicEdit'>Create A New Topic</Link>
-          </Button>
+          </Button> */}
           <RegisterModal/>
         </h1>   
 
