@@ -110,7 +110,7 @@ class TopicManagePanel extends Component {
                     {this.props.topic.archive_summary}
                     </p>
                     
-                    <img src="./assets/politicsIcon.svg" alt="" width="200"/>
+                    <img src={this.props.topic.icon_url} alt="" width="200"/>
                   </div>
 
                   <div className="topicManageButtongroup">
