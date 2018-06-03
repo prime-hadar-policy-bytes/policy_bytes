@@ -59,6 +59,7 @@ class LandingPageFeaturedTopic extends Component {
                     </Row>
 
 
+
         {/* CONTRIBUTORS */}
                     <Row>
                                   <Col xs={12} md={12} lg={2}>

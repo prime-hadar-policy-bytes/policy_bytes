@@ -233,8 +233,8 @@ class TopicEdit extends Component {
                 
                 <ControlLabel>Upload Archive Icon</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
-                  contributor='topicReadMore' />
-
+                  contributor='topicReadMore'  //<-- topicReadMore is icon_url through full stack
+                              />
               </Panel.Body>
             </Panel>
 
