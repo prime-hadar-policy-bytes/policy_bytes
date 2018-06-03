@@ -21,6 +21,7 @@ class TopicEdit extends Component {
       submitAlert: false,
       photo1: '',
       photo2: '',
+      topicReadMore: '',
       fireRedirect: false,
       edit: false,
     }
@@ -118,7 +119,8 @@ class TopicEdit extends Component {
       })
       this.setState({
         submitAlert: true,
-        fireRedirect: true  
+        fireRedirect: true
+        
       })
     }
     ///SOME INDICATOR HERE

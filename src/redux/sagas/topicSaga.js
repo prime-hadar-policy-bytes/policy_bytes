@@ -75,6 +75,9 @@ function* setNewTopic(action){
         //posts new topic to the database via axios.post
         //action.payload contains the new topic
         yield call(axios.post, '/api/topic/newtopic', action.payload)
+        yield put ({
+            type: 'FETCH_ALL_TOPICS'
+        })
 
     //if there is an error in sending post request to router, the error
     //will display in the console log
