@@ -38,8 +38,8 @@ class LandingPageArchive extends Component {
                         <Panel className="archivePanel">
                         <Panel.Body>
                             <Panel.Heading>{archivedTopic.topic_title}</Panel.Heading>
-                                <p>{archivedTopic.icon_url}</p>
-                                {/* <img src="./assets/Gun.png" alt="" width="100"/> */}
+                                <img src={archivedTopic.icon_url} alt="" width="100"/>
+                                <br/>
                                 <p>{date}</p>
                                 <br/>
                                 <p>{archivedTopic.archive_summary}</p>
