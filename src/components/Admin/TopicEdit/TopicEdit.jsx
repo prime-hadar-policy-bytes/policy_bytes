@@ -22,6 +22,7 @@ class TopicEdit extends Component {
       photo1: '',
       photo2: '',
       fireRedirect: false,
+      edit: false,
     }
   }
 
@@ -51,11 +52,17 @@ class TopicEdit extends Component {
         type: 'FETCH_EDIT_TOPIC_INFO',
         payload: editTopicId
       })
+      this.setState({
+        edit: true,
+      })
       this.fetchEditCache();
     } else {
       this.props.dispatch({
         type: 'RESET_EDIT_CACHE',
         payload: editTopicId
+      })
+      this.setState({
+        edit: false,
       })
       this.fetchEditCache();
     }
@@ -173,7 +180,9 @@ class TopicEdit extends Component {
     let keyClaimForms = []
     for (const keyClaim in keyClaimIdObject) {
       keyClaimForms.push(
-        <KeyClaimForm key={keyClaim}
+        <KeyClaimForm 
+          edit={this.state.edit}
+          key={keyClaim}
           claimId={keyClaim}  //LOCAL, count to populate the view 
           keyClaimIdObject={this.props.state.cacheEdit.topicEditCache.keyClaims} ////REDUX, everything in keyclaims
           handleKeyClaimChange={this.handleKeyClaimChange}
@@ -195,7 +204,7 @@ class TopicEdit extends Component {
           {/* SHOW STATE ON DOM */}
           {/* <pre>state: {JSON.stringify(this.state, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache, null, 3)}</pre> */}
-          <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicReadMore, null, 3)}</pre>
+          {/* <pre>state: {JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicReadMore, null, 3)}</pre> */}
           {/* <pre>{JSON.stringify(this.props.state.cacheEdit.topicEditCache.topicSummary, null, 3)}</pre> */} 
           {/* <pre>state: {JSON.stringify(this.props.keyClaims, null, 3)}</pre> */}
           {/* <pre>state: {JSON.stringify(this.props.uploadItem, null, 3)}</pre> */}
@@ -210,7 +219,8 @@ class TopicEdit extends Component {
                   value={this.props.state.cacheEdit.topicEditCache.topicTitle}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
                   <img src={this.props.state.cacheEdit.topicEditCache.topicReadMore} width="100" />
-
+                
+                <ControlLabel>Upload Archive Icon</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='topicReadMore'  //<-- topicReadMore is icon_url through full stack
                               />
@@ -280,7 +290,7 @@ class TopicEdit extends Component {
 
                 <img src={this.props.state.cacheEdit.topicEditCache.photo1} width="300" />
 
-
+                <ControlLabel>Upload Contributor 1 Photo</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='photo1' />
 
@@ -315,7 +325,7 @@ class TopicEdit extends Component {
 
                 <img src={this.props.state.cacheEdit.topicEditCache.photo2} width="300" />
 
-
+                <ControlLabel>Upload Contributor 2 Photo</ControlLabel>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='photo2' />
 

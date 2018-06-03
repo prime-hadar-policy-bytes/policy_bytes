@@ -16,6 +16,7 @@ const userRouter = require('./routes/user.router');
 const facebookRouter = require('./routes/facebook.router');
 const topicRouter = require('./routes/topic.router')
 const commentsRouter = require('./routes/comments.router')
+const likesRouter = require('./routes/likes.router')
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,8 @@ app.use('/api/user', userRouter);
 app.use('/api/facebook', facebookRouter);
 app.use('/api/topic', topicRouter);
 app.use('/api/comments', commentsRouter);
+app.use('/api/likes', likesRouter);
+
 
 // Serve static files
 app.use(express.static('build'));

@@ -11,12 +11,14 @@ import TopicTitleContent from './TopicTitleContent.jsx'
 import StreamItemFactory from './StreamItemFactory.jsx'
 import TopicContributors from './TopicContributors.jsx'
 import CommentSection from './CommentSection/CommentSection.jsx'
+import LoveModal from './LoveModal/LoveModal.jsx'
+import LikeButtonProposal from './LikeButtons/LikeButtonProposal.jsx'
+
 
 
 import dummyTopicCache from './DummyData.js'
 
 import './TopicPage.css'
-
 
 //TO-DO replace hard-coded topic_id in CommentSection component
 
@@ -206,18 +208,15 @@ fetchTopicPageContent = (id) => {
                     </Panel.Body>
                       <Panel.Footer className="keyClaimFooter">
                         <ButtonGroup className="keyClaimFooterButtons">
+                          <LikeButtonProposal id={arenaProposalId}/>
                           <Button className="keyClaimFooterItem">
-                            <Glyphicon glyph="thumbs-up" />
-                          </Button>
-                          <Button className="keyClaimFooterItem">
-                            <Glyphicon glyph="heart" />
+                            <LoveModal topicPageContent={this.props.topicPageContent} contributor={this.state.contributorSelect}/>
                           </Button>
                           <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentProposal(arenaProposal, arenaProposalId)}
                             className="keyClaimFooterItem">
                             <Glyphicon glyph="comment" />
                           </Button>
                         </ButtonGroup>
-                        <p className="keyClaimFooterLikes">Likes: 4 </p>
                       </Panel.Footer>
                     </Panel>
                   </Col>

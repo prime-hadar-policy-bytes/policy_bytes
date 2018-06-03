@@ -152,9 +152,9 @@ router.post('/newtopic', (req, res) => {
 
             //creates an entry in the topic table in the database
             let queryText = `INSERT INTO "topic" ("topic_title", "premise", "common_ground", "contributor1_id",
-                 "contributor2_id", "archive_summary") VALUES($1, $2, $3, $4, $5, $6)  RETURNING "id";`;
+                 "contributor2_id", "archive_summary", "icon_url") VALUES($1, $2, $3, $4, $5, $6, $7)  RETURNING "id";`;
             const topicResult = await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround,
-                contributor1Id, contributor2Id, topic.topicSummary]);
+                contributor1Id, contributor2Id, topic.topicSummary, topic.topicReadMore]); //<---- TOPIC READ MORE IS ACTUALLY ICON URL
             console.log('successfully posted topic');
 
             //the id of the topic that was created in topicResult
