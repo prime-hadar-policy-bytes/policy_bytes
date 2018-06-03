@@ -116,7 +116,10 @@ class CommentSectionItem extends Component {
                             ?
                             //set container to contributor color
                             <div className={referenceTextCommentClass}>  
-                                <span className='referenceTextCommentList'>{this.props.comment.claim}{this.props.comment.stream_comment}{this.props.comment.proposal}"
+                                <span className='referenceTextCommentList'>
+                                <span dangerouslySetInnerHTML={{ __html: this.props.comment.claim}} />  
+                                <span dangerouslySetInnerHTML={{ __html: this.props.comment.stream_comment}} /> 
+                                <span dangerouslySetInnerHTML={{ __html: this.props.comment.proposal}} />    
                                 </span> 
                             </div>
                             : null}

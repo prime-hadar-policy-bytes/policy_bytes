@@ -179,7 +179,11 @@ class CommentAdd extends Component {
                             <FormGroup className="addCommentPicAndResponse" controlId="formControlsTextarea">
                                     {(keyClaimText || streamText || proposalText) ?
                                         <Panel className={referenceTextClass}>
-                                            responding to...   "{keyClaimText}{streamText}{proposalText}"                                    
+                                            responding to...   "
+                                            <span dangerouslySetInnerHTML={{ __html: keyClaimText}} />
+                                            <span dangerouslySetInnerHTML={{ __html: streamText}} />
+                                            <span dangerouslySetInnerHTML={{ __html: proposalText}} />
+                                                    
                                         </Panel> : null}
                                     <Image className='addCommentPic' circle src={fbPicture} />
 
