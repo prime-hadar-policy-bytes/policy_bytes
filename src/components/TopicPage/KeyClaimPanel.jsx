@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import { Panel, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 
+import LikeButtonKeyClaim from './LikeButtons/LikeButtonKeyClaim.jsx'
 import './TopicPage.css'
 
 
@@ -75,17 +76,12 @@ export class KeyClaimPanel extends Component {
           onMouseLeave={this.handleMouseLeave}
           expanded={this.state.open}>
           <Panel.Body onClick={this.toggleLockKeyClaim}>
-            <p>{this.props.keyClaim.keyClaim}</p>
+            <p dangerouslySetInnerHTML={{__html: this.props.keyClaim.keyClaim}}/>
           </Panel.Body>
           <Panel.Collapse>
             <Panel.Footer className="keyClaimFooter">
               <ButtonGroup className="keyClaimFooterButtons">
-                <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="thumbs-up" />
-                </Button>
-                <Button className="keyClaimFooterItem">
-                  <Glyphicon glyph="heart" />
-                </Button>
+                <LikeButtonKeyClaim id={this.props.keyClaim.claimDbId}/>
                 <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentKeyClaim(this.props.keyClaim)}
                   className="keyClaimFooterItem">
                   <Glyphicon glyph="comment" />
