@@ -8,7 +8,6 @@ import TopicManageAddPanel from './TopicManageAddPanel.jsx'
 
 import './TopicManage.css'; 
 
-import { Link } from 'react-router-dom';
 import { Panel, Button, ButtonGroup, ButtonToolbar, Glyphicon, Modal, Grid, Row, Col } from 'react-bootstrap'; 
 
 class TopicManage extends Component {
@@ -74,9 +73,6 @@ class TopicManage extends Component {
 
         <h1>
           Topic Manage Page
-          {/* <Button className="newTopicButton" bsStyle="success">
-            <Link to='/topicEdit'>Create A New Topic</Link>
-          </Button> */}
           <RegisterModal/>
         </h1>   
 
