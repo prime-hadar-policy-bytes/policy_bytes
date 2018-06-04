@@ -490,7 +490,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
             await client.query('BEGIN');
 
             //begins series of async database SELECTS to add to selectedTopicToSend
-            let queryText1 = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.common_ground, contributor1_id, contributor2_id,
+            let queryText1 = `SELECT topic.topic_title, topic.archive_summary, topic.premise, topic.icon_url, topic.common_ground, contributor1_id, contributor2_id,
             "topic"."id" as "topic_id" FROM topic 
             WHERE topic.id = $1;`;
             const topicResult = await client.query(queryText1, [topicId]);
@@ -501,7 +501,7 @@ router.get(`/fetchEditTopicInfo/:id`, (req, res) => {
                 topicTitle: topicResult.rows[0].topic_title,
                 topicSummary: topicResult.rows[0].archive_summary,
                 topicPremise: topicResult.rows[0].premise,
-                topicReadMore: '',
+                topicReadMore: topicResult.rows[0].icon_url,
                 topicCommonGround: topicResult.rows[0].common_ground
             };
             contributor1Id = topicResult.rows[0].contributor1_id;
