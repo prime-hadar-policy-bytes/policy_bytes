@@ -42,7 +42,7 @@ class LandingPageArchive extends Component {
                                 <br/><br/>
                                 <p>{date}</p>
                                 <br/>
-                                <p>{archivedTopic.archive_summary}</p>
+                                <p className="archiveTopicSummary">{archivedTopic.archive_summary}</p>
                         </Panel.Body>
                         </Panel>
                     </Col>

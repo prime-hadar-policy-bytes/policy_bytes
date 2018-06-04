@@ -143,6 +143,10 @@
     cursor: pointer;
 }
 
+.archiveTopicSummary {
+    min-height: 6em
+}
+
 .archiveWrapper {
     text-align: center; 
     width: 100%; 
