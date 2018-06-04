@@ -55,7 +55,7 @@ class StreamItemForm extends Component {
               <FormControl onChange={this.packageStreamChange} 
                             id={this.props.claimId} 
                             name="streamComment" 
-                            type="text"
+                            componentClass="textarea" 
                             value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamComment}
                             />
 
@@ -63,11 +63,10 @@ class StreamItemForm extends Component {
               <FormControl onChange={this.packageStreamChange} 
                           id={this.props.claimId} 
                           name="streamEvidence" 
-                          type="text"
+                          componentClass="textarea" 
                           value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamEvidence}
                           />
 
-              <Button bsStyle="danger">Delete Stream Item</Button>
 
           </Panel.Body>
         </Panel>

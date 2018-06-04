@@ -52,14 +52,11 @@ class StreamItem extends Component {
 
         <Panel className={streamItemClass} expanded={this.state.open}>
           <Panel.Body>
-            <strong>Comment:</strong>
-            <br />
             <div dangerouslySetInnerHTML={{ __html: this.props.streamItem.streamComment }} />
 
             <Panel.Collapse>
               <br />
               <br />
-              <strong>Evidence:</strong>
               <br />
 
               <p dangerouslySetInnerHTML={{ __html: this.props.streamItem.streamEvidence }} />

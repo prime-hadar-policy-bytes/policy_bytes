@@ -100,18 +100,13 @@ class KeyClaimForm extends Component {
                             id={this.props.claimId} //<-- LOOK AT ME 
                             name="keyClaim" 
                             value={this.props.keyClaims[this.props.claimId].keyClaim} 
-                            type="text"/>
-                <ControlLabel>Key Claim Evidence</ControlLabel>
+                            componentClass="textarea" />
 
 {/* Variable holding .map of <StreamItemForm>  */}
             {streamItemForms}
 
               <ButtonGroup className="wireCommentButtons">
                 <Button bsStyle="danger" onClick={this.props.deleteKeyClaim}>Delete Key Claim</Button>
-                <Button>[arrow up]</Button>
-                <Button>[arrow down]</Button>
-                <Button onClick={this.addStreamItem}>Add Stream Item</Button>
-                <Button bsStyle="danger">Delete Key Claim</Button>
                 {!match ? <Button onClick={this.addStreamItem}>Add Stream Item</Button> : <Button disabled>Add Stream Item</Button>}
               </ButtonGroup>
 
