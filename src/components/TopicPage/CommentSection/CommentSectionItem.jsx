@@ -94,11 +94,12 @@ class CommentSectionItem extends Component {
         //set background of reply based on contributor number
         let referenceTextCommentClass = ''; 
         let contributorDeclaration = ''; 
-        if (this.props.comment.contributor_id %2 !== 0) {
+        if (this.props.comment.keyclaim_contributor_id %2 !== 0 || this.props.comment.proposal_contributor_id %2 !== 0 || this.props.comment.stream_contributor_id %2 !== 0) {
             referenceTextCommentClass = 'referenceTextCommentContainerContrib1'
         } else {
             referenceTextCommentClass = 'referenceTextCommentContainerContrib2'
         } 
+    
 
 
         return (

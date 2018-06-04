@@ -87,7 +87,6 @@ export class KeyClaimPanel extends Component {
                   <Glyphicon glyph="comment" />
                 </Button>
               </ButtonGroup>
-              <p className="keyClaimFooterLikes">Likes: 4 </p>
 
             </Panel.Footer>
           </Panel.Collapse>

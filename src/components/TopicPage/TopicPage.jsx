@@ -34,9 +34,20 @@ export class TopicPage extends Component {
     }
   }
 
+  componentWillUnmount(){
+    this.props.dispatch({
+      type: 'CLEAR_PROPOSAL_COMMENT',  
+    })
+    this.props.dispatch({
+      type: 'CLEAR_KEY_CLAIM_COMMENT'
+    });
+    this.props.dispatch({
+      type: 'CLEAR_STREAM_COMMENT'
+    });
+   }
+
   componentDidMount() {
     // this.props.dispatch({ type: USER_ACTIONS.FETCH_USER });
-    
     this.props.dispatch({
       type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
   })

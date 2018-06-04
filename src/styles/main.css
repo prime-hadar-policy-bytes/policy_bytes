@@ -148,3 +148,13 @@ li a:hover {
 
 
 
+#demoButton {
+    width: 100px; 
+    height: 20px;
+    /* border: 1px solid red;   */
+}
+
+textArea {
+     /* margin: 10px 0 10px 0; */
+    /* width: 97% !important; */
+}

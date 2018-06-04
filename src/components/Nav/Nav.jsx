@@ -24,24 +24,24 @@ class Nav extends Component {
     this.props.dispatch(triggerLogout());
   }
 
-  renderAdminNav() {
-    if (this.props.user.userInfo && this.props.user.userInfo.status === 2) {
-      return (
-        <li className="navItem">
-          <Link to="/admin">Admin Landing Page</Link>
-        </li>
-      )
-    } else {
-      return (
-        <div></div>
-      )
-    }
-  }
+  // renderAdminNav() {
+  //   if (this.props.user.userInfo && this.props.user.userInfo.status === 2) {
+  //     return (
+
+  //     )
+  //   } else {
+  //     return (
+  //       <div></div>
+  //     )
+  //   }
+  // }
 
   renderGreetingAdmin() {
     if (this.props.user.userInfo.status === 2) {
       return (
-        <span className="helloUser">Hello Admin!</span>
+        <li className="navItem">
+          <Link to="/admin">Admin</Link>
+        </li>
       )
     } else {
       return (
@@ -78,7 +78,7 @@ class Nav extends Component {
               </Link>
             </li>
 
-            {this.renderAdminNav()}
+            {/* {this.renderAdminNav()} */}
 
             <li className="loginButton">
               {this.renderLoginItems()}

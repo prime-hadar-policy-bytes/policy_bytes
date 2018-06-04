@@ -5,19 +5,20 @@ color: white;
 }
 
 .navItem {
-    font-size: 1.5em;
-    margin: 10px;
+    font-size: 1em;
+    margin: 10px 10px 10px 10px;
     color: white;
+    /* float: right;  */
     }
 
 .helloUser {
     font-size: 0.7em;
-    margin: 10px;
+    margin: 40px;
     color: white;
     }
 
 .loginButton{
-    margin: 10px;
+    margin: 10px 11px 10px 10px;
     float: right; 
 }
 
