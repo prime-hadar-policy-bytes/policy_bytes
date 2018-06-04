@@ -129,18 +129,22 @@
     width: auto; 
     border-radius: 10px; 
     box-shadow: 1px 1px 6px #888888;
-    height: 23em; 
+    height: 24em; 
     background: white; 
     transform: perspective(1px) translateZ(0);
     box-shadow: 1px 1px 2px rgb(204, 207, 210); 
     transition-duration: 0.3s;
     transition-property: box-shadow;
-    overflow: scroll;
+    overflow: hidden;
 }
 
 .archivePanel:hover{
     box-shadow: 10px 10px 10px -7px rgba(0, 0, 0, 0.5);
     cursor: pointer;
+}
+
+.archiveTopicSummary {
+    min-height: 6em
 }
 
 .archiveWrapper {

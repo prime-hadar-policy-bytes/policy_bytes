@@ -14,7 +14,7 @@
 #addTopicButton {
     color: rgb(75, 160, 75) !important;
     padding-left: .6em; 
-    padding-top: .4em; 
+    padding-top: .6em; 
     font-size: 10em !important; 
 
 }
@@ -25,7 +25,7 @@
     font-size: 15px; 
     width: 100%; 
     margin: 1em 1em 0 0; 
-    height: 24em; 
+    height: 28em; 
     transform: perspective(1px) translateZ(0);
     box-shadow: 1px 1px 2px rgb(204, 207, 210); 
     transition-duration: 0.3s;
@@ -48,8 +48,8 @@
 }
 
 .topicManagePanelText{
-    height: 15em;
-    overflow: scroll; 
+    height: 20em;
+    overflow: hidden; 
     text-align: center;
 }
 

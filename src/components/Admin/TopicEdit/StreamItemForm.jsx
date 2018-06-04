@@ -34,7 +34,7 @@ class StreamItemForm extends Component {
         {/* STREAM INPUTS */}
         <Panel className="wireStreamInput">
           <Panel.Body>
-          <h4>stream item Id: {JSON.stringify(this.props.id)}</h4>
+          <h5>Stream Order: {Number(this.props.streamId) + 1}</h5>
           <br/>
 
             
@@ -55,7 +55,7 @@ class StreamItemForm extends Component {
               <FormControl onChange={this.packageStreamChange} 
                             id={this.props.claimId} 
                             name="streamComment" 
-                            type="text"
+                            componentClass="textarea" 
                             value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamComment}
                             />
 
@@ -63,11 +63,10 @@ class StreamItemForm extends Component {
               <FormControl onChange={this.packageStreamChange} 
                           id={this.props.claimId} 
                           name="streamEvidence" 
-                          type="text"
+                          componentClass="textarea" 
                           value={this.props.keyClaims[this.props.claimId].streamData[this.props.streamId].streamEvidence}
                           />
 
-              <Button bsStyle="danger">Delete Stream Item</Button>
 
           </Panel.Body>
         </Panel>

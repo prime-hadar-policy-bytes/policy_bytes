@@ -70,7 +70,6 @@ class KeyClaimForm extends Component {
     return (
       <div>
 {/* SHOW STATE ON DOM */}
-          {/* <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre> */}
 
           <Panel bsStyle="primary">
 
@@ -83,7 +82,7 @@ class KeyClaimForm extends Component {
                                     placeholder="select" 
                                     name="claimContributor" 
                                     onChange={this.handleChange}
-                                    id={this.props.claimId}  //<-- LOOK AT ME 
+                                    id={this.props.claimId}  
                                     value={this.props.keyClaims[this.props.claimId].claimContributor} 
                                     >
                         <option key="0" value="">-- Select Contributor --</option>
@@ -94,24 +93,22 @@ class KeyClaimForm extends Component {
 
             </Panel.Heading>
 
+
               <Panel.Body>
+              <h4>Claim Order: {(Number(this.props.claimId) + 1)}</h4>
+              <br/>
                 <ControlLabel>Key Claim</ControlLabel>
                 <FormControl onChange={this.handleChange} 
-                            id={this.props.claimId} //<-- LOOK AT ME 
+                            id={this.props.claimId}
                             name="keyClaim" 
                             value={this.props.keyClaims[this.props.claimId].keyClaim} 
-                            type="text"/>
-                <ControlLabel>Key Claim Evidence</ControlLabel>
+                            componentClass="textarea" />
 
 {/* Variable holding .map of <StreamItemForm>  */}
             {streamItemForms}
 
               <ButtonGroup className="wireCommentButtons">
                 <Button bsStyle="danger" onClick={this.props.deleteKeyClaim}>Delete Key Claim</Button>
-                <Button>[arrow up]</Button>
-                <Button>[arrow down]</Button>
-                <Button onClick={this.addStreamItem}>Add Stream Item</Button>
-                <Button bsStyle="danger">Delete Key Claim</Button>
                 {!match ? <Button onClick={this.addStreamItem}>Add Stream Item</Button> : <Button disabled>Add Stream Item</Button>}
               </ButtonGroup>
 

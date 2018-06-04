@@ -15,8 +15,8 @@ router.get('/getGeneralcomments/:id', (req, res) => {
                         comments_general.date, comments_general.order, comments_general.person_id, 
                         comments_general.topic_id, comments_general.comment, comments_general.approved, 
                         person.fb_display_name, person.fb_picture, person.id as person_id, 
-                        key_claim.claim, stream.stream_comment, proposal.proposal, 
-                        stream.contributor_id, key_claim.contributor_id
+                        key_claim.claim, stream.stream_comment, proposal.proposal, proposal.contributor_id as proposal_contributor_id, 
+                        stream.contributor_id as stream_contributor_id, key_claim.contributor_id as keyclaim_contributor_id
                         FROM "comments_general" 
                         LEFT JOIN "person" ON comments_general.person_id = person.id 
                         LEFT JOIN "key_claim" on comments_general.key_claim_id = key_claim.id 
