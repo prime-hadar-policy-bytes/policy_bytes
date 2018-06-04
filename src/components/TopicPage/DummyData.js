@@ -1,234 +1,74 @@
 let dummyTopicCache = {
-    topicTitle: 'School Taxes',
-    topicSummary: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam metus augue, volutpat ut hendrerit ac.',
-    topicPremise: "The Restaurant Opportunities Center of Minnesota (ROC MN) is a movement led by local restaurant workers, employers, and diners striving for higher standards in our industry. In St. Paul, for over 30 years, we have had one wage for all workers and we have created a thriving restaurant scene predicated on higher wages for workers. St. Paul is a leader in the effort to support working families and we should be proud of our commitment to an equal pay structure.",
+    topicTitle: 'Stadium Tax',
+    topicSummary: 'Should a tax be levied to help pay for a future sports team stadium?',
+    topicPremise: "There is a proposal to build a new stadium and the owner is asking for the city to help fund the construction.",
     topicReadMore: '',
-    topicCommonGround: "Schools do need adequate funding.",
-    contributor1FirstName: 'Eli',
-    contributor1LastName: 'Harrison',
-    bio1: 'Eli has a PhD in Economics from the University of Minnesota, and has worked as a Financial Analyst at Ameriprise Financial for 15 years.',
-    photo1: '/assets/headshot1.jpeg',
-    proposal1: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
-    contributor2FirstName: 'Jennifer',
-    contributor2LastName: 'Osters',
-    bio2: 'Jennifer currently teaches Microeconomics at St. Thomas University, and has a PhD in Economic Theory from Georgetown University.',
-    photo2: '/assets/headshot2.jpeg',
-    proposal2: 'Loulum libero porttitor. Integer ut efficitur felis. Vivamus lacinia interdum turpis in pretium. Curabitur molestie scelerisque nisi vel commodo. Nullam',
+    topicCommonGround: "The professional team brings in alot of revenue for the city. Local fans do not want to see the team leave.",
+    contributor1FirstName: 'Mark',
+    contributor1LastName: 'Proulx',
+    bio1: 'Mark is a local business owner and longtime area resident. He has owned and operated his local bar for 30 years.',
+    photo1: '',
+    proposal1: 'If the stadium is not built, the team may move to another state and local business will be adversely affected by the ensuing loss of business. The economic benefits of the stadium outweigh the cost of the tax burden. We should allow the tax to go through to help pay for a new stadium.',
+    contributor2FirstName: 'Andrew',
+    contributor2LastName: 'Taglius',
+    bio2: 'Andrew is a local resident who heads a watchdog agency on government spending.',
+    photo2: '',
+    proposal2: 'We cannot allow a sports team owner to force us to help them pay for a stadium on threat of moving the team somewhere else. In the end, they will own the stadium and not the taxpayer. We should reject the tax, and make the owner pay for their own stadium.',
     keyClaims: {
         0: {
             claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
             claimContributor: 'contributor1',
-            keyClaim: 'consectecipit lorem ut quam gravida, sed vestibulum libero porttitor',
+            keyClaim: 'Professional sports teams have a considerable economic effect on the local economy. Losing the new stadium will negatively impact local businesses and employment.',
             streamData: {
                 0: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
+                    streamComment: 'Professional sports teams have a considerable economic effect on their local economy. Losing the new stadium will negatively impact local businesses and employment.',
+                    streamEvidence: 'The economy in Oakland has already taken a hit with the departure of The Raiders Franchise.',
                 },
                 1: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
+                    streamComment: 'On principle, we should not allow a business owner, no matter how large their business, hold the people hostage to pay for something they will own. It ends up being a waste of taxpayer money.',
+                    streamEvidence: 'Oaklands economy was not very strong before The Raiders left, the economic loss was very nominal.',
                 },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                3: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                }
             }
         },
         1: {
             claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
             claimContributor: 'contributor1',
-            keyClaim: 'consectetur adipisd vestibulud vestibulud vestibulud vestibulud vestibulud vestibulud vestibulucing elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor',
+            keyClaim: 'The construction of the stadium will be a financial boom that will create hundreds of jobs and keep the economy strong.',
             streamData: {
                 0: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
+                    streamComment: 'The construction of the stadium will be a financial boom that will create hundreds of jobs and keep the economy strong.',
+                    streamEvidence: 'Las Vegas saw an economic increase and unemployment decrease with the construction of the new stadium for The Raiders.',
                 },
                 1: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
+                    streamComment: 'The construction of the stadium will be a financial boom that will create hundreds of jobs and keep the economy strong.',
+                    streamEvidence: 'Las Vegas saw an economic increase and unemployment decrease with the construction of the new stadium for The Raiders.',
                 },
             }
         },
         2: {
             claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-            claimContributor: 'contributor1',
-            keyClaim: 'consectecipit lorem ut quam gravida, sed vestibulum libero porttitor',
-            streamData: {
-                0: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                },
-                1: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                3: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                },
-                4: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                5: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                },
-                4: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                5: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                },
-            }
-        },
-        3: {
-            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-            claimContributor: 'contributor1',
-            keyClaim: 'consecteconsectecipit lorem ut quam gravida, sed vestibulum libero porttitorconsectecipit lorem ut quam gravida, sed vestibulum libero porttitorconsectecipit lorem ut quam gravida, sed vestibulum libero porttitorulum libero porttitor',
-            streamData: {
-                0: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                },
-                1: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                3: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                }
-            }
-        },
-        4: {
-            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-            claimContributor: 'contributor1',
-            keyClaim: 'consectetur adipiscing elit. Slum libero porttitor',
-            streamData: {
-                0: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                },
-                1: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                3: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                }
-            }
-        },
-        5: {
-            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
             claimContributor: 'contributor2',
-            keyClaim: 'consectibulum libero porttitor',
+            keyClaim: 'Allowing big business to force its hand on the citizens opens up a doorway to ceding ground. It will set a precident that big businesses can tell people how their local economy will work.',
             streamData: {
                 0: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
+                    streamContributor: 'contributor2',
+                    streamComment: 'Allowing big business to force its hand on the citizens opens up a doorway to ceding ground. It will set a precident that big businesses can tell people how their local economy will work.',
+                    streamEvidence: '',
                 },
                 1: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
                     streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-            }
-        },
-        6: {
-            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-            claimContributor: 'contributor2',
-            keyClaim: 'consectetur adipiscing elit. Sed suscipit lorem ut qconsectecipit lorem ut quam gravida, sed vestibulum libero porttitorconsectecipit lorem ut quam gravida, sed vestibulum libero porttitorconsectecipit lorem ut quam gravida, sed vestibulum libero porttitoruam gravida, sed vestibulum libero porttitor',
-            streamData: {
-                0: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                },
-                1: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
+                    streamComment: 'In this circumstance we need to let it happen. It will not start a trend of business abusng citizens, moreover it will be very beneficial for citizens.',
+                    streamEvidence: '',
                 },
                 2: {
                     streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
@@ -241,64 +81,9 @@ let dummyTopicCache = {
                     streamContributor: 'contributor1',
                     streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
                     streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                },
-                4: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                5: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                },
-                4: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                5: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                },
+                },             
             }
-        },
-        7: {
-            claimDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-            claimContributor: 'contributor2',
-            keyClaim: 'adipisciconsectecipit lorem ut quam gravida, sed vestibulum libero porttitorng elit. Sed suscipit lorem ut quam gravida, sed vestibulum libero porttitor',
-            streamData: {
-                0: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi pharetra dictum tortor, in euismod diam gravida in. Duis ut libero in urna suscipit molestie vel eget ex. In ante sapien, efficitur nec vulputate ut, auctor',
-                },
-                1: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                2: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor2',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. IntegerLorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam ac nibh sed pretium. Integer',
-                },
-                3: {
-                    streamDbId: '', //<--- this comes from the database, doesn't really affect DOM placement
-                    streamContributor: 'contributor1',
-                    streamComment: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                    streamEvidence: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eu erat pulvinar, fringilla tellus vitae, tempor felis. Vivamus nec erat non libero luctus sagittis et id augue. Praesent vel leo sed felis efficitur laoreet. Cras sed massa ullamcorper eros rhoncus feugiat',
-                }
-            }
-        },
+        },              
     }
 }
 

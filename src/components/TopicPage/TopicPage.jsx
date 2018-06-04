@@ -40,8 +40,8 @@ export class TopicPage extends Component {
     this.props.dispatch({
       type: 'FETCH_NEW_TOPIC_LANDING_PAGE'
   })
-  
   }
+
 //allows reducer to be populated before it looks for data
   componentWillReceiveProps(nextProps){
     

@@ -379,9 +379,9 @@ router.put('/updatetopic', (req, res) => {
 
             //creates an entry in the topic table in the database
             let queryText = `UPDATE "topic" SET "topic_title" = $1, "premise" = $2, "common_ground" = $3, 
-            "archive_summary" = $4 WHERE "id" = $5;`;
+            "archive_summary" = $4, "icon_url" = $5 WHERE "id" = $6;`;
             await client.query(queryText, [topic.topicTitle, topic.topicPremise, topic.topicCommonGround, 
-                topic.topicSummary, topic.topicDbId]);
+                topic.topicSummary, topic.topicReadMore, topic.topicDbId]);
             console.log('successfully posted topic');
 
             let queryText3 = `UPDATE "proposal" SET "proposal" = $1 WHERE "id" = $2;`

@@ -258,11 +258,6 @@ class TopicEdit extends Component {
                   name="topicPremise"
                   value={this.props.state.cacheEdit.topicEditCache.topicPremise}  //<-- VALUE COMES FROM REDUX STATE 
                   type="text" />
-                <ControlLabel>Link to read more?</ControlLabel>
-                <FormControl onChange={this.handleTextChange}
-                  name="topicReadMore"
-                  value={this.props.state.cacheEdit.topicEditCache.topicReadMore}  //<-- VALUE COMES FROM REDUX STATE 
-                  type="text" />
               </Panel.Body>
             </Panel>
 
