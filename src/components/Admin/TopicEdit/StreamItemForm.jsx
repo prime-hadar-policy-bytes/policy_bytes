@@ -34,7 +34,7 @@ class StreamItemForm extends Component {
         {/* STREAM INPUTS */}
         <Panel className="wireStreamInput">
           <Panel.Body>
-          <h4>stream item Id: {JSON.stringify(this.props.id)}</h4>
+          <h5>Stream Order: {Number(this.props.streamId) + 1}</h5>
           <br/>
 
             
