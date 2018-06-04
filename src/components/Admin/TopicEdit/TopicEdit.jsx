@@ -11,6 +11,8 @@ import { Panel, Tab, Tabs, Button, ButtonGroup, FormGroup, ControlLabel, FormCon
 
 import { Redirect } from 'react-router';
 
+import './TopicEdit.css'
+
 let debug = false;
 
 class TopicEdit extends Component {
@@ -207,7 +209,7 @@ class TopicEdit extends Component {
     
 
     return (
-      <div>
+      <div id="topicEditMaster">
         <div className="wrapper">
 
 
@@ -234,7 +236,8 @@ class TopicEdit extends Component {
                   componentClass="textarea"  />
                   <img src={this.props.state.cacheEdit.topicEditCache.topicReadMore} width="100" />
                 
-                <ControlLabel>Upload Archive Icon</ControlLabel>
+                <p>Upload Archive Icon</p>
+                <br/>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='topicReadMore'  //<-- topicReadMore is icon_url through full stack
                               />
@@ -304,8 +307,8 @@ class TopicEdit extends Component {
 
                 <img src={this.props.state.cacheEdit.topicEditCache.photo1} width="300" />
 
-                <ControlLabel>Upload Contributor 1 Photo</ControlLabel>
-                
+                <p>Upload Contributor 1 Photo</p>
+                <br/>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='photo1' />
 
@@ -341,7 +344,8 @@ class TopicEdit extends Component {
 
                 <img src={this.props.state.cacheEdit.topicEditCache.photo2} width="300" />
 
-                <ControlLabel>Upload Contributor 2 Photo</ControlLabel>
+                <p>Upload Contributor 2 Photo</p>
+                <br/>
                 <ImageUpload handleUploadContent={this.handleUploadContent}
                   contributor='photo2' />
 

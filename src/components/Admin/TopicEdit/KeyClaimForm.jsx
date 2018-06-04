@@ -70,7 +70,6 @@ class KeyClaimForm extends Component {
     return (
       <div>
 {/* SHOW STATE ON DOM */}
-          {/* <pre>claim Id: {JSON.stringify(this.props.claimId, null, 2)}</pre> */}
 
           <Panel bsStyle="primary">
 
@@ -83,7 +82,7 @@ class KeyClaimForm extends Component {
                                     placeholder="select" 
                                     name="claimContributor" 
                                     onChange={this.handleChange}
-                                    id={this.props.claimId}  //<-- LOOK AT ME 
+                                    id={this.props.claimId}  
                                     value={this.props.keyClaims[this.props.claimId].claimContributor} 
                                     >
                         <option key="0" value="">-- Select Contributor --</option>
@@ -94,10 +93,13 @@ class KeyClaimForm extends Component {
 
             </Panel.Heading>
 
+
               <Panel.Body>
+              <h4>Claim Order: {(Number(this.props.claimId) + 1)}</h4>
+              <br/>
                 <ControlLabel>Key Claim</ControlLabel>
                 <FormControl onChange={this.handleChange} 
-                            id={this.props.claimId} //<-- LOOK AT ME 
+                            id={this.props.claimId}
                             name="keyClaim" 
                             value={this.props.keyClaims[this.props.claimId].keyClaim} 
                             componentClass="textarea" />
