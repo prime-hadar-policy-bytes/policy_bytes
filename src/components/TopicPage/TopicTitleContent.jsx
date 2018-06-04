@@ -19,7 +19,8 @@ export default class TopicTitleContent extends Component {
                         <h1><strong>{this.props.topicPageContent.topicTitle}</strong></h1>
                     </Col>
                     <Col xs={12} md={12}>
-                    <p>{this.props.topicPageContent.topicPremise}</p>
+
+                    <p><div dangerouslySetInnerHTML={{ __html: this.props.topicPageContent.topicPremise} } /></p>
                     {/* <hr/> */}
                     </Col>
                 </Row>
@@ -29,7 +30,9 @@ export default class TopicTitleContent extends Component {
             <Jumbotron className="commonGroundJumbotron">
                 <h1>Common Ground</h1>
                 <p>
-                "{this.props.topicPageContent.topicCommonGround}"
+
+            <div dangerouslySetInnerHTML={{ __html: this.props.topicPageContent.topicCommonGround} } />
+                
                 </p>
             </Jumbotron>
 
