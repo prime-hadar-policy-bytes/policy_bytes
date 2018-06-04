@@ -29,6 +29,8 @@ class StreamItem extends Component {
   }
 
   handleOpen = () => {
+    console.log('hey');
+    
     this.setState({
       open: !this.state.open
     })
@@ -53,15 +55,18 @@ class StreamItem extends Component {
         <Panel className={streamItemClass} expanded={this.state.open}>
           <Panel.Body>
             <div dangerouslySetInnerHTML={{ __html: this.props.streamItem.streamComment }} />
-
+            <br/>
+            <div className="evidenceTag">
+              <span>
+              Evidence {(this.state.open === true) ? <i class="fa fa-caret-up" aria-hidden="true"></i> : <i class="fa fa-caret-down" aria-hidden="true"></i>}
+              </span>    
+            </div>
             <Panel.Collapse>
-              <br />
-              <br />
               <br />
 
               <p dangerouslySetInnerHTML={{ __html: this.props.streamItem.streamEvidence }} />
               <br />
-              <br />
+
               <Panel.Footer className="keyClaimFooter">
 
                 <ButtonGroup className="keyClaimFooterButtons">
