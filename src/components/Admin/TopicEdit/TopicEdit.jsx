@@ -261,6 +261,7 @@ class TopicEdit extends Component {
                 <FormControl onChange={this.handleTextChange}
                   name="topicPremise"
                   value={this.props.state.cacheEdit.topicEditCache.topicPremise}  //<-- VALUE COMES FROM REDUX STATE 
+                  
                   componentClass="textarea"  />
                 <ControlLabel>Link to read more?</ControlLabel>
                 <FormControl onChange={this.handleTextChange}
