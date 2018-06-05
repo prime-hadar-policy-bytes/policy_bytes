@@ -3,7 +3,7 @@ let dummyTopicCache = {
     topicSummary: 'Should a tax be levied to help pay for a future sports team stadium?',
     topicPremise: "There is a proposal to build a new stadium and the owner is asking for the city to help fund the construction.",
     topicReadMore: '',
-    topicCommonGround: "The professional team brings in alot of revenue for the city. Local fans do not want to see the team leave.",
+    topicCommonGround: "The professional team brings in a lot of revenue for the city. Local fans do not want to see the team leave.",
     contributor1FirstName: 'Mark',
     contributor1LastName: 'Proulx',
     bio1: 'Mark is a local business owner and longtime area resident. He has owned and operated his local bar for 30 years.',

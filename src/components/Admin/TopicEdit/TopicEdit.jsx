@@ -226,6 +226,11 @@ class TopicEdit extends Component {
 
           <form action="" onSubmit={this.handleSubmit}>
           <Button type="submit" bsStyle="primary">Submit!</Button>
+          <div>
+              {this.state.submitAlert &&
+                <SubmitAlert handleDismiss={this.handleDismiss} />
+              }
+            </div>
 
             <Panel>
               <Panel.Body>
