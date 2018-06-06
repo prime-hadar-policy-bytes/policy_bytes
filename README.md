@@ -19,10 +19,11 @@ Required:
 - Node.js
 - Express
 
+To a development build on your own machine: 
 1) Clone/download Repository
 2) `npm install`
 3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
-
-For local development you'll need to run two server: 
+For local development you'll need to run two server: <br/> 
 4) `npm run server`
 5) `npm run client` 
+
