@@ -176,11 +176,11 @@ class TopicEdit extends Component {
     })
   }
 
-  demoButton = () => {
-    this.props.dispatch({
-      type: 'DEMO_BUTTON',
-    })
-  }
+  // demoButton = () => {
+  //   this.props.dispatch({
+  //     type: 'DEMO_BUTTON',
+  //   })
+  // }
 
 
 
@@ -214,7 +214,7 @@ class TopicEdit extends Component {
 
 
           <h1>Topic Edit</h1>
-          <div id="demoButton" onClick={this.demoButton}></div>
+          {/* <div id="demoButton" onClick={this.demoButton}></div> */}
 
           {/* SHOW STATE ON DOM */}
           {/* <pre>state: {JSON.stringify(this.state, null, 3)}</pre> */}

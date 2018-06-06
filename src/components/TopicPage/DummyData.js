@@ -2,17 +2,19 @@ let dummyTopicCache = {
     topicTitle: 'Stadium Tax',
     topicSummary: 'Should a tax be levied to help pay for a future sports team stadium?',
     topicPremise: "There is a proposal to build a new stadium and the owner is asking for the city to help fund the construction.",
+
     topicReadMore: '',
+
     topicCommonGround: "The professional team brings in a lot of revenue for the city. Local fans do not want to see the team leave.",
     contributor1FirstName: 'Mark',
     contributor1LastName: 'Proulx',
     bio1: 'Mark is a local business owner and longtime area resident. He has owned and operated his local bar for 30 years.',
-    photo1: '',
+    photo1: '/assets/headshot2.jpeg',
     proposal1: 'If the stadium is not built, the team may move to another state and local business will be adversely affected by the ensuing loss of business. The economic benefits of the stadium outweigh the cost of the tax burden. We should allow the tax to go through to help pay for a new stadium.',
     contributor2FirstName: 'Andrew',
     contributor2LastName: 'Taglius',
     bio2: 'Andrew is a local resident who heads a watchdog agency on government spending.',
-    photo2: '',
+    photo2: '/assets/headshot1.jpeg',
     proposal2: 'We cannot allow a sports team owner to force us to help them pay for a stadium on threat of moving the team somewhere else. In the end, they will own the stadium and not the taxpayer. We should reject the tax, and make the owner pay for their own stadium.',
     keyClaims: {
         0: {

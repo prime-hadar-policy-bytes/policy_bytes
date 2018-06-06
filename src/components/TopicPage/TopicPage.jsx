@@ -219,10 +219,18 @@ fetchTopicPageContent = (id) => {
                     </Panel.Body>
                       <Panel.Footer className="keyClaimFooter">
                         <ButtonGroup className="keyClaimFooterButtons">
-                          <LikeButtonProposal id={arenaProposalId}/>
+                        {this.props.user.userInfo ? 
                           <Button className="keyClaimFooterItem">
-                            <LoveModal topicPageContent={this.props.topicPageContent} contributor={this.state.contributorSelect}/>
-                          </Button>
+                          <LoveModal topicPageContent={this.props.topicPageContent} contributor={this.state.contributorSelect}/> 
+                          </Button>: 
+                          <Button disabled className="keyClaimFooterItem">
+                            <Glyphicon glyph="heart" />
+                            </Button>
+                          }
+
+                          
+
+                          <LikeButtonProposal id={arenaProposalId}/>
                           <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentProposal(arenaProposal, arenaProposalId)}
                             className="keyClaimFooterItem">
                             <Glyphicon glyph="comment" />
