@@ -54,8 +54,8 @@ const PORT = process.env.PORT || 5000;
 
 // var server = https.createServer( options, app );
 
-var server = https.createServer( app );
+//var server = https.createServer( app );
 /** Listen * */
-server.listen(PORT, () => {
+app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 }); 
