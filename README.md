@@ -1,85 +1,64 @@
-# Express/Passport with React
-This version uses React to control the login requests and redirection in coordination with client-side routing.
+# Policy Bytes
 
-We **STONGLY** recommend following these instructions carefully. It's a lot, and will take some time to set up, but your life will be much easier this way in the long run.
+Policy Bytes is a full-stack webapp designed for Citizens Leauge, a nonpartisan nonprofit based in St. Paul, MN. Citizens Leauge works to ensure Minnesotans of all backgrounds and ideologies have the opportunity to be engaged, inspired and empowered to take an active role in public policymaking. Policy Bytes is designed to host civil, accessiable, and accountable conversations between experts about critical topics in public policy, from tax reform to tip credits. The site features a threaded comment section to allow users to participate in the conversation as well. 
 
-## Prerequisites
 
-Before you get started, make sure you have the following software installed on your computer:
+<img src="documentation/images/policyBytes_screen1.png" width="750"/>
+<br>
+<br>
+<img src="documentation/images/policyBytes_screen2.png" width="750"/>
 
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
+### Built With: 
+- React.js & React-Redux
+- Node.js
+- PostgreSQL
+- React-Bootstrap
+- Font Awesome
+- Passport (Local and Facebook Authorizatoin)
+- Filestack
+- Express
 
-## Create database and table
+### Getting Started: 
 
-Create a new database called `prime_app` and create a `person` table:
+Required: 
+- PostgreSQL
+- Node.js
+- Express
 
-```SQL
-CREATE TABLE person (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR (80) UNIQUE NOT NULL,
-    password VARCHAR (1000) NOT NULL
-);
-```
+To start with a sample table: <br>
+- Create a new database in PostgreSQL named `policy-bytes-2`
+- In terminal, navigate to the foler containing sampleData.psql (at the root of this project)
+- run command `psql policy_bytes_2 < dbexport.psql`
+- Default admin username: david password: 12
 
-If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
+To start wiht an empty databse: 
+- Run the `CREATE TABLE` SQL queries in database.sql in Postico <br>
 
-## Download (Don't Clone) This Repository
 
-* Don't Fork or Clone. Instead, click the `Clone or Download` button and select `Download Zip`.
-* Unzip the project and start with the code in that folder.
-* Create a new GitHub project and push this code to the new repository.
+Once the database is set up, to run a development build on your own machine: 
+1) Clone/download Repository
+2) `npm install`
+3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
+For local development you'll need to run two server: <br/> 
+4) `npm run server`
+5) `npm run client` 
 
-## Development Setup Instructions
+Note: Because of the Facebook Auth strategy the development server runs on an https:// URL. This URL is not actually secure so your brower my warn you that it is unsafe. 
 
-* Run `npm install`
-* Create a `.env` file at the root of the project and paste this line into the file:
-    ```
-    SERVER_SESSION_SECRET=superDuperSecret
-    ```
-    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm run dev`
-* Navigate to `localhost:3000`
+Violà!
 
-## Debugging
 
-To debug, you will need to run the client-side separately from the server. Start the client by running the command `npm run dev:client`. Start the debugging server by selecting the Debug button.
+### Features: 
+- Dynamic landing page with an introduction to the site's format, a admin-selectable 'Current Conversation', and an archive section. 
+- Topic Page featuring the topic premise, contributors' bios and common ground, and an intuitive discussion platform highlighting the contributors' key points and the back-and-forth conversation between contributors on each key point. 
+- A threaded comments section with likes and replys.
+- The ability to engage further with relevent non-profits by clicking 'Love' on a contributor's premise or key claim. 
+- A robust admin section allowing the user to create/edit/delete, publish/unpublish, and feature/unfeature, topics. 
+- A Facebook authorization strategy encouragins users to engage in a civil, respectful manner in the comments section.
 
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
+## Next Steps: 
+- Ability to add/delete key claims and stream items when editing topics. 
+- Color code admin's Create Topic view to make it more user friendly. 
+- Mobile-friendly styling. 
 
-Then make sure `Launch Program` is selected from the dropdown, then click the green play arrow.
-
-![VSCode Debug Bar](documentation/images/vscode-debug-bar.png)
-
-## Linting
-
-The Airbnb ESLint for react is a part of this project. If you would like to take advantage of this in VS Code, you can add the `ESLint` extension. Click the `Extensions` button (the button right below the `Debug`) and search for `ESLint`. Click `install` for the first result and then click `Reload`. Then it should be all set up!
-
-![VSCode Toolbar](documentation/images/vscode-toolbar.png)
-
-## Production Build
-
-This is the build Heroku will run, but during development, you will likely not need to use it.
-
-* Start postgres if not running already by using `brew services start postgresql`
-* Run `npm start`
-* Navigate to `localhost:5000`
-
-## Lay of the Land
-
-* `src/` contains the React application
-* `public/` contains static assets for the client-side
-* `build/` after you build the project, contains the transpiled code from `src/` and `public/` that will be viewed on the production site
-* `server/` contains the Express App
-
-## Deployment
-
-1. Create a new Heroku project
-1. Link the Heroku project to the project GitHub Repo
-1. Create an Herkoku Postgres database
-1. Connect to the Heroku Postgres database from Postico
-1. Create the necessary tables
-1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
-1. In the deploy section, select manual deploy
+#### Hand-crafted by: Justin Peterson, David Kesler, Kerry Burns, and Atticus Pomerantz
