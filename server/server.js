@@ -45,14 +45,16 @@ app.use(express.static('build'));
 // App Set //
 const PORT = process.env.PORT || 5000;
 
-var options = {
-  key: fs.readFileSync( './localhost.key' ),
-  cert: fs.readFileSync( './localhost.cert' ),
-  requestCert: false,
-  rejectUnauthorized: false
-};
+// var options = {
+//   key: fs.readFileSync( './localhost.key' ),
+//   cert: fs.readFileSync( './localhost.cert' ),
+//   requestCert: false,
+//   rejectUnauthorized: false
+// };
 
-var server = https.createServer( options, app );
+// var server = https.createServer( options, app );
+
+var server = https.createServer( app );
 /** Listen * */
 server.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
