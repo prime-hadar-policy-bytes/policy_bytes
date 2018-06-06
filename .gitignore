@@ -5,9 +5,6 @@ sandbox.js
 .DS_Store
 .DS_STORE/
 
-# React Build Directory
-build/
-
 # Logs
 logs
 *.log

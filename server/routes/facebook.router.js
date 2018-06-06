@@ -11,7 +11,7 @@ if(process.env.DEV == 'true'){
   successUrl = process.env.LOCALHOST_SUCCESS_URL
   console.log(successUrl);
 } else {
-  successUrl = process.env.LOCALHOST_SUCCESS_URL
+  successUrl = process.env.DEPLOY_SUCCESS_URL
   console.log(successUrl);
 }
 
