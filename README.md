@@ -4,6 +4,8 @@ Policy Bytes is a full-stack webapp designed for Citizens Leauge, a nonpartisan 
 
 
 <img src="documentation/images/policyBytes_screen1.png" width="750"/>
+<br>
+<br>
 <img src="documentation/images/policyBytes_screen2.png" width="750"/>
 
 ### Built With: 
@@ -46,4 +48,17 @@ Note: Because of the Facebook Auth strategy the development server runs on an ht
 Violà!
 
 
+### Features: 
+- Dynamic landing page with an introduction to the site's format, a admin-selectable 'Current Conversation', and an archive section. 
+- Topic Page featuring the topic premise, contributors' bios and common ground, and an intuitive discussion platform highlighting the contributors' key points and the back-and-forth conversation between contributors on each key point. 
+- A threaded comments section with likes and replys.
+- The ability to engage further with relevent non-profits by clicking 'Love' on a contributor's premise or key claim. 
+- A robust admin section allowing the user to create/edit/delete, publish/unpublish, and feature/unfeature, topics. 
+- A Facebook authorization strategy encouragins users to engage in a civil, respectful manner in the comments section.
 
+## Next Steps: 
+- Ability to add/delete key claims and stream items when editing topics. 
+- Color code admin's Create Topic view to make it more user friendly. 
+- Mobile-friendly styling. 
+
+#### Hand-crafted by: Justin Peterson, David Kesler, Kerry Burns, and Atticus Pomerantz
