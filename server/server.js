@@ -53,7 +53,7 @@ const PORT = process.env.PORT || 5000;
 // };
 
 // var server = https.createServer( options, app );
-
+// Only for dev purposes
 //var server = https.createServer( app );
 /** Listen * */
 app.listen(PORT, () => {
