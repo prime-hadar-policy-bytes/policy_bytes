@@ -95,46 +95,46 @@ CREATE TABLE "love" (
     "proposal_id" INT REFERENCES "proposal"
 );
 
-INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url") 
-VALUES ('Brad', 'Benjamin', 'Professor at some college', '/assets/headshot1.jpeg'),
-('Jane', '', 'Comedian', '/assets/headshot2.jpeg');
+-- INSERT INTO "contributor" ("first_name", "last_name", "bio", "photo_url") 
+-- VALUES ('Brad', 'Benjamin', 'Professor at some college', '/assets/headshot1.jpeg'),
+-- ('Jane', '', 'Comedian', '/assets/headshot2.jpeg');
 
 --topic
-INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "contributor1_id", "contributor2_id", "featured", "archive_summary", "icon_url") 
-VALUES ('guns', 'more guns or less guns?', 'people should be able to own', false, 1, 2, false, 'people should be able to own','url'), 
-('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, 1, 2, false, 
-'Taxes are important for a government to function','url'),
-('Marijuana', 'Legalize or no?', 'It should be addressed', false, 1, 2, false, 'It should be addressed', 'url');
+-- INSERT INTO "topic" ("topic_title", "premise", "common_ground", "published", "contributor1_id", "contributor2_id", "featured", "archive_summary", "icon_url") 
+-- VALUES ('guns', 'more guns or less guns?', 'people should be able to own', false, 1, 2, false, 'people should be able to own','url'), 
+-- ('Taxes', 'Should we raise or lower taxes?', 'Taxes are important for a government to function', false, 1, 2, false, 
+-- 'Taxes are important for a government to function','url'),
+-- ('Marijuana', 'Legalize or no?', 'It should be addressed', false, 1, 2, false, 'It should be addressed', 'url');
 
 --proposal
-INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") 
-VALUES 
-(1, 1, 'we should have more guns...'),
-(1, 2, 'guns should be regulated more'),
-(2, 1, 'taxes should decrease'),
-(2, 2, 'taxes should go up'),
-(3, 1, 'weed should be legal'),
-(3, 2, 'do not legalize weed');
+-- INSERT INTO "proposal" ("topic_id", "contributor_id", "proposal") 
+-- VALUES 
+-- (1, 1, 'we should have more guns...'),
+-- (1, 2, 'guns should be regulated more'),
+-- (2, 1, 'taxes should decrease'),
+-- (2, 2, 'taxes should go up'),
+-- (3, 1, 'weed should be legal'),
+-- (3, 2, 'do not legalize weed');
 
 --key claim
-INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order") 
-VALUES 
-(1, 1,'guns make us safer', 1), 
-(1, 2,'guns are dangerous', 2), 
-(2, 1,'decrease taxes because..', 3), 
-(2, 2,'increase taxes because..', 4), 
-(3, 1,'Legalize it because..', 5), 
-(3, 2,'keep it illegal because..', 6);
+-- INSERT INTO "key_claim" ("topic_id", "contributor_id", "claim", "claim_order") 
+-- VALUES 
+-- (1, 1,'guns make us safer', 1), 
+-- (1, 2,'guns are dangerous', 2), 
+-- (2, 1,'decrease taxes because..', 3), 
+-- (2, 2,'increase taxes because..', 4), 
+-- (3, 1,'Legalize it because..', 5), 
+-- (3, 2,'keep it illegal because..', 6);
 
 --stream
-INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", "stream_evidence", "stream_order") 
-VALUES 
-(1, 1,'regulation for guns not necessary', 'link to some research', 1), 
-(2, 2,'guns are killing too many people', 'link to some research', 2), 
-(3, 1,'voodoo economics', 'link to some research', 3), 
-(4, 2,'raise taxes for infrastructure', 'link to some research', 4), 
-(5, 1,'criminalizaton of weed doesnt make sense', 'link to some research', 5), 
-(6, 2,'weed makes people crazy', 'link to some research', 6);
+-- INSERT INTO "stream" ("key_claim_id", "contributor_id", "stream_comment", "stream_evidence", "stream_order") 
+-- VALUES 
+-- (1, 1,'regulation for guns not necessary', 'link to some research', 1), 
+-- (2, 2,'guns are killing too many people', 'link to some research', 2), 
+-- (3, 1,'voodoo economics', 'link to some research', 3), 
+-- (4, 2,'raise taxes for infrastructure', 'link to some research', 4), 
+-- (5, 1,'criminalizaton of weed doesnt make sense', 'link to some research', 5), 
+-- (6, 2,'weed makes people crazy', 'link to some research', 6);
 
 -- --comments general
 -- INSERT INTO "comments_general" ("person_id", "topic_id", "comment", "approved") 
