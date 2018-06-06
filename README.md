@@ -11,3 +11,18 @@ Policy Bytes is a full-stack webapp designed for Citizens Leauge, a nonpartisan 
 - Passport (Local and Facebook Authorizatoin)
 - Filestack
 - Express
+
+### Getting Started: 
+
+Required: 
+- PostgreSQL
+- Node.js
+- Express
+
+1) Clone/download Repository
+2) `npm install`
+3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
+
+For local development you'll need to run two server: 
+4) `npm run server`
+5) `npm run client` 
