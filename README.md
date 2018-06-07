@@ -28,22 +28,39 @@ Required:
 To start with a sample table: <br>
 - Create a new database in PostgreSQL named `policy-bytes-2`
 - In terminal, navigate to the folder containing sampleData.psql (at the root of this project)
-- run command `psql policy_bytes_2 < dbexport.psql`. This should give you a starting databse. 
+- run command `psql policy_bytes_2 < dbexport.psql`. This should give you a starting database. 
 - Default admin login, accessible by going to /admin in the URL bar, username: david password: 12
 
+To run a development build on your own machine: 
 
-
-Once the database is set up, to run a development build on your own machine: 
 1) Clone/download Repository
 2) `npm install`
-3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
-For local development you'll need to run two servers: <br/> 
-4) `npm run server`
-5) `npm run client` 
 
-Note: Because of the Facebook Auth strategy the development server runs on an https:// URL. This URL is not actually secure so your brower my warn you that it is unsafe. Facebook will not run locally, only when it is deployed and values for FACEBOOK_APP_ID and FACEBOOK_APP_SECRET are supplied.
+3) Create a .env file with the following variables, for local deployment set DEV=true;
 
-Violà!
+SERVER_SESSION_SECRET=
+FACEBOOK_APP_ID=
+FACEBOOK_APP_SECRET=
+DEV=false
+LOCALHOST_REDIRECT_URL=https://localhost:5000/api/facebook/callback
+DEPLOY_REDIRECT_URL=https://policybytes.herokuapp.com/api/facebook/callback
+LOCALHOST_SUCCESS_URL=https://localhost:3000/topicPage
+DEPLOY_SUCCESS_URL=https://policybytes.herokuapp.com/topicPage
+
+To get a FACEBOOK_APP_ID and FACEBOOK_APP SECRET, register a new PolicyBytes app at https://developers.facebook.com/. Also list the site's domain, as well as redirect URLs.
+
+If you are in development, in FacebookLogin.jsx, change the URL for the callback manually to localhost:
+https://localhost:3000/api/facebook/send
+
+Otherwise change it to the name of your deployed site plus /api/facebook/send.
+
+4) Get a key and cert for https development with create-react-app. More info here: https://medium.com/@nileshsingh/everything-about-creating-an-https-server-using-node-js-2fc5c48a8d4e
+
+5) For local development, in Server.js at the bottom comment out the lines for var options, var server and server.listen, and comment in app.listen.
+
+6) `npm run server`
+7) `npm run client` 
+
 
 
 ### Features: 
