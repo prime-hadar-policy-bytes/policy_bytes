@@ -27,12 +27,10 @@ Required:
 
 To start with a sample table: <br>
 - Create a new database in PostgreSQL named `policy-bytes-2`
-- In terminal, navigate to the foler containing sampleData.psql (at the root of this project)
-- run command `psql policy_bytes_2 < dbexport.psql`
-- Default admin username: david password: 12
+- In terminal, navigate to the folder containing sampleData.psql (at the root of this project)
+- run command `psql policy_bytes_2 < dbexport.psql`. This should give you a starting databse. 
+- Default admin login, accessible by going to /admin in the URL bar, username: david password: 12
 
-To start wiht an empty databse: 
-- Run the `CREATE TABLE` SQL queries in database.sql in Postico <br>
 
 
 Once the database is set up, to run a development build on your own machine: 
