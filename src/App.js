@@ -31,7 +31,7 @@ const App = () => (
             path="/home"
             component={LandingPage}
           />
-          <Redirect exact from="/topicPage%0A" to="/topicPage"/>
+          <Redirect exact from="/#/topicPage%0A" to="/topicPage"/>
           <Route
             path="/topicPage"
             component={TopicPage}
