@@ -41,11 +41,11 @@ To run a development build on your own machine:
 SERVER_SESSION_SECRET=
 FACEBOOK_APP_ID=
 FACEBOOK_APP_SECRET=
-DEV=false
+DEV=true
 LOCALHOST_REDIRECT_URL=https://localhost:5000/api/facebook/callback
 DEPLOY_REDIRECT_URL=https://policybytes.herokuapp.com/api/facebook/callback
-LOCALHOST_SUCCESS_URL=https://localhost:3000/topicPage
-DEPLOY_SUCCESS_URL=https://policybytes.herokuapp.com/topicPage
+LOCALHOST_SUCCESS_URL=https://localhost:3000/#/topicPage
+DEPLOY_SUCCESS_URL=https://policybytes.herokuapp.com/#/topicPage
 
 To get a FACEBOOK_APP_ID and FACEBOOK_APP SECRET, register a new PolicyBytes app at https://developers.facebook.com/. Also list the site's domain, as well as redirect URLs.
 
