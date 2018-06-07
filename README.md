@@ -64,9 +64,9 @@ Otherwise change it to the name of your deployed site plus /api/facebook/send.
 
 
 ### Features: 
-- Dynamic landing page with an introduction to the site's format, a admin-selectable 'Current Conversation', and an archive section. 
+- Dynamic landing page with an introduction to the site's format, an admin-selectable 'Current Conversation', and an archive section. 
 - Topic Page featuring the topic premise, contributors' bios and common ground, and an intuitive discussion platform highlighting the contributors' key points and the back-and-forth conversation between contributors on each key point. 
-- A threaded comments section with likes and replys.
+- A threaded comments section with likes and replies.
 - The ability to engage further with relevent non-profits by clicking 'Love' on a contributor's premise or key claim. 
 - A robust admin section allowing the user to create/edit/delete, publish/unpublish, and feature/unfeature, topics. 
 - A Facebook authorization strategy encouragins users to engage in a civil, respectful manner in the comments section.
