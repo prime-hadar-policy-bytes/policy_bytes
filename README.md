@@ -21,9 +21,9 @@ Policy Bytes is a full-stack webapp designed for Citizens Leauge, a nonpartisan 
 ### Getting Started: 
 
 Required: 
-- PostgreSQL
-- Node.js
-- Express
+- [Node.js](https://nodejs.org/en/)
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
 
 To start with a sample table: <br>
 - Create a new database in PostgreSQL named `policy-bytes-2`
