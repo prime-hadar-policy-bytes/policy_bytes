@@ -37,11 +37,11 @@ Once the database is set up, to run a development build on your own machine:
 1) Clone/download Repository
 2) `npm install`
 3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
-For local development you'll need to run two server: <br/> 
+For local development you'll need to run two servers: <br/> 
 4) `npm run server`
 5) `npm run client` 
 
-Note: Because of the Facebook Auth strategy the development server runs on an https:// URL. This URL is not actually secure so your brower my warn you that it is unsafe. 
+Note: Because of the Facebook Auth strategy the development server runs on an https:// URL. This URL is not actually secure so your brower my warn you that it is unsafe. Facebook will not run locally, only when it is deployed and values for FACEBOOK_APP_ID and FACEBOOK_APP_SECRET are supplied.
 
 Violà!
 
