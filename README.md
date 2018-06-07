@@ -21,9 +21,9 @@ Policy Bytes is a full-stack webapp designed for Citizens Leauge, a nonpartisan 
 ### Getting Started: 
 
 Required: 
-- PostgreSQL
-- Node.js
-- Express
+- [Node.js](https://nodejs.org/en/)
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
 
 To start with a sample table: <br>
 - Create a new database in PostgreSQL named `policy-bytes-2`
@@ -38,6 +38,18 @@ To start wiht an empty databse:
 Once the database is set up, to run a development build on your own machine: 
 1) Clone/download Repository
 2) `npm install`
+
+* Create a `.env` file at the root of the project and paste this line into the file:
+    ```
+    SERVER_SESSION_SECRET=superDuperSecret
+    ```
+    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, the app will still work but you will get a warning.
+
+* Start postgres if not running already by using `brew services start postgresql`
+* Navigate to `localhost:3000`
+
+
+
 3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
 For local development you'll need to run two server: <br/> 
 4) `npm run server`
