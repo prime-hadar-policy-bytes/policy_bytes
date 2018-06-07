@@ -35,25 +35,6 @@ To run a development build on your own machine:
 
 1) Clone/download Repository
 2) `npm install`
-<<<<<<< HEAD
-=======
-
-* Create a `.env` file at the root of the project and paste this line into the file:
-    ```
-    SERVER_SESSION_SECRET=superDuperSecret
-    ```
-    While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, the app will still work but you will get a warning.
-
-* Start postgres if not running already by using `brew services start postgresql`
-* Navigate to `localhost:3000`
-
-
-
-3) Initialize Facebook Auth by setting up a .env file with a Facebook FACEBOOK_APP_ID and FACEBOOK_APP_SECRET
-For local development you'll need to run two server: <br/> 
-4) `npm run server`
-5) `npm run client` 
->>>>>>> f4516b5f8d55aad0fa1d1d2c209ba74995b67c14
 
 3) Create a .env file with the following variables, for local deployment set DEV=true;
 
@@ -61,10 +42,10 @@ SERVER_SESSION_SECRET=
 FACEBOOK_APP_ID=
 FACEBOOK_APP_SECRET=
 DEV=true
-LOCALHOST_REDIRECT_URL=https://localhost:5000/api/facebook/callback
-DEPLOY_REDIRECT_URL=https://policybytes.herokuapp.com/api/facebook/callback
-LOCALHOST_SUCCESS_URL=https://localhost:3000/#/topicPage
-DEPLOY_SUCCESS_URL=https://policybytes.herokuapp.com/#/topicPage
+LOCALHOST_REDIRECT_URL=YOUR_LOCALHOST_AND_PORT/api/facebook/callback
+DEPLOY_REDIRECT_URL=YOUR_DEPLOY_URL/api/facebook/callback
+LOCALHOST_SUCCESS_URL=YOUR_LOCALHOST_AND_PORT/#/topicPage
+DEPLOY_SUCCESS_URL=YOUR_DEPLOY_URL/#/topicPage
 
 To get a FACEBOOK_APP_ID and FACEBOOK_APP SECRET, register a new PolicyBytes app at https://developers.facebook.com/. Also list the site's domain, as well as redirect URLs.
 
