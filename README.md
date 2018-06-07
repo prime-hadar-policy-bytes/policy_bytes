@@ -38,9 +38,9 @@ To run a development build on your own machine:
 
 3) Create a .env file with the following variables, for local deployment set DEV=true;
 
-SERVER_SESSION_SECRET=
-FACEBOOK_APP_ID=
-FACEBOOK_APP_SECRET=
+SERVER_SESSION_SECRET=<br>
+FACEBOOK_APP_ID=<br>
+FACEBOOK_APP_SECRET=<br>
 DEV=true
 LOCALHOST_REDIRECT_URL=YOUR_LOCALHOST_AND_PORT/api/facebook/callback
 DEPLOY_REDIRECT_URL=YOUR_DEPLOY_URL/api/facebook/callback
