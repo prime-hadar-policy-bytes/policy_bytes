@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { HashLink as Link } from 'react-router-hash-link';
 
 import { Panel, Button, ButtonGroup, Glyphicon } from 'react-bootstrap';
 
@@ -37,8 +38,10 @@ export class KeyClaimPanel extends Component {
     this.props.toggleClickShowStream(this.props.keyClaimId)
   }
 
+
   handleCommentKeyClaim = (keyClaimInput) => {
     console.log('clicked!');
+
     this.props.dispatch({
       type: 'SET_KEY_CLAIM_COMMENT',
       payload: keyClaimInput,
@@ -50,6 +53,9 @@ export class KeyClaimPanel extends Component {
       type: 'CLEAR_STREAM_COMMENT'
     });
   }
+
+  // <Link to="topicPage#commentPanelMaster">Here is a link
+  // </Link>
 
 
   render() {
@@ -68,6 +74,7 @@ export class KeyClaimPanel extends Component {
     }
 
 
+
     return (
       <div>
 
@@ -76,13 +83,13 @@ export class KeyClaimPanel extends Component {
           onMouseLeave={this.handleMouseLeave}
           expanded={this.state.open}>
           <Panel.Body onClick={this.toggleLockKeyClaim}>
-            <p dangerouslySetInnerHTML={{__html: this.props.keyClaim.keyClaim}}/>
+            <p dangerouslySetInnerHTML={{ __html: this.props.keyClaim.keyClaim }} />
           </Panel.Body>
           <Panel.Collapse>
             <Panel.Footer className="keyClaimFooter">
               <ButtonGroup className="keyClaimFooterButtons">
-                <LikeButtonKeyClaim id={this.props.keyClaim.claimDbId}/>
-                <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentKeyClaim(this.props.keyClaim)}
+                <LikeButtonKeyClaim id={this.props.keyClaim.claimDbId} />
+                <Button onClick={() => this.handleCommentKeyClaim(this.props.keyClaim)}
                   className="keyClaimFooterItem">
                   <Glyphicon glyph="comment" />
                 </Button>

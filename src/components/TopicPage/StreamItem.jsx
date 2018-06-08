@@ -71,7 +71,7 @@ class StreamItem extends Component {
 
                 <ButtonGroup className="keyClaimFooterButtons">
                    <LikeButtonStream id={this.props.streamItem.streamDbId} />
-                  <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentStream(this.props.streamItem)} className="keyClaimFooterItem">
+                  <Button onClick={() => this.handleCommentStream(this.props.streamItem)} className="keyClaimFooterItem">
                     <Glyphicon glyph="comment" />
                   </Button>
                 </ButtonGroup>
