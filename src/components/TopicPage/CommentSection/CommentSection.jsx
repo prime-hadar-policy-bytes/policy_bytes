@@ -18,6 +18,25 @@ class CommentSection extends Component {
 
     }
 
+
+    componentDidUpdate =(prevProps) => {
+
+        if ( (prevProps.comments.keyClaimComment !== this.props.comments.keyClaimComment) ||
+
+        (prevProps.comments.streamComment !== this.props.comments.streamComment) ||
+        
+        (prevProps.comments.proposalComment !== this.props.comments.proposalComment)) {
+
+            console.log('triggered componentDid update in comments');
+
+            document.getElementById('commentPanelMaster').scrollIntoView();
+        }
+            
+        
+        
+
+
+    }
     componentWillReceiveProps(nextProps) {
         if (nextProps.topicPageContent !== this.props.topicPageContent) {
             this.props.dispatch({

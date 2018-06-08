@@ -226,12 +226,9 @@ fetchTopicPageContent = (id) => {
                           <Button disabled className="keyClaimFooterItem">
                             <Glyphicon glyph="heart" />
                             </Button>
-                          }
-
-                          
-
+                          }     
                           <LikeButtonProposal id={arenaProposalId}/>
-                          <Button a href="/topicPage#commentPanelMaster" onClick={() => this.handleCommentProposal(arenaProposal, arenaProposalId)}
+                          <Button onClick={() => this.handleCommentProposal(arenaProposal, arenaProposalId)}
                             className="keyClaimFooterItem">
                             <Glyphicon glyph="comment" />
                           </Button>
@@ -259,7 +256,7 @@ fetchTopicPageContent = (id) => {
 
       
 
-
+                          
           <CommentSection topic_id={this.props.topicPageContent.topicDbId} />
         </div>   {/* <---  WRAPPER DIV ENDS */}
 

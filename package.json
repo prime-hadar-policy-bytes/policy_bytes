@@ -30,6 +30,7 @@
     "react-fontawesome": "^1.6.1",
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "react-router-hash-link": "^1.2.0",
     "react-scripts": "^1.1.1",
     "redux": "^3.7.2",
     "redux-logger": "^3.0.6",
@@ -37,7 +38,7 @@
     "redux-saga": "^0.16.0"
   },
   "scripts": {
-    "start": "node server/server.js", 
+    "start": "node server/server.js",
     "client": "HTTPS=true react-scripts start",
     "server": "nodemon --watch server server/server.js",
     "build": "react-scripts build",
