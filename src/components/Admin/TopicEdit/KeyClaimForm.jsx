@@ -31,6 +31,7 @@ class KeyClaimForm extends Component {
         let streamItemId = Object.keys(this.props.keyClaims[this.props.claimId].streamData).length;
         let claimId = this.props.claimId; //<-- local ID of the key claim that this lives in
         //packaging up the object to send to the reducer
+        
         let payloadObject = {
             streamItemId: streamItemId,
             claimId: claimId
@@ -45,6 +46,8 @@ class KeyClaimForm extends Component {
   render() {
     //ID of the keyClaim
     let claimId = this.props.claimId; 
+    
+    
 
     let match = this.props.edit && this.props.edit;
 

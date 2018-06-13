@@ -187,6 +187,7 @@ class TopicEdit extends Component {
   render() {
     console.log('ROUTE PARAMS', this.props.match.params.id);
     
+    
 
     if (debug) { console.log('ROUTE PARAMS', this.props.match.params.id); }
 
